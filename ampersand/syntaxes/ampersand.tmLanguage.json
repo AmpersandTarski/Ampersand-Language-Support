@@ -1,0 +1,72 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"scopeName": "source.ampersand",
+	"name": "Ampersand (ADL)",
+	"patterns":
+	[	{	"name": "relationdef.ampersand",
+			"match": "\\b[a-z][A-Za-z0-9]\\b(?=\\s*::)"
+		},
+		{	"include": "#comments"
+		},
+		{	"include": "#keywords"
+		},
+		{	"include": "#strings"
+		}
+	],
+	"repository": 
+	{	"comments":
+		{	"patterns": 
+			[	{	"name": "comment.block.ampersand",
+					"begin": "{-",
+					"end": "-}"
+				},
+				{	"name": "comment.block.documentation.ampersand",
+					"begin": "{+",
+					"end": "+}"
+				},
+				{	"name": "comment.line.double-dash.ampersand",
+					"match": "--.*$"
+				},
+				{	"name": "comment.block.documentation.ampersand",
+					"begin": "\\bENDCONTEXT\\b",
+					"end": "\\bCONTEXT\\b"
+				}
+			]
+		}
+	,	"keywords":
+		{	"patterns": 
+			[	{	"name": "keyword.control.ampersand",
+					"match": "\\b(CONTEXT|ENDCONTEXT|PATTERN|ENDPATTERN|PROCESS|ENDPROCESS|SERVICE|ENDSERVICE|VIEW|ENDVIEW|INCLUDE|THEMES|IN|DUTCH|ENGLISH|REST|HTML|LATEX|MARKDOWN|META|PURPOSE|RULE|MEANING|MESSAGE|VIOLATION|ROLE|MAINTAINS|SERVICE|IDENT|RELATION|PRAGMA|CONCEPT|BYPLUG|REPRESENT|TYPE|SRC|TGT|TXT|CLASSIFY|SPEC|ISA|IS|LINKTO|INTERFACE|GUI|API|FOR|BOX|ROWS|TABS|COLS|CLASS|HTML|TEMPLATE|TXT|PRIMHTML|POPULATION|CONTAINS)\\b"
+				},
+				{	"name": "keyword.control.crud.ampersand",
+					"match": "\\b[Cc][Rr][Uu][Dd]\\b"
+				},
+				{	"name": "keyword.control.view.ampersand",
+					"match": "\\b\\<[^\\>]*\\>\\b"
+				},
+				{	"name": "constant.character.ampersand",
+					"match": "(?<!['])\\b[VI]\\b"
+				},
+				{   "name": "keyword.operator.ampersand",
+					"match": "(\\|-|-|->|=|~|\\+|;|!|\\*|::|:|\\\\/|/\\\\|\\\\|/|<>)"
+				},
+				{	"name": "constant.language.ampersand",
+					"match": "\\[(\\s*+(INJ|SUR|UNI|TOT|SYM|ASY|RFX|IRF|TRN|PROP)(\\s*+(,\\s*+(INJ|SUR|UNI|TOT|SYM|ASY|RFX|IRF|TRN|PROP))*+)?+)?+\\s*+\\]"
+				},
+				{	"name": "constant.language.ampersand",
+					"match": "\\b(ALPHANUMERIC|BIGALPHANUMERIC|HUGEALPHANUMERIC|PASSWORD|BINARY|BIGBINARY|HUGEBINARY|DATE|DATETIME|BOOLEAN|INTEGER|FLOAT)\\b"
+				}
+			]
+		}
+		,"strings":
+		{	"name": "string.quoted.double.ampersand",
+			"begin": "\"",
+			"end": "\"",
+			"patterns":
+			[	{	"name": "constant.character.escape.ampersand",
+					"match": "\\\\."
+				}
+			]
+		}
+	}	
+}

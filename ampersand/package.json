@@ -1,0 +1,26 @@
+{
+    "name": "ampersand",
+    "displayName": "Ampersand",
+    "description": "Syntax highlighter for Ampersand scripts",
+    "version": "0.0.1",
+    "publisher": "RieksJ",
+    "engines": {
+        "vscode": "^1.25.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "ampersand",
+            "aliases": ["Ampersand (ADL, Relational Algebra)", "ampersand"],
+            "extensions": [".adl",".ifc",".pop"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "ampersand",
+            "scopeName": "source.ampersand",
+            "path": "./syntaxes/ampersand.tmLanguage.json"
+        }]
+    }
+}
