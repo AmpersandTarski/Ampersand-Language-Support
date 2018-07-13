@@ -1,4 +1,12 @@
+.gitignore
 .vscode/**
 .vscode-test/**
-.gitignore
+out/test/**
+src/**
+test/**
+test.hs
+test.cabal
+tsconfig.json
+typings/**
 vsc-extension-quickstart.md
+**/*.map

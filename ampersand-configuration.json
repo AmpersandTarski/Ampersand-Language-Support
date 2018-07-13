@@ -24,5 +24,8 @@
     "surroundingPairs":
     [   ["[", "]"],
         ["{+", "+}"]
-    ]
+    ],
+   "folding": {
+       "offSide": true
+   }
 }
