@@ -1,12 +1,9 @@
 {
-    "name": "language-ampersand",
+    "name": "Ampersand-Language-Support",
     "displayName": "Ampersand language support",
     "description": "Language support for Ampersand scripts",
     "version": "0.0.1",
-    "publisher": "RieksJ",
-    "engines": {
-        "vscode": "^1.25.0"
-    },
+    "publisher": "AmpersandTarski",
     "categories": [
         "Programming Languages", "Themes"
     ],
@@ -42,6 +39,6 @@
     },
     "devDependencies": {
         "typescript": "^2.6.2",
-        "vscode": "^1.25.0"
+        "vscode": "^0.11.0"
     }
 }
