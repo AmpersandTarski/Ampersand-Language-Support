@@ -21,14 +21,14 @@
 					"end": "-}"
 				},
 				{	"name": "comment.block.documentation.ampersand",
-					"begin": "{+",
-					"end": "+}"
+					"begin": "{\\+",
+					"end": "\\+}"
 				},
 				{	"name": "comment.line.double-dash.ampersand",
 					"match": "--.*$"
 				},
-				{	"name": "comment.block.documentation.ampersand",
-					"begin": "\\bENDCONTEXT\\b",
+				{	"name": "comment.ampersand",
+					"begin": "(?<=ENDCONTEXT)\\s*",
 					"end": "\\bCONTEXT\\b"
 				}
 			]
@@ -42,16 +42,16 @@
 					"match": "\\b[Cc][Rr][Uu][Dd]\\b"
 				},
 				{	"name": "keyword.control.view.ampersand",
-					"match": "\\b\\<[^\\>]*\\>\\b"
+					"match": "\\b\\<[^\\>]+\\>\\b"
+				},
+				{   "name": "keyword.operator.ampersand",
+					"match": "(\\|-|->|-|=|~|\\+|;|!|\\*|::|:|\\\\/|/\\\\|\\\\|/|<>)"
 				},
 				{	"name": "constant.character.ampersand",
 					"match": "(?<!['])\\b[VI]\\b"
 				},
-				{   "name": "keyword.operator.ampersand",
-					"match": "(\\|-|-|->|=|~|\\+|;|!|\\*|::|:|\\\\/|/\\\\|\\\\|/|<>)"
-				},
 				{	"name": "constant.language.ampersand",
-					"match": "\\[(\\s*+(INJ|SUR|UNI|TOT|SYM|ASY|RFX|IRF|TRN|PROP)(\\s*+(,\\s*+(INJ|SUR|UNI|TOT|SYM|ASY|RFX|IRF|TRN|PROP))*+)?+)?+\\s*+\\]"
+					"match": "\\[(\\s*(INJ|SUR|UNI|TOT|SYM|ASY|RFX|IRF|TRN|PROP))(\\s*,\\s*(INJ|SUR|UNI|TOT|SYM|ASY|RFX|IRF|TRN|PROP))*\\s*\\]"
 				},
 				{	"name": "constant.language.ampersand",
 					"match": "\\b(ALPHANUMERIC|BIGALPHANUMERIC|HUGEALPHANUMERIC|PASSWORD|BINARY|BIGBINARY|HUGEBINARY|DATE|DATETIME|BOOLEAN|INTEGER|FLOAT)\\b"
