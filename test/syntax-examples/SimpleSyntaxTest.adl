@@ -1,0 +1,10 @@
+CONTEXT Test1
+
+-- This file is a simple .adl file with (eventually) all language constructs in it.
+
+CONCEPT Persoon "Een persoon is een natuurlijke persoon of een rechtspersoon, naar geldend Nederlands recht."
+PURPOSE CONCEPT Persoon
+{+Er is sprake van werkgever en werknemer, waarbij de werkgever (naar geldend recht) zowel een natuurlijke persoon als een rechtspersoon kan zijn.
+In deze analyse wordt daarvan geabstraheerd, en noemen we alle natuurlijke- en rechtspersonen gewoon ``Persoon''.+} 
+
+ENDCONTEXT
