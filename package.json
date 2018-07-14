@@ -5,32 +5,58 @@
     "version": "0.0.1",
     "publisher": "AmpersandTarski",
     "categories": [
-        "Programming Languages", "Themes"
+        "Programming Languages",
+        "Themes"
     ],
+    "engines": {
+        "vscode": "^0.10.2"
+    },
     "activationEvents": [
         "onLanguage:ampersand"
     ],
+    "license": "GPL-3.0",
+    "homepage": "https://github.com/AmpersandTarski/Ampersand-Language-Support",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/AmpersandTarski/Ampersand-Language-Support.git"
+    },
+    "bugs": {
+        "url": "https://github.com/AmpersandTarski/Ampersand-Language-Support/issues"
+    },
     "main": "./out/src/extension",
     "contributes": {
-        "languages": [{
-            "id": "ampersand",
-            "aliases": [ "Ampersand",
-                         "ampersand",
-                         "ADL",
-                         "Ampersand Definition Language"],
-            "extensions": [".adl",".ifc",".pop",".docadl"],
-            "configuration": "./ampersand-configuration.json"
-            }],
-        "grammars": [{
-            "language": "ampersand",
-            "scopeName": "source.ampersand",
-            "path": "./syntaxes/ampersand.tmLanguage.json"
-            }],
-        "themes": [{
-            "label": "Ampersand",
-            "uiTheme": "vs-dark",
-            "path": "./themes/Ampersand-color-theme.json"
-            }]
+        "languages": [
+            {
+                "id": "ampersand",
+                "aliases": [
+                    "Ampersand",
+                    "ampersand",
+                    "ADL",
+                    "Ampersand Definition Language"
+                ],
+                "extensions": [
+                    ".adl",
+                    ".ifc",
+                    ".pop",
+                    ".docadl"
+                ],
+                "configuration": "./ampersand-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "ampersand",
+                "scopeName": "source.ampersand",
+                "path": "./syntaxes/ampersand.tmLanguage.json"
+            }
+        ],
+        "themes": [
+            {
+                "label": "Ampersand",
+                "uiTheme": "vs-dark",
+                "path": "./themes/Ampersand-color-theme.json"
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
