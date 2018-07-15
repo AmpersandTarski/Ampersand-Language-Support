@@ -9,7 +9,10 @@
 	},
 	"tokenColors": [
 		{   "name": "documentation comments",
-			"scope": "source.ampersand comment.block.documentation",
+			"scope": [
+				"source.ampersand comment.block.documentation",
+				"source.ampersand statement.purpose"
+			],
 			"settings": 
 				{ 
 					"foreground": "#225522",
@@ -37,6 +40,10 @@
 		{   "name": "Ampersand - backticks",
 			"scope": "source.ampersand backticked.ampersand",
 			"settings": { "foreground": "#c04000" }
+		},
+		{   "name": "Ampersand - url",
+			"scope": "source.ampersand filename.ampersand",
+			"settings": { "foreground": "#4080ff", "fontStyle": "underline" }
 		},
 		{   "name": "Ampersand - filenames",
 			"scope": "source.ampersand filename.ampersand",
@@ -79,6 +86,8 @@
 					"fontStyle": "bold"
 				}
 		},
+
+		
 		
 		{
 			"name": "Comment",

@@ -1,0 +1,224 @@
+CONTEXT "BurgerAuthenticatie" IN DUTCH
+{- dit is een 
+blokcomment -}
+PURPOSE CONTEXT "BurgerAuthenticatie" {+ dit is een **this stuff sits** `at` thi
+blokcomment +}
+
+PURPOSE RULE "BurgerAuthenticatie"
+{+  **this stuff sits** `at` this stuff sits at https://github.com/AmpersandTarski/Ampersand-Language-Support (did you know that)?
+we have issue #903 and want to **emphasize text** and `test`  'test' "test", (test), [test],
++}
+-- **this stuff sits** `at` this file: "aap.xlsx" stuff sits at https://github.com/AmpersandTarski/Ampersand-Language-Support (did you know that)?
+{- **this stuff sits** `at` this stuff sits at https://github.com/AmpersandTarski/Ampersand-Language-Support (did you know that)?
+we have issue #903 and want to **emphasize text** and `test`  'test' "test", (test), [test],
+-}
+
+CONCEPT Aap "explanation" -- enzovoorts
+CONCEPT Aap "explanation" "reftext"
+
+operators  |-  -  ->  =  ~  +  ;  !  *  ::  :  \/  /\  \\  /  <>
+
+INCLUDE "some filename"
+
+POPULATION SessionTitle CONTAINS [ "Basisregistratie Personen" ]
+POPULATION sessionTitle CONTAINS [ ("Mijnsessie", "Basisregistratie Personen") ]
+
+--[Step 1: Define the Form Template ]--
+
+--The FormTemplate, as well as its fields, ownership etc., are defined as a population in an Excel sheet.
+INCLUDE "BRP_BAuthForm.xlsx" -- This file defines **BAuthForm** as the name of a form template
+
+--[Step 2: Define Form Instances]
+
+CONCEPT  BAuthForm "een formulier dat ingevuld moet worden voor het authenticeren van een persoon aan de balie van het burgerserviceloket"
+CLASSIFY BAuthForm ISA Form
+
+-- Ensure that the name of the FormTemplate is assigned to every BAuthForm:
+ROLE ExecEngine MAINTAINS "Request to assign BAuthForms with the FormTemplate called 'BAuthForm'"
+RULE "Request to assign BAuthForms with the FormTemplate called 'BAuthForm'": 
+     I[BAuthForm] |- formTemplateName;"BAuthForm";formTemplateName~
+VIOLATION (TXT "{EX} InsPair;formTemplateName;Form;", SRC I, TXT ";FormTemplateName;BAuthForm")
+
+--[Step 2a: Allow interfaces to create BAuthForms]
+sessionBAuthForm :: SESSION * BAuthForm [UNI] -- Only one registration form allowed in any session.
+RELATION req_NewBAuthForm [SESSION * SESSION] [PROP] -- Requestor wants to negotiate a new ZZP registration 
+
+POPULATION MissingXslx CONTAINS [ "BAuthForm" ]
+
+newBAuthFormIsAllowed :: SESSION * SESSION [PROP] -- we can actually create new registration forms (all excel files are loaded) 
+ROLE ExecEngine MAINTAINS "Allow creation of BAuthForms"
+RULE "Allow creation of BAuthForms":
+   I[SESSION]         \/ /\ \ / -> 
+   /\ V;ftName;"BAuthForm";V 
+-- /\ V;clName;"SBICodes";V
+-- etc.
+|- newBAuthFormIsAllowed
+VIOLATION (TXT "{EX} InsPair;newBAuthFormIsAllowed;SESSION;", SRC I, TXT ";SESSION;", TGT I)
+ROLE ExecEngine MAINTAINS "Refuse creation of BAuthForms"
+RULE "Refuse creation of BAuthForms":
+   newBAuthFormIsAllowed
+|- I[SESSION]
+   /\ V;ftName;"BAuthForm";V 
+-- /\ V;clName;"SBICodes";V
+-- etc.
+VIOLATION (TXT "{EX} DelPair;newBAuthFormIsAllowed;SESSION;", SRC I, TXT ";SESSION;", TGT I)
+
+ROLE ExecEngine MAINTAINS "Create new BAuthForm"
+RULE "Create new BAuthForm": req_NewBAuthForm |- sessionBAuthForm;V
+VIOLATION (TXT "{EX} InsAtom;BAuthForm"
+          ,TXT "{EX} InsPair;sessionBAuthForm;SESSION;", SRC I, TXT ";BAuthForm;_NEW"
+-- Set default properties for form filling interfaces
+-- e.g.   ,TXT "{EX} InsPair;zzprfBezoekadresIsPriveadres;BAuthForm;_NEW;BAuthForm;_NEW"
+--        ,TXT "{EX} SetNavToOnCommit;/ZZP_32_Registratieformulier/_NEW" -- goto the ZZP Registration page
+          )
+ROLE ExecEngine MAINTAINS "Refuse new BAuthForm" -- appropriate when excel file is not INCLUDEd.
+RULE "Refuse new BAuthForm": req_NewBAuthForm |- V;ftName;"BAuthForm";V
+VIOLATION (TXT "{EX} DelPair;req_NewBAuthForm;SESSION;", SRC I, TXT ";SESSION;", TGT I)
+
+ROLE ExecEngine MAINTAINS "Cancel filling in of BAuthForms"
+RULE "Cancel filling in of BAuthForms":
+   I - req_NewBAuthForm |- -(sessionBAuthForm;V)
+VIOLATION (TXT "{EX} DelPair;sessionBAuthForm;SESSION;", SRC I, TXT ";BAuthForm;", TGT sessionBAuthForm)
+
+ROLE ExecEngine MAINTAINS "Discard orphaned BAuthForms"
+RULE "Discard orphaned BAuthForms":
+   I[BAuthForm] |- V;sessionBAuthForm \/ V;gvfForm
+VIOLATION (TXT "{EX} DelAtom;BAuthForm;", SRC I)
+
+--[Step 3: Define an INTERFACE between the form/fields and the relations that they must populate]
+-- The interface here below **must match 1-1** with the fields defined in the file "BRP_BAuthForm.xlsx" that is INCLUDED in Step 1 earlier in this file.
+-- **this must be checked manually**.
+
+INTERFACE "Authenticatie Balieklant": I[BAuthForm] cRud BOX <SSIFORM>
+   [ "Persoonsgegevens" : I cRud ROWS
+      [ "BSN"                    : bauthBSN cRUd
+      , "Geslachtsnaam"          : bauthGeslachtsnaam cRUd
+      , "Voornamen"              : bauthVoornamen cRUd
+      , "Geboortedatum"          : bauthGeboortedatum cRUd
+      , "Geboorteplaats"         : bauthGeboorteplaats cRUd
+      , "Geboorteland of gebied" : bauthGeboorteland cRUd
+      , "Geslacht"               : bauthGeslacht cRUd
+      ]
+   , "Mogelijke personen": bauthPossibleBSNs;npBSN~ cRud <Persoonsgegevens>   
+   , "Dit wordt later door SSIFORM gegenereerd": I cRud BOX <COLSNL>
+      [ "SSIF QR-code": I cRud <QRCode>
+      , "Verstuur": I cRud BOX <PROPBUTTON> 
+         [ property : bauthProcessReq cRUd
+         , disabled : (I-bauthIsClean) cRud
+         ]   
+-- ** Dit kan mogelijk handiger door de property op de regform te zetten ipv op de sessie.
+      , "Annuleer": sessionBAuthForm~ cRud BOX <PROPBUTTON> 
+         [ property : req_NewBAuthForm cRUd 
+         , disabled : (I-req_NewBAuthForm) cRud
+         ]
+      ]
+   ]
+
+--[Step 4: define the relations that will be populated and set default values if appropriate]
+-- Every relation that is mentioned in the Interface as defined in step 3 must be defined here.
+-- Also, the TGT concepts must match those of the relations in the actual registration (for KvK: Handelsregister); we assume any REPRESENT stuff is taken care of at the definition of that registration.
+bauthBSN            :: BAuthForm * BSN                  [UNI]
+bauthGeslachtsnaam  :: BAuthForm * Geslachtsnaam        [UNI]
+bauthVoornamen      :: BAuthForm * Voornamen            [UNI]
+bauthGeboortedatum  :: BAuthForm * Datum                [UNI]
+bauthGeboorteplaats :: BAuthForm * Plaats               [UNI]
+bauthGeboorteland   :: BAuthForm * LandOfGebied         [UNI]
+bauthGeslacht       :: BAuthForm * Geslachtsaanduiding  [UNI]
+
+RULE "Er is niemand geregistreerd met deze gegevens": I |- bauthPossibleBSNs;bauthPossibleBSNs~
+
+bauthPossibleBSNs :: BAuthForm * BSN
+ROLE ExecEngine MAINTAINS "InsPair bauthPossibleBSNs"
+RULE "InsPair bauthPossibleBSNs": 
+   (  bauthGeslachtsnaam~\npGeslachtsnaam~
+   /\ bauthVoornamen~\npVoornamen~
+   /\ bauthGeboortedatum~\npGeboortedatum~
+   /\ bauthGeboorteplaats~\npGeboorteplaats~
+   /\ bauthGeboorteland~\npGeboorteland~
+   /\ bauthGeslacht~\npGeslacht~
+   );npBSN |- bauthPossibleBSNs
+VIOLATION (TXT "{EX} InsPair;bauthPossibleBSNs;BAuthForm;", SRC I, TXT ";BSN;", TGT I)
+ROLE ExecEngine MAINTAINS "DelPair bauthPossibleBSNs"
+RULE "DelPair bauthPossibleBSNs": 
+   bauthPossibleBSNs
+|- (  bauthGeslachtsnaam~\npGeslachtsnaam~
+   /\ bauthVoornamen~\npVoornamen~
+   /\ bauthGeboortedatum~\npGeboortedatum~
+   /\ bauthGeboorteplaats~\npGeboorteplaats~
+   /\ bauthGeboorteland~\npGeboorteland~
+   /\ bauthGeslacht~\npGeslacht~
+   );npBSN
+VIOLATION (TXT "{EX} DelPair;bauthPossibleBSNs;BAuthForm;", SRC I, TXT ";BSN;", TGT I)
+
+--$4b: populate default values
+ROLE ExecEngine MAINTAINS "Set default value for bauth_Land"
+RULE "Set default value for bauth_Land": I[BAuthForm] - bauthGeboorteland;bauthGeboorteland~ |- -I[BAuthForm]
+VIOLATION (TXT "{EX} InsPair;bauthGeboorteland;BAuthForm;", SRC I[BAuthForm], TXT ";LandOfGebied;Nederland")
+
+ROLE ExecEngine MAINTAINS "Haal BSN van de te authenticeren persoon als er een match is"
+RULE "Haal BSN van de te authenticeren persoon als er een match is": 
+   bauthPossibleBSNs - bauthPossibleBSNs;-I |- bauthBSN
+VIOLATION (TXT "{EX} InsPair;bauthBSN;BAuthForm;", SRC I[BAuthForm], TXT ";BSN;", TGT I)
+
+ROLE ExecEngine MAINTAINS "Haal data van te authenticeren persoon uit BRP als BSN bestaat"
+RULE "Haal data van te authenticeren persoon uit BRP als BSN bestaat": 
+   bauthBSN;npBSN~
+|-    bauthGeslachtsnaam;npGeslachtsnaam~
+   /\ bauthVoornamen<>npVoornamen~
+   /\ bauthGeboortedatum<>npGeboortedatum~
+   /\ bauthGeboorteplaats<>npGeboorteplaats~
+   /\ bauthGeboorteland<>npGeboorteland~
+   /\ bauthGeslacht<>npGeslacht~
+VIOLATION (TXT "{EX} InsPair;bauthGeslachtsnaam;BAuthForm;", SRC I, TXT ";Geslachtsnaam;", TGT npGeslachtsnaam
+          ,TXT "{EX} InsPair;bauthVoornamen;BAuthForm;", SRC I, TXT ";Voornamen;", TGT npVoornamen
+          ,TXT "{EX} InsPair;bauthGeboortedatum;BAuthForm;", SRC I, TXT ";Datum;", TGT npGeboortedatum
+          ,TXT "{EX} InsPair;bauthGeboorteplaats;BAuthForm;", SRC I, TXT ";Plaats;", TGT npGeboorteplaats
+          ,TXT "{EX} InsPair;bauthGeboorteland;BAuthForm;", SRC I, TXT ";LandOfGebied;", TGT npGeboorteland
+          ,TXT "{EX} InsPair;bauthGeslacht;BAuthForm;", SRC I, TXT ";Geslachtsaanduiding;", TGT npGeslacht
+          )
+
+--$4c: check for correct values
+RULE "Te authenticeren persoon moet zijn geregistreerd":
+   bauthBSN
+|- (  bauthGeslachtsnaam;npGeslachtsnaam~
+   /\ bauthVoornamen<>npVoornamen~
+   /\ bauthGeboortedatum<>npGeboortedatum~
+   /\ bauthGeboorteplaats<>npGeboorteplaats~
+   /\ bauthGeboorteland<>npGeboorteland~
+   /\ bauthGeslacht<>npGeslacht~
+   );npBSN
+
+RULE "Te authenticeren persoon mag niet zijn geregistreerd als overleden":
+   bauthBSN;npBSN~;overlNatPersoon~ |- -V
+
+--[Step 5: we need the ability to assess when a form is clean - i.e. ready to be processed]
+bauthIsClean :: BAuthForm * BAuthForm [PROP]
+ROLE ExecEngine MAINTAINS "InsPair bauthIsClean"
+RULE "InsPair bauthIsClean":
+   I[BAuthForm]
+   /\ bauthBSN;npBSN~;(I-overlNatPersoon~;overlNatPersoon);npBSN;bauthBSN~
+-- etcetera...
+|- bauthIsClean
+VIOLATION (TXT "{EX} InsPair;bauthIsClean;BAuthForm;", SRC I, TXT ";BAuthForm;", TGT I)
+ROLE ExecEngine MAINTAINS "DelPair bauthIsClean"
+RULE "DelPair bauthIsClean":
+   bauthIsClean
+|- I[BAuthForm]
+   /\ bauthBSN;npBSN~;(I-overlNatPersoon~;overlNatPersoon);npBSN;bauthBSN~
+-- etcetera...
+VIOLATION (TXT "{EX} DelPair;bauthIsClean;BAuthForm;", SRC I, TXT ";BAuthForm;", TGT I)
+
+--[Step 6: We need the ability to process clean forms]
+bauthProcessReq :: BAuthForm * BAuthForm [PROP]
+RULE "A request for processing BAuthForms can only be done on clean forms": bauthProcessReq |- bauthIsClean
+
+ROLE ExecEngine MAINTAINS "Authenticatie van klant is compleet"
+RULE "Authenticatie van klant is compleet":
+    sessionBAuthForm;(bauthProcessReq /\ bauthIsClean);bauthBSN |- sessionBSNAuth;sessionBSN
+VIOLATION (TXT "{EX} InsPair;sessionBSNAuth;SESSION;", SRC I, TXT ";SESSION;", SRC I
+          ,TXT "{EX} InsPair;sessionBSN;SESSION;", SRC I, TXT ";BSN;", TGT I
+          ,TXT "{EX} DelAtom;BAuthForm;", SRC sessionBAuthForm
+          ,TXT "{EX} DelPair;req_NewBAuthForm;SESSION;", SRC I, TXT ";SESSION;", SRC I
+          )
+
+ENDCONTEXT
