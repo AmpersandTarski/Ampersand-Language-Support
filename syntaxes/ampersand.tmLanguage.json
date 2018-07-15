@@ -233,7 +233,7 @@
 					"match": "\\b(CONTEXT|IN|DUTCH|ENGLISH|ENDCONTEXT|PATTERN|ENDPATTERN|PROCESS|ENDPROCESS|SERVICE|ENDSERVICE|LATEX|MARKDOWN)\\b"
 				},
 				{	"name": "keyword.control.others.ampersand",
-					"match": "\\b(INCLUDE|THEMES|META|IDENT|BYPLUG)\\b"
+					"match": "\\b(INCLUDE|THEMES|META|IDENT)\\b"
 				},
 				{	"name": "keyword.control.concepts.ampersand",
 					"match": "\\b(CONCEPT|CLASSIFY|SPEC|ISA|IS)\\b"
