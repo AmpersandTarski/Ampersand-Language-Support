@@ -6,4 +6,8 @@ All notable changes to the "ampersand" extension will be documented in this file
 
 ## [Unreleased]
 
-- Initial release
+## [0.0.1] - 2018-07-14
+
+### Initial version
+
+- Trying out language support with VSCode.

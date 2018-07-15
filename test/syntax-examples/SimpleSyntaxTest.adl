@@ -2,7 +2,7 @@ CONTEXT Test1
 
 -- This file is a simple .adl file with (eventually) all language constructs in it.
 
-CONCEPT Person "Een person is a human of flesh and blood."
+CONCEPT Person "A person is a human of flesh and blood."
 PURPOSE CONCEPT Person
 {+The purpose of persons is a question about the meaning of life. However, in this specific case, it is as an example of a concept+} 
 
