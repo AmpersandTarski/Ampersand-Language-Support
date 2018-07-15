@@ -3,61 +3,83 @@
 	"type": "dark",
 	"colors": {
 		"editor.background": "#202020",
-		"editor.foreground": "#d0d0d0",
+		"editor.foreground": "#c0c0c0",
 		"activityBarBadge.background": "#007fcc",
 		"sideBarTitle.foreground": "#bbbbbb"
 	},
 	"tokenColors": [
-		{
-			"name": "Ampersand - Comment",
-			"scope": [
-				"comment.block.ampersand",
-				"comment.block.documentation.ampersand",
-				"comment.line.double-dash.ampersand",
-				"comment.ampersand"
-			],
-			"settings": {
-				"fontStyle": "bold",
-				"foreground": "#337733"
-			}
+		{   "name": "documentation comments",
+			"scope": "source.ampersand comment.block.documentation",
+			"settings": 
+				{ 
+					"foreground": "#225522",
+					"fontStyle": "italic bold"
+				}
+
 		},
-		{
-			"name": "Ampersand - Keywords",
-			"scope": [
-				"keyword.control.ampersand",
-				"keyword.control.crud.ampersand",
-				"keyword.control.view.ampersand",
-				"keyword.operator.ampersand"
-			],
-			"settings": {
-				"fontStyle": "bold",
-				"foreground": "#773377"
-			}
+		{   "name": "other comments",
+			"scope": "source.ampersand comment",
+			"settings": 
+				{ 
+					"foreground": "#555555",
+					"fontStyle": "bold"
+				}
+
+		},            
+		{   "name": "Ampersand - punctuation",
+			"scope": "source.ampersand punctuation",
+			"settings": { "foreground": "#c00000" }
 		},
-		{
-			"name": "Ampersand - Constants",
-			"scope": [
-				"constant.character.ampersand",
-				"constant.language.ampersand",
-			],
-			"settings": {
-				"fontStyle": "bold",
-				"foreground": "#333377"
-			}
+		{   "name": "Ampersand - highlight",
+			"scope": "source.ampersand highlight.ampersand",
+			"settings": { "foreground": "#ffc000" }
 		},
-		{
-			"name": "Ampersand - Keywords",
-			"scope": [
-				"keyword.control.ampersand",
-				"keyword.control.crud.ampersand",
-				"keyword.control.view.ampersand",
-				"keyword.operator.ampersand"
-			],
-			"settings": {
-				"fontStyle": "bold",
-				"foreground": "#773377"
-			}
+		{   "name": "Ampersand - backticks",
+			"scope": "source.ampersand backticked.ampersand",
+			"settings": { "foreground": "#c04000" }
 		},
+		{   "name": "Ampersand - filenames",
+			"scope": "source.ampersand filename.ampersand",
+			"settings": { "foreground": "#4080ff" }
+		},
+		{   "name": "Ampersand - using defined stuff",
+			"scope": "source.ampersand use",
+			"settings": { "foreground": "#c04040" }
+		},
+		{   "name": "Ampersand - definitions",
+			"scope": "source.ampersand definition",
+			"settings": 
+				{ 
+					"foreground": "#C04000",
+					"fontStyle": "bold underline"
+				}
+
+		},
+			{   "name": "operators",
+			"scope": "source.ampersand keyword.operator",
+			"settings": 
+				{ 
+					"foreground": "#FF4040",
+					"fontStyle": "bold"
+				}
+		},
+		{   "name": "keywords",
+			"scope": "source.ampersand keyword.control",
+			"settings": 
+				{ 
+					"foreground": "#B04040",
+					"fontStyle": "bold"
+				}
+		},
+		{   "name": "strings",
+			"scope": "source.ampersand string.quoted",
+			"settings": 
+				{ 
+					"foreground": "#208020",
+					"fontStyle": "bold"
+				}
+		},
+		
 		{
 			"name": "Comment",
 			"scope": [
