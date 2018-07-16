@@ -6,7 +6,7 @@ export function activate(ctx: vscode.ExtensionContext) {
     // Use the console to output diagnostic information (console.log) and errors (console.error).
     // This line of code will only be executed once when your extension is activated.
     console.log('Congratulations, your extension "Ampersand" is now active!');
-
+    
     // vscode.languages.setLanguageConfiguration('ampersand', {
     //     indentationRules: {
     //         // ^.*\{[^}"']*$
@@ -25,7 +25,8 @@ export function activate(ctx: vscode.ExtensionContext) {
     ctx.subscriptions.push(controller);
     ctx.subscriptions.push(wordCounter);
 }
-
+export function deactivate() {
+}
 export class WordCounter {
 
     private _statusBarItem: StatusBarItem;
