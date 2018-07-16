@@ -149,7 +149,7 @@
 				}
 			]
 		}
-		,	"relations":
+		, "relations":
 		{	"patterns": 
 			[	{	"comment": "relation :: Concept1 * Concept2",
 					"match": "\\b([a-z][_A-Za-z0-9]*)\\s*(::)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\\*)\\s*([A-Z][_A-Za-z0-9]*)",
@@ -181,13 +181,13 @@
 				}
 			]
 		}
-		,	"rules":
-		{	"patterns": 
-			[	{	"comment": "IDENT rule definition",
+		, "rules":
+		{	"patterns": [
+				{	"comment": "IDENT rule definition",
 					"name":"statement.ident.rule.ampersand",
 					"begin": "\\b(IDENT)\\s+(|\")([^\"]+)(\\2)\\s*(:)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\\()",
 					"beginCaptures": {
-						"0": { "name":"statement.ident.rule.leader.ampersand"},
+						"0": { "name":"statement.ident.rule.begin.ampersand"},
 						"1": { "name":"keyword.other.ampersand"},
 						"2": { "name":"punctuation.definition.rule.ampersand"},
 						"3": { "name":"definition.rule.ampersand"},
@@ -196,14 +196,9 @@
 						"6": { "name":"use.concept.ampersand"},
 						"7": { "name":"punctuation.definition.rule.ampersand"}						
 					},
-					"end": "(\\))",
-					"endCaptures": {
-						"0": { "name":"statement.ident.rule.trailer.ampersand"},
-						"1": { "name":"punctuation.definition.rule.ampersand"}						
-					},
+					"end": "(?<=\\))",
 					"patterns": [
 						{	"include": "#term" },
-						{	"include": "#parentheset" },
 						{	"name": "keyword.term.operator.ampersand",
 							"match": "((?<!-)-(?!-)|~|\\+|;|!|\\*|\\\\/|/\\\\|\\\\|/|<>)"
 						},
@@ -213,17 +208,29 @@
 					]
 				},
 				{	"comment": "RULE definition",
-					"match": "\\b(RULE)\\s+(\")([^\"]*)(\")\\s*(:)",
-					"captures": {
-						"0": { "name":"statement.definition.rule.ampersand"},
+					"name":"statement.definition.rule.ampersand",
+					"begin": "\\b(RULE)\\s+(\")([^\"]*)(\")\\s*(:)",
+					"beginCaptures": {
+						"0": { "name":"statement.definition.rule.begin.ampersand"},
 						"1": { "name":"keyword.other.ampersand"},
 						"2": { "name":"punctuation.definition.rule.ampersand"},
 						"3": { "name":"definition.rule.ampersand"},
 						"4": { "name":"punctuation.definition.rule.ampersand"},
 						"5": { "name":"punctuation.definition.rule.ampersand"}
-					}
+					},
+					"end": "^(?=[^\\|\\s])",
+					"patterns": [
+						{	"include": "#rulexpr" },
+						{	"name": "keyword.term.operator.ampersand",
+							"match": "((?<!-)-(?!-)|~|\\+|;|!|\\*|\\\\/|/\\\\|\\\\|/|<>)"
+						},
+						{	"name": "invalid.illegal.expected-term-operator.ampersand",
+							"match": "[^\\s\\)]"
+						}
+					]
 				},
 				{	"comment":"ROLE <role> MAINTAINS <rulename>",
+					"name":"statement.role.maintains.rule.ampersand",
 					"match": "\\b(ROLE)\\s+([A-Z][_A-Za-z0-9]*)\\s+(MAINTAINS)\\s+(\")([^\"]*)(\")",
 					"captures": {
 						"1": { "name":"keyword.other.ampersand"},
@@ -248,21 +255,35 @@
 			"name": "meta.structure.rulexpr.ampersand",
             "patterns":[
                 {	"include": "#term" },
-				{	"include": "#parentheset" },
-				{	"name": "keyword.rulexpr.operator.ampersand",
-					"match": "(\\|-|=)"
-				},
+				{	"include": "#ruleoperator" },
 				{	"name": "invalid.illegal.expected-rulexpr-operator.ampersand",
 					"match": "[^\\s]"
 				}
             ]
         },
+		"ruleoperator": {
+			"patterns": [
+				{	"name": "keyword.rulexpr.operator.ampersand",
+					"match": "(\\|-|=)"
+				}
+			]
+		},
+		"termoperator": {
+			"patterns": [
+				{	"name": "keyword.term.operator.ampersand",
+					"match": "((?<!-)-(?!-)|~|\\+|;|!|\\*|\\\\/|/\\\\|\\\\|/|<>)"
+				}
+			]
+		},
 		"term": {
 			"name": "meta.structure.term.ampersand",
             "patterns": [
-				{ "include": "#relname" },
-				{ "include": "#IV" },
-				{ "include": "#atom" }
+				{	"include": "#comments" },
+				{	"include": "#parentheset" },
+				{ 	"include": "#relname" },
+				{ 	"include": "#IV" },
+				{ 	"include": "#atom" },
+				{ 	"include": "#termoperator" }
 			]
         },
         "relname": {
@@ -343,8 +364,8 @@
 				}
 			]
 		},
-		"parentheset":
-		{	"patterns": [
+"parentheset": {
+			"patterns": [
 				{   "name": "meta.structure.parentheset.ampersand",
 					"begin": "\\(",
 					"beginCaptures": { "0": { "name": "punctuation.definition.parentheset.begin.ampersand" } },
@@ -352,9 +373,7 @@
 					"endCaptures": { "0": { "name": "punctuation.definition.parentheset.end.ampersand" } },
 					"patterns": [
 						{	"include": "#term" },
-						{	"name": "keyword.term.operator.ampersand",
-							"match": "((?<!-)-(?!-)|~|\\+|;|!|\\*|\\\\/|/\\\\|\\\\|/|<>)"
-						},
+						{	"include": "#termoperator" },
 						{	"name": "invalid.illegal.expected-term-operator.ampersand",
 							"match": "[^\\s\\)]"
 						}
