@@ -25,8 +25,6 @@ export function activate(ctx: vscode.ExtensionContext) {
     ctx.subscriptions.push(controller);
     ctx.subscriptions.push(wordCounter);
 }
-export function deactivate() {
-}
 export class WordCounter {
 
     private _statusBarItem: StatusBarItem;
