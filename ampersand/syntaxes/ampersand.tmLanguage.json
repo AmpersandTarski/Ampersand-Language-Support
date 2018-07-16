@@ -81,26 +81,33 @@
 			]
 		}
 		, "purposes":
-		{	"comment":"PURPOSE (CONTEXT|CONCEPT|RELATION|RULE) (<identifier>|\"<identifier>\") {+ <multi-linedescription> +}",
-			"name": "statement.purpose.ampersand",
-			"begin": "\\b(PURPOSE)\\s+(CONTEXT|CONCEPT|RELATION|RULE)\\s+(([^\"\\s]*)|(\")([^\"]*)(\"))[\\s]+({\\+)",
+		{	"comment":"PURPOSE <keyword> \"<identifier>\" -- tnx to https://github.com/Microsoft/vscode-textmate/issues/41",
+			"name": "statement.purpose.quoted-string.ampersand",
+			"begin": "\\b(PURPOSE)\\s+(CONTEXT|CONCEPT|RELATION|RULE)\\s+(\")([^\"]*)(\")\\s*",
 			"beginCaptures": {
-				"0": { "name":"statement.purpose.leadertext.ampersand"},
+				"0": { "name":"statement.purpose.begincapture1.ampersand"},
 				"1": { "name":"keyword.other.ampersand"},
 				"2": { "name":"keyword.other.ampersand"},
-				"3": { "name":"statement.identifierstring.ampersand"},
+				"3": { "name":"punctuation.purpose.ampersand"},
 				"4": { "name":"use.identifier.ampersand"},
-				"5": { "name":"punctuation.purpose.ampersand"},
-				"6": { "name":"use.identifier.ampersand"},
-				"7": { "name":"punctuation.purpose.ampersand"},
-				"8": { "name":"punctuation.purpose.ampersand"}
+				"5": { "name":"punctuation.purpose.ampersand"}
 			},
-			"end": "(\\+})",
-			"endCaptures": {
-				"0": { "name":"statement.purpose.trailertext.ampersand"},
-				"1": { "name":"punctuation.purpose.ampersand" } 
-			},
-			"patterns": [ {"include": "#comment patterns"} ]
+			"end": "(?<=\\+})",
+			"patterns": [
+				{	"comment":"inside {+ section",
+					"name": "comment.block.documentation.ampersand",
+					"begin": "{\\+",
+					"beginCaptures": { "0": { "name": "punctuation.comment.block.ampersand" } },
+					"end": "\\+}",
+					"endCaptures": { "0": { "name": "punctuation.comment.block.ampersand" } },
+					"patterns": [ {"include": "#comment patterns"} ]
+				},
+				{	"comment":"outside {+ section",
+					"name": "invalid.illegal.ampersand",
+					"begin": "\\s*([^{]|{[^\\+])",
+					"end": "\\bENDCONTEXT"
+				}
+			]
 		}
 		, "includes":
 		{	"patterns": 

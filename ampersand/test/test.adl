@@ -1,10 +1,13 @@
 CONTEXT "BurgerAuthenticatie" IN DUTCH
 {- dit is een 
 blokcomment -}
+
 PURPOSE CONTEXT "BurgerAuthenticatie" {+ dit is een **this stuff sits** `at` thi
 blokcomment +}
 
-PURPOSE RULE "BurgerAuthenticatie"
+dit is een te
+
+PURPOSE RULE "BurgerAuthenticatie"  
 {+  **this stuff sits** `at` this stuff sits at https://github.com/AmpersandTarski/Ampersand-Language-Support (did you know that)?
 we have issue #903 and want to **emphasize text** and `test`  'test' "test", (test), [test],
 +}
