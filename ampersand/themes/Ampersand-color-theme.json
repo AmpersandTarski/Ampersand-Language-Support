@@ -46,26 +46,16 @@
 		},
 		{   "name": "Ampersand - definitions",
 			"scope": "source.ampersand definition",
-			"settings": 
-				{   "foreground": "#60A000",
-					"fontStyle": "bold underline"
-				}
-			},
-			{   "name": "Ampersand - operators",
+			"settings": { "foreground": "#60A000", "fontStyle": "bold underline" }
+		},
+		{   "name": "Ampersand - operators",
 			"scope": "source.ampersand keyword.operator",
-			"settings": 
-				{   "foreground": "#C06060",
-					"fontStyle": "bold"
-				}
+			"settings": { "foreground": "#C06060", "fontStyle": "bold" }
 		},
 		{   "name": "Ampersand - keywords",
 			"scope": "source.ampersand keyword",
-			"settings": 
-				{   "foreground": "#C08080",
-					"fontStyle": "bold"
-				}
-		}
-
+			"settings": { "foreground": "#C08080", "fontStyle": "bold" }
+		},
 		
 		{
 			"name": "Comment",

@@ -4,10 +4,11 @@ blokcomment -}
 
 PURPOSE CONTEXT "BurgerAuthenticatie" {+ dit is een **this stuff sits** `at` thi
 blokcomment +}
-
+PURPOSE RULE "asdfasd" 
+{+asdfasdf+}
 dit is een te
 
-PURPOSE RULE "BurgerAuthenticatie"  
+PURPOSE RULE "BurgerAuthenticatie"
 {+  **this stuff sits** `at` this stuff sits at https://github.com/AmpersandTarski/Ampersand-Language-Support (did you know that)?
 we have issue #903 and want to **emphasize text** and `test`  'test' "test", (test), [test],
 +}
@@ -17,7 +18,7 @@ we have issue #903 and want to **emphasize text** and `test`  'test' "test", (te
 -}
 
 CONCEPT Aap "explanation" -- enzovoorts
-CONCEPT Aap "explanation" "reftext"
+CONCEPT Aap "explanation" "reftext" "en nog een tekst"
 
 operators  |-  -  ->  =  ~  +  ;  !  *  ::  :  \/  /\  \\  /  <>
 

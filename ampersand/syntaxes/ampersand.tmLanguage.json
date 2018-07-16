@@ -20,19 +20,19 @@
 	"repository": 
 	{	"comments":
 		{	"patterns": 
-			[	{	"comment":"{- block comment -}",
+			[	{	"comment":"-- line comment",
+					"name": "comment.line.double-dash.ampersand",
+					"begin": "--",
+					"beginCaptures": { "0": { "name": "punctuation.comment.line.double-dash.ampersand" } },
+					"end": "$",
+					"patterns": [ {"include": "#comment patterns"} ]
+				},
+				{	"comment":"{- block comment -}",
 					"name": "comment.block.ampersand",
 					"begin": "{-",
 					"beginCaptures": { "0": { "name": "punctuation.comment.block.ampersand" } },
 					"end": "-}",
 					"endCaptures": { "0": { "name": "punctuation.comment.block.ampersand" } },
-					"patterns": [ {"include": "#comment patterns"} ]
-				},
-				{	"comment":"-- line comment",
-					"name": "comment.line.double-dash.ampersand",
-					"begin": "--",
-					"beginCaptures": { "0": { "name": "punctuation.comment.line.double-dash.ampersand" } },
-					"end": "$",
 					"patterns": [ {"include": "#comment patterns"} ]
 				},
 				{	"comment":"text after `ENDCONTEXT` is comment",
@@ -44,19 +44,14 @@
 			]
 		}
 		, "comment patterns":
-		{	"name": "comment.ampersand",
-			"patterns": 
+		{	"patterns": 
 			[	{	"comment":"**highlighted**",
 					"match": "\\*\\*(.*?)\\*\\*",
-					"captures": {
-						"0": { "name":"highlight.ampersand"}
-					}
+					"captures": { "0": { "name":"highlight.ampersand"} }
 				},
 				{	"comment":"`backticked`",
 					"match": "`([^`]*)`",
-					"captures": {
-						"1": { "name":"backticked.ampersand"}
-					}
+					"captures": { "1": { "name":"backticked.ampersand"}	}
 				},
 				{	"comment":"<protocol>://<domainname><Etc>",
 					"match": "\\w+:(\/?\/?)[^\\s]+",
@@ -81,31 +76,34 @@
 			]
 		}
 		, "purposes":
-		{	"comment":"PURPOSE <keyword> \"<identifier>\" -- tnx to https://github.com/Microsoft/vscode-textmate/issues/41",
-			"name": "statement.purpose.quoted-string.ampersand",
-			"begin": "\\b(PURPOSE)\\s+(CONTEXT|CONCEPT|RELATION|RULE)\\s+(\")([^\"]*)(\")\\s*",
-			"beginCaptures": {
-				"0": { "name":"statement.purpose.begincapture1.ampersand"},
-				"1": { "name":"keyword.other.ampersand"},
-				"2": { "name":"keyword.other.ampersand"},
-				"3": { "name":"punctuation.purpose.ampersand"},
-				"4": { "name":"use.identifier.ampersand"},
-				"5": { "name":"punctuation.purpose.ampersand"}
-			},
-			"end": "(?<=\\+})",
-			"patterns": [
-				{	"comment":"inside {+ section",
-					"name": "comment.block.documentation.ampersand",
-					"begin": "{\\+",
-					"beginCaptures": { "0": { "name": "punctuation.comment.block.ampersand" } },
-					"end": "\\+}",
-					"endCaptures": { "0": { "name": "punctuation.comment.block.ampersand" } },
-					"patterns": [ {"include": "#comment patterns"} ]
-				},
-				{	"comment":"outside {+ section",
-					"name": "invalid.illegal.ampersand",
-					"begin": "\\s*([^{]|{[^\\+])",
-					"end": "\\bENDCONTEXT"
+		{	"patterns":[
+				{	"comment":"PURPOSE <keyword> \"<identifier>\" -- tnx to https://github.com/Microsoft/vscode-textmate/issues/41",
+					"name": "statement.purpose.quoted-string.ampersand",
+					"begin": "\\b(PURPOSE)\\s+(CONTEXT|CONCEPT|RELATION|RULE)\\s+(\")([^\"]*)(\")\\s*",
+					"beginCaptures": {
+						"0": { "name":"statement.purpose.begincapture1.ampersand"},
+						"1": { "name":"keyword.other.ampersand"},
+						"2": { "name":"keyword.other.ampersand"},
+						"3": { "name":"punctuation.purpose.ampersand"},
+						"4": { "name":"use.identifier.ampersand"},
+						"5": { "name":"punctuation.purpose.ampersand"}
+					},
+					"end": "(?<=\\+})",
+					"patterns": [
+						{	"comment":"inside {+ section",
+							"name": "comment.block.documentation.ampersand",
+							"begin": "{\\+",
+							"beginCaptures": { "0": { "name": "punctuation.comment.block.ampersand" } },
+							"end": "\\+}",
+							"endCaptures": { "0": { "name": "punctuation.comment.block.ampersand" } },
+							"patterns": [ {"include": "#comment patterns"} ]
+						},
+						{	"comment":"outside {+ section",
+							"name": "invalid.illegal.ampersand",
+							"begin": "\\s*([^{]|{[^\\+])",
+							"end": "\\bENDCONTEXT"
+						}
+					]
 				}
 			]
 		}
@@ -124,18 +122,29 @@
 		}
 		, "concepts":
 		{	"patterns": 
-			[	{	"comment": "CONCEPT <Concept> \"explanatory text\" \"reftext\"?",
-					"match": "\\b(CONCEPT)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\")([^\"]*)(\")((?!\\s*(\"))|\\s*(\")([^\"]*)(\"))",
+			[	{	"comment": "CONCEPT <Concept> \"explanatory text\" \"reftext\"",
+					"match": "\\b(CONCEPT)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\")([^\"]*)(\")\\s*(\")([^\"]*)(\")",
+					"captures": {
+						"0": { "name":"statement.definition.conceptref.ampersand"},
+						"1": { "name":"keyword.other.ampersand"},
+						"2": { "name":"definition.concept.ampersand"},
+						"3": { "name":"punctuation.definition.concept.ampersand"},
+						"4": { "name":"string.quoted.double.definition.concept.ampersand"},
+						"5": { "name":"punctuation.definition.concept.ampersand"},
+						"6": { "name":"punctuation.definition.concept.ampersand"},
+						"7": { "name":"string.quoted.double.definition.concept.ampersand"},
+						"8": { "name":"punctuation.definition.concept.ampersand"}
+					}
+				},
+				{	"comment": "CONCEPT <Concept> \"explanatory text\"",
+					"match": "\\b(CONCEPT)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\")([^\"]*)(\")",
 					"captures": {
 						"0": { "name":"statement.definition.concept.ampersand"},
 						"1": { "name":"keyword.other.ampersand"},
 						"2": { "name":"definition.concept.ampersand"},
 						"3": { "name":"punctuation.definition.concept.ampersand"},
-						"4": { "name":"string.quoted.double.ampersand"},
-						"5": { "name":"punctuation.definition.concept.ampersand"},
-						"6": { "name":"punctuation.definition.concept.ampersand"},
-						"7": { "name":"string.quoted.double.ampersand"},
-						"8": { "name":"punctuation.definition.concept.ampersand"}
+						"4": { "name":"string.quoted.double.definition.concept.ampersand"},
+						"5": { "name":"punctuation.definition.concept.ampersand"}
 					}
 				}
 			]
