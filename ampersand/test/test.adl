@@ -121,6 +121,7 @@ INTERFACE "Authenticatie Balieklant": I[BAuthForm] cRud BOX <SSIFORM>
 --[Step 4: define the relations that will be populated and set default values if appropriate]
 -- Every relation that is mentioned in the Interface as defined in step 3 must be defined here.
 -- Also, the TGT concepts must match those of the relations in the actual registration (for KvK: Handelsregister); we assume any REPRESENT stuff is taken care of at the definition of that registration.
+IDENT "BAuthForms": BAuthForm(bauthBSN;I[Aap];V[Noot*Mies];test)
 bauthBSN            :: BAuthForm * BSN                  [UNI]
 bauthGeslachtsnaam  :: BAuthForm * Geslachtsnaam        [UNI]
 bauthVoornamen      :: BAuthForm * Voornamen            [UNI]

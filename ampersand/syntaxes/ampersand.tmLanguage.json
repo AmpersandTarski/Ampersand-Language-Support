@@ -174,12 +174,46 @@
 						"6": { "name":"use.concept.ampersand"},
 						"7": { "name":"punctuation.definition.relation.ampersand"}
 					}
+				},
+				{	"comment": "[multiplicities]",
+					"name": "keyword.control.multiplicity.ampersand",
+					"match": "\\[(\\s*(INJ|SUR|UNI|TOT|SYM|ASY|RFX|IRF|TRN|PROP))(\\s*,\\s*(INJ|SUR|UNI|TOT|SYM|ASY|RFX|IRF|TRN|PROP))*\\s*\\]"
 				}
 			]
 		}
 		,	"rules":
 		{	"patterns": 
-			[	{	"match": "\\b(RULE)\\s+(\")([^\"]*)(\")\\s*(:)",
+			[	{	"comment": "IDENT rule definition",
+					"name":"statement.ident.rule.ampersand",
+					"begin": "\\b(IDENT)\\s+(|\")([^\"]+)(\\2)\\s*(:)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\\()",
+					"beginCaptures": {
+						"0": { "name":"statement.ident.rule.leader.ampersand"},
+						"1": { "name":"keyword.other.ampersand"},
+						"2": { "name":"punctuation.definition.rule.ampersand"},
+						"3": { "name":"definition.rule.ampersand"},
+						"4": { "name":"punctuation.definition.rule.ampersand"},
+						"5": { "name":"punctuation.definition.rule.ampersand"},
+						"6": { "name":"use.concept.ampersand"},
+						"7": { "name":"punctuation.definition.rule.ampersand"}						
+					},
+					"end": "(\\))",
+					"endCaptures": {
+						"0": { "name":"statement.ident.rule.trailer.ampersand"},
+						"1": { "name":"punctuation.definition.rule.ampersand"}						
+					},
+					"patterns": [
+						{	"include": "#term" },
+						{	"include": "#parentheset" },
+						{	"name": "keyword.term.operator.ampersand",
+							"match": "((?<!-)-(?!-)|~|\\+|;|!|\\*|\\\\/|/\\\\|\\\\|/|<>)"
+						},
+						{	"name": "invalid.illegal.expected-term-operator.ampersand",
+							"match": "[^\\s\\)]"
+						}
+					]
+				},
+				{	"comment": "RULE definition",
+					"match": "\\b(RULE)\\s+(\")([^\"]*)(\")\\s*(:)",
 					"captures": {
 						"0": { "name":"statement.definition.rule.ampersand"},
 						"1": { "name":"keyword.other.ampersand"},
@@ -209,42 +243,40 @@
 					"patterns": [ {"include": "#comment patterns"} ]
 				}
 			]
-		}
-		,	"interfaces":
-		{	"patterns": 
-			[	{	"match": "\\b(INTERFACE)\\s+(\")([^\"]*)(\")\\s*(|(FOR)([^:]*))(:)",
-					"captures": {
-						"1": { "name":"keyword.other.ampersand"},
-						"2": { "name":"keyword.other.ampersand"},
-						"3": { "name":"definition.interface.ampersand"},
-						"4": { "name":"keyword.other.ampersand"},
-						"5": { "name":"keyword.other.ampersand"},
-						"6": { "name":"use.role.ampersand"}
-					}
+		},
+        "rulexpr": {
+			"name": "meta.structure.rulexpr.ampersand",
+            "patterns":[
+                {	"include": "#term" },
+				{	"include": "#parentheset" },
+				{	"name": "keyword.rulexpr.operator.ampersand",
+					"match": "(\\|-|=)"
+				},
+				{	"name": "invalid.illegal.expected-rulexpr-operator.ampersand",
+					"match": "[^\\s]"
+				}
+            ]
+        },
+		"term": {
+			"name": "meta.structure.term.ampersand",
+            "patterns": [
+				{ "include": "#relname" },
+				{ "include": "#IV" },
+				{ "include": "#atom" }
+			]
+        },
+        "relname": {
+			"name": "meta.structure.relname.ampersand",
+			"patterns": [
+            	{ 	"name": "use.relation.ampersand",
+            		"match": "[a-z][_A-Za-z0-0]*"
 				}
 			]
-		}
-		,	"views":
-		{	"patterns": 
-			[	{	"match": "\\b(VIEW)\\s+([^:]*)(:)",
-					"captures": {
-						"1": { "name":"keyword.other.ampersand"},
-						"2": { "name":"definition.view.ampersand"},
-						"3": { "name":"keyword.other.ampersand"}
-					}
-				}
-			]
-		}
-		,	"operators":
-		{	"patterns": 
-			[	{	"name": "keyword.operator.relationalgebra.ampersand",
-					"match": "(\\|-|->|(?<!-)-(?!-)|=|~|\\+|;|!|\\*|\\\\/|/\\\\|\\\\|/|<>)"
-				}
-			]
-		}
-		,	"IV":
-		{	"patterns": 
-			[	{	"comment": "V, I",
+		},
+		"IV": {
+			"name": "meta.structure.iv.ampersand",
+			"patterns": [
+				{	"comment": "V, I",
 					"match": "(?<!['])\\b[IV]\\b(?!\\[)",
 					"name": "constant.character.iv.ampersand"
 				},
@@ -269,6 +301,91 @@
 					}
 				}
 			]
+		},
+        "atom": {
+			"name": "meta.structure.atom.ampersand",
+            "patterns": [
+				{   "comment": "integer",
+					"name": "use.atom.integer.ampersand",
+					"match": "\\b\\d+\\b"
+				},
+				{   "comment": "float",
+					"name": "use.atom.float.ampersand",
+					"match": "\\b\\d+(\\.\\d*)?\\b"
+				},
+				{   "comment": "boolean",
+					"name": "use.atom.boolean.ampersand",
+					"match": "\\b(?:true|false|null)\\b"
+				},
+				{   "comment": "date",
+					"name": "use.atom.date.ampersand",
+					"match": "\\b(\\d\\d){1,2}-(\\d\\d)-(\\d\\d){1,2}\\b"
+				},
+				{   "comment": "datetime",
+					"name": "use.atom.datetime.ampersand",
+					"match": "\\bto be done\\b"
+				},
+				{   "comment": "string",
+					"match": "(\")([^\"\\\\]*)(\")",
+					"captures": {
+						"1": { "name":"punctuation.string.ampersand"},
+						"2": { "name":"use.atom.string.ampersand"},
+						"3": { "name":"punctuation.string.ampersand"}
+					}
+				},
+				{   "comment": "specials",
+					"match": "(\")(ONE|_SESSION)(\")",
+					"captures": {
+						"1": { "name":"punctuation.string.ampersand"},
+						"2": { "name":"use.atom.specials.ampersand"},
+						"3": { "name":"punctuation.string.ampersand"}
+					}
+				}
+			]
+		},
+		"parentheset":
+		{	"patterns": [
+				{   "name": "meta.structure.parentheset.ampersand",
+					"begin": "\\(",
+					"beginCaptures": { "0": { "name": "punctuation.definition.parentheset.begin.ampersand" } },
+					"end": "\\)",
+					"endCaptures": { "0": { "name": "punctuation.definition.parentheset.end.ampersand" } },
+					"patterns": [
+						{	"include": "#term" },
+						{	"name": "keyword.term.operator.ampersand",
+							"match": "((?<!-)-(?!-)|~|\\+|;|!|\\*|\\\\/|/\\\\|\\\\|/|<>)"
+						},
+						{	"name": "invalid.illegal.expected-term-operator.ampersand",
+							"match": "[^\\s\\)]"
+						}
+					]
+				}
+			]
+		},
+		"interfaces":
+		{	"patterns": 
+			[	{	"match": "\\b(INTERFACE)\\s+(\")([^\"]*)(\")\\s*(|(FOR)([^:]*))(:)",
+					"captures": {
+						"1": { "name":"keyword.other.ampersand"},
+						"2": { "name":"keyword.other.ampersand"},
+						"3": { "name":"definition.interface.ampersand"},
+						"4": { "name":"keyword.other.ampersand"},
+						"5": { "name":"keyword.other.ampersand"},
+						"6": { "name":"use.role.ampersand"}
+					}
+				}
+			]
+		}
+		,	"views":
+		{	"patterns": 
+			[	{	"match": "\\b(VIEW)\\s+([^:]*)(:)",
+					"captures": {
+						"1": { "name":"keyword.other.ampersand"},
+						"2": { "name":"definition.view.ampersand"},
+						"3": { "name":"keyword.other.ampersand"}
+					}
+				}
+			]
 		}
 	,	"keywords":
 		{	"patterns": 
@@ -276,16 +393,13 @@
 					"match": "\\b(CONTEXT|IN|DUTCH|ENGLISH|ENDCONTEXT|PATTERN|ENDPATTERN|PROCESS|ENDPROCESS|SERVICE|ENDSERVICE|LATEX|MARKDOWN)\\b"
 				},
 				{	"name": "keyword.control.others.ampersand",
-					"match": "\\b(INCLUDE|THEMES|META|IDENT|BYPLUG)\\b"
+					"match": "\\b(THEMES|META|BYPLUG)\\b"
 				},
 				{	"name": "keyword.control.concepts.ampersand",
-					"match": "\\b(CONCEPT|CLASSIFY|SPEC|ISA|IS)\\b"
+					"match": "\\b(CLASSIFY|SPEC|ISA|IS)\\b"
 				},
 				{	"name": "keyword.control.represents.ampersand",
 					"match": "\\b(REPRESENT|TYPE|ALPHANUMERIC|BIGALPHANUMERIC|HUGEALPHANUMERIC|PASSWORD|BINARY|BIGBINARY|HUGEBINARY|DATE|DATETIME|BOOLEAN|INTEGER|FLOAT)\\b"
-				},
-				{	"name": "keyword.control.relprops.ampersand",
-					"match": "\\[(\\s*(INJ|SUR|UNI|TOT|SYM|ASY|RFX|IRF|TRN|PROP))(\\s*,\\s*(INJ|SUR|UNI|TOT|SYM|ASY|RFX|IRF|TRN|PROP))*\\s*\\]"
 				},
 				{	"name": "keyword.control.views.ampersand",
 					"match": "\\b(VIEW|ENDVIEW|REST|HTML|TEMPLATE)\\b"
