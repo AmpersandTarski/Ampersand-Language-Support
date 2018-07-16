@@ -31,8 +31,8 @@
       "properties": {
         "ampersand.indentationRules.enabled": {
           "type": "boolean",
-          "default": true,
-          "description": "Set to 'false' to disable automatically increasing indent on newlines after '=', 'do', 'where' etc."
+          "default": false,
+          "description": "Set to 'true' to enable automatically increasing indent on newlines after '=', 'do', 'where' etc."
         }
       }
     },

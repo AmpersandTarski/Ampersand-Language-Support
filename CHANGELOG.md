@@ -6,6 +6,10 @@ All notable changes to the "ampersand" extension will be documented in this file
 
 ## [Unreleased]
 
+## [0.0.2] - 2018-07-16
+
+- This version compiles.
+
 ## [0.0.1] - 2018-07-14
 
 ### Initial version
