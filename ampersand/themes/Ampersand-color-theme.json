@@ -8,21 +8,25 @@
 		"sideBarTitle.foreground": "#bbbbbb"
 	},
 	"tokenColors": [
+		{   "name": "Ampersand - title comments",
+			"scope": "source.ampersand comment.line.double-dash.sectionheader",
+			"settings": { "foreground": "#f0d0b0", "fontStyle": "bold italic underline" }
+		},
 		{   "name": "Ampersand - documentation comments",
 			"scope": "source.ampersand comment.block.documentation",
 			"settings": { "foreground": "#209020" }
 		},
 		{   "name": "Ampersand - other comments",
 			"scope": "source.ampersand comment",
-			"settings": { "foreground": "#666666" }
+			"settings": { "foreground": "#AAAAAA" }
 		},
 		{   "name": "Ampersand - strings",
 			"scope": "source.ampersand string.quoted",
-			"settings": { "foreground": "#60a0e0" }
+			"settings": { "foreground": "#80b0d0" }
 		},            
 		{   "name": "Ampersand - punctuation",
 			"scope": "source.ampersand punctuation",
-			"settings": { "foreground": "#FF8080" }
+			"settings": { "foreground": "#E08080" }
 		},
 		{   "name": "Ampersand - highlight",
 			"scope": "source.ampersand highlight.ampersand",
@@ -46,17 +50,40 @@
 		},
 		{   "name": "Ampersand - definitions",
 			"scope": "source.ampersand definition",
-			"settings": { "foreground": "#60A000", "fontStyle": "bold underline" }
+			"settings": { "foreground": "#60A000", "fontStyle": "underline" }
 		},
 		{   "name": "Ampersand - operators",
 			"scope": "source.ampersand keyword.operator",
 			"settings": { "foreground": "#C06060", "fontStyle": "bold" }
 		},
+		{   "name": "Ampersand - violations - well-known functions",
+			"scope": "keyword.other.violation.txt.wellknown-function",
+			"settings": { "foreground": "#60A000", "fontStyle": "bold" }
+		},
+		{   "name": "Ampersand - violations - unknown functions",
+			"scope": "keyword.other.violation.txt.unknown-function",
+			"settings": { "foreground": "#60A000", "fontStyle": "bold italic underline" }
+		},
+		{   "name": "Ampersand - violations - argument delimiters",
+			"scope": "punctuation.violation.delimiter",
+			"settings": { "foreground": "#E08080", "fontStyle": "bold" }
+		},
+		{   "name": "Ampersand - violations - reserved argument words",
+			"scope": "keyword.other.violation.txt.arguments.reserved",
+			"settings": { "foreground": "#FF7070", "fontStyle": "bold" }
+		},
+		{   "name": "Ampersand - violations - other arguments",
+			"scope": "keyword.other.violation.txt.arguments.other",
+			"settings": { "foreground": "#60A060" }
+		},
 		{   "name": "Ampersand - keywords",
 			"scope": "source.ampersand keyword",
 			"settings": { "foreground": "#C08080", "fontStyle": "bold" }
 		},
-		
+	
+
+
+
 		{
 			"name": "Comment",
 			"scope": [

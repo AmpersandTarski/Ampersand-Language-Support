@@ -17,10 +17,10 @@ we have issue #903 and want to **emphasize text** and `test`  'test' "test", (te
 we have issue #903 and want to **emphasize text** and `test`  'test' "test", (test), [test],
 -}
 
+IDENT Apen: Aap(aap,noot,mies[Tien*Noot])
+
 CONCEPT Aap "explanation" -- enzovoorts
 CONCEPT Aap "explanation" "reftext" "en nog een tekst"
-
-operators  |-  -  ->  =  ~  +  ;  !  *  ::  :  \/  /\  \\  /  <>
 
 INCLUDE "some filename"
 
@@ -52,7 +52,7 @@ POPULATION MissingXslx CONTAINS [ "BAuthForm" ]
 newBAuthFormIsAllowed :: SESSION * SESSION [PROP] -- we can actually create new registration forms (all excel files are loaded) 
 ROLE ExecEngine MAINTAINS "Allow creation of BAuthForms"
 RULE "Allow creation of BAuthForms":
-   I[SESSION]         \/ /\ \ / -> 
+   I[SESSION]
    /\ V;ftName;"BAuthForm";V 
 -- /\ V;clName;"SBICodes";V
 -- etc.
@@ -121,7 +121,7 @@ INTERFACE "Authenticatie Balieklant": I[BAuthForm] cRud BOX <SSIFORM>
 --[Step 4: define the relations that will be populated and set default values if appropriate]
 -- Every relation that is mentioned in the Interface as defined in step 3 must be defined here.
 -- Also, the TGT concepts must match those of the relations in the actual registration (for KvK: Handelsregister); we assume any REPRESENT stuff is taken care of at the definition of that registration.
-IDENT "BAuthForms": BAuthForm(bauthBSN;I[Aap];V[Noot*Mies];test)
+--DENT "BAuthForms": BAuthForm(bauthBSN;(I[Aap];V[Noot])*mies;test)
 bauthBSN            :: BAuthForm * BSN                  [UNI]
 bauthGeslachtsnaam  :: BAuthForm * Geslachtsnaam        [UNI]
 bauthVoornamen      :: BAuthForm * Voornamen            [UNI]
