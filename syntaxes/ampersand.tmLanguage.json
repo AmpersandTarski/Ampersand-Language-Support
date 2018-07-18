@@ -20,7 +20,19 @@
 	"repository": 
 	{	"comments":
 		{	"patterns": 
-			[	{	"comment":"-- line comment",
+			[	{	"comment":"--[sectionheader] line comments",
+					"name": "comment.sectionheader.ampersand",
+					"begin": "(--)(\\[)([^\\]]*)(\\])",
+					"beginCaptures": { 
+						"1": { "name": "comment.line.double-dash.ampersand" },
+						"2": { "name": "punctuation.comment.line.double-dash.sectionheader.ampersand" },
+						"3": { "name": "comment.line.double-dash.sectionheader.ampersand" },
+						"4": { "name": "punctuation.comment.line.double-dash.sectionheader.ampersand" } 
+					},
+					"end": "$",
+					"patterns": [ {"include": "#comment patterns"} ]
+				},
+				{	"comment":"-- line comment",
 					"name": "comment.line.double-dash.ampersand",
 					"begin": "--",
 					"beginCaptures": { "0": { "name": "punctuation.comment.line.double-dash.ampersand" } },
@@ -146,10 +158,20 @@
 						"4": { "name":"string.quoted.double.definition.concept.ampersand"},
 						"5": { "name":"punctuation.definition.concept.ampersand"}
 					}
+				},
+				{	"comment": "CLASSIFY <Concept> ISA <CONCEPT>",
+					"match": "\\b(CLASSIFY)\\s*([A-Z][_A-Za-z0-9]*)\\s*(ISA)\\s*([A-Z][_A-Za-z0-9]*)",
+					"captures": {
+						"0": { "name":"statement.classify.ampersand"},
+						"1": { "name":"keyword.other.ampersand"},
+						"2": { "name":"use.concept.ampersand"},
+						"3": { "name":"keyword.other.ampersand"},
+						"4": { "name":"use.concept.ampersand"}
+					}
 				}
 			]
 		}
-		,	"relations":
+		, "relations":
 		{	"patterns": 
 			[	{	"comment": "relation :: Concept1 * Concept2",
 					"match": "\\b([a-z][_A-Za-z0-9]*)\\s*(::)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\\*)\\s*([A-Z][_A-Za-z0-9]*)",
@@ -174,46 +196,382 @@
 						"6": { "name":"use.concept.ampersand"},
 						"7": { "name":"punctuation.definition.relation.ampersand"}
 					}
+				},
+				{	"comment": "[multiplicities]",
+					"name": "keyword.control.multiplicity.ampersand",
+					"match": "\\[(\\s*(INJ|SUR|UNI|TOT|SYM|ASY|RFX|IRF|TRN|PROP))(\\s*,\\s*(INJ|SUR|UNI|TOT|SYM|ASY|RFX|IRF|TRN|PROP))*\\s*\\]"
 				}
 			]
 		}
-		,	"rules":
-		{	"patterns": 
-			[	{	"match": "\\b(RULE)\\s+(\")([^\"]*)(\")\\s*(:)",
-					"captures": {
-						"0": { "name":"statement.definition.rule.ampersand"},
+		, "rules":
+		{	"patterns": [
+				{	"comment": "IDENT rule definition",
+					"name":"statement.ident.rule.ampersand",
+					"begin": "\\b(IDENT)\\s+(|\")([^\"]+)(\\2)\\s*(:)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\\()",
+					"beginCaptures": {
+						"0": { "name":"statement.ident.rule.begin.ampersand"},
+						"1": { "name":"keyword.other.ampersand"},
+						"2": { "name":"punctuation.definition.rule.ampersand"},
+						"3": { "name":"definition.rule.ampersand"},
+						"4": { "name":"punctuation.definition.rule.ampersand"},
+						"5": { "name":"punctuation.definition.rule.ampersand"},
+						"6": { "name":"use.concept.ampersand"},
+						"7": { "name":"punctuation.definition.rule.ampersand"}						
+					},
+					"end": "(\\))",
+					"endCaptures": {
+						"0": { "name":"statement.ident.rule.end.ampersand"},
+						"1": { "name":"punctuation.definition.rule.ampersand"}
+					},
+					"patterns": [
+						{	"include": "#term" },
+						{	"name": "keyword.term.separator.ampersand",
+							"match": ",\\s*"
+						},
+						{	"name": "invalid.illegal.expected-term-operator.ampersand",
+							"match": "[^\\s\\)]"
+						}
+					]
+				},
+				{	"comment": "RULE definition",
+					"name":"statement.definition.rule.ampersand",
+					"begin": "\\b(RULE)\\s+(\")([^\"]*)(\")\\s*(:)",
+					"beginCaptures": {
+						"0": { "name":"statement.definition.rule.begin.ampersand"},
 						"1": { "name":"keyword.other.ampersand"},
 						"2": { "name":"punctuation.definition.rule.ampersand"},
 						"3": { "name":"definition.rule.ampersand"},
 						"4": { "name":"punctuation.definition.rule.ampersand"},
 						"5": { "name":"punctuation.definition.rule.ampersand"}
-					}
+					},
+					"end": "^(?=[^-\\|\\s])",
+					"patterns": [
+						{	"include": "#rulexpr" },
+						{	"name": "keyword.term.operator.ampersand",
+							"match": "((?<!-)-(?!-)|~|\\+|;|!|\\*|\\\\/|/\\\\|\\\\|/|<>)"
+						},
+						{	"name": "invalid.illegal.expected-term-operator.ampersand",
+							"match": "[^\\s\\)]"
+						}
+					]
 				},
 				{	"comment":"ROLE <role> MAINTAINS <rulename>",
+					"name":"statement.role.maintains.rule.ampersand",
 					"match": "\\b(ROLE)\\s+([A-Z][_A-Za-z0-9]*)\\s+(MAINTAINS)\\s+(\")([^\"]*)(\")",
 					"captures": {
 						"1": { "name":"keyword.other.ampersand"},
 						"2": { "name":"use.role.ampersand"},
 						"3": { "name":"keyword.other.ampersand"},
 						"4": { "name":"punctuation.rule.ampersand"},
-						"5": { "name":"string.quoted.double.ampersand"},
+						"5": { "name":"use.rule.ampersand"},
 						"6": { "name":"punctuation.rule.ampersand"}
 					}
 				},
-				{	"comment":"VIOLATIONs",
-					"name": "comment.block.ampersand",
-					"begin": "{-",
-					"beginCaptures": { "0": { "name": "punctuation.definition.comment.block.ampersand" } },
-					"end": "-}",
-					"endCaptures": { "0": { "name": "punctuation.definition.comment.block.ampersand" } },
-					"patterns": [ {"include": "#comment patterns"} ]
+				{	"comment":"VIOLATION statement",
+					"name": "meta.structure.violation.ampersand",
+					"begin": "\\b(VIOLATION)\\s+(\\()",
+					"beginCaptures": {
+						"0": { "name":"statement.violation.begin.ampersand"},
+						"1": { "name":"keyword.other.ampersand"},
+						"2": { "name":"punctuation.rule.ampersand"}
+					},
+					"end": "(\\))",
+					"endCaptures": {
+						"0": { "name":"statement.violation.end.ampersand"},
+						"1": { "name":"punctuation.violation.ampersand"}
+					},
+					"patterns": [
+						{	"include": "#comments"
+						},
+						{	"comment": "TXT \"<all sorts of text\"",
+							"name":"meta.structure.violation.txt.ampersand",
+							"begin": "\\s*(|,\\s*)(TXT)\\s+(\")",
+							"captures": {
+								"0": { "name":"meta.structure.violation.txt.begin.ampersand"},
+								"1": { "name":"punctuation.violation.delimiter.ampersand"},
+								"2": { "name":"keyword.other.violation.txt.ampersand"},
+								"3": { "name":"punctuation.violation.ampersand"}
+							},
+							"end": "(\")",
+							"endCaptures": {
+								"0": { "name":"meta.structure.violation.txt.end.ampersand"},
+								"1": { "name":"punctuation.violation.delimiter.ampersand"}
+							},
+							"patterns": [ 
+								{	"comment": "TXT - {EX} - well-known functions",
+									"match": "({EX})(\\s*|_;)(InsAtom|DelAtom|MrgAtoms|InsPair|DelPair|SetConcept|ClearConcept|InsPairCond|SetConceptCond|SetNavToOnCommit|SetNavToOnRollback)(?=;)",
+									"captures": {
+										"0": { "name":"meta.structure.violation.execengine.wellknown-function.ampersand"},
+										"1": { "name":"keyword.other.violation.txt.ampersand"},
+										"2": { "name":"punctuation.violation.delimiter.ampersand"},
+										"3": { "name":"keyword.other.violation.txt.wellknown-function.ampersand"}
+									}
+								},
+								{	"comment": "TXT - {EX} - deprecated functions",
+									"match": "({EX})(\\s*|_;)(NewStruct)(?=;)",
+									"captures": {
+										"0": { "name":"meta.structure.violation.execengine.deprecated-function.ampersand"},
+										"1": { "name":"keyword.other.violation.txt.ampersand"},
+										"2": { "name":"punctuation.violation.delimiter.ampersand"},
+										"3": { "name":"invalid.deprecated.violation.ampersand"}
+									}
+								},
+								{	"comment": "TXT - {EX} - unknown functions (that need to be registered with the ExecEngine",
+									"match": "({EX})(\\s*|_;)([^;\"]*)",
+									"captures": {
+										"0": { "name":"meta.structure.violation.execengine.unknown-function.ampersand"},
+										"1": { "name":"keyword.other.violation.txt.ampersand"},
+										"2": { "name":"punctuation.violation.delimiter.ampersand"},
+										"3": { "name":"keyword.other.violation.txt.unknown-function.ampersand"}
+									}
+								},
+								{	"comment": "TXT - {EX} - <?php (phpcode) ?>",
+									"name":"meta.structure.violation.txt.php.ampersand",
+									"begin": "(<\\?php)",
+									"captures": {
+										"0": { "name":"meta.structure.violation.txt.php.begin.ampersand"},
+										"1": { "name":"keyword.other.violation.txt.php.ampersand"}
+									},
+									"end": "(\\?>)",
+									"endCaptures": {
+										"0": { "name":"meta.structure.violation.txt.php.end.ampersand"},
+										"1": { "name":"keyword.other.violation.txt.php.ampersand"}
+									},
+									"patterns": [
+										{ "include": "source.php"}
+									]
+								},
+								{	"comment": "TXT - {EX} - {php} phpcode",
+									"name":"meta.structure.violation.txt.php.ampersand",
+									"begin": "({php})",
+									"captures": {
+										"0": { "name":"meta.structure.violation.txt.php.begin.ampersand"},
+										"1": { "name":"keyword.other.violation.txt.php.ampersand"}
+									},
+									"end": "(?=\")",
+									"endCaptures": {
+										"0": { "name":"meta.structure.violation.txt.php.end.ampersand"},
+										"1": { "name":"keyword.other.violation.txt.php.ampersand"}
+									},
+									"patterns": [
+										{ "include": "source.php"}
+									]
+								},
+								{	"comment": "TXT - {EX} - argument delimiters",
+									"match": "(_;|;)",
+									"name":"keyword.other.violation.underscore-semicolon.ampersand"
+								},
+								{	"comment": "TXT - {EX} - reserved argument words",
+									"match": "(_NEW)(?=;)",
+									"name":"keyword.other.violation.txt.arguments.reserved.ampersand"
+								},
+								{	"comment": "TXT - {EX} - other arguments",
+									"match": "[^;\"]*",
+									"name":"keyword.other.violation.txt.arguments.other.ampersand"
+								} 
+							]
+						},
+						{	"comment": "SRC <expr> or TGT <expr>",
+							"name":"meta.structure.violation.srctgt.ampersand",
+							"begin": "\\s*(|,\\s*)(SRC|TGT)\\s+",
+							"captures": {
+								"0": { "name":"meta.structure.violation.srctgt.begin.ampersand"},
+								"1": { "name":"punctuation.violation.delimiter.ampersand"},
+								"2": { "name":"keyword.other.violation.srctgt.ampersand"}
+							},
+							"end": "(,|(?=\\)))",
+							"endCaptures": {
+								"0": { "name":"meta.structure.violation.srctgt.end.ampersand"},
+								"1": { "name":"punctuation.violation.delimiter.ampersand"}
+							},
+							"patterns": [ {	"include": "#term" } ]
+						},
+						{	"name": "invalid.illegal.ampersand",
+							"match": "[^\\s\\)]"
+						}
+					]
 				}
 			]
-		}
-		,	"interfaces":
+		},
+        "rulexpr": {
+			"name": "meta.structure.rulexpr.ampersand",
+            "patterns":[
+                {	"include": "#term" },
+				{	"include": "#ruleoperator" },
+				{	"name": "invalid.illegal.expected-rulexpr-operator.ampersand",
+					"match": "[^\\s]"
+				}
+            ]
+        },
+		"ruleoperator": {
+			"patterns": [
+				{	"name": "keyword.rulexpr.operator.ampersand",
+					"match": "(\\|-|=)"
+				}
+			]
+		},
+		"termoperator": {
+			"patterns": [
+				{	"name": "keyword.term.operator.ampersand",
+					"match": "((?<!-)-(?!-)|~|\\+|;|!|\\*|\\\\/|/\\\\|\\\\|/|<>)"
+				}
+			]
+		},
+		"term": {
+			"name": "meta.structure.term.ampersand",
+            "patterns": [
+				{	"include": "#comments" },
+				{	"include": "#parentheset" },
+				{ 	"include": "#relname" },
+				{ 	"include": "#IV" },
+				{ 	"include": "#atom" },
+				{ 	"include": "#termoperator" }
+			]
+        },
+        "relname": {
+			"name": "meta.structure.relname.ampersand",
+			"patterns": [
+            	{	"comment": "relationName[Concept1*Concept2]",
+					"match": "\\b([a-z][_A-Za-z0-9]*)\\s*(\\[)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\\*)\\s*([A-Z][_A-Za-z0-9]*)(\\])",
+					"captures": {
+						"1": { "name":"use.relation.ampersand"},
+						"2": { "name":"punctuation.bracket.square.ampersand"},
+						"3": { "name":"use.concept.ampersand"},
+						"4": { "name":"punctuation.bracket.square.ampersand"},
+						"5": { "name":"use.concept.ampersand"},
+						"6": { "name":"punctuation.bracket.square.ampersand"}
+					}
+				},
+				{	"comment": "relationName[Concept1]",
+					"match": "\\b([a-z][_A-Za-z0-9]*)\\s*(\\[)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\\])",
+					"captures": {
+						"1": { "name":"use.relation.ampersand"},
+						"2": { "name":"punctuation.bracket.square.ampersand"},
+						"3": { "name":"use.concept.ampersand"},
+						"4": { "name":"punctuation.bracket.square.ampersand"}
+					}
+				},
+				{	"comment": "relationName",
+					"name": "use.relation.ampersand",
+            		"match": "\\b[a-z][_A-Za-z0-9]*\\b"
+				}
+			]
+		},
+		"IV": {
+			"name": "meta.structure.iv.ampersand",
+			"patterns": [
+				{	"comment": "V[Concept1*Concept2]",
+					"match": "(?<!['])\\b(V)\\s*(\\[)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\\*)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\\])",
+					"captures": {
+						"1": { "name":"constant.character.iv.ampersand"},
+						"2": { "name":"punctuation.bracket.square.ampersand"},
+						"3": { "name":"use.concept.ampersand"},
+						"4": { "name":"punctuation.character.ampersand"},
+						"5": { "name":"use.concept.ampersand"},
+						"6": { "name":"punctuation.bracket.square.ampersand"}
+					}
+				},
+				{	"comment": "I[Concept], V[Concept]",
+					"match": "(?<!['])\\b([IV])\\s*(\\[)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\\])",
+					"captures": {
+						"1": { "name":"constant.character.iv.ampersand"},
+						"2": { "name":"punctuation.bracket.square.ampersand"},
+						"3": { "name":"use.concept.ampersand"},
+						"4": { "name":"punctuation.bracket.square.ampersand"}
+					}
+				},
+				{	"comment": "V, I",
+					"match": "(?<!['])\\b[IV]\\b(?!\\[)",
+					"name": "constant.character.iv.ampersand"
+				}
+			]
+		},
+        "atom": {
+			"name": "meta.structure.atom.ampersand",
+            "patterns": [
+				{   "comment": "integer",
+					"name": "use.atom.integer.ampersand",
+					"match": "\\b\\d+\\b"
+				},
+				{   "comment": "float (tnx to JSON.tmLanguage.json)",
+					"name": "use.atom.float.ampersand",
+					"match": "-?(?:0|[1-9]\\d*)(?:(?:\\.\\d+)?(?:[eE][+-]?\\d+)?)?"
+				},
+				{   "comment": "boolean (tnx to JSON.tmLanguage.json)",
+					"name": "use.atom.boolean.ampersand",
+					"match": "\\b(?:true|false|null)\\b"
+				},
+				{   "comment": "date",
+					"name": "use.atom.date.ampersand",
+					"match": "\\b(\\d{4})-(\\d{2})-(\\d{2})\\b",
+					"captures": {
+						"1": { "name":"constant.numeric.yyyy.ampersand"},
+						"2": { "name":"constant.numeric.mm.ampersand"},
+						"3": { "name":"constant.numeric.dd.ampersand"}
+					}
+				},
+				{   "comment": "datetime",
+					"name": "use.atom.datetime.ampersand",
+					"match": "\\b(\\d{4})-(\\d{2})-(\\d{2})\\s(\\d{2}):(\\d{2}):(\\d{2})\\b",
+					"captures": {
+						"1": { "name":"constant.numeric.yyyy.ampersand"},
+						"2": { "name":"constant.numeric.mm.ampersand"},
+						"3": { "name":"constant.numeric.dd.ampersand"},
+						"4": { "name":"constant.numeric.hh.ampersand"},
+						"5": { "name":"constant.numeric.mm.ampersand"},
+						"6": { "name":"constant.numeric.ss.ampersand"}
+					}
+				},
+				{   "comment": "atomid[Concept]",
+					"match": "(\")([^\"\\\\]*)(\")(\\[)([A-Z][_A-Za-z0-9]*)(\\])",
+					"captures": {
+						"1": { "name":"punctuation.string.ampersand"},
+						"2": { "name":"use.atom.string.ampersand"},
+						"3": { "name":"punctuation.string.ampersand"},
+						"4": { "name":"punctuation.string.ampersand"},
+						"5": { "name":"use.concept.string.ampersand"},
+						"6": { "name":"punctuation.string.ampersand"}
+					}
+				},
+				{   "comment": "atomid",
+					"match": "(\")([^\"\\\\]*)(\")(?!=\\[)",
+					"captures": {
+						"1": { "name":"punctuation.string.ampersand"},
+						"2": { "name":"use.atom.string.ampersand"},
+						"3": { "name":"punctuation.string.ampersand"}
+					}
+				},
+				{   "comment": "specials",
+					"match": "(\")(ONE|_SESSION)(\")",
+					"captures": {
+						"1": { "name":"punctuation.string.ampersand"},
+						"2": { "name":"use.atom.specials.ampersand"},
+						"3": { "name":"punctuation.string.ampersand"}
+					}
+				}
+			]
+		},
+		"parentheset": {
+			"patterns": [
+				{   "name": "meta.structure.parentheset.ampersand",
+					"begin": "\\(",
+					"beginCaptures": { "0": { "name": "punctuation.definition.parentheset.begin.ampersand" } },
+					"end": "\\)",
+					"endCaptures": { "0": { "name": "punctuation.definition.parentheset.end.ampersand" } },
+					"patterns": [
+						{	"include": "#term" },
+						{	"name": "invalid.illegal.expected-term-operator.ampersand",
+							"match": "[^\\s\\)]"
+						}
+					]
+				}
+			]
+		},
+		"interfaces":
 		{	"patterns": 
 			[	{	"match": "\\b(INTERFACE)\\s+(\")([^\"]*)(\")\\s*(|(FOR)([^:]*))(:)",
 					"captures": {
+						"0": { "name":"statement.definition.interface.begin.ampersand"},
 						"1": { "name":"keyword.other.ampersand"},
 						"2": { "name":"keyword.other.ampersand"},
 						"3": { "name":"definition.interface.ampersand"},
@@ -235,57 +593,23 @@
 				}
 			]
 		}
-		,	"operators":
-		{	"patterns": 
-			[	{	"name": "keyword.operator.relationalgebra.ampersand",
-					"match": "(\\|-|->|(?<!-)-(?!-)|=|~|\\+|;|!|\\*|\\\\/|/\\\\|\\\\|/|<>)"
-				}
-			]
-		}
-		,	"IV":
-		{	"patterns": 
-			[	{	"comment": "V, I",
-					"match": "(?<!['])\\b[IV]\\b(?!\\[)",
-					"name": "constant.character.iv.ampersand"
-				},
-				{	"comment": "I[Concept], V[Concept]",
-					"match": "(?<!['])\\b([IV])\\s*(\\[)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\\])",
-					"captures": {
-						"1": { "name":"constant.character.iv.ampersand"},
-						"2": { "name":"punctuation.bracket.square.ampersand"},
-						"3": { "name":"use.concept.ampersand"},
-						"4": { "name":"punctuation.bracket.square.ampersand"}
-					}
-				},
-				{	"comment": "V[Concept*Concept]",
-					"match": "(?<!['])\\b(V)\\s*(\\[)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\\*)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\\])",
-					"captures": {
-						"1": { "name":"constant.character.iv.ampersand"},
-						"2": { "name":"punctuation.bracket.square.ampersand"},
-						"3": { "name":"use.concept.ampersand"},
-						"4": { "name":"punctuation.character.ampersand"},
-						"5": { "name":"use.concept.ampersand"},
-						"6": { "name":"punctuation.bracket.square.ampersand"}
-					}
-				}
-			]
-		}
 	,	"keywords":
 		{	"patterns": 
 			[	{	"name": "keyword.control.block.ampersand",
 					"match": "\\b(CONTEXT|IN|DUTCH|ENGLISH|ENDCONTEXT|PATTERN|ENDPATTERN|PROCESS|ENDPROCESS|SERVICE|ENDSERVICE|LATEX|MARKDOWN)\\b"
 				},
 				{	"name": "keyword.control.others.ampersand",
+<<<<<<< HEAD:ampersand/syntaxes/ampersand.tmLanguage.json
+					"match": "\\b(THEMES|META|BYPLUG)\\b"
+=======
 					"match": "\\b(INCLUDE|THEMES|META|IDENT)\\b"
+>>>>>>> master:syntaxes/ampersand.tmLanguage.json
 				},
 				{	"name": "keyword.control.concepts.ampersand",
-					"match": "\\b(CONCEPT|CLASSIFY|SPEC|ISA|IS)\\b"
+					"match": "\\b(CLASSIFY|SPEC|ISA|IS)\\b"
 				},
 				{	"name": "keyword.control.represents.ampersand",
 					"match": "\\b(REPRESENT|TYPE|ALPHANUMERIC|BIGALPHANUMERIC|HUGEALPHANUMERIC|PASSWORD|BINARY|BIGBINARY|HUGEBINARY|DATE|DATETIME|BOOLEAN|INTEGER|FLOAT)\\b"
-				},
-				{	"name": "keyword.control.relprops.ampersand",
-					"match": "\\[(\\s*(INJ|SUR|UNI|TOT|SYM|ASY|RFX|IRF|TRN|PROP))(\\s*,\\s*(INJ|SUR|UNI|TOT|SYM|ASY|RFX|IRF|TRN|PROP))*\\s*\\]"
 				},
 				{	"name": "keyword.control.views.ampersand",
 					"match": "\\b(VIEW|ENDVIEW|REST|HTML|TEMPLATE)\\b"
