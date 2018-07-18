@@ -12,6 +12,7 @@ notifications:
 sudo: false
 
 os:
+- osx
 - linux
 
 language: node_js
@@ -30,6 +31,13 @@ before_install:
     sh -e /etc/init.d/xvfb start;
     sleep 3;
   fi
+
+install:
+- npm install
+- npm run vscode:prepublish
+
+script:
+- npm test
 
 before_deploy:
 - npm install -g vsce;
