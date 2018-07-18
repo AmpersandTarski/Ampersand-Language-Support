@@ -522,8 +522,19 @@
 						"6": { "name":"constant.numeric.ss.ampersand"}
 					}
 				},
-				{   "comment": "string",
-					"match": "(\")([^\"\\\\]*)(\")",
+				{   "comment": "atomid[Concept]",
+					"match": "(\")([^\"\\\\]*)(\")(\\[)([A-Z][_A-Za-z0-9]*)(\\])",
+					"captures": {
+						"1": { "name":"punctuation.string.ampersand"},
+						"2": { "name":"use.atom.string.ampersand"},
+						"3": { "name":"punctuation.string.ampersand"},
+						"4": { "name":"punctuation.string.ampersand"},
+						"5": { "name":"use.concept.string.ampersand"},
+						"6": { "name":"punctuation.string.ampersand"}
+					}
+				},
+				{   "comment": "atomid",
+					"match": "(\")([^\"\\\\]*)(\")(?!=\\[)",
 					"captures": {
 						"1": { "name":"punctuation.string.ampersand"},
 						"2": { "name":"use.atom.string.ampersand"},
