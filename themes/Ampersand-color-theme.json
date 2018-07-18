@@ -28,6 +28,10 @@
 			"scope": "source.ampersand punctuation",
 			"settings": { "foreground": "#E08080" }
 		},
+		{   "name": "Ampersand - other keywords",
+			"scope": "source.ampersand keyword.other",
+			"settings": { "foreground": "#FFCB6Bc0" }
+		},
 		{   "name": "Ampersand - highlight",
 			"scope": "source.ampersand highlight.ampersand",
 			"settings": { "foreground": "#ffc000" }
@@ -50,22 +54,22 @@
 		},
 		{   "name": "Ampersand - definitions",
 			"scope": "source.ampersand definition",
-			"settings": { "foreground": "#60A000", "fontStyle": "underline" }
+			"settings": { "foreground": "#60A080", "fontStyle": "underline" }
 		},
 		{   "name": "Ampersand - operators",
 			"scope": "source.ampersand keyword.operator",
 			"settings": { "foreground": "#C06060", "fontStyle": "bold" }
 		},
 		{   "name": "Ampersand - violations - well-known functions",
-			"scope": "keyword.other.violation.txt.wellknown-function",
+			"scope": "source.ampersand keyword.other.violation.txt.wellknown-function",
 			"settings": { "foreground": "#60A000", "fontStyle": "bold" }
 		},
 		{   "name": "Ampersand - violations - unknown functions",
-			"scope": "keyword.other.violation.txt.unknown-function",
+			"scope": "source.ampersand keyword.other.violation.txt.unknown-function",
 			"settings": { "foreground": "#60A000", "fontStyle": "bold italic underline" }
 		},
 		{   "name": "Ampersand - violations - argument delimiters",
-			"scope": "punctuation.violation.delimiter",
+			"scope": "source.ampersand punctuation.violation.delimiter",
 			"settings": { "foreground": "#E08080", "fontStyle": "bold" }
 		},
 		{   "name": "Ampersand - violations - reserved argument words",
