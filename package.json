@@ -1,7 +1,7 @@
 {
   "name": "language-ampersand",
   "displayName": "Ampersand language support",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "AmpersandTarski",
   "description": "Language support for Ampersand scripts",
   "categories": [
@@ -10,6 +10,11 @@
   ],
   "engines": {
     "vscode": "^0.10.2"
+  },
+  "icon": "images/ampersandLogo.png",
+  "galleryBanner": {
+    "color": "#293845",
+    "theme": "dark"
   },
   "activationEvents": [
     "onLanguage:ampersand"

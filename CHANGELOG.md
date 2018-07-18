@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [0.0.4] - 2018-07-18
+
+- Add logo.
+
 ## [0.0.3] - 2018-07-18
 
 - Some more initial work.
