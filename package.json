@@ -78,8 +78,8 @@
     "publish": "vsce publish"
   },
   "dependencies": {
+    "tslint": "^5.11.0",
     "typescript": "^2.9.2",
-    "tslint": "^5.9.1",
     "vscode": "^1.1.18"
   },
   "devDependencies": {
