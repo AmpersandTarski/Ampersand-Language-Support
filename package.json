@@ -1,7 +1,7 @@
 {
   "name": "language-ampersand",
   "displayName": "Ampersand language support",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "AmpersandTarski",
   "description": "Language support for Ampersand scripts",
   "categories": [
