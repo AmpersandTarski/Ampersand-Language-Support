@@ -599,7 +599,11 @@
 					"match": "\\b(CONTEXT|IN|DUTCH|ENGLISH|ENDCONTEXT|PATTERN|ENDPATTERN|PROCESS|ENDPROCESS|SERVICE|ENDSERVICE|LATEX|MARKDOWN)\\b"
 				},
 				{	"name": "keyword.control.others.ampersand",
+<<<<<<< HEAD:ampersand/syntaxes/ampersand.tmLanguage.json
 					"match": "\\b(THEMES|META|BYPLUG)\\b"
+=======
+					"match": "\\b(INCLUDE|THEMES|META|IDENT)\\b"
+>>>>>>> master:syntaxes/ampersand.tmLanguage.json
 				},
 				{	"name": "keyword.control.concepts.ampersand",
 					"match": "\\b(CLASSIFY|SPEC|ISA|IS)\\b"
