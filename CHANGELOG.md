@@ -1,10 +1,10 @@
 # Change Log
 
-All notable changes to the "ampersand" extension will be documented in this file.
-
-[comment]: <> Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
 ## [Unreleased]
+
+## [0.0.3] - 2018-07-18
+
+- Some more initial work.
 
 ## [0.0.2] - 2018-07-16
 
