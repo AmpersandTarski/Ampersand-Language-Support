@@ -1,7 +1,7 @@
 {
   "name": "language-ampersand",
   "displayName": "Ampersand (ADL) language support",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "AmpersandTarski",
   "description": "Language support for Ampersand scripts",
   "categories": [
@@ -71,8 +71,8 @@
     ],
     "snippets": [
       {
-          "language": "ampersand",
-          "path": "./snippets/ampersand.json"
+        "language": "ampersand",
+        "path": "./snippets/ampersand.json"
       }
     ]
   },

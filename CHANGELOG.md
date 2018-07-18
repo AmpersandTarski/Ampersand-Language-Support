@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [0.0.5] - 2018-07-18
+
+- first attempt to add snippets.
+- first attempt to use travis-ci (shamelessly copied .travis.yaml from <https://github.com/VSCodeVim/Vim>)
+
 ## [0.0.4] - 2018-07-18
 
 - Add logo.
