@@ -1,12 +1,13 @@
 {
   "name": "language-ampersand",
-  "displayName": "Ampersand language support",
-  "version": "0.0.3",
+  "displayName": "Ampersand (ADL) language support",
+  "version": "0.0.4",
   "publisher": "AmpersandTarski",
   "description": "Language support for Ampersand scripts",
   "categories": [
     "Programming Languages",
-    "Themes"
+    "Themes",
+    "Snippets"
   ],
   "engines": {
     "vscode": "^0.10.2"
@@ -66,6 +67,12 @@
         "label": "Ampersand",
         "uiTheme": "vs-dark",
         "path": "./themes/Ampersand-color-theme.json"
+      }
+    ],
+    "snippets": [
+      {
+          "language": "ampersand",
+          "path": "./snippets/ampersand.json"
       }
     ]
   },
