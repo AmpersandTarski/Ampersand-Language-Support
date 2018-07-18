@@ -19,7 +19,7 @@
   "homepage": "https://github.com/AmpersandTarski/Ampersand-Language-Support",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AmpersandTarski/Ampersand-Language-Support.git"
+    "url": "https://github.com/AmpersandTarski/Ampersand-Language-Support.git"
   },
   "bugs": {
     "url": "https://github.com/AmpersandTarski/Ampersand-Language-Support/issues"
