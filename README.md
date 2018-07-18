@@ -1,6 +1,6 @@
 # Ampersand-Language-Support
 
-Here is (a first attempt to) syntax coloring support for the Ampersand Definition Language (ADL).
+Here is (a first attempt to) syntax coloring support for the [Ampersand Definition Language (ADL)](http://ampersandtarski.github.io/).
 
 ## Features
 
