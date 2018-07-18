@@ -325,6 +325,38 @@
 										"3": { "name":"keyword.other.violation.txt.unknown-function.ampersand"}
 									}
 								},
+								{	"comment": "TXT - {EX} - <?php (phpcode) ?>",
+									"name":"meta.structure.violation.txt.php.ampersand",
+									"begin": "(<\\?php)",
+									"captures": {
+										"0": { "name":"meta.structure.violation.txt.php.begin.ampersand"},
+										"1": { "name":"keyword.other.violation.txt.php.ampersand"}
+									},
+									"end": "(\\?>)",
+									"endCaptures": {
+										"0": { "name":"meta.structure.violation.txt.php.end.ampersand"},
+										"1": { "name":"keyword.other.violation.txt.php.ampersand"}
+									},
+									"patterns": [
+										{ "include": "source.php"}
+									]
+								},
+								{	"comment": "TXT - {EX} - {php} phpcode",
+									"name":"meta.structure.violation.txt.php.ampersand",
+									"begin": "({php})",
+									"captures": {
+										"0": { "name":"meta.structure.violation.txt.php.begin.ampersand"},
+										"1": { "name":"keyword.other.violation.txt.php.ampersand"}
+									},
+									"end": "(?=\")",
+									"endCaptures": {
+										"0": { "name":"meta.structure.violation.txt.php.end.ampersand"},
+										"1": { "name":"keyword.other.violation.txt.php.ampersand"}
+									},
+									"patterns": [
+										{ "include": "source.php"}
+									]
+								},
 								{	"comment": "TXT - {EX} - argument delimiters",
 									"match": "(_;|;)",
 									"name":"keyword.other.violation.underscore-semicolon.ampersand"
