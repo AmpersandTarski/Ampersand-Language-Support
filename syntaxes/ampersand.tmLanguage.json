@@ -134,7 +134,15 @@
 		}
 		, "concepts":
 		{	"patterns": 
-			[	{	"comment": "CONCEPT <Concept> \"explanatory text\" \"reftext\"",
+			[	{	"comment": "Concept names must start with an upper case character",
+					"match": "\\b(CONCEPT|CLASSIFY)\\s*([a-z][_A-Za-z0-9]*)",
+					"captures": {
+						"0": { "name":"statement.illegal.concept.ampersand"},
+						"1": { "name":"keyword.other.ampersand"},
+						"2": { "name":"invalid.illegal.ampersand"}
+					}
+				},
+				{	"comment": "CONCEPT <Concept> \"explanatory text\" \"reftext\"",
 					"match": "\\b(CONCEPT)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\")([^\"]*)(\")\\s*(\")([^\"]*)(\")",
 					"captures": {
 						"0": { "name":"statement.definition.conceptref.ampersand"},
@@ -159,14 +167,6 @@
 						"5": { "name":"punctuation.definition.concept.ampersand"}
 					}
 				},
-				{	"comment": "CONCEPT <concept> is an illegal construct",
-					"match": "\\b(CONCEPT)\\s*([a-z][_A-Za-z0-9]*)",
-					"captures": {
-						"0": { "name":"statement.illegal.concept.ampersand"},
-						"1": { "name":"keyword.other.ampersand"},
-						"2": { "name":"invalid.illegal.ampersand"}
-					}
-				},
 				{	"comment": "CLASSIFY <Concept> ISA <CONCEPT>",
 					"match": "\\b(CLASSIFY)\\s*([A-Z][_A-Za-z0-9]*)\\s*(ISA)\\s*([A-Z][_A-Za-z0-9]*)",
 					"captures": {
@@ -176,6 +176,38 @@
 						"3": { "name":"keyword.other.ampersand"},
 						"4": { "name":"use.concept.ampersand"}
 					}
+				},
+				{	"comment": "CLASSIFY <Concept> IS <Concept1> /\\ <Concept2> ...", 
+					"name": "statement.classify.is.ampersand",
+					"begin": "\\b(CLASSIFY)\\s*([A-Z][_A-Za-z0-9]*)\\s*(IS)\\s*([A-Z][_A-Za-z0-9]*)\\s*(/\\\\\\)s*([A-Z][_A-Za-z0-9]*)",
+					"beginCaptures": {
+						"0": { "name":"statement.classify.is.begin.ampersand"},
+						"1": { "name":"keyword.other.ampersand"},
+						"2": { "name":"use.concept.ampersand"},
+						"3": { "name":"keyword.other.ampersand"},
+						"4": { "name":"use.concept.ampersand"},
+						"5": { "name":"keyword.term.operator.ampersand"},
+						"6": { "name":"use.concept.ampersand"}
+					},
+					"end": "",
+					"patterns": [
+						{  "include": "#comments" },
+						{	"comment":"/\\",
+							"match": "\\s*(/\\\\)",
+							"captures": {
+								"0": { "name":"statement.classify.is.and-operator.ampersand"},
+								"1": { "name":"keyword.term.operator.ampersand"}
+							}
+						},
+						{	"comment":"Concept",
+							"name": "invalid.illegal.ampersand",
+							"match": "\\s*([A-Z][_A-Za-z0-9]*)",
+							"captures": {
+								"0": { "name":"statement.classify.is.concept.ampersand"},
+								"1": { "name":"use.concept.ampersand"}
+							}
+						}
+					]
 				}
 			]
 		}

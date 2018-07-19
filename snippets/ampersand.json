@@ -1,7 +1,28 @@
 {
-    "Define a context": {
+	"This section is for comments only": {
+		"prefix": "SNIPPET COMMENTS",
+		"description": "Design considerations - this snippet is not intended to be executed",
+		"body":[
+			"These Snippets are intended to make life easier for Ampersand authors.",
+			"We use the convention to start names of placeholders with an illegal character,",
+			"so that it will be colored red while it has not been replaced with user text."
+		]
+	},"Define a Concepts population": {
+		"prefix": "POPULATION",
+		"description": "Define a POPULATION of Concept Atoms",
+		"body":[
+			"POPULATION \"${1:concept}\" [ \"$0\" ]"
+		]
+	},"Define a Relation population": {
+		"prefix": "POPULATION",
+		"description": "Define a POPULATION of Relation pairs/links",
+		"body":[
+			"POPULATION \"${1:Relname}\" [ (\"$2\", \"$3\") ]"
+		]
+	}, "Define a context": {
 		"prefix": "CONTEXT",
 		"description": "Define a CONTEXT, and its PURPOSE. You need to add the ENDCONTEXT statement yourself",
+		"comment": "this snippet ensures that you do not forget to document the PURPOSE of a CONTEXT that you define",
 		"body":[
 			"CONTEXT \"${1:name}\" IN ${2|DUTCH,ENGLISH|}",
 			"PURPOSE CONTEXT \"$1\"",
@@ -11,14 +32,37 @@
 	"Define a concept": {
 		"prefix": "CONCEPT",
 		"description": "Define a CONCEPT and optionally, a reference",
+		"comment": "this snippet ensures that you do not forget about the optional reference text",
 		"body":[
-			"CONCEPT ${1:name} \"${2:description}\" \"$0\""
+			"CONCEPT ${1:cname} \"${2:description}\" \"$0\""
 		]
 	},
-	"Define a relation": {
-		"prefix": "RELATION",
+	"Define a CLASSIFY ISA statement": {
+		"prefix": "CLASSIFY",
+		"description": "CLASSIFY <Concept> ISA <GenericConcept>",
 		"body":[
-			"RELATION ${1:relname}[${2:SrcConcept} * ${3:TgtConcept}] "
+			"CLASSIFY ${1:cname} ISA ${2:generiConcept}"
+		]
+	},
+	"Define a CLASSIFY IS statement": {
+		"prefix": "CLASSIFY",
+		"description": "CLASSIFY <Concept> IS <GenericConcept1> /\\ <GenericConcept2> /\\... <GenericConcept<n>>",
+		"body":[
+			"CLASSIFY ${1:cname} IS ${2:generiConcept} /\\ ${3:generiConcept}"
+		]
+	},
+	"Define a RELATION statement": {
+		"prefix": "RELATION",
+		"description": "RELATION <relname>[<SrcConcept>*<TgtConcept>]",
+		"body":[
+			"RELATION ${1:Relname}[${2:srcConcept} * ${3:tgtConcept}] "
+		]
+	},
+	"Define a relation (::-notation)": {
+		"prefix": "RELATION",
+		"description": "<relname> :: <SrcConcept> * <TgtConcept>",
+		"body":[
+			"${1:Relname} :: ${2:srcConcept} * ${3:tgtConcept} "
 		]
 	},
 	"ExecEngine rule": {

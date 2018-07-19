@@ -16,7 +16,7 @@ we have issue #903 and want to **emphasize text** and `test`  'test' "test", (te
 {- **this stuff sits** `at` this stuff sits at https://github.com/AmpersandTarski/Ampersand-Language-Support (did you know that)?
 we have issue #903 and want to **emphasize text** and `test`  'test' "test", (test), [test],
 -}
-
+CLASSIFY Concept IS C1 /\ C2 
 IDENT Apen: Aap(aap,noot,mies[Tien*Noot])
 
 CONCEPT Aap "explanation" -- enzovoorts
