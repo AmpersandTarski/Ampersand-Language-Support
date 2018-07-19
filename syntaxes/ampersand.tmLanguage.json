@@ -159,6 +159,14 @@
 						"5": { "name":"punctuation.definition.concept.ampersand"}
 					}
 				},
+				{	"comment": "CONCEPT <concept> is an illegal construct",
+					"match": "\\b(CONCEPT)\\s*([a-z][_A-Za-z0-9]*)",
+					"captures": {
+						"0": { "name":"statement.illegal.concept.ampersand"},
+						"1": { "name":"keyword.other.ampersand"},
+						"2": { "name":"invalid.illegal.ampersand"}
+					}
+				},
 				{	"comment": "CLASSIFY <Concept> ISA <CONCEPT>",
 					"match": "\\b(CLASSIFY)\\s*([A-Z][_A-Za-z0-9]*)\\s*(ISA)\\s*([A-Z][_A-Za-z0-9]*)",
 					"captures": {

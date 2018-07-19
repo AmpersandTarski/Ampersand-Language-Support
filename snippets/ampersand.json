@@ -1,22 +1,49 @@
 {
-    "Equivalence rule": {
-        "prefix": "-- EQ",
-        "description": "Define a relation whose population is maintained to be the same as that of an expression",
-        "body": [
-            "-- EQUIVALENCE ${1:relname}[${2:Src concept} * ${3:Tgt concept}] == ${4:Expression}",
-            "$1 :: $2 * $3 -- define the shortcut-relation",
-            "ROLE ExecEngine MAINTAINS \"Equivalence - InsPair $1\"",
-            "RULE \"Equivalence - InsPair $1\": $4 |- $1[$2*$3]",
-            "VIOLATION (TXT \"{EX}_;InsPair;$1;$2;\", SRC I[$2], TXT \";$3;\", TGT I[$3])",
-            "ROLE ExecEngine MAINTAINS \"Equivalence - DelPair $1\"",
-            "RULE \"Equivalence - DelPair $1\": $1[$2*$3] |- $4",
-            "VIOLATION (TXT \"{EX}_;DelPair;$1;$2;\", SRC I[$2], TXT \";$3;\", TGT I[$3])"
-        ]
-    },
-    "Define relation": {
-        "prefix": "RELATION",
-        "body":[
-            "RELATION ${1:relname}[${2:Src concept} * ${3:Tgt concept}]"
-        ]
-    }
+    "Define a context": {
+		"prefix": "CONTEXT",
+		"description": "Define a CONTEXT, and its PURPOSE. You need to add the ENDCONTEXT statement yourself",
+		"body":[
+			"CONTEXT \"${1:name}\" IN ${2|DUTCH,ENGLISH|}",
+			"PURPOSE CONTEXT \"$1\"",
+			"{+$0+}"
+		]
+	},
+	"Define a concept": {
+		"prefix": "CONCEPT",
+		"description": "Define a CONCEPT and optionally, a reference",
+		"body":[
+			"CONCEPT ${1:name} \"${2:description}\" \"$0\""
+		]
+	},
+	"Define a relation": {
+		"prefix": "RELATION",
+		"body":[
+			"RELATION ${1:relname}[${2:SrcConcept} * ${3:TgtConcept}] "
+		]
+	},
+	"ExecEngine rule": {
+		"prefix": "ROLE ExecEngine MAINTAINS",
+		"description": "Define a RULE that the ExecEngine will maintain (including the VIOLATION statement)",
+		"body":[
+			"ROLE ExecEngine MAINTAINS \"$1\"",
+			"RULE \"${1:rulename}\": ${2:Expression} |- ${3:Expression}",
+			"VIOLATION (TXT \"{EX} ${4|InsPair,DelPair,InsAtom,DelAtom|};${5:Relname};${6:srcConcept};\", SRC I[$6], TXT \";${7:tgtConcept};\", TGT I[$7])",
+			"$0"
+		]
+	},
+	"Equivalence rule": {
+		"prefix": "eqv",
+		"description": "Define a relation whose population is maintained to be the same as that of an expression",
+		"body": [
+			"-- EQUIVALENCE ${1:Relname}[${2:srcConcept}*${3:tgtConcept}] == ${4:Expression}",
+			"$1 :: $2 * $3 -- define relation $1 as shorthand for $4",
+			"ROLE ExecEngine MAINTAINS \"Equivalence - InsPair $1\"",
+			"RULE \"Equivalence - InsPair $1\": $4 |- $1[$2*$3]",
+			"VIOLATION (TXT \"{EX} InsPair;$1;$2;\", SRC I[$2], TXT \";$3;\", TGT I[$3])",
+			"ROLE ExecEngine MAINTAINS \"Equivalence - DelPair $1\"",
+			"RULE \"Equivalence - DelPair $1\": $1[$2*$3] |- $4",
+			"VIOLATION (TXT \"{EX} DelPair;$1;$2;\", SRC I[$2], TXT \";$3;\", TGT I[$3])",
+			"$0"
+		]
+	}
 }
