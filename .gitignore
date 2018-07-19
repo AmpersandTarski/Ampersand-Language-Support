@@ -6,3 +6,4 @@
 *.exe
 *.vsix
 *.zip
+*.code-workspace

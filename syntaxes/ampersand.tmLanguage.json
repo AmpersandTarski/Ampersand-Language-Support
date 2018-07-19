@@ -179,7 +179,7 @@
 				},
 				{	"comment": "CLASSIFY <Concept> IS <Concept1> /\\ <Concept2> ...", 
 					"name": "statement.classify.is.ampersand",
-					"begin": "\\b(CLASSIFY)\\s*([A-Z][_A-Za-z0-9]*)\\s*(IS)\\s*([A-Z][_A-Za-z0-9]*)\\s*(/\\\\\\)s*([A-Z][_A-Za-z0-9]*)",
+					"begin": "\\b(CLASSIFY)\\s*([A-Z][_A-Za-z0-9]*)\\s*(IS)\\s*([A-Z][_A-Za-z0-9]*)\\s*(/\\\\)\\s*([A-Z][_A-Za-z0-9]*)",
 					"beginCaptures": {
 						"0": { "name":"statement.classify.is.begin.ampersand"},
 						"1": { "name":"keyword.other.ampersand"},
@@ -189,7 +189,7 @@
 						"5": { "name":"keyword.term.operator.ampersand"},
 						"6": { "name":"use.concept.ampersand"}
 					},
-					"end": "",
+					"end": "$",
 					"patterns": [
 						{  "include": "#comments" },
 						{	"comment":"/\\",
