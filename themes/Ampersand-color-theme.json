@@ -8,53 +8,57 @@
 		"sideBarTitle.foreground": "#bbbbbb"
 	},
 	"tokenColors": [
-		{   "name": "Ampersand - title comments",
+		{	"name": "Ampersand - title comments",
 			"scope": "source.ampersand comment.line.double-dash.sectionheader",
 			"settings": { "foreground": "#f0d0b0", "fontStyle": "bold italic underline" }
 		},
-		{   "name": "Ampersand - documentation comments",
+		{  "name": "Ampersand - documentation comments",
 			"scope": "source.ampersand comment.block.documentation",
 			"settings": { "foreground": "#209020" }
 		},
-		{   "name": "Ampersand - other comments",
+		{  "name": "Ampersand - other comments",
 			"scope": "source.ampersand comment",
 			"settings": { "foreground": "#AAAAAA" }
 		},
-		{   "name": "Ampersand - strings",
+		{  "name": "Ampersand - strings",
 			"scope": "source.ampersand string.quoted",
 			"settings": { "foreground": "#80b0d0" }
 		},            
-		{   "name": "Ampersand - punctuation",
+		{  "name": "Ampersand - punctuation",
 			"scope": "source.ampersand punctuation",
 			"settings": { "foreground": "#E08080" }
 		},
-		{   "name": "Ampersand - other keywords",
+		{  "name": "Ampersand - other keywords",
 			"scope": "source.ampersand keyword.other",
 			"settings": { "foreground": "#FFCB6Bc0" }
 		},
-		{   "name": "Ampersand - highlight",
+		{  "name": "Ampersand - highlight",
 			"scope": "source.ampersand highlight.ampersand",
 			"settings": { "foreground": "#ffc000" }
 		},
-		{   "name": "Ampersand - backticks",
+		{  "name": "Ampersand - backticks",
 			"scope": "source.ampersand backticked.ampersand",
 			"settings": { "foreground": "#c04000" }
 		},
-		{   "name": "Ampersand - url",
+		{  "name": "Ampersand - url",
 			"scope": "source.ampersand filename.ampersand",
 			"settings": { "foreground": "#4080ff", "fontStyle": "underline" }
 		},
-		{   "name": "Ampersand - filenames",
+		{  "name": "Ampersand - filenames",
 			"scope": "source.ampersand filename.ampersand",
 			"settings": { "foreground": "#4080ff" }
 		},
-		{   "name": "Ampersand - using defined stuff",
+		{  "name": "Ampersand - using defined stuff",
 			"scope": "source.ampersand use",
 			"settings": { "foreground": "#60A060" }
 		},
-		{   "name": "Ampersand - definitions",
+		{  "name": "Ampersand - definitions",
 			"scope": "source.ampersand definition",
 			"settings": { "foreground": "#60A080", "fontStyle": "underline" }
+		},
+		{  "name": "Ampersand - statements",
+			"scope": "source.ampersand statement",
+			"settings": { "foreground": "#60B0C0" }
 		},
 		{   "name": "Ampersand - operators",
 			"scope": "source.ampersand keyword.operator",
