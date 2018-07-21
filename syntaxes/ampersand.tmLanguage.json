@@ -4,23 +4,24 @@
 	"name": "Ampersand (ADL)",
 	"patterns":
 	[	{	"comment": "to be reviewed using https://www.sublimetext.com/docs/3/scope_naming.html"},
-		{	"include": "#comments"    },
-		{	"include": "#CONTEXT"     },
-		{	"include": "#PURPOSE"     },
-		{	"include": "#INCLUDE"     },
-		{	"include": "#CONCEPT"     },
-		{	"include": "#CLASSIFY"    },
-		{  "include": "#REPRESENT"   },
-		{  "include": "#IDENT"       },
-		{	"include": "#RELATION"    },
-		{	"include": "#POPULATION"  },
-		{	"include": "#ROLE"        },
-		{	"include": "#RULE"        },
-		{	"include": "#VIOLATION"   },
-		{	"include": "#INTERFACE"   },
-		{	"include": "#BOX"         },
-		{	"include": "#VIEW"        },
-		{	"include": "#OTHERKWDS"   }
+		{	"include": "#comments"     },
+		{	"include": "#CONTEXT"      },
+		{	"include": "#PURPOSE"      },
+		{	"include": "#INCLUDE"      },
+		{	"include": "#CONCEPT"      },
+		{	"include": "#CLASSIFY"     },
+		{  "include": "#REPRESENT"    },
+		{  "include": "#IDENT"        },
+		{	"include": "#RELATION"     },
+		{	"include": "#POPULATION"   },
+		{	"include": "#ROLE"         },
+		{	"include": "#RULE"         },
+		{	"include": "#VIOLATION"    },
+		{	"include": "#INTERFACE"    },
+		{	"include": "#BOX"          },
+		{	"include": "#BOX-BRACKETS" },
+		{	"include": "#VIEW"         },
+		{	"include": "#OTHERKWDS"    }
 	],
 
 	"repository": 
@@ -416,28 +417,38 @@
 
 		"INTERFACE":
 		{	"patterns": 
-			[	{	"comment":"INTERFACE \"<ifcname>\" [FOR <role>,<Role>]: <expression> <crud>",
-					"begin": "\\b(INTERFACE)\\s+(\")([^\"]+)(\")\\s*(|(FOR)\\s+([^\"\\s,:]+)(\\s*(,)\\s*([^\"\\s,:]+))*)(:)",
+			[	{	"comment":"INTERFACE/API/GUI \"<ifcname>\" [FOR <role>,<Role>]: <expression> <crud>",
+					"name":"statement.interface.ampersand",
+					"begin": "\\b(INTERFACE|API|GUI)\\s+(\")([^\"]+)(\")\\s*(|(FOR)\\s+([^\"\\s,:]+)(\\s*(,)\\s*([^\"\\s,:]+))*)(:)",
 					"beginCaptures": {
-						"0": { "name":"statement.definition.interface.begin.ampersand"},
-						"1": { "name":"keyword.other.ampersand"},
+						"0": { "name":"statement.interface.begin.ampersand"},
+						"1": { "name":"keyword.statement.interface.ampersand"},
 						"2": { "name":"punctuation.statement.interface.ampersand"},
 						"3": { "name":"definition.interface.ampersand"},
 						"4": { "name":"punctuation.statement.interface.ampersand"},
-						"5": { "name":"statement.definition.interface.for-group.ampersand"},
-						"6": { "name":"statement.definition.interface.for.ampersand"},
-						"7": { "name":"statement.definition.interface.role.ampersand"},
-						"8": { "name":"statement.definition.interface.roles-group.delimiter-role-group.ampersand"},
-						"9": { "name":"statement.definition.interface.roles-group.delimiter-role-group.delimiter.ampersand"},
-						"10": { "name":"statement.definition.interface.roles-group.delimiter-role-group.role.ampersand"},
+						"5": { "name":"statement.interface.for-group.ampersand"},
+						"6": { "name":"keyword.statement.interface.for.ampersand"},
+						"7": { "name":"statement.interface.role.ampersand"},
+						"8": { "name":"statement.interface.roles-group.delimiter-role-group.ampersand"},
+						"9": { "name":"statement.interface.roles-group.delimiter-role-group.delimiter.ampersand"},
+						"10": { "name":"statement.interface.roles-group.delimiter-role-group.role.ampersand"},
 						"11": { "name":"punctuation.statement.interface.ampersand"}
 						},
-					"end": "([Cc][Rr][Uu][Dd])",
+					"end": "([Cc][Rr][Uu][Dd])(\\s*(<)([^>\\s\"]*)(>))?(?=\\s*(BOX|ROWS|COLS|TABS|PANELS))",
 					"endCaptures": {
-						"0": { "name":"statement.definition.interface.end.ampersand"},
-						"1": { "name":"statement.definition.interface.crud.ampersand"}
+						"0": { "name":"statement.interface.end.ampersand"},
+						"1": { "name":"statement.interface.crud.ampersand"},
+						"2": { "name":"statement.interface.view.ampersand"},
+						"3": { "name":"punctuation.statement.interface.ampersand"},
+						"4": { "name":"use.view.ampersand"},
+						"5": { "name":"punctuation.statement.interface.ampersand"}
 					},
-					"patterns": [ {	"include":"#term" } ]
+					"patterns": [ 
+						{	"include":"#term" },
+						{	"match": "[^\\s]+",
+							"name": "invalid.illegal.interface.ampersand"
+						}
+					]
 				}
 			]
 		},
@@ -445,24 +456,94 @@
 		"BOX":
 		{	"patterns": 
 			[	{	"comment":"All kind of BOX-related constructs (including ROWS, COLS, etc.)",
-					"begin": "\\b((BOX)(\\s*<[^>]*>)?|ROWS|COLS|TABS|PANELS)",
+				   "name": "statement.box.ampersand",
+					"begin": "\\b((BOX)(\\s*((<)([^>\\s\"]*)(>))?)|(ROWS|COLS|TABS|PANELS))",
 					"beginCaptures": {
-						"0": { "name":"statement.definition.box.begin.ampersand"},
-						"1": { "name":"keyword.other.1.ampersand"},
-						"2": { "name":"keyword.other.2.ampersand"},
-						"3": { "name":"statement.definition.box.viewspec.ampersand"}
+						"0": { "name":"statement.box.begin.ampersand"},
+						"1": { "name":"statement.box.boxtype.ampersand"},
+						"2": { "name":"keyword.statement.box.ampersand"},
+						"5": { "name":"punctiation.statement.box.ampersand"},
+						"6": { "name":"use.view.ampersand"},
+						"7": { "name":"punctiation.statement.box.ampersand"},
+						"8": { "name":"keyword.statement.box.ampersand"}
 						},
-					"end": "(?=\\b(INTERFACE|VIEW|VIOLATION)\\b)",
+					"end": "(?=\\[)",
 					"patterns": [ 
-							{	"include":"#brackets" } 
-						]
+						{	"include":"#comments" },
+						{	"match": "[^\\s]+",
+							"name": "invalid.illegal.box.ampersand"
+						}
+					]
 				}
 			]
 		},
 
+		"BOX-BRACKETS":
+		{	"patterns": 
+			[	{	"name": "statement.box.brackets.ampersand",
+					"comment":"See http://textmate.1073791.n5.nabble.com/TextMate-grammars-and-nested-multiline-comments-td28743.html",
+					"begin": "(\\[)",
+					"beginCaptures": {
+						"0": { "name":"statement.box.brackets.begin.ampersand"},
+						"1": { "name":"punctuation.box.brackets.ampersand"}
+					},
+					"end": "(\\])",
+					"endCaptures": {
+						"0": { "name":"statement.box.brackets.end.ampersand"},
+						"1": { "name":"punctuation.box.brackets.ampersand"}
+					},
+					"patterns": [
+						{	"include":"#comments" },
+						{  "name": "statement.box.brackets.LabelColonTermCrudView.ampersand",
+							"begin": "((\")([^\"]*)(\")|([^\\]\"\\s]*))\\s*(:)",
+							"beginCaptures": {
+								"0": { "name":"statement.box.brackets.LabelColon.ampersand"},
+								"1": { "name":"statement.box.brackets.label.quotedtext.ampersand"},
+								"2": { "name":"punctuation.statement.box.brackets.ampersand"},
+								"3": { "name":"statement.box.brackets.label.text.ampersand"},
+								"4": { "name":"punctuation.statement.box.brackets.ampersand"},
+								"5": { "name":"statement.box.brackets.label.text.ampersand"},
+								"6": { "name":"punctuation.statement.box.brackets.ampersand"}
+							},
+							"end": "(([Cc][Rr][Uu][Dd])(\\s*(<)([^>\\s\"]*)(>))?|(\\s(LINKTO\\s+)?(INTERFACE)\\s+(\")([^\"]+)(\")))",
+							"endCaptures": {
+								"0": { "name":"statement.box.brackets.CrudViewOrLinktoInterface.ampersand"},
+								"2": { "name":"statement.box.brackets.crud.ampersand"},
+								"3": { "name":"statement.box.brackets.view.ampersand"},
+								"4": { "name":"punctuation.statement.box.brackets.ampersand"},
+								"5": { "name":"use.view.ampersand"},
+								"6": { "name":"punctuation.statement.box.brackets.ampersand"},
+								"8": { "name":"keyword.statement.box.brackets.ampersand"},
+								"9": { "name":"keyword.statement.box.brackets.ampersand"},
+								"10": { "name":"punctuation.statement.interface.ampersand"},
+								"11": { "name":"use.interface.ampersand"},
+								"12": { "name":"punctuation.statement.interface.ampersand"}
+							},
+							"patterns": [
+								{	"include":"#comments" },
+								{	"include":"#term" }
+							]	
+						},
+						{  "include": "#BOX" 
+						},
+						{  "include": "#BOX-BRACKETS" 
+						},
+						{  "name": "box.brackets.separator.ampersand",
+							"match": ","
+						},
+						{	"match": "[^\\s]+",
+							"name": "invalid.illegal.box.brackets.ampersand"
+						}
+					]
+				}
+			]
+		},
+
+		
 		"VIEW":
 		{	"patterns": 
-			[	{	"match": "\\b(VIEW)\\s+([^:]*)(:)",
+			[	{	"name": "statement.view.ampersand",
+					"match": "\\b(VIEW)\\s+([^:]*)(:)",
 					"captures": {
 						"1": { "name":"keyword.other.ampersand"},
 						"2": { "name":"definition.view.ampersand"},
@@ -480,11 +561,8 @@
 				{	"name": "keyword.control.views.ampersand",
 					"match": "\\b(VIEW|ENDVIEW|REST|HTML|TEMPLATE)\\b"
 				},
-				{	"name": "keyword.control.interfaces.ampersand",
-					"match": "\\b(LINKTO|GUI|API|ROWS|TABS|COLS)\\b"
-				},
 				{	"name": "keyword.control.boxes.ampersand",
-					"match": "\\bBOX(|\\s*<(DIV|TABS|ROWS|ROWSNL|HROWS|COLS|COLSNL|HCOLS|SCOLS|SHCOLS|SPCOLS|SPHCOLS|PANELS|PROPBUTTON|STRONG)>)"
+					"match": "\\bBOXS(|\\s*<(DIV|TABS|ROWS|ROWSNL|HROWS|COLS|COLSNL|HCOLS|SCOLS|SHCOLS|SPCOLS|SPHCOLS|PANELS|PROPBUTTON|STRONG)>)"
 				},
 				{	"name": "keyword.control.crud.ampersand",
 					"match": "\\b[Cc][Rr][Uu][Dd]\\b"
