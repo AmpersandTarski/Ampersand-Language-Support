@@ -457,7 +457,7 @@
 		{	"patterns": 
 			[	{	"comment":"All kind of BOX-related constructs (including ROWS, COLS, etc.)",
 				   "name": "statement.box.ampersand",
-					"begin": "\\b((BOX)(\\s*((<)([^>\\s\"]*)(>))?)|(ROWS|COLS|TABS|PANELS))",
+					"begin": "\\b((BOX)(\\s*((<)(?:(DIV|TABS|ROWS|ROWSNL|HROWS|COLS|COLSNL|HCOLS|SCOLS|SHCOLS|SPCOLS|SPHCOLS|PANELS|PROPBUTTON|STRONG)|[^>\\s\"]*)(>))?)|(ROWS|COLS|TABS|PANELS))",
 					"beginCaptures": {
 						"0": { "name":"statement.box.begin.ampersand"},
 						"1": { "name":"statement.box.boxtype.ampersand"},
@@ -590,11 +590,10 @@
 					},
 					"patterns": [
 						{	"include":"#comments" },
-						{  "name": "statement.view.brackets.LabelColonLine.ampersand",
-							"comment": "like TXT statements in violations, we start to look for the (optional) comma",
-							"begin": "(,\\s*)?((\")([^\"]*)(\")|([^\\]\"\\s]*))\\s*(:)",
-							"beginCaptures": {
-								"0": { "name":"statement.view.brackets.LabelColonLine.begin.ampersand"},
+						{  "comment": "like TXT statements in violations, we start to look for the (optional) comma",
+							"match": "(,\\s*)?((\")([^\"]*)(\")|([^\\]\"\\s]*))\\s*(:)",
+							"captures": {
+								"0": { "name":"statement.view.brackets.LabelColon.ampersand"},
 								"1": { "name":"punctuation.statement.view.brackets.ampersand"},
 								"2": { "name":"statement.view.brackets.label.quotedtext.ampersand"},
 								"3": { "name":"punctuation.statement.view.brackets.ampersand"},
@@ -602,16 +601,12 @@
 								"5": { "name":"punctuation.statement.view.brackets.ampersand"},
 								"6": { "name":"statement.view.brackets.label.text.ampersand"},
 								"7": { "name":"punctuation.statement.view.brackets.ampersand"}
-							},
-							"end": "$",
-							"patterns": [
-								{	"include":"#comments" },
-								{	"include":"#plaintext-item" },
-								{	"include":"#term" }
-							]
+							}
 						},
+						{	"include":"#plaintext-item" },
+						{  "include":"#term" },
 						{	"match": "[^\\s]+",
-							"name": "invalid.illegal.statement.view.brackets.LabelColonLine.ampersand"
+							"name": "invalid.illegal.statement.view.brackets.ampersand"
 						}
 					]
 				},
@@ -624,16 +619,7 @@
 		"OTHERKWDS":
 		{	"patterns": 
 			[	{	"name": "keyword.control.block.ampersand",
-					"match": "\\b(PATTERN|ENDPATTERN|PROCESS|ENDPROCESS|SERVICE|ENDSERVICE|LATEX|MARKDOWN|SPEC)\\b"
-				},
-				{	"name": "keyword.control.views.ampersand",
-					"match": "\\b(VIEW|ENDVIEW|REST|HTML|TEMPLATE)\\b"
-				},
-				{	"name": "keyword.control.boxes.ampersand",
-					"match": "\\bBOXS(|\\s*<(DIV|TABS|ROWS|ROWSNL|HROWS|COLS|COLSNL|HCOLS|SCOLS|SHCOLS|SPCOLS|SPHCOLS|PANELS|PROPBUTTON|STRONG)>)"
-				},
-				{	"name": "keyword.control.crud.ampersand",
-					"match": "\\b[Cc][Rr][Uu][Dd]\\b"
+					"match": "\\b(PATTERN|ENDPATTERN|PROCESS|ENDPROCESS|SERVICE|ENDSERVICE|LATEX|MARKDOWN|SPEC|REST)\\b"
 				},
 				{	"name": "keyword.control.view.ampersand",
 					"match": "\\b\\<[^\\>]+\\>\\b"
