@@ -259,10 +259,8 @@
 						"1": { "name":"punctuation.statement.ident.ampersand"}
 					},
 					"patterns": [
+						{	"include": "#comma" },
 						{	"include": "#term" },
-						{	"name": "keyword.term.separator.ampersand",
-							"match": ",\\s*"
-						},
 						{	"name": "invalid.illegal.statement.represent.ampersand",
 							"match": "[^\\s\\)]"
 						}
@@ -375,12 +373,13 @@
 					},
 					"end": "^(?=[^-\\|\\s])",
 					"patterns": [
-						{	"include": "#rule-expression" },
-						{	"name": "keyword.term.operator.ampersand",
-							"match": "((?<!-)-(?!-)|~|\\+|;|!|\\*|\\\\/|/\\\\|\\\\|/|<>)"
+						{	"name": "keyword.rule-expression.operator.ampersand",
+							"match": "(\\|-|=)"
 						},
-						{	"name": "invalid.illegal.expected-term-operator.ampersand",
-							"match": "[^\\s\\)]"
+						{	"include": "#term" 
+						},
+						{	"name": "invalid.illegal.rule-expression.ampersand",
+							"match": "[^\\s]"
 						}
 					]
 				}
@@ -664,22 +663,6 @@
 						"3": { "name":"keyword.statement.violation.txt.unknown-function.ampersand"}
 					}
 				},
-				{	"comment": "<?php (phpcode) ?>",
-					"name":"statement.violation.txt.php.ampersand",
-					"begin": "(<\\?php)",
-					"captures": {
-						"0": { "name":"statement.violation.txt.php.begin.ampersand"},
-						"1": { "name":"keyword.statement.violation.txt.php.ampersand"}
-					},
-					"end": "(\\?>)",
-					"endCaptures": {
-						"0": { "name":"statement.violation.txt.php.end.ampersand"},
-						"1": { "name":"keyword.statement.violation.txt.php.ampersand"}
-					},
-					"patterns": [
-						{ "include": "source.php"}
-					]
-				},
 				{	"comment": "{php} phpcode",
 					"name":"statement.violation.txt.php.ampersand",
 					"begin": "({php})",
@@ -698,7 +681,7 @@
 				},
 				{	"comment": "argument delimiters",
 					"match": "(_;|;)",
-					"name":"keyword.statement.violation.underscore-semicolon.ampersand"
+					"name":"punctuation.statement.violation.ampersand"
 				},
 				{	"comment": "reserved argument words",
 					"match": "(_NEW)(?=;)",
@@ -750,25 +733,12 @@
 			]
 		},
 
-		"rule-expression": {
-			"name": "meta.structure.rule-expression.ampersand",
-			"patterns":[
-				{	"include": "#term" },
-				{	"name": "keyword.rule-expression.operator.ampersand",
-					"match": "(\\|-|=)"
-				},
-				{	"name": "invalid.illegal.rule-expression.ampersand",
-					"match": "[^\\s]"
-				}
-			]
-		},
-		  
 		"term": {
 			"name": "meta.structure.term.ampersand",
             "patterns": [
 				{	"include": "#comments" },
 				{	"match": "\\b(TXT|SRC|TGT)\\b",
-					"name": "invalid.illegal.term.ampersand"
+					"name": "invalid.illegal.term.txtsrctgt.ampersand"
 				},
 				{	"include": "#parentheset" },
 				{ 	"include": "#relname" },
