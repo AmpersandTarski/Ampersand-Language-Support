@@ -193,7 +193,7 @@ RULE "Te authenticeren persoon moet zijn geregistreerd":
    /\ bauthGeboorteland<>npGeboorteland~
    /\ bauthGeslacht<>npGeslacht~
    );npBSN
-
+-- dit is 
 RULE "Te authenticeren persoon mag niet zijn geregistreerd als overleden":
    bauthBSN;npBSN~;overlNatPersoon~ |- -V
 
@@ -227,4 +227,5 @@ VIOLATION (TXT "{EX} InsPair;sessionBSNAuth;SESSION;", SRC I, TXT ";SESSION;", S
           ,TXT "{EX} DelPair;req_NewBAuthForm;SESSION;", SRC I, TXT ";SESSION;", SRC I
           )
 
-ENDCONTEXT
+ENDCONTEXT en dit is kommentaar
+asdfasdf asdf 
