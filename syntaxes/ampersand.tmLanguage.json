@@ -237,7 +237,7 @@
 		{	"patterns": [
 				{	"comment": "IDENT rule definition",
 					"name":"statement.ident.rule.ampersand",
-					"begin": "\\b(IDENT)\\s+(|\")([^\"]+)(\\2)\\s*(:)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\\()",
+					"begin": "\\b(IDENT)\\s+(\"?)([^\"]+)(\\2)\\s*(:)\\s*([A-Z][_A-Za-z0-9]*)\\s*(\\()",
 					"beginCaptures": {
 						"0": { "name":"statement.ident.begin.ampersand"},
 						"1": { "name":"keyword.other.ampersand"},
@@ -479,7 +479,8 @@
 		},
 
 		"BOX-BRACKETS":
-		{	"patterns": 
+		{	"comment": "Since we cannot determine the end of an INTERFACE statement, BOX-BRACKETS cannot be used as a subsidiary thereof, and they are thus 'stand-alone'",
+			"patterns": 
 			[	{	"name": "statement.box.brackets.ampersand",
 					"comment":"See http://textmate.1073791.n5.nabble.com/TextMate-grammars-and-nested-multiline-comments-td28743.html",
 					"begin": "(\\[)",
@@ -539,16 +540,83 @@
 			]
 		},
 
-		
 		"VIEW":
 		{	"patterns": 
 			[	{	"name": "statement.view.ampersand",
-					"match": "\\b(VIEW)\\s+([^:]*)(:)",
-					"captures": {
-						"1": { "name":"keyword.other.ampersand"},
-						"2": { "name":"definition.view.ampersand"},
-						"3": { "name":"keyword.other.ampersand"}
-					}
+					"begin": "\\b(VIEW)\\s+(\"?)([_A-Za-z0-9]+)(\\2)\\s*(:)\\s+([A-Z][_A-Za-z0-9]*)",
+					"beginCaptures": {
+						"0": { "name":"statement.view.begin.ampersand"},
+						"1": { "name":"keyword.statement.view.ampersand"},
+						"2": { "name":"punctuation.statement.view.ampersand"},
+						"3": { "name":"definition.view.ampersand"},
+						"4": { "name":"punctuation.statement.view.ampersand"},
+						"5": { "name":"punctuation.statement.view.colon.ampersand"},
+						"6": { "name":"use.concept.ampersand"}
+					},
+					"end": "\\b((HTML)\\s+(TEMPLATE)\\s+(\"?)([^\"]+)(\"?)\\s+)?(ENDVIEW)",
+					"endCaptures": {
+						"0": { "name":"statement.view.end.ampersand"},
+						"1": { "name":"statement.view.templatespec.ampersand"},
+						"2": { "name":"keyword.statement.view.ampersand"},
+						"3": { "name":"keyword.statement.view.ampersand"},
+						"4": { "name":"punctuation.statement.view.ampersand"},
+						"5": { "name":"use.filename.ampersand"},
+						"6": { "name":"punctuation.statement.view.ampersand"},
+						"7": { "name":"keyword.statement.view.ampersand"}
+					},
+					"patterns": [
+						{	"include":"#comments" },
+						{	"include":"#view-brackets" },
+						{	"match": "[^\\s]+",
+							"name": "invalid.illegal.statement.view.ampersand"
+						}
+					]
+				}
+			]
+		},
+
+		"view-brackets":
+		{	"patterns": 
+			[	{	"name": "statement.view.brackets.ampersand",
+					"begin": "(\\{)",
+					"beginCaptures": {
+						"0": { "name":"statement.view.brackets.begin.ampersand"},
+						"1": { "name":"punctuation.view.brackets.ampersand"}
+					},
+					"end": "(\\})",
+					"endCaptures": {
+						"0": { "name":"statement.view.brackets.end.ampersand"},
+						"1": { "name":"punctuation.view.brackets.ampersand"}
+					},
+					"patterns": [
+						{	"include":"#comments" },
+						{  "name": "statement.view.brackets.LabelColonLine.ampersand",
+							"comment": "like TXT statements in violations, we start to look for the (optional) comma",
+							"begin": "(,\\s*)?((\")([^\"]*)(\")|([^\\]\"\\s]*))\\s*(:)",
+							"beginCaptures": {
+								"0": { "name":"statement.view.brackets.LabelColonLine.begin.ampersand"},
+								"1": { "name":"punctuation.statement.view.brackets.ampersand"},
+								"2": { "name":"statement.view.brackets.label.quotedtext.ampersand"},
+								"3": { "name":"punctuation.statement.view.brackets.ampersand"},
+								"4": { "name":"statement.view.brackets.label.text.ampersand"},
+								"5": { "name":"punctuation.statement.view.brackets.ampersand"},
+								"6": { "name":"statement.view.brackets.label.text.ampersand"},
+								"7": { "name":"punctuation.statement.view.brackets.ampersand"}
+							},
+							"end": "$",
+							"patterns": [
+								{	"include":"#comments" },
+								{	"include":"#plaintext-item" },
+								{	"include":"#term" }
+							]
+						},
+						{	"match": "[^\\s]+",
+							"name": "invalid.illegal.statement.view.brackets.LabelColonLine.ampersand"
+						}
+					]
+				},
+				{	"match": "[^\\s]+",
+					"name": "invalid.illegal.statement.view.ampersand"
 				}
 			]
 		},
@@ -666,9 +734,9 @@
 		"plaintext-item":
 		{	"patterns": [
 				{	"comment": "TXT \"plaintext\"",
-					"name":"meta.structure.violation.plaintext-item.ampersand",
-					"match": "\\s*(|,\\s*)(TXT)\\s+(\")((?:[^\"\\\\]|\\\\.)*)(\")",
+					"match": "(,\\s*)?(TXT)\\s+(\")((?:[^\"\\\\]|\\\\.)*)(\")",
 					"captures": {
+						"0": { "name":"meta.structure.txt.ampersand"},
 						"1": { "name":"punctuation.statement.violation.delimiter.ampersand"},
 						"2": { "name":"keyword.other.violation.plaintext-item.ampersand"},
 						"3": { "name":"punctuation.statement.violation.ampersand"},
@@ -733,6 +801,9 @@
 			"name": "meta.structure.term.ampersand",
             "patterns": [
 				{	"include": "#comments" },
+				{	"match": "\\b(TXT|SRC|TGT)\\b",
+					"name": "invalid.illegal.term.ampersand"
+				},
 				{	"include": "#parentheset" },
 				{ 	"include": "#relname" },
 				{ 	"include": "#IV" },
@@ -742,6 +813,23 @@
 			]
 		  },
 		  
+		  "parentheset": {
+			"patterns": [
+				{   "name": "meta.structure.parentheset.ampersand",
+					"begin": "\\(",
+					"beginCaptures": { "0": { "name": "punctuation.parentheset.begin.ampersand" } },
+					"end": "\\)",
+					"endCaptures": { "0": { "name": "punctuation.parentheset.end.ampersand" } },
+					"patterns": [
+						{	"include": "#term" },
+						{	"name": "invalid.illegal.expected-term-operator.ampersand",
+							"match": "[^\\s\\)]"
+						}
+					]
+				}
+			]
+		},
+
       "relname": {
 			"name": "meta.structure.relname.ampersand",
 			"patterns": [
@@ -870,23 +958,6 @@
 						"2": { "name":"use.atom.specialatom.ampersand"},
 						"3": { "name":"punctuation.string.ampersand"}
 					}
-				}
-			]
-		},
-
-		"parentheset": {
-			"patterns": [
-				{   "name": "meta.structure.parentheset.ampersand",
-					"begin": "\\(",
-					"beginCaptures": { "0": { "name": "punctuation.parentheset.begin.ampersand" } },
-					"end": "\\)",
-					"endCaptures": { "0": { "name": "punctuation.parentheset.end.ampersand" } },
-					"patterns": [
-						{	"include": "#term" },
-						{	"name": "invalid.illegal.expected-term-operator.ampersand",
-							"match": "[^\\s\\)]"
-						}
-					]
 				}
 			]
 		},
