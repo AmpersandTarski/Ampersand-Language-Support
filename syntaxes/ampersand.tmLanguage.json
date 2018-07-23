@@ -56,9 +56,12 @@
 					"patterns": [ {"include": "#comment patterns"} ]
 				},
 				{	"comment":"ENDCONTEXT statement; all text thereafter is comment",
-					"name": "statement.endcontext comment.block.endcontext.ampersand",
-					"begin": "\\bENDCONTEXT\\b",
-					"beginCaptures": { "0": { "name": "keyword.statement.endcontext.ampersand" } },
+					"name": "comment.block.endcontext.ampersand",
+					"begin": "\\b(ENDCONTEXT)\\b",
+					"beginCaptures": {
+						"0": { "name": "statement.endcontext.ampersand" },
+						"1": { "name": "keyword.statement.endcontext.ampersand" }
+					},
 					"end": "\\b(?=CONTEXT\\b)",
 					"patterns": [ {"include": "#comment patterns"} ]
 				}
@@ -67,7 +70,7 @@
 
 		"CONTEXT":
 		{	"patterns": 
-			[	{	"match": "\\b(CONTEXT)\\s*(\")([^\"]*)(\")\\s*(IN\\s*(DUTCH|ENGLISH))",
+			[	{	"match": "\\b(CONTEXT)\\s*(\")?([^\"]*)(\")?\\s*(IN\\s*(DUTCH|ENGLISH))",
 					"captures": {
 						"0": { "name":"statement.context.ampersand"},
 						"1": { "name":"keyword.statement.context.ampersand"},
@@ -314,7 +317,7 @@
 					},
 					"end": "(?<=\\])",
 					"patterns": [
-						{  "include": "#bracket" },
+						{  "include": "#bracket-open" },
 						{  "include": "#atom" },
 						{  "include": "#comma" },
 						{  "include": "#comments" }
@@ -331,7 +334,7 @@
 					},
 					"end": "(?<=\\])",
 					"patterns": [
-						{  "include": "#bracket" },
+						{  "include": "#bracket-open" },
 						{  "include": "#atompair" },
 						{  "include": "#semi-colon" },
 						{  "include": "#comments" }
@@ -372,7 +375,7 @@
 					},
 					"end": "^(?=[^-\\|\\s])",
 					"patterns": [
-						{	"include": "#rulexpr" },
+						{	"include": "#rule-expression" },
 						{	"name": "keyword.term.operator.ampersand",
 							"match": "((?<!-)-(?!-)|~|\\+|;|!|\\*|\\\\/|/\\\\|\\\\|/|<>)"
 						},
@@ -713,12 +716,12 @@
 				{	"comment": "TXT \"plaintext\"",
 					"match": "(,\\s*)?(TXT)\\s+(\")((?:[^\"\\\\]|\\\\.)*)(\")",
 					"captures": {
-						"0": { "name":"meta.structure.txt.ampersand"},
-						"1": { "name":"punctuation.statement.violation.delimiter.ampersand"},
-						"2": { "name":"keyword.statement.violation.plaintext-item.ampersand"},
-						"3": { "name":"punctuation.statement.violation.ampersand"},
+						"0": { "name":"statement.txt.ampersand"},
+						"1": { "name":"punctuation.statement.txt.ampersand"},
+						"2": { "name":"keyword.statement.txt.ampersand"},
+						"3": { "name":"punctuation.statement.txt.ampersand"},
 						"4": { "name":"string.quoted.double.ampersand"},
-						"5": { "name":"punctuation.statement.violation.ampersand"}
+						"5": { "name":"punctuation.statement.txt.ampersand"}
 					}
 				}
 			]
@@ -731,49 +734,35 @@
 					"begin": "\\s*(|,\\s*)(SRC|TGT)\\s+",
 					"captures": {
 						"0": { "name":"statement.violation.srctgt.begin.ampersand"},
-						"1": { "name":"punctuation.statement.violation.delimiter.ampersand"},
+						"1": { "name":"punctuation.statement.violation.ampersand"},
 						"2": { "name":"keyword.statement.violation.srctgt.ampersand"}
 					},
 					"end": "(,|(?=\\)))",
 					"endCaptures": {
 						"0": { "name":"statement.violation.srctgt.end.ampersand"},
-						"1": { "name":"punctuation.statement.violation.delimiter.ampersand"}
+						"1": { "name":"punctuation.statement.violation.ampersand"}
 					},
 					"patterns": [ {	"include": "#term" } ]
 				},
-				{	"name": "invalid.illegal.ampersand",
+				{	"name": "invalid.illegal.violation.srctgt.ampersand",
 					"match": "[^\\s\\)]"
 				}
 			]
 		},
 
-		"rulexpr": {
-			"name": "meta.structure.rulexpr.ampersand",
+		"rule-expression": {
+			"name": "meta.structure.rule-expression.ampersand",
 			"patterns":[
 				{	"include": "#term" },
-				{	"include": "#ruleoperator" },
-				{	"name": "invalid.illegal.expected-rulexpr-operator.ampersand",
+				{	"name": "keyword.rule-expression.operator.ampersand",
+					"match": "(\\|-|=)"
+				},
+				{	"name": "invalid.illegal.rule-expression.ampersand",
 					"match": "[^\\s]"
 				}
 			]
 		},
 		  
-		"ruleoperator": {
-			"patterns": [
-				{	"name": "keyword.rulexpr.operator.ampersand",
-					"match": "(\\|-|=)"
-				}
-			]
-		},
-
-		"termoperator": {
-			"patterns": [
-				{	"name": "keyword.term.operator.ampersand",
-					"match": "((?<!-)-(?!-)|~|\\+|;|!|\\*|\\\\/|/\\\\|\\\\|/|<>)"
-				}
-			]
-		},
-
 		"term": {
 			"name": "meta.structure.term.ampersand",
             "patterns": [
@@ -786,13 +775,16 @@
 				{ 	"include": "#IV" },
 				{ 	"include": "#atom" },
 				{ 	"include": "#specialatom" },
-				{ 	"include": "#termoperator" }
+				{ 	"include": "#termoperator" },
+				{	"match": "[^\\s]",
+					"name": "invalid.illegal.term.ampersand"
+				}
 			]
 		  },
 		  
 		  "parentheset": {
 			"patterns": [
-				{   "name": "meta.structure.parentheset.ampersand",
+				{	"name": "meta.structure.parentheset.ampersand",
 					"begin": "\\(",
 					"beginCaptures": { "0": { "name": "punctuation.parentheset.begin.ampersand" } },
 					"end": "\\)",
@@ -939,6 +931,14 @@
 			]
 		},
 
+		"termoperator": {
+			"patterns": [
+				{	"name": "keyword.term.operator.ampersand",
+					"match": "((?<!-)-(?!-)|~|\\+|;|!|\\*|\\\\/|/\\\\|\\\\|/|<>)"
+				}
+			]
+		},
+
 		"comment patterns":
 		{	"patterns": 
 			[	{	"comment":"**highlighted**",
@@ -999,25 +999,11 @@
 				}
 			]
 		},
-		
-		"brace":
-		{	"patterns": 
-			[	{	"match": "\\s*(\\()",
-					"name":"punctuation.opening-brace.ampersand"
-				},
-				{	"match": "\\s*(\\)",
-					"name":"punctuation.closing-brace.ampersand"
-				}
-			]
-		},
 
-		"bracket":
+		"bracket-open":
 		{	"patterns": 
 			[	{	"match": "\\s*(\\[)",
 					"name":"punctuation.opening-bracket.ampersand"
-				},
-				{	"match": "\\s*(\\])",
-					"name":"punctuation.closing-bracket.ampersand"
 				}
 			]
 		},
