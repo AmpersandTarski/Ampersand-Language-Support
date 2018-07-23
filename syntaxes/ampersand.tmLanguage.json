@@ -70,8 +70,8 @@
 
 		"CONTEXT":
 		{	"patterns": 
-			[	{	"match": "\\b(CONTEXT)\\s*(\")?([^\"]*)(\")?\\s*(IN\\s*(DUTCH|ENGLISH))",
-					"captures": {
+			[	{	"match": "\\b(CONTEXT)\\s*(\")?([^\"]*)(\\2)?(\\s*IN\\s*(DUTCH|ENGLISH))?",
+				"captures": {
 						"0": { "name":"statement.context.ampersand"},
 						"1": { "name":"keyword.statement.context.ampersand"},
 						"2": { "name":"punctuation.statement.context.ampersand"},
