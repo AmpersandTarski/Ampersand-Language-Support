@@ -304,6 +304,17 @@
 						"7": { "name":"punctuation.statement.relation.ampersand"}
 					}
 				},
+				{	"comment": "RELATION relname [Concept]",
+					"match": "\\b(RELATION)\\s*([a-z][_A-Za-z0-9]*)\\s*(\\[)\\s*([A-Z][_A-Za-z0-9]*)(\\])",
+					"captures": {
+						"0": { "name":"statement.relation.ampersand"},
+						"1": { "name":"keyword.statement.relation.ampersand"},
+						"2": { "name":"definition.relation.ampersand"},
+						"3": { "name":"punctuation.statement.relation.ampersand"},
+						"4": { "name":"use.concept.ampersand"},
+						"5": { "name":"punctuation.statement.relation.ampersand"}
+					}
+				},
 				{	"comment": "[multiplicities]",
 					"name": "keyword.statement.relation.multiplicity.ampersand",
 					"match": "\\[(\\s*(INJ|SUR|UNI|TOT|SYM|ASY|RFX|IRF|TRN|PROP))(\\s*,\\s*(INJ|SUR|UNI|TOT|SYM|ASY|RFX|IRF|TRN|PROP))*\\s*\\]"

@@ -97,14 +97,14 @@
 		"prefix": "eqvprop",
 		"description": "Equivalence with [PROP]-attribute",
 		"body": [
-			"-- EQUIVALENCE ${1:Relname}[${2:srcConcept}*${3:tgtConcept}] [PROP] == ${4:Expression}",
-			"$1 :: $2 * $3 [PROP] -- define relation $1 as shorthand for $4",
+			"-- EQUIVALENCE ${1:Relname}[${2:concept}] [PROP] == ${4:Expression}",
+			"$1 :: $2 * $2 [PROP] -- define relation $1 as shorthand for $4",
 			"ROLE ExecEngine MAINTAINS \"Equivalence - InsPair $1\"",
-			"RULE \"Equivalence - InsPair $1\": $4 |- $1[$2*$3]",
-			"VIOLATION (TXT \"{EX} InsPair;$1;$2;\", SRC I[$2], TXT \";$3;\", TGT I[$3])",
+			"RULE \"Equivalence - InsPair $1\": $4 |- $1[$2*$2]",
+			"VIOLATION (TXT \"{EX} InsPair;$1;$2;\", SRC I[$2], TXT \";$2;\", TGT I[$2])",
 			"ROLE ExecEngine MAINTAINS \"Equivalence - DelPair $1\"",
-			"RULE \"Equivalence - DelPair $1\": $1[$2*$3] |- $4",
-			"VIOLATION (TXT \"{EX} DelPair;$1;$2;\", SRC I[$2], TXT \";$3;\", TGT I[$3])",
+			"RULE \"Equivalence - DelPair $1\": $1[$2*$2] |- $4",
+			"VIOLATION (TXT \"{EX} DelPair;$1;$2;\", SRC I[$2], TXT \";$2;\", TGT I[$2])",
 			"$0"
 		]
 	}
