@@ -19,8 +19,13 @@
 		{	"scope": "source.ampersand comment.block",
 			"settings": { "foreground": "#808080" }
 		},
-		{	"scope": "source.ampersand comment.line.double-dash.sectionheader",
+		{	"scope": [ "source.ampersand comment.line.double-dash.sectionheader"
+						, "source.ampersand comment.snippet.keyword.ampersand"
+						],
 			"settings": { "foreground": "#f0d0b0", "fontStyle": "bold italic underline" }
+		},
+		{  "scope": "source.ampersand comment.snippets.double-dash.ampersand",
+			"settings": { "foreground": "#80b0d0" }
 		},
 		{  "scope": "source.ampersand comment.block.documentation",
 			"settings": { "foreground": "#209020" }
@@ -28,7 +33,6 @@
 		{  "scope": "source.ampersand comment.block.endcontext",
 			"settings": { "foreground": "#546E7A" }
 		},
-		
 		
 		{	"scope": "source.ampersand statement",
 			"settings": { "foreground": "#C0c080" }

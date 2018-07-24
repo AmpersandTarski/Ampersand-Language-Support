@@ -42,6 +42,13 @@
 					"end": "$",
 					"patterns": [ {"include": "#comment patterns"} ]
 				},
+				{	"comment":"-- comments inserted by snippets",
+					"name": "comment.snippets.double-dash.ampersand",
+					"begin": "--\\s*(EQUIVALENCE)",
+					"beginCaptures": { "1": { "name": "comment.snippet.keyword.ampersand" } },
+					"end": "$",
+					"patterns": [ {"include": "#comment patterns"} ]
+				},
 				{	"comment":"-- line comment",
 					"name": "comment.line.double-dash.ampersand",
 					"begin": "--",
