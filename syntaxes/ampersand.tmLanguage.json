@@ -2,6 +2,8 @@
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"scopeName": "source.ampersand",
 	"name": "Ampersand (ADL)",
+	"foldingStartMarker":"--\\[[^\\[]",
+	"foldingStopMarker":"'^(?=--\\[[^\\[])",
 	"patterns":
 	[	{	"comment": "to be reviewed using https://www.sublimetext.com/docs/3/scope_naming.html"},
 		{	"include": "#comments"     },
@@ -71,7 +73,7 @@
 		"CONTEXT":
 		{	"patterns": 
 			[	{	"match": "\\b(CONTEXT)\\s*(\")?([^\"]*)(\\2)?(\\s*IN\\s*(DUTCH|ENGLISH))?",
-				"captures": {
+					"captures": {
 						"0": { "name":"statement.context.ampersand"},
 						"1": { "name":"keyword.statement.context.ampersand"},
 						"2": { "name":"punctuation.statement.context.ampersand"},
@@ -415,7 +417,7 @@
 		{	"patterns": 
 			[	{	"comment":"INTERFACE/API/GUI \"<ifcname>\" [FOR <role>,<Role>]: <expression> <crud>",
 					"name":"statement.interface.ampersand",
-					"begin": "\\b(INTERFACE|API|GUI)\\s+(\")([^\"]+)(\")\\s*(|(FOR)\\s+([^\"\\s,:]+)(\\s*(,)\\s*([^\"\\s,:]+))*)(:)",
+					"begin": "\\b(INTERFACE|API|GUI)\\s+(\")([^\"]+)(\")\\s*(|(FOR)\\s+([^\"\\s,:]+)(\\s*(,)\\s*([^\"\\s,:]+))*)\\s*(:)",
 					"beginCaptures": {
 						"0": { "name":"statement.interface.begin.ampersand"},
 						"1": { "name":"keyword.statement.interface.ampersand"},
@@ -623,7 +625,7 @@
 		"exectext-item":
 		{	"comment": "TXT \"<all sorts of text\"",
 			"name":"statement.violation.txt.ampersand",
-			"begin": "\\s*(|,\\s*)(TXT)\\s+(\")",
+			"begin": "\\s*(,\\s*)?(TXT)\\s+(\")",
 			"captures": {
 				"0": { "name":"statement.violation.exectext-item.begin.ampersand"},
 				"1": { "name":"punctuation.statement.violation.delimiter.ampersand"},
@@ -641,7 +643,7 @@
 					"captures": {
 						"0": { "name":"statement.violation.execengine.wellknown-function.ampersand"},
 						"1": { "name":"keyword.statement.violation.txt.ampersand"},
-						"2": { "name":"punctuation.statement.violation.delimiter.ampersand"},
+						"2": { "name":"punctuation.statement.violation.txt.ampersand"},
 						"3": { "name":"keyword.statement.violation.txt.wellknown-function.ampersand"}
 					}
 				},
@@ -650,7 +652,7 @@
 					"captures": {
 						"0": { "name":"statement.violation.execengine.deprecated-function.ampersand"},
 						"1": { "name":"keyword.statement.violation.txt.ampersand"},
-						"2": { "name":"punctuation.statement.violation.delimiter.ampersand"},
+						"2": { "name":"punctuation.statement.violation.txt.ampersand"},
 						"3": { "name":"invalid.deprecated.violation.ampersand"}
 					}
 				},
@@ -659,7 +661,7 @@
 					"captures": {
 						"0": { "name":"statement.violation.execengine.unknown-function.ampersand"},
 						"1": { "name":"keyword.statement.violation.txt.ampersand"},
-						"2": { "name":"punctuation.statement.violation.delimiter.ampersand"},
+						"2": { "name":"punctuation.statement.violation.txt.ampersand"},
 						"3": { "name":"keyword.statement.violation.txt.unknown-function.ampersand"}
 					}
 				},

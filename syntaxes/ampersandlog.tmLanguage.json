@@ -1,0 +1,45 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"scopeName": "source.ampersandlog",
+	"name": "Ampersand log",
+	"patterns":
+	[	{	"include": "#FunctionReg"  },
+		{	"include": "#ExecEngine"   },
+		{	"name": "comment.block.ampersand", "match": "[^\\s\\)]" }
+	],
+
+	"repository": 
+	{	"FunctionReg":
+		{	"patterns": 
+			[	{	"name": "functionreg",
+					"match": "^.*ExecEngine function.*registered.*$"
+            }
+         ]
+      },
+      "ExecEngine":
+		{	"patterns": 
+			[	{	"name": "execengine.ampersand",
+					"begin": "^.*ExecEngine started",
+					"beginCaptures": { "0": { "name": "execengine.started.ampersand" } },
+					"end": "ExecEngine finished.*$",
+					"endCaptures": { "0": { "name": "execengine.finished.ampersand" } },
+					"patterns": [ {"include": "#ExecEngine patterns"} ]
+            }
+         ]
+      },
+      "ExecEngine patterns":
+		{	"patterns": 
+			[	{	"name": "execengine.highlight.fixing.ampersand",
+					"match": "^.*ExecEngine started(?=.*ExecEngine fixing)"
+            },
+            {	"name": "execengine.run.ampersand",
+					"begin": "^.*Run #\\d*",
+					"beginCaptures": { "0": { "name": "execengine.run.started.ampersand" } },
+					"end": "Run finished.*$",
+					"endCaptures": { "0": { "name": "execengine.run.finished.ampersand" } },
+					"patterns": [ {"include": "#fix violations"} ]
+            }
+         ]
+      }
+	}	
+}

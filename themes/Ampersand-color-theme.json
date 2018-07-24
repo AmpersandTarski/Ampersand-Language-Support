@@ -12,7 +12,7 @@
 			"settings": { "foreground": "#FF0000", "fontStyle": "bold underline" }
 		},
 		{	"scope": "source.ampersand invalid.deprecated",
-			"settings": { "foreground": "#FF0000C0", "fontStyle": "bold underline" }
+			"settings": { "foreground": "#FF5370", "fontStyle": "bold" }
 		},
 		
 		
@@ -31,7 +31,7 @@
 		
 		
 		{	"scope": "source.ampersand statement",
-			"settings": { "foreground": "#00a0c0" }
+			"settings": { "foreground": "#C0c080" }
 		},
 		
 		
@@ -41,11 +41,19 @@
 		{  "scope": "source.ampersand keyword.operator",
 			"settings": { "foreground": "#C06060", "fontStyle": "bold" }
 		},
-		{  "scope": "source.ampersand keyword.statement.violation.txt.arguments",
-			"settings": { "foreground": "#60A000" }
+		{  "scope": [ "source.ampersand keyword.statement.violation.txt"
+						, "source.ampersand punctuation.statement.violation"
+						, "keyword.statement.violation.txt.arguments.reserved"
+						],
+			"settings": { "foreground": "#60A080", "fontStyle": "" }
 		},
-		{  "scope": "source.ampersand keyword.statement.violation.txt.arguments.other",
-			"settings": { "foreground": "#60A000" }
+		{  "scope": [ "source.ampersand punctuation.statement.violation.txt"
+						, "keyword.statement.violation.txt.arguments.reserved"
+						],
+			"settings": { "fontStyle": "bold" }
+		},
+		{  "scope": "source.ampersand keyword.statement.violation.txt.arguments",
+			"settings": { "foreground": "#60A000", "fontStyle": "" }
 		},
 		{  "scope": "source.ampersand keyword.statement.violation.txt.wellknown-function",
 			"settings": { "foreground": "#60A000", "fontStyle": "bold" }
@@ -53,12 +61,13 @@
 		{  "scope": "source.ampersand keyword.statement.violation.txt.unknown-function",
 			"settings": { "foreground": "#60A000", "fontStyle": "bold italic underline" }
 		},
-			
+		{  "scope": "source.ampersand keyword.statement.violation.txt.arguments.reserved",
+			"settings": { "foreground": "#60A000", "fontStyle": "bold" }
+		},	
 		
 		{	"scope": "source.ampersand punctuation",
 			"settings": { "foreground": "#E0C080" }
 		},
-		
 		
 		{	"scope": "source.ampersand definition",
 			"settings": { "foreground": "#60A080", "fontStyle": "bold underline" }
@@ -71,7 +80,7 @@
 
 
 		{  "scope": "source.ampersand string.quoted",
-			"settings": { "foreground": "#80b0d0" }
+			"settings": { "foreground": "#C0c040" }
 		},            
 		{  "scope": "source.ampersand highlight.ampersand",
 			"settings": { "foreground": "#ffc000" }
