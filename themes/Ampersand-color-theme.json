@@ -42,6 +42,9 @@
 		{	"scope": "source.ampersand keyword",
 			"settings": { "foreground": "#ffC080C0", "fontStyle": "bold" }
 		},
+		{	"scope": "source.ampersand keyword.statement.emphasis",
+			"settings": { "foreground": "#ffb060c0", "fontStyle": "bold underline" }
+		},
 		{  "scope": "source.ampersand keyword.operator",
 			"settings": { "foreground": "#C06060", "fontStyle": "bold" }
 		},
