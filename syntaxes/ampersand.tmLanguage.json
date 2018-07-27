@@ -551,29 +551,40 @@
 						"1": { "name":"punctuation.box.brackets.ampersand"}
 					},
 					"patterns": [
-						{	"include":"#comments" },
-						{
-							"name": "statement.box.brackets.item.ampersand",
-							"begin": "((\")([^\"]*)(\")|([^\\]\"\\s]*))\\s*(:)",
-							"beginCaptures": {
-								"0": { "name":"statement.box.brackets.item.begin.ampersand"},
-								"1": { "name":"statement.box.brackets.label.quotedtext.ampersand"},
-								"2": { "name":"punctuation.statement.box.brackets.ampersand"},
-								"3": { "name":"statement.box.brackets.label.text.ampersand"},
-								"4": { "name":"punctuation.statement.box.brackets.ampersand"},
-								"5": { "name":"statement.box.brackets.label.text.ampersand"},
-								"6": { "name":"punctuation.statement.box.brackets.ampersand"}
-							},
-							"end": "(,|(?=([Cc][Rr][Uu][Dd]|<|LINKTO|INTERFACE)|\\]))",
-							"endCaptures": {
-								"0": { "name":"statement.box.brackets.item.end.ampersand"},
-								"1": { "name":"punctuation.statement.box.brackets.ampersand"}
-							},
-							"patterns": [
-								{	"include":"#comments" },
-								{	"include":"#term" }
-							]
-						},
+						{	"include": "#comments" },
+						{  "include": "#boxitems" },
+						{  "include": "#BOX" },
+						{  "include": "#BOX-BRACKETS" },
+						{  "include": "#comma" },
+						{	"match": "[^\\s]+",
+							"name": "invalid.illegal.box.brackets.ampersand"
+						}
+					]
+				}
+			]
+		},
+
+		"boxitems":
+		{	"patterns": 
+			[	{	"name": "statement.boxitem.ampersand",
+					"begin": "((\")([^\"]*)(\")|([^\\]\"\\s]*))\\s*(:)",
+					"beginCaptures": {
+						"0": { "name":"statement.boxitem.begin.ampersand"},
+						"1": { "name":"statement.box.brackets.label.quotedtext.ampersand"},
+						"2": { "name":"punctuation.statement.box.brackets.ampersand"},
+						"3": { "name":"statement.box.brackets.label.text.ampersand"},
+						"4": { "name":"punctuation.statement.box.brackets.ampersand"},
+						"5": { "name":"statement.box.brackets.label.text.ampersand"},
+						"6": { "name":"punctuation.statement.box.brackets.ampersand"}
+					},
+					"end": "(,|(?=([Cc][Rr][Uu][Dd]|<|LINKTO|INTERFACE)|BOX|ROWS|COLS|TABS|PANELS|\\]))",
+					"endCaptures": {
+						"0": { "name":"statement.boxitem.end.ampersand"},
+						"1": { "name":"punctuation.statement.box.brackets.ampersand"}
+					},
+					"patterns": [
+						{ "include": "#comments" },
+						{ "include": "#term" },
 						{
 							"name": "illegalCRUDandInterface",
 							"match": "\\b[Cc][Rr][Uu][Dd]\\s+(LINKTO\\s+)?INTERFACE",
@@ -585,40 +596,30 @@
 							"name": "crud",
 							"match": "\\b[Cc][Rr][Uu][Dd]\\b",
 							"captures": { 
-								"1": { "name":"statement.box.brackets.item.crud.ampersand" }
+								"1": { "name":"statement.boxitem.crud.ampersand" }
 							}
 						},
 						{
 							"name": "view",
 							"match": "(<)([^>\\s\"]*)(>)",
 							"captures": { 
-								"0": { "name":"statement.box.brackets.item.view.ampersand"},
-								"1": { "name":"punctuation.statement.box.brackets.item.ampersand"},
+								"0": { "name":"statement.boxitem.view.ampersand"},
+								"1": { "name":"punctuation.statement.boxitem.ampersand"},
 								"2": { "name":"use.view.ampersand"},
-								"3": { "name":"punctuation.statement.box.brackets.item.ampersand"}
+								"3": { "name":"punctuation.statement.boxitem.ampersand"}
 							}
 						},
 						{
 							"name": "interface",
 							"match": "((LINKTO)\\s+)?(INTERFACE)\\s+(\")([^\"]+)(\")",
 							"captures": { 
-								"0": { "name":"statement.box.brackets.item.interface.ampersand"},
-								"2": { "name":"keyword.statement.box.brackets.item.ampersand"},
-								"3": { "name":"punctuation.statement.box.brackets.item.ampersand"},
-								"4": { "name":"punctuation.statement.box.brackets.item.ampersand"},
+								"0": { "name":"statement.boxitem.interface.ampersand"},
+								"2": { "name":"keyword.statement.boxitem.ampersand"},
+								"3": { "name":"punctuation.statement.boxitem.ampersand"},
+								"4": { "name":"punctuation.statement.boxitem.ampersand"},
 								"5": { "name":"use.interface.ampersand"},
-								"6": { "name":"punctuation.statement.box.brackets.item.ampersand"}
+								"6": { "name":"punctuation.statement.boxitem.ampersand"}
 							}
-						},
-						{  "include": "#BOX" 
-						},
-						{  "include": "#BOX-BRACKETS" 
-						},
-						{  "name": "box.brackets.separator.ampersand",
-							"match": ","
-						},
-						{	"match": "[^\\s]+",
-							"name": "invalid.illegal.box.brackets.ampersand"
 						}
 					]
 				}
