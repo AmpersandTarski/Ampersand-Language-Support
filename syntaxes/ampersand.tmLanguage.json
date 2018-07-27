@@ -367,14 +367,17 @@
 		{	"patterns": [
 				{	"comment":"ROLE <role> MAINTAINS <rulename>",
 					"name":"statement.role.ampersand",
-					"match": "\\b(ROLE)\\s+([A-Z][_A-Za-z0-9]*)\\s+(MAINTAINS)\\s+(\")([^\"]*)(\")",
+					"match": "\\b(ROLE)\\s+(?:\\b([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))\\s+(MAINTAINS)\\s+(\")([^\"]*)(\")",
 					"captures": {
 						"1": { "name":"keyword.statement.role.ampersand"},
 						"2": { "name":"use.role.ampersand"},
-						"3": { "name":"keyword.statement.role.ampersand"},
-						"4": { "name":"punctuation.statement.role.ampersand"},
-						"5": { "name":"use.rule.ampersand"},
-						"6": { "name":"punctuation.statement.role.ampersand"}
+						"3": { "name":"punctuation.statement.role.ampersand"},
+						"4": { "name":"use.role.ampersand"},
+						"5": { "name":"punctuation.statement.role.ampersand"},
+						"6": { "name":"keyword.statement.role.ampersand"},
+						"7": { "name":"punctuation.statement.role.ampersand"},
+						"8": { "name":"use.rule.ampersand"},
+						"9": { "name":"punctuation.statement.role.ampersand"}
 					}
 				}
 			]
