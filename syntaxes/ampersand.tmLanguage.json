@@ -393,15 +393,12 @@
 						"4": { "name":"punctuation.statement.rule.ampersand"},
 						"5": { "name":"punctuation.statement.rule.ampersand"}
 					},
-					"end": "^(?=[^-\\|\\s])",
+					"end": "^(?=([^-\\|\\s]|(\\s+(VIOLATION|ROLE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|VIEW))))",
 					"patterns": [
 						{	"name": "keyword.rule-expression.operator.ampersand",
 							"match": "(\\|-|=)"
 						},
 						{	"include": "#term" 
-						},
-						{	"name": "invalid.illegal.rule-expression.ampersand",
-							"match": "[^\\s]"
 						}
 					]
 				}
