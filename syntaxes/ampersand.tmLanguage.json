@@ -559,16 +559,17 @@
 		"VIEW":
 		{	"patterns": 
 			[	{	"name": "statement.view.ampersand",
-					"begin": "\\b(VIEW)\\s+(\"?)([_A-Za-z0-9]+)(\\2)\\s*(:)\\s+([A-Z][_A-Za-z0-9]*)",
-					"beginCaptures": {
-						"0": { "name":"statement.view.begin.ampersand"},
-						"1": { "name":"keyword.statement.view.ampersand"},
-						"2": { "name":"punctuation.statement.view.ampersand"},
-						"3": { "name":"definition.view.ampersand"},
-						"4": { "name":"punctuation.statement.view.ampersand"},
-						"5": { "name":"punctuation.statement.view.colon.ampersand"},
-						"6": { "name":"use.concept.ampersand"}
-					},
+				"begin": "\\b(VIEW)\\s+(\"?)([_A-Za-z0-9]+)(\\2)\\s*(:)\\s+([A-Z][_A-Za-z0-9]*)(\\s+DEFAULT)?",
+				"beginCaptures": {
+					"0": { "name":"statement.view.begin.ampersand"},
+					"1": { "name":"keyword.statement.view.ampersand"},
+					"2": { "name":"punctuation.statement.view.ampersand"},
+					"3": { "name":"definition.view.ampersand"},
+					"4": { "name":"punctuation.statement.view.ampersand"},
+					"5": { "name":"punctuation.statement.view.colon.ampersand"},
+					"6": { "name":"use.concept.ampersand"},
+					"7": { "name":"keyword.statement.view.ampersand"}
+				},
 					"end": "\\b((HTML)\\s+(TEMPLATE)\\s+(\"?)([^\"]+)(\"?)\\s+)?(ENDVIEW)",
 					"endCaptures": {
 						"0": { "name":"statement.view.end.ampersand"},
