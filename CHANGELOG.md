@@ -1,6 +1,10 @@
 # Change Log
 
 ## [Unreleased]
+- syntax coloring grammar is testable.
+- syntax coloring theme 'ampersand' is testable.
+- snippets are available for most language constructs.
+- snippet `eqv` enables easy definition of equivalence relations.
 
 ## [0.0.5] - 2018-07-18
 
