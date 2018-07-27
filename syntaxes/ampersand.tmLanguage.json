@@ -15,6 +15,8 @@
 		{  "include": "#REPRESENT"    },
 		{  "include": "#IDENT"        },
 		{	"include": "#RELATION"     },
+		{	"include": "#MSGMEANING"   },
+		{	"include": "#PRAGMA"       },
 		{	"include": "#POPULATION"   },
 		{	"include": "#ROLE"         },
 		{	"include": "#RULE"         },
@@ -223,7 +225,7 @@
 						"5": { "name":"punctuation.statement.classify.ampersand"},
 						"6": { "name":"keyword.statement.classify.ampersand"}
 					},
-					"end": "^(?=\\s*([^A-Z/]|VIOLATION|ROLE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|VIEW))",
+					"end": "^(?=\\s*([^A-Z/]|VIOLATION|ROLE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|VIEW|MEANING|MESSAGE|PRAGMA))",
 					"patterns": [
 						{  "include": "#comments" },
 						{	"match": "\\s*(/\\\\)",
@@ -406,7 +408,7 @@
 						"4": { "name":"punctuation.statement.rule.ampersand"},
 						"5": { "name":"punctuation.statement.rule.ampersand"}
 					},
-					"end": "^(?=([^-\\|\\s]|(\\s+(VIOLATION|ROLE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|VIEW))))",
+					"end": "^(?=([^-\\|\\s]|(\\s+(VIOLATION|ROLE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|VIEW|MEANING|MESSAGE|PRAGMA))))",
 					"patterns": [
 						{	"name": "keyword.rule-expression.operator.ampersand",
 							"match": "(\\|-|=)"
@@ -439,6 +441,34 @@
 						{	"include": "#src-tgt-item" },
 						{	"include": "#plaintext-item" }
 					]
+				}
+			]
+		},
+		
+		"PRAGMA":
+		{	"patterns":
+			[	{	"match": "\\b(PRAGMA)(?:\\s+(\")([^\"]*)(\")){1,3}",
+					"captures": {
+						"0": { "name":"statement.pragma.ampersand"},
+						"1": { "name":"keyword.statement.messageORmeaning.ampersand"},
+						"2": { "name":"punctuation.statement.messageORmeaning.ampersand"},
+						"3": { "name":"string.quoted.double.statement.messageORmeaning.ampersand"},
+						"4": { "name":"punctuation.statement.messageORmeaning.ampersand"}
+					}
+				}
+			]
+		},
+
+		"MSGMEANING":
+		{	"patterns": [
+				{	"match": "\\b(MESSAGE|MEANING)\\s+(\")([^\"]*)(\")",
+					"captures": {
+						"0": { "name":"statement.messageORmeaning.ampersand"},
+						"1": { "name":"keyword.statement.messageORmeaning.ampersand"},
+						"2": { "name":"punctuation.statement.messageORmeaning.ampersand"},
+						"3": { "name":"string.quoted.double.statement.messageORmeaning.ampersand"},
+						"4": { "name":"punctuation.statement.messageORmeaning.ampersand"}
+					}
 				}
 			]
 		},
