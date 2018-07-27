@@ -295,7 +295,7 @@
 		"RELATION":
 		{	"patterns": 
 			[	{	"comment": "relation :: Concept1 * Concept2",
-					"match": "\\b([a-z]\\w*)\\s*(::)\\s*([A-Z]\\w*)\\s*(\\*)\\s*([A-Z]\\w*)",
+					"match": "\\b([a-z]\\w*)\\s*(::)\\s*([A-Z]\\w*)\\s*(\\*|->)\\s*([A-Z]\\w*)",
 					"captures": {
 						"0": { "name":"statement.relation.ampersand"},
 						"1": { "name":"definition.relation.ampersand"},
@@ -593,6 +593,9 @@
 					"patterns": [
 						{	"include": "#comments" },
 						{  "include": "#boxitems" },
+						{  "include": "#crud" },
+						{	"include": "#useview" },
+						{	"include": "#useinterface" },
 						{  "include": "#BOX" },
 						{  "include": "#BOX-BRACKETS" },
 						{  "include": "#comma" },
@@ -631,37 +634,46 @@
 							"captures": { 
 								"0": { "name":"invalid.illegal.crud.interface.ampersand" }
 							}
-						},
-						{
-							"name": "crud",
-							"match": "\\b[Cc][Rr][Uu][Dd]\\b",
-							"captures": { 
-								"1": { "name":"statement.boxitem.crud.ampersand" }
-							}
-						},
-						{
-							"name": "view",
-							"match": "(<)([^>\\s\"]*)(>)",
-							"captures": { 
-								"0": { "name":"statement.boxitem.view.ampersand"},
-								"1": { "name":"punctuation.statement.boxitem.ampersand"},
-								"2": { "name":"use.view.ampersand"},
-								"3": { "name":"punctuation.statement.boxitem.ampersand"}
-							}
-						},
-						{
-							"name": "interface",
-							"match": "((LINKTO)\\s+)?(INTERFACE)\\s+(\")([^\"]+)(\")",
-							"captures": { 
-								"0": { "name":"statement.boxitem.interface.ampersand"},
-								"2": { "name":"keyword.statement.boxitem.ampersand"},
-								"3": { "name":"punctuation.statement.boxitem.ampersand"},
-								"4": { "name":"punctuation.statement.boxitem.ampersand"},
-								"5": { "name":"use.interface.ampersand"},
-								"6": { "name":"punctuation.statement.boxitem.ampersand"}
-							}
 						}
 					]
+				}
+			]
+		},
+
+		"crud":
+		{	"patterns": [
+				{	"match": "\\b[Cc][Rr][Uu][Dd]\\b",
+					"captures": { 
+						"1": { "name":"statement.boxitem.crud.ampersand" }
+					}
+				}
+			]
+		},
+
+		"useinterface":
+		{	"patterns": [
+				{	"match": "((LINKTO)\\s+)?(INTERFACE)\\s+(\")([^\"]+)(\")",
+					"captures": { 
+						"0": { "name":"statement.boxitem.interface.ampersand"},
+						"2": { "name":"keyword.statement.boxitem.ampersand"},
+						"3": { "name":"punctuation.statement.boxitem.ampersand"},
+						"4": { "name":"punctuation.statement.boxitem.ampersand"},
+						"5": { "name":"use.interface.ampersand"},
+						"6": { "name":"punctuation.statement.boxitem.ampersand"}
+					}
+				}
+			]
+		},
+
+		"useview":
+		{	"patterns": [
+				{	"match": "(<)([^>\\s\"]*)(>)",
+					"captures": { 
+						"0": { "name":"statement.boxitem.view.ampersand"},
+						"1": { "name":"punctuation.statement.boxitem.ampersand"},
+						"2": { "name":"use.view.ampersand"},
+						"3": { "name":"punctuation.statement.boxitem.ampersand"}
+					}
 				}
 			]
 		},
