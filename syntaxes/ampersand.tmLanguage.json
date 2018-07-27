@@ -97,14 +97,15 @@
 		{	"patterns":[
 				{	"comment":"PURPOSE <keyword> \"<identifier>\" -- tnx to https://github.com/Microsoft/vscode-textmate/issues/41",
 					"name": "statement.purpose.ampersand",
-					"begin": "\\b(PURPOSE)\\s+(CONTEXT|CONCEPT|RELATION|RULE)\\s+(\")([^\"]*)(\")\\s*",
+					"begin": "\\b(PURPOSE)\\s+(CONTEXT|CONCEPT|RELATION|RULE)\\s+(?:(\\w*)|(\")([^\"]*)(\"))",
 					"beginCaptures": {
 						"0": { "name":"statement.purpose.begin.ampersand"},
 						"1": { "name":"keyword.statement.purpose.ampersand"},
 						"2": { "name":"keyword.statement.purpose.ampersand"},
-						"3": { "name":"punctuation.statement.purpose.ampersand"},
-						"4": { "name":"use.context.ampersand"},
-						"5": { "name":"punctuation.statement.purpose.ampersand"}
+						"3": { "name":"use.purpose.ampersand"},
+						"4": { "name":"punctuation.statement.purpose.ampersand"},
+						"5": { "name":"use.purpose.ampersand"},
+						"6": { "name":"punctuation.statement.purpose.ampersand"}
 					},
 					"end": "(?<=\\+})",
 					"patterns": [
@@ -118,8 +119,8 @@
 						},
 						{	"comment":"outside {+ section",
 							"name": "invalid.illegal.statement.purpose.ampersand",
-							"begin": "\\s*([^{]|{[^\\+])",
-							"end": "(?=\\bENDCONTEXT)"
+							"begin": "[^\\s]+",
+							"end": "(?=\\bENDCONTEXT|{\\+)"
 						}
 					]
 				}
