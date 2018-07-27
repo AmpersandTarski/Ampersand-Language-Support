@@ -450,14 +450,18 @@
 						"10": { "name":"statement.interface.roles-group.delimiter-role-group.role.ampersand"},
 						"11": { "name":"punctuation.statement.interface.ampersand"}
 						},
-					"end": "([Cc][Rr][Uu][Dd])(\\s*(<)([^>\\s\"]*)(>))?(?=\\s*(BOX|ROWS|COLS|TABS|PANELS))",
+					"end": "(?:([Cc][Rr][Uu][Dd]\\s+)?((<)([^>\\s\"]+)(>)\\s+)?(?=(BOX|ROWS|COLS|TABS|PANELS)))|(INTERFACE\\s+(\")([^\"]+)(\"))",
 					"endCaptures": {
 						"0": { "name":"statement.interface.end.ampersand"},
 						"1": { "name":"statement.interface.crud.ampersand"},
 						"2": { "name":"statement.interface.view.ampersand"},
 						"3": { "name":"punctuation.statement.interface.ampersand"},
 						"4": { "name":"use.view.ampersand"},
-						"5": { "name":"punctuation.statement.interface.ampersand"}
+						"5": { "name":"punctuation.statement.interface.ampersand"},
+						"7": { "name":"keyword.statement.interface.ampersand"},
+						"8": { "name":"punctuation.statement.interface.ampersand"},
+						"9": { "name":"definition.interface.ampersand"},
+						"10": { "name":"punctuation.statement.interface.ampersand"}
 					},
 					"patterns": [ 
 						{	"include":"#term" },
@@ -473,7 +477,7 @@
 		{	"patterns": 
 			[	{	"comment":"All kind of BOX-related constructs (including ROWS, COLS, etc.)",
 				   "name": "statement.box.ampersand",
-					"begin": "\\b((BOX)(\\s*((<)(?:(DIV|TABS|ROWS|ROWSNL|HROWS|COLS|COLSNL|HCOLS|SCOLS|SHCOLS|SPCOLS|SPHCOLS|PANELS|PROPBUTTON|STRONG)|[^>\\s\"]*)(>))?)|(ROWS|COLS|TABS|PANELS))",
+					"begin": "\\b((BOX)(\\s*((<)(?:(DIV|TABS|ROWS|ROWSNL|ROWSNH|HROWS|COLS|COLSNL|HCOLS|SCOLS|SHCOLS|SPCOLS|SPHCOLS|PANELS|PROPBUTTON|STRONG)|[^>\\s\"]*)(>))?)|(ROWS|COLS|TABS|PANELS))",
 					"beginCaptures": {
 						"0": { "name":"statement.box.begin.ampersand"},
 						"1": { "name":"statement.box.boxtype.ampersand"},
@@ -559,17 +563,17 @@
 		"VIEW":
 		{	"patterns": 
 			[	{	"name": "statement.view.ampersand",
-				"begin": "\\b(VIEW)\\s+(\"?)([_A-Za-z0-9]+)(\\2)\\s*(:)\\s+([A-Z][_A-Za-z0-9]*)(\\s+DEFAULT)?",
-				"beginCaptures": {
-					"0": { "name":"statement.view.begin.ampersand"},
-					"1": { "name":"keyword.statement.view.ampersand"},
-					"2": { "name":"punctuation.statement.view.ampersand"},
-					"3": { "name":"definition.view.ampersand"},
-					"4": { "name":"punctuation.statement.view.ampersand"},
-					"5": { "name":"punctuation.statement.view.colon.ampersand"},
-					"6": { "name":"use.concept.ampersand"},
-					"7": { "name":"keyword.statement.view.ampersand"}
-				},
+					"begin": "\\b(VIEW)\\s+(\"?)([_A-Za-z0-9]+)(\\2)\\s*(:)\\s+([A-Z][_A-Za-z0-9]*)(\\s+DEFAULT)?",
+					"beginCaptures": {
+						"0": { "name":"statement.view.begin.ampersand"},
+						"1": { "name":"keyword.statement.view.ampersand"},
+						"2": { "name":"punctuation.statement.view.ampersand"},
+						"3": { "name":"definition.view.ampersand"},
+						"4": { "name":"punctuation.statement.view.ampersand"},
+						"5": { "name":"punctuation.statement.view.colon.ampersand"},
+						"6": { "name":"use.concept.ampersand"},
+						"7": { "name":"keyword.statement.view.ampersand"}
+					},
 					"end": "\\b((HTML)\\s+(TEMPLATE)\\s+(\"?)([^\"]+)(\"?)\\s+)?(ENDVIEW)",
 					"endCaptures": {
 						"0": { "name":"statement.view.end.ampersand"},
@@ -657,13 +661,31 @@
 				"1": { "name":"punctuation.statement.violation.delimiter.ampersand"}
 			},
 			"patterns": [ 
-				{	"comment": "{EX} - well-known functions",
-					"match": "({EX})(\\s*|_;)(InsAtom|DelAtom|MrgAtoms|InsPair|DelPair|SetConcept|ClearConcept|InsPairCond|SetConceptCond|SetNavToOnCommit|SetNavToOnRollback)(?=;)",
+				{	"comment": "{EX} - well-known relation functions",
+					"match": "({EX})(\\s*|_;)(InsPair|DelPair)(?=;)",
 					"captures": {
-						"0": { "name":"statement.violation.execengine.wellknown-function.ampersand"},
+						"0": { "name":"statement.violation.execengine.wellknown-function.relation.ampersand"},
 						"1": { "name":"keyword.statement.violation.txt.ampersand"},
 						"2": { "name":"punctuation.statement.violation.txt.ampersand"},
-						"3": { "name":"keyword.statement.violation.txt.wellknown-function.ampersand"}
+						"3": { "name":"keyword.statement.violation.txt.wellknown-function.relation.ampersand"}
+					}
+				},
+				{	"comment": "{EX} - well-known atom functions",
+					"match": "({EX})(\\s*|_;)(InsAtom|DelAtom)(?=;)",
+					"captures": {
+						"0": { "name":"statement.violation.execengine.wellknown-function.atom.ampersand"},
+						"1": { "name":"keyword.statement.violation.txt.ampersand"},
+						"2": { "name":"punctuation.statement.violation.txt.ampersand"},
+						"3": { "name":"keyword.statement.violation.txt.wellknown-function.atom.ampersand"}
+					}
+				},
+				{	"comment": "{EX} - well-known miscellaneous functions",
+					"match": "({EX})(\\s*|_;)(MrgAtoms|SetConcept|ClearConcept|InsPairCond|SetConceptCond|SetNavToOnCommit|SetNavToOnRollback)(?=;)",
+					"captures": {
+						"0": { "name":"statement.violation.execengine.wellknown-function.atom.ampersand"},
+						"1": { "name":"keyword.statement.violation.txt.ampersand"},
+						"2": { "name":"punctuation.statement.violation.txt.ampersand"},
+						"3": { "name":"keyword.statement.violation.txt.wellknown-function.atom.ampersand"}
 					}
 				},
 				{	"comment": "{EX} - deprecated functions",
@@ -705,7 +727,7 @@
 					"name":"punctuation.statement.violation.ampersand"
 				},
 				{	"comment": "reserved argument words",
-					"match": "(_NEW)(?=;)",
+					"match": "(_NEW|_SESSION)(?=\\s*;)",
 					"name":"keyword.statement.violation.txt.arguments.reserved.ampersand"
 				},
 				{	"comment": "other arguments",
