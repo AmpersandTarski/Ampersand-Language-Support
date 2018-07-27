@@ -235,13 +235,15 @@
 		
 		"REPRESENT":
 		{	"patterns": 
-			[	{	"match": "\\b(REPRESENT)\\s*([A-Z][_A-Za-z0-9]*)\\s*(TYPE)\\s*(ALPHANUMERIC|BIGALPHANUMERIC|HUGEALPHANUMERIC|PASSWORD|BINARY|BIGBINARY|HUGEBINARY|DATE|DATETIME|BOOLEAN|INTEGER|FLOAT)\\b",
+			[	{	"match": "\\b(REPRESENT)\\s+([A-Z][_A-Za-z0-9]*)(\\s*(,)\\s*([A-Z][_A-Za-z0-9]*))*\\s+(TYPE)\\s+(ALPHANUMERIC|BIGALPHANUMERIC|HUGEALPHANUMERIC|PASSWORD|BINARY|BIGBINARY|HUGEBINARY|DATE|DATETIME|BOOLEAN|INTEGER|FLOAT)\\b",
 					"captures": {
 						"0": { "name":"statement.represent.ampersand"},
 						"1": { "name":"keyword.statement.represent.ampersand"},
 						"2": { "name":"use.concept.ampersand"},
-						"3": { "name":"keyword.statement.represent.ampersand"},
-						"4": { "name":"keyword.statement.represent.ampersand"}
+						"3": { "name":"punctuation.statement.represent.ampersand"},
+						"4": { "name":"use.concept.ampersand"},
+						"5": { "name":"keyword.statement.represent.ampersand"},
+						"6": { "name":"keyword.statement.represent.ampersand"}
 					}
 				}
 			]
@@ -450,18 +452,47 @@
 						"10": { "name":"statement.interface.roles-group.delimiter-role-group.role.ampersand"},
 						"11": { "name":"punctuation.statement.interface.ampersand"}
 						},
-					"end": "(?:([Cc][Rr][Uu][Dd]\\s+)?((<)([^>\\s\"]+)(>)\\s+)?(?=(BOX|ROWS|COLS|TABS|PANELS)))|(INTERFACE\\s+(\")([^\"]+)(\"))",
+					"end": "([Cc][Rr][Uu][Dd]\\s+)?((<)([^>\\s\"]+)(>)\\s+)?(?=(BOX|ROWS|COLS|TABS|PANELS))",
 					"endCaptures": {
-						"0": { "name":"statement.interface.end.ampersand"},
+						"0": { "name":"statement.interface.end.crud-view-box.ampersand"},
 						"1": { "name":"statement.interface.crud.ampersand"},
 						"2": { "name":"statement.interface.view.ampersand"},
 						"3": { "name":"punctuation.statement.interface.ampersand"},
 						"4": { "name":"use.view.ampersand"},
 						"5": { "name":"punctuation.statement.interface.ampersand"},
-						"7": { "name":"keyword.statement.interface.ampersand"},
-						"8": { "name":"punctuation.statement.interface.ampersand"},
-						"9": { "name":"definition.interface.ampersand"},
-						"10": { "name":"punctuation.statement.interface.ampersand"}
+						"6": { "name":"keyword.statement.interface.ampersand"}
+					},
+					"patterns": [ 
+						{	"include":"#term" },
+						{	"match": "[^\\s]+",
+							"name": "invalid.illegal.interface.ampersand"
+						}
+					]
+				},
+				{	"comment":"INTERFACE/API/GUI \"<ifcname>\" [FOR <role>,<Role>]: <expression> <view>",
+					"name":"statement.interface.ampersand",
+					"begin": "\\b(INTERFACE|API|GUI)\\s+(\")([^\"]+)(\")\\s*(|(FOR)\\s+([^\"\\s,:]+)(\\s*(,)\\s*([^\"\\s,:]+))*)\\s*(:)",
+					"beginCaptures": {
+						"0": { "name":"statement.interface.begin.ampersand"},
+						"1": { "name":"keyword.statement.interface.ampersand"},
+						"2": { "name":"punctuation.statement.interface.ampersand"},
+						"3": { "name":"definition.interface.ampersand"},
+						"4": { "name":"punctuation.statement.interface.ampersand"},
+						"5": { "name":"statement.interface.for-group.ampersand"},
+						"6": { "name":"keyword.statement.interface.for.ampersand"},
+						"7": { "name":"statement.interface.role.ampersand"},
+						"8": { "name":"statement.interface.roles-group.delimiter-role-group.ampersand"},
+						"9": { "name":"statement.interface.roles-group.delimiter-role-group.delimiter.ampersand"},
+						"10": { "name":"statement.interface.roles-group.delimiter-role-group.role.ampersand"},
+						"11": { "name":"punctuation.statement.interface.ampersand"}
+						},
+					"end": "((<)([^>\\s\"]+)(>)\\s+)?(?=(BOX|ROWS|COLS|TABS|PANELS))",
+					"endCaptures": {
+						"0": { "name":"statement.interface.end.nocrud-view-box.ampersand"},
+						"1": { "name":"statement.interface.view.ampersand"},
+						"2": { "name":"punctuation.statement.interface.ampersand"},
+						"3": { "name":"use.view.ampersand"},
+						"4": { "name":"punctuation.statement.interface.ampersand"}
 					},
 					"patterns": [ 
 						{	"include":"#term" },
@@ -515,10 +546,11 @@
 					},
 					"patterns": [
 						{	"include":"#comments" },
-						{  "name": "statement.box.brackets.LabelColonTermCrudView.ampersand",
+						{
+							"name": "statement.box.brackets.item.ampersand",
 							"begin": "((\")([^\"]*)(\")|([^\\]\"\\s]*))\\s*(:)",
 							"beginCaptures": {
-								"0": { "name":"statement.box.brackets.LabelColon.ampersand"},
+								"0": { "name":"statement.box.brackets.item.begin.ampersand"},
 								"1": { "name":"statement.box.brackets.label.quotedtext.ampersand"},
 								"2": { "name":"punctuation.statement.box.brackets.ampersand"},
 								"3": { "name":"statement.box.brackets.label.text.ampersand"},
@@ -526,24 +558,51 @@
 								"5": { "name":"statement.box.brackets.label.text.ampersand"},
 								"6": { "name":"punctuation.statement.box.brackets.ampersand"}
 							},
-							"end": "(([Cc][Rr][Uu][Dd])(\\s*(<)([^>\\s\"]*)(>))?|(\\s(LINKTO\\s+)?(INTERFACE)\\s+(\")([^\"]+)(\")))",
+							"end": "(,|(?=([Cc][Rr][Uu][Dd]|<|LINKTO|INTERFACE)|\\]))",
 							"endCaptures": {
-								"0": { "name":"statement.box.brackets.CrudViewOrLinktoInterface.ampersand"},
-								"2": { "name":"statement.box.brackets.crud.ampersand"},
-								"3": { "name":"statement.box.brackets.view.ampersand"},
-								"4": { "name":"punctuation.statement.box.brackets.ampersand"},
-								"5": { "name":"use.view.ampersand"},
-								"6": { "name":"punctuation.statement.box.brackets.ampersand"},
-								"8": { "name":"keyword.statement.box.brackets.ampersand"},
-								"9": { "name":"keyword.statement.box.brackets.ampersand"},
-								"10": { "name":"punctuation.statement.interface.ampersand"},
-								"11": { "name":"use.interface.ampersand"},
-								"12": { "name":"punctuation.statement.interface.ampersand"}
+								"0": { "name":"statement.box.brackets.item.end.ampersand"},
+								"1": { "name":"punctuation.statement.box.brackets.ampersand"}
 							},
 							"patterns": [
 								{	"include":"#comments" },
 								{	"include":"#term" }
-							]	
+							]
+						},
+						{
+							"name": "illegalCRUDandInterface",
+							"match": "\\b[Cc][Rr][Uu][Dd]\\s+(LINKTO\\s+)?INTERFACE",
+							"captures": { 
+								"0": { "name":"invalid.illegal.crud.interface.ampersand" }
+							}
+						},
+						{
+							"name": "crud",
+							"match": "\\b[Cc][Rr][Uu][Dd]\\b",
+							"captures": { 
+								"1": { "name":"statement.box.brackets.item.crud.ampersand" }
+							}
+						},
+						{
+							"name": "view",
+							"match": "(<)([^>\\s\"]*)(>)",
+							"captures": { 
+								"0": { "name":"statement.box.brackets.item.view.ampersand"},
+								"1": { "name":"punctuation.statement.box.brackets.item.ampersand"},
+								"2": { "name":"use.view.ampersand"},
+								"3": { "name":"punctuation.statement.box.brackets.item.ampersand"}
+							}
+						},
+						{
+							"name": "interface",
+							"match": "((LINKTO)\\s+)?(INTERFACE)\\s+(\")([^\"]+)(\")",
+							"captures": { 
+								"0": { "name":"statement.box.brackets.item.interface.ampersand"},
+								"2": { "name":"keyword.statement.box.brackets.item.ampersand"},
+								"3": { "name":"punctuation.statement.box.brackets.item.ampersand"},
+								"4": { "name":"punctuation.statement.box.brackets.item.ampersand"},
+								"5": { "name":"use.interface.ampersand"},
+								"6": { "name":"punctuation.statement.box.brackets.item.ampersand"}
+							}
 						},
 						{  "include": "#BOX" 
 						},
