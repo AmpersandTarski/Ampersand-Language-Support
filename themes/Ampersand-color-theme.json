@@ -12,7 +12,7 @@
 			"settings": { "foreground": "#FF0000", "fontStyle": "bold underline" }
 		},
 		{	"scope": "source.ampersand invalid.deprecated",
-			"settings": { "foreground": "#FF5370", "fontStyle": "bold" }
+			"settings": { "foreground": "#FF5070", "fontStyle": "bold" }
 		},
 		
 		
@@ -41,9 +41,6 @@
 		
 		{	"scope": "source.ampersand keyword",
 			"settings": { "foreground": "#ffC080C0", "fontStyle": "bold" }
-		},
-		{	"scope": "source.ampersand keyword.statement.emphasis",
-			"settings": { "foreground": "#ffb060c0", "fontStyle": "bold underline" }
 		},
 		{  "scope": "source.ampersand keyword.operator",
 			"settings": { "foreground": "#C06060", "fontStyle": "bold" }
@@ -83,6 +80,9 @@
 		
 		{	"scope": "source.ampersand use",
 			"settings": { "foreground": "#60A060"}
+		},
+		{	"scope": "source.ampersand use.filename",
+			"settings": { "foreground": "#4080C0"}
 		},
 
 
