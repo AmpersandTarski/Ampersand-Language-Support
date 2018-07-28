@@ -681,6 +681,32 @@
 		"VIEW":
 		{	"patterns": 
 			[	{	"name": "statement.view.ampersand",
+					"begin": "\\b(VIEW)\\s+(\"?)(\\w+)(\\2)\\s*(:)\\s+([A-Z]\\w*)?\\s*(\\()",
+					"beginCaptures": {
+						"0": { "name":"statement.view.begin.ampersand"},
+						"1": { "name":"keyword.statement.view.ampersand"},
+						"2": { "name":"punctuation.statement.view.ampersand"},
+						"3": { "name":"definition.view.ampersand"},
+						"4": { "name":"punctuation.statement.view.ampersand"},
+						"5": { "name":"punctuation.statement.view.colon.ampersand"},
+						"6": { "name":"use.concept.ampersand"},
+						"7": { "name":"punctuation.statement.view.paren.ampersand"}
+					},
+					"end": "\\)",
+					"endCaptures": {
+						"0": { "name":"statement.view.end.ampersand"},
+						"1": { "name":"punctuation.statement.view.ampersand"}
+					},
+					"patterns": [
+						{	"include":"#comments" },
+						{	"include":"#plaintext-item" },
+						{  "include":"#term" },
+						{	"match": "[^\\s]+",
+							"name": "invalid.illegal.statement.view.ampersand"
+						}
+					]
+				},
+				{	"name": "statement.view.ampersand",
 					"begin": "\\b(VIEW)\\s+(\"?)(\\w+)(\\2)\\s*(:)\\s+([A-Z]\\w*)(\\s+DEFAULT)?",
 					"beginCaptures": {
 						"0": { "name":"statement.view.begin.ampersand"},
