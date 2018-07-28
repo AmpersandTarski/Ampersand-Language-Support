@@ -22,51 +22,42 @@
 		"prefix": "CONCEPT",
 		"description": "Define a CONCEPT and optionally, a reference",
 		"comment": "this snippet ensures that you do not forget about the optional reference text",
-		"body":[
-			"CONCEPT ${1:cname} \"${2:description}\" \"$0\""
-		]
+		"body":[ "CONCEPT ${1:cname} \"${2:description}\" \"$0\"" ]
 	},
 	"Define a CLASSIFY ISA statement": {
 		"prefix": "CLASSIFY",
 		"description": "CLASSIFY <Concept> ISA <GenericConcept>",
-		"body":[
-			"CLASSIFY ${1:cname} ISA ${2:generiConcept}"
-		]
+		"body":[ "CLASSIFY ${1:cname} ISA ${2:generiConcept}" ]
 	},
 	"Define a CLASSIFY IS statement": {
 		"prefix": "CLASSIFY",
 		"description": "CLASSIFY <Concept> IS <GenericConcept1> /\\ <GenericConcept2> /\\... <GenericConcept<n>>",
-		"body":[
-			"CLASSIFY ${1:cname} IS ${2:generiConcept} /\\ ${3:generiConcept}"
-		]
+		"body":[ "CLASSIFY ${1:cname} IS ${2:generiConcept} /\\ ${3:generiConcept}" ]
 	},
 	"Define a Concepts population": {
 		"prefix": "POPULATION",
 		"description": "Define a POPULATION of Concept Atoms",
-		"body":[
-			"POPULATION \"${1:concept}\" [ \"$0\" ]"
-		]
+		"body":[ "POPULATION \"${1:concept}\" [ \"$0\" ]" ]
+	},
+	"REPRESENT statement": {
+		"prefix": "REPRESENT",
+		"description": "Define a REPRESENTation of Concept Atoms",
+		"body":[ "REPRESENT ${1:concept} TYPE ${2|ALPHANUMERIC,BIGALPHANUMERIC,DATE,DATETIME,BOOLEAN,INTEGER,FLOAT,PASSWORD,BINARY,BIGBINARY,HUGEALPHANUMERIC,HUGEBINARY|}" ]
 	},
 	"Define a RELATION statement": {
 		"prefix": "RELATION",
 		"description": "RELATION <relname>[<SrcConcept>*<TgtConcept>]",
-		"body":[
-			"RELATION ${1:Relname}[${2:srcConcept} * ${3:tgtConcept}] "
-		]
+		"body":[ "RELATION ${1:Relname}[${2:srcConcept} * ${3:tgtConcept}] " ]
 	},
 	"Define a relation (::-notation)": {
 		"prefix": "RELATION",
 		"description": "<relname> :: <SrcConcept> * <TgtConcept>",
-		"body":[
-			"${1:Relname} :: ${2:srcConcept} * ${3:tgtConcept} "
-		]
+		"body":[ "${1:Relname} :: ${2:srcConcept} * ${3:tgtConcept} " ]
 	},
 	"Define a Relation population": {
 		"prefix": "POPULATION",
 		"description": "Define a POPULATION of Relation pairs/links",
-		"body":[
-			"POPULATION \"${1:Relname}\" [ (\"$2\", \"$3\") ]"
-		]
+		"body":[ "POPULATION \"${1:Relname}\" [ (\"$2\", \"$3\") ]" ]
 	},
 	"ExecEngine rule": {
 		"prefix": "ROLE ExecEngine MAINTAINS",
