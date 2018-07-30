@@ -9,10 +9,10 @@
 	},
 	"tokenColors": [
 		{	"scope": "source.ampersand invalid.illegal",
-			"settings": { "foreground": "#FF0000", "fontStyle": "bold underline" }
+			"settings": { "foreground": "#E00000", "fontStyle": "bold underline" }
 		},
 		{	"scope": "source.ampersand invalid.deprecated",
-			"settings": { "foreground": "#FF5070", "fontStyle": "bold" }
+			"settings": { "foreground": "#E05070", "fontStyle": "bold" }
 		},
 		
 		
@@ -35,12 +35,14 @@
 		},
 		
 		{	"scope": "source.ampersand statement",
-			"settings": { "foreground": "#C0c080" }
+			"settings": { "foreground": "#c0a040" }
+		},
+		{	"scope": "source.ampersand statement.boxitem.crud",
+			"settings": { "foreground": "#c0a040", "fontStyle": "bold" }
 		},
 		
-		
 		{	"scope": "source.ampersand keyword",
-			"settings": { "foreground": "#ffC080C0", "fontStyle": "bold" }
+			"settings": { "foreground": "#FFC080F0", "fontStyle": "bold" }
 		},
 		{  "scope": "source.ampersand keyword.operator",
 			"settings": { "foreground": "#C06060", "fontStyle": "bold" }
@@ -90,14 +92,18 @@
 		{	"scope": [
 				"source.ampersand use.concept",
 				"source.ampersand use.relation",
-				"source.ampersand use.rule"
+				"source.ampersand use.rule",
+				"source.ampersand use.boxtype.userdefined"
 			],
 			"settings": { "foreground": "#40A060"}
 		},
 		{	"scope": "source.ampersand use.filename",
 			"settings": { "foreground": "#4080C0"}
 		},
-
+		{	"scope": "source.ampersand use.boxtype.predefined",
+			"settings": { "foreground": "#FFC080F0", "fontStyle": "" }
+		},
+		
 
 		{  "scope": [
 				"source.ampersand string.quoted",

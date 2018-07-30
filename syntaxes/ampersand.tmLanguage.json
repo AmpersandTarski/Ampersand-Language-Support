@@ -521,9 +521,9 @@
 					"captures": {
 						"0": { "name":"statement.interface.for-role.ampersand"},
 						"1": { "name":"keyword.statement.interface.for.ampersand"},
-						"2": { "name":"definition.interface.ampersand"},
+						"2": { "name":"use.role.ampersand"},
 						"3": { "name":"punctuation.statement.interface.ampersand"},
-						"4": { "name":"definition.interface.ampersand"},
+						"4": { "name":"use.role.ampersand"},
 						"5": { "name":"punctuation.statement.interface.ampersand"}
 						}
 				},
@@ -531,9 +531,9 @@
 					"captures": {
 						"0": { "name":"statement.interface.comma-role.ampersand"},
 						"1": { "name":"punctuation.statement.interface.ampersand"},
-						"2": { "name":"definition.interface.ampersand"},
+						"2": { "name":"use.role.ampersand"},
 						"3": { "name":"punctuation.statement.interface.ampersand"},
-						"4": { "name":"definition.interface.ampersand"},
+						"4": { "name":"use.role.ampersand"},
 						"5": { "name":"punctuation.statement.interface.ampersand"}
 						}
 				},
@@ -550,15 +550,15 @@
 		{	"patterns": 
 			[	{	"comment":"All kind of BOX-related constructs (including ROWS, COLS, etc.)",
 				   "name": "statement.box.ampersand",
-					"begin": "\\b((BOX)\\s*(((<)(?:(DIV|ROWSNL|ROWSNH|HROWS|COLSNL|HCOLS|SCOLS|SHCOLS|SPCOLS|SPHCOLS)|[^>\\s\"\\\\]*)(>))?)|(ROWS|COLS|TABS|PANELS))",
+					"begin": "\\b(ROWS|COLS|TABS|PANELS)|\\b(BOX)\\s*(?:(<)(?:(DIV|ROWSNL|ROWSNH|HROWS|COLSNL|HCOLS|SCOLS|SHCOLS|SPCOLS|SPHCOLS)|([^>\\s\"\\\\]*))(>))?",
 					"beginCaptures": {
 						"0": { "name":"statement.box.header.begin.ampersand"},
-						"1": { "name":"statement.box.header.boxtype.ampersand"},
+						"1": { "name":"keyword.statement.box.header.ampersand"},
 						"2": { "name":"keyword.statement.box.header.ampersand"},
-						"5": { "name":"punctiation.statement.box.header.ampersand"},
-						"6": { "name":"use.view.ampersand"},
-						"7": { "name":"punctiation.statement.box.header.ampersand"},
-						"8": { "name":"keyword.statement.box.header.ampersand"}
+						"3": { "name":"punctiation.statement.box.header.ampersand"},
+						"4": { "name":"use.boxtype.predefined.ampersand"},
+						"5": { "name":"use.boxtype.userdefined.ampersand"},
+						"6": { "name":"punctiation.statement.box.header.ampersand"}
 						},
 					"end": "(?=\\[)",
 					"patterns": [ 
@@ -641,7 +641,7 @@
 		{	"patterns": [
 				{	"match": "(?<=\\s)(?=[CcRrUuDd])[Cc]?[Rr]?[Uu]?[Dd]?(?=\\s)",
 					"captures": { 
-						"1": { "name":"statement.boxitem.crud.ampersand" }
+						"0": { "name":"statement.boxitem.crud.ampersand" }
 					}
 				}
 			]
