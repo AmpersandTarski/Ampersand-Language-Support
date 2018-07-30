@@ -3,7 +3,7 @@
 		"prefix": "SNIPPET COMMENTS",
 		"description": "Design considerations - this snippet is not intended to be executed",
 		"body":[
-			"These Snippets are intended to make life easier for Ampersand authors.",
+			"These Snippets are intended to make life easier for Ampersand developers.",
 			"We use the convention to start names of placeholders with an illegal character,",
 			"so that it will be colored red while it has not been replaced with user text."
 		]
@@ -57,7 +57,22 @@
 	"Define a Relation population": {
 		"prefix": "POPULATION",
 		"description": "Define a POPULATION of Relation pairs/links",
-		"body":[ "POPULATION \"${1:Relname}\" [ (\"$2\", \"$3\") ]" ]
+		"body":[ "POPULATION \"${1:Relname}\" [ (\"$2\", \"$3\") ]"	]
+	},
+	"Define a PRAGMA": {
+		"prefix": "PRAGMA",
+		"description": "Define a PRAGMA for a relation, rule, ...",
+		"body":[ "PRAGMA \"${1:}\" \"${2:}\" \"${3:}\"" ]
+	},
+	"Define a MEANING": {
+		"prefix": "MEANING",
+		"description": "Define a MEANING for a relation, rule, ...",
+		"body":[ "MEANING \"$0\"" ]
+	},
+	"Define a MESSAGE": {
+		"prefix": "MESSAGE",
+		"description": "Define a MESSAGE for a (violated) rule",
+		"body":[ "MESSAGE \"$0\"" ]
 	},
 	"ExecEngine rule": {
 		"prefix": "ROLE ExecEngine MAINTAINS",
