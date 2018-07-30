@@ -247,16 +247,31 @@
 		
 		"REPRESENT":
 		{	"patterns": 
-			[	{	"match": "\\b(REPRESENT)\\s+([A-Z]\\w*)(?:\\s*(,)\\s*([A-Z]\\w*))*\\s+(TYPE)\\s+(ALPHANUMERIC|BIGALPHANUMERIC|HUGEALPHANUMERIC|PASSWORD|BINARY|BIGBINARY|HUGEBINARY|DATE|DATETIME|BOOLEAN|INTEGER|FLOAT)\\b",
-					"captures": {
-						"0": { "name":"statement.represent.ampersand"},
-						"1": { "name":"keyword.statement.represent.ampersand"},
-						"2": { "name":"use.concept.ampersand"},
-						"3": { "name":"punctuation.statement.represent.ampersand"},
-						"4": { "name":"use.concept.ampersand"},
-						"5": { "name":"keyword.statement.represent.ampersand"},
-						"6": { "name":"keyword.statement.represent.ampersand"}
+			[	{	"name": "statement.represent.ampersand",
+				"begin": "\\b(REPRESENT)\\s+([A-Z]\\w*)",
+				"beginCaptures": {
+					"0": { "name":"statement.represent.begin.ampersand"},
+					"1": { "name":"keyword.statement.represent.ampersand"},
+					"2": { "name":"use.concept.ampersand"}
+				},
+				"end": "(TYPE)\\s+((BIG|HUGE)?(ALPHANUMERIC|BINARY)|PASSWORD|DATE(TIME)?|BOOLEAN|INTEGER|FLOAT)\\b",
+				"endCaptures": {
+					"0": { "name":"statement.represent.end.ampersand"},
+					"1": { "name":"keyword.statement.represent.ampersand"},
+					"2": { "name":"keyword.statement.represent.ampersand"}
+				},
+				"patterns": [
+					{  "include": "#comments" },
+					{  "match": "(,)\\s*([A-Z]\\w*)",
+						"captures": {
+							"1": { "name":"punctuation.statement.represent.ampersand"},
+							"2": { "name":"use.concept.ampersand"}
+						}
+					},
+					{	"match": "([^\\s]+)",
+						"captures": { "1": { "name":"invalid.illegal.statement.classify.ampersand"} }
 					}
+				]
 				}
 			]
 		},
