@@ -3,7 +3,7 @@
 	"scopeName": "source.ampersand",
 	"name": "Ampersand (ADL)",
 	"foldingStartMarker":"--\\[[^\\[]",
-	"foldingStopMarker":"'^(?=--\\[[^\\[])",
+	"foldingStopMarker":"^(?=--\\[[^\\[])",
 	"patterns":
 	[	{	"comment": "to be reviewed using https://www.sublimetext.com/docs/3/scope_naming.html"},
 		{	"include": "#comments"     },
@@ -965,7 +965,7 @@
 						"6": { "name":"punctuation.bracket.square.ampersand"}
 					}
 				},
-				{	"comment": "relationName[Concept1]",
+				{	"comment": "relationName[Concept]",
 					"match": "\\b([a-z]\\w*)\\s*(\\[)\\s*([A-Z]\\w*)\\s*(\\])",
 					"captures": {
 						"1": { "name":"use.relation.ampersand"},
@@ -1154,7 +1154,7 @@
 
 		"bracket-open":
 		{	"patterns": 
-			[	{	"match": "\\s*(\\[)",
+			[	{	"match": "\\[",
 					"name":"punctuation.opening-bracket.ampersand"
 				}
 			]
@@ -1162,7 +1162,7 @@
 
 		"comma":
 		{	"patterns": 
-			[	{	"match": "\\s*(,)",
+			[	{	"match": ",",
 					"name":"punctiation.delimiter.comma.ampersand"
 				}
 			]
@@ -1170,7 +1170,7 @@
 
 		"semi-colon":
 		{	"patterns": 
-			[	{	"match": "\\s*(;)",
+			[	{	"match": ";",
 					"name":"punctiation.delimiter.semi-colon.ampersand"
 				}
 			]
