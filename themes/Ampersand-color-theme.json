@@ -74,19 +74,35 @@
 		},
 		
 		{	"scope": "source.ampersand definition",
-			"settings": { "foreground": "#60A080", "fontStyle": "bold underline" }
+			"settings": { "foreground": "#80A060", "fontStyle": "bold underline" }
 		},
-		
-		
+		{	"scope": [
+				"source.ampersand definition.concept",
+				"source.ampersand definition.relation",
+				"source.ampersand definition.rule"
+			],
+			"settings": { "foreground": "#40A060"}
+		},
+			
 		{	"scope": "source.ampersand use",
-			"settings": { "foreground": "#60A060"}
+			"settings": { "foreground": "#80A060"}
+		},
+		{	"scope": [
+				"source.ampersand use.concept",
+				"source.ampersand use.relation",
+				"source.ampersand use.rule"
+			],
+			"settings": { "foreground": "#40A060"}
 		},
 		{	"scope": "source.ampersand use.filename",
 			"settings": { "foreground": "#4080C0"}
 		},
 
 
-		{  "scope": "source.ampersand string.quoted",
+		{  "scope": [
+				"source.ampersand string.quoted",
+				"source.ampersand statement.box.body.label.text"
+			],
 			"settings": { "foreground": "#C0c040" }
 		},            
 		{  "scope": "source.ampersand highlight.ampersand",

@@ -7,3 +7,4 @@
 *.vsix
 *.zip
 *.code-workspace
+copyLangSupportToGitRepo.bat
