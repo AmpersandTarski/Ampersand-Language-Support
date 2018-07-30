@@ -550,7 +550,7 @@
 		{	"patterns": 
 			[	{	"comment":"All kind of BOX-related constructs (including ROWS, COLS, etc.)",
 				   "name": "statement.box.ampersand",
-					"begin": "\\b(ROWS|COLS|TABS|PANELS)|\\b(BOX)\\s*(?:(<)(?:(DIV|ROWSNL|ROWSNH|HROWS|COLSNL|HCOLS|SCOLS|SHCOLS|SPCOLS|SPHCOLS)|([^>\\s\"\\\\]*))(>))?",
+					"begin": "\\b(ROWS|COLS|TABS|PANELS)|\\b(BOX)\\s*(?:(<)(?:(DIV|ROWSNL|ROWSNH|HROWS|COLSNL|HCOLS|SCOLS|SHCOLS|SPCOLS|SPHCOLS|PROPBUTTON|SSIFORM)|([^>\\s\"\\\\]*))(>))?",
 					"beginCaptures": {
 						"0": { "name":"statement.box.header.begin.ampersand"},
 						"1": { "name":"keyword.statement.box.header.ampersand"},
@@ -665,12 +665,13 @@
 
 		"useview":
 		{	"patterns": [
-				{	"match": "(<)([^>\\s\"]*)(>)",
+				{	"match": "(<)(?:(STRONG)|([^>\\s\"\\\\]*))(>)",
 					"captures": { 
 						"0": { "name":"statement.boxitem.view.ampersand"},
 						"1": { "name":"punctuation.statement.boxitem.ampersand"},
-						"2": { "name":"use.view.ampersand"},
-						"3": { "name":"punctuation.statement.boxitem.ampersand"}
+						"2": { "name":"use.view.predefined.ampersand"},
+						"3": { "name":"use.view.userdefined.ampersand"},
+						"4": { "name":"punctuation.statement.boxitem.ampersand"}
 					}
 				}
 			]

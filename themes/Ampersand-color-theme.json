@@ -93,14 +93,17 @@
 				"source.ampersand use.concept",
 				"source.ampersand use.relation",
 				"source.ampersand use.rule",
-				"source.ampersand use.boxtype.userdefined"
+				"source.ampersand use.boxtype.userdefined",
+				"source.ampersand use.view.userdefined"
 			],
 			"settings": { "foreground": "#40A060"}
 		},
 		{	"scope": "source.ampersand use.filename",
 			"settings": { "foreground": "#4080C0"}
 		},
-		{	"scope": "source.ampersand use.boxtype.predefined",
+		{	"scope": [	"source.ampersand use.boxtype.predefined",
+							"source.ampersand use.view.predefined"
+						],
 			"settings": { "foreground": "#FFC080F0", "fontStyle": "" }
 		},
 		
