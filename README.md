@@ -1,8 +1,12 @@
 # Ampersand-Language-Support
 
-Here is (a first attempt to) syntax coloring support for the [Ampersand Definition Language (ADL)](http://ampersandtarski.github.io/).
+This extension is a first attempt to provide langauge support for the [Ampersand](http://ampersandtarski.github.io/) Definition Language [(ADL)](https://ampersandtarski.gitbook.io/documentation). This is a language that allows one to define an application in terms of state (expressed in terms of concepts, relations and relation algebraic invariant rules), and interfaces that allow for state changes. The [tooling](https://github.com/AmpersandTarski/Ampersand) takes an ADL-script, and generates a complete web-application.
 
 ## Features
+
+- syntax coloring grammar
+- syntax coloring theme (ampersand)
+- snippets that help you write the common language constructs
 
 Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
@@ -22,7 +26,7 @@ For example if there is an image subfolder under your extension project workspac
 
 ## Known Issues
 
-The coloring isn't fully implemented yet. Updates will follow shortly.
+Features are currently testable, and may contain bugs. Please create an [issue](https://github.com/AmpersandTarski/Ampersand-Language-Support/issues) if you find a mistake.
 
 ## Release Notes
 

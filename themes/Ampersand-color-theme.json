@@ -8,85 +8,122 @@
 		"sideBarTitle.foreground": "#bbbbbb"
 	},
 	"tokenColors": [
-		{   "name": "Ampersand - title comments",
-			"scope": "source.ampersand comment.line.double-dash.sectionheader",
+		{	"scope": "source.ampersand invalid.illegal",
+			"settings": { "foreground": "#E00000", "fontStyle": "bold underline" }
+		},
+		{	"scope": "source.ampersand invalid.deprecated",
+			"settings": { "foreground": "#E05070", "fontStyle": "bold" }
+		},
+		
+		
+		{	"scope": "source.ampersand comment.block",
+			"settings": { "foreground": "#808080" }
+		},
+		{	"scope": [ "source.ampersand comment.line.double-dash.sectionheader"
+						, "source.ampersand comment.snippet.keyword.ampersand"
+						],
 			"settings": { "foreground": "#f0d0b0", "fontStyle": "bold italic underline" }
 		},
-		{   "name": "Ampersand - documentation comments",
-			"scope": "source.ampersand comment.block.documentation",
+		{  "scope": "source.ampersand comment.snippets.double-dash.ampersand",
+			"settings": { "foreground": "#80b0d0" }
+		},
+		{  "scope": "source.ampersand comment.block.documentation",
 			"settings": { "foreground": "#209020" }
 		},
-		{   "name": "Ampersand - other comments",
-			"scope": "source.ampersand comment",
-			"settings": { "foreground": "#AAAAAA" }
+		{  "scope": "source.ampersand comment.block.endcontext",
+			"settings": { "foreground": "#546E7A" }
 		},
-		{   "name": "Ampersand - strings",
-			"scope": "source.ampersand string.quoted",
-			"settings": { "foreground": "#80b0d0" }
-		},            
-		{   "name": "Ampersand - punctuation",
-			"scope": "source.ampersand punctuation",
-			"settings": { "foreground": "#E08080" }
+		
+		{	"scope": "source.ampersand statement",
+			"settings": { "foreground": "#c0a040" }
 		},
-		{   "name": "Ampersand - other keywords",
-			"scope": "source.ampersand keyword.other",
-			"settings": { "foreground": "#FFCB6Bc0" }
+		{	"scope": "source.ampersand statement.boxitem.crud",
+			"settings": { "foreground": "#c0a040", "fontStyle": "bold" }
 		},
-		{   "name": "Ampersand - highlight",
-			"scope": "source.ampersand highlight.ampersand",
-			"settings": { "foreground": "#ffc000" }
+		
+		{	"scope": "source.ampersand keyword",
+			"settings": { "foreground": "#FFC080F0", "fontStyle": "bold" }
 		},
-		{   "name": "Ampersand - backticks",
-			"scope": "source.ampersand backticked.ampersand",
-			"settings": { "foreground": "#c04000" }
-		},
-		{   "name": "Ampersand - url",
-			"scope": "source.ampersand filename.ampersand",
-			"settings": { "foreground": "#4080ff", "fontStyle": "underline" }
-		},
-		{   "name": "Ampersand - filenames",
-			"scope": "source.ampersand filename.ampersand",
-			"settings": { "foreground": "#4080ff" }
-		},
-		{   "name": "Ampersand - using defined stuff",
-			"scope": "source.ampersand use",
-			"settings": { "foreground": "#60A060" }
-		},
-		{   "name": "Ampersand - definitions",
-			"scope": "source.ampersand definition",
-			"settings": { "foreground": "#60A080", "fontStyle": "underline" }
-		},
-		{   "name": "Ampersand - operators",
-			"scope": "source.ampersand keyword.operator",
+		{  "scope": "source.ampersand keyword.operator",
 			"settings": { "foreground": "#C06060", "fontStyle": "bold" }
 		},
-		{   "name": "Ampersand - violations - well-known functions",
-			"scope": "source.ampersand keyword.other.violation.txt.wellknown-function",
+		{  "scope": [ "source.ampersand keyword.statement.violation.txt"
+						, "source.ampersand punctuation.statement.violation"
+						, "keyword.statement.violation.txt.arguments.reserved"
+						],
+			"settings": { "foreground": "#60A080", "fontStyle": "" }
+		},
+		{  "scope": [ "source.ampersand punctuation.statement.violation.txt"
+						, "keyword.statement.violation.txt.arguments.reserved"
+						],
+			"settings": { "fontStyle": "bold" }
+		},
+		{  "scope": "source.ampersand keyword.statement.violation.txt.arguments",
+			"settings": { "foreground": "#60A000", "fontStyle": "" }
+		},
+		{  "scope": "source.ampersand keyword.statement.violation.txt.wellknown-function",
 			"settings": { "foreground": "#60A000", "fontStyle": "bold" }
 		},
-		{   "name": "Ampersand - violations - unknown functions",
-			"scope": "source.ampersand keyword.other.violation.txt.unknown-function",
+		{  "scope": "source.ampersand keyword.statement.violation.txt.unknown-function",
 			"settings": { "foreground": "#60A000", "fontStyle": "bold italic underline" }
 		},
-		{   "name": "Ampersand - violations - argument delimiters",
-			"scope": "source.ampersand punctuation.violation.delimiter",
-			"settings": { "foreground": "#E08080", "fontStyle": "bold" }
+		{  "scope": "source.ampersand keyword.statement.violation.txt.arguments.reserved",
+			"settings": { "foreground": "#60A000", "fontStyle": "bold" }
+		},	
+		
+		{	"scope": "source.ampersand punctuation",
+			"settings": { "foreground": "#E0C080" }
 		},
-		{   "name": "Ampersand - violations - reserved argument words",
-			"scope": "keyword.other.violation.txt.arguments.reserved",
-			"settings": { "foreground": "#FF7070", "fontStyle": "bold" }
+		
+		{	"scope": "source.ampersand definition",
+			"settings": { "foreground": "#80A060", "fontStyle": "bold underline" }
 		},
-		{   "name": "Ampersand - violations - other arguments",
-			"scope": "keyword.other.violation.txt.arguments.other",
-			"settings": { "foreground": "#60A060" }
+		{	"scope": [
+				"source.ampersand definition.concept",
+				"source.ampersand definition.relation",
+				"source.ampersand definition.rule"
+			],
+			"settings": { "foreground": "#40A060"}
 		},
-		{   "name": "Ampersand - keywords",
-			"scope": "source.ampersand keyword",
-			"settings": { "foreground": "#C08080", "fontStyle": "bold" }
+			
+		{	"scope": "source.ampersand use",
+			"settings": { "foreground": "#80A060"}
 		},
-	
+		{	"scope": [
+				"source.ampersand use.concept",
+				"source.ampersand use.relation",
+				"source.ampersand use.rule",
+				"source.ampersand use.boxtype.userdefined",
+				"source.ampersand use.view.userdefined"
+			],
+			"settings": { "foreground": "#40A060"}
+		},
+		{	"scope": "source.ampersand use.filename",
+			"settings": { "foreground": "#4080C0"}
+		},
+		{	"scope": [	"source.ampersand use.boxtype.predefined",
+							"source.ampersand use.view.predefined"
+						],
+			"settings": { "foreground": "#FFC080F0", "fontStyle": "" }
+		},
+		
 
-
+		{  "scope": [
+				"source.ampersand string.quoted",
+				"source.ampersand statement.box.body.label.text"
+			],
+			"settings": { "foreground": "#C0c040" }
+		},            
+		{  "scope": "source.ampersand highlight.ampersand",
+			"settings": { "foreground": "#ffc000" }
+		},
+		{  "scope": "source.ampersand backticked.ampersand",
+			"settings": { "foreground": "#c04000" }
+		},
+		{  "scope": "source.ampersand filename.ampersand",
+			"settings": { "foreground": "#4080ff", "fontStyle": "underline" }
+		},
+		
 
 		{
 			"name": "Comment",

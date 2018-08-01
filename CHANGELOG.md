@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [0.0.6] - 2018-08-01
+
+- trying to get automatic publishing at vs-code markteplace to work.
+- syntax coloring grammar is testable.
+- syntax coloring theme 'ampersand' is testable.
+- snippets are available for most language constructs.
+- snippet `eqv` enables easy definition of equivalence relations.
+
 ## [0.0.5] - 2018-07-18
 
 - first attempt to add snippets.

@@ -16,7 +16,7 @@ we have issue #903 and want to **emphasize text** and `test`  'test' "test", (te
 {- **this stuff sits** `at` this stuff sits at https://github.com/AmpersandTarski/Ampersand-Language-Support (did you know that)?
 we have issue #903 and want to **emphasize text** and `test`  'test' "test", (test), [test],
 -}
-
+CLASSIFY Concept IS C1 /\ C2 
 IDENT Apen: Aap(aap,noot,mies[Tien*Noot])
 
 CONCEPT Aap "explanation" -- enzovoorts
@@ -99,8 +99,8 @@ INTERFACE "Authenticatie Balieklant": I[BAuthForm] cRud BOX <SSIFORM>
       , "Geslachtsnaam"          : bauthGeslachtsnaam cRUd
       , "Voornamen"              : bauthVoornamen cRUd
       , "Geboortedatum"          : bauthGeboortedatum cRUd
-      , "Geboorteplaats"         : bauthGeboorteplaats cRUd
-      , "Geboorteland of gebied" : bauthGeboorteland cRUd
+      , "Geboorteplaats"         : bauthGeboorteplaats LINKTO INTERFACE "Some Interface"
+      , "Geboorteland of gebied" : bauthGeboorteland  INTERFACE "Some Interface"
       , "Geslacht"               : bauthGeslacht cRUd
       ]
    , "Mogelijke personen": bauthPossibleBSNs;npBSN~ cRud <Persoonsgegevens>   
@@ -118,10 +118,11 @@ INTERFACE "Authenticatie Balieklant": I[BAuthForm] cRud BOX <SSIFORM>
       ]
    ]
 
+
 --[Step 4: define the relations that will be populated and set default values if appropriate]
 -- Every relation that is mentioned in the Interface as defined in step 3 must be defined here.
 -- Also, the TGT concepts must match those of the relations in the actual registration (for KvK: Handelsregister); we assume any REPRESENT stuff is taken care of at the definition of that registration.
---DENT "BAuthForms": BAuthForm(bauthBSN;(I[Aap];V[Noot])*mies;test)
+IDENT "BAuthForms": BAuthForm(bauthBSN;(I[Aap];V[Noot])*mies;test)
 bauthBSN            :: BAuthForm * BSN                  [UNI]
 bauthGeslachtsnaam  :: BAuthForm * Geslachtsnaam        [UNI]
 bauthVoornamen      :: BAuthForm * Voornamen            [UNI]
@@ -192,7 +193,7 @@ RULE "Te authenticeren persoon moet zijn geregistreerd":
    /\ bauthGeboorteland<>npGeboorteland~
    /\ bauthGeslacht<>npGeslacht~
    );npBSN
-
+-- dit is 
 RULE "Te authenticeren persoon mag niet zijn geregistreerd als overleden":
    bauthBSN;npBSN~;overlNatPersoon~ |- -V
 
@@ -226,4 +227,5 @@ VIOLATION (TXT "{EX} InsPair;sessionBSNAuth;SESSION;", SRC I, TXT ";SESSION;", S
           ,TXT "{EX} DelPair;req_NewBAuthForm;SESSION;", SRC I, TXT ";SESSION;", SRC I
           )
 
-ENDCONTEXT
+ENDCONTEXT en dit is kommentaar
+asdfasdf asdf 
