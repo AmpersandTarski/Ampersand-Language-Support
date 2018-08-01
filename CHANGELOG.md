@@ -1,5 +1,7 @@
 # Change Log
 
+## [Unreleased]
+
 ## [0.0.6] - 2018-08-01
 
 - trying to get automatic publishing at vs-code markteplace to work.
