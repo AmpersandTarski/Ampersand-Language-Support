@@ -8,3 +8,4 @@
 *.zip
 *.code-workspace
 copyLangSupportToGitRepo.bat
+copyLangSupFiles.bat

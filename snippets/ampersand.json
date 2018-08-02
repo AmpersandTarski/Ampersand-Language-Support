@@ -37,7 +37,7 @@
 	"Define a Concepts population": {
 		"prefix": "POPULATION",
 		"description": "Define a POPULATION of Concept Atoms",
-		"body":[ "POPULATION \"${1:concept}\" [ \"$0\" ]" ]
+		"body":[ "POPULATION \"${1:concept}\" CONTAINS [ \"$0\" ]" ]
 	},
 	"REPRESENT statement": {
 		"prefix": "REPRESENT",
@@ -57,7 +57,7 @@
 	"Define a Relation population": {
 		"prefix": "POPULATION",
 		"description": "Define a POPULATION of Relation pairs/links",
-		"body":[ "POPULATION \"${1:Relname}\" [ (\"$2\", \"$3\") ]"	]
+		"body":[ "POPULATION \"${1:Relname}\" CONTAINS [ (\"$2\", \"$3\") ]"	]
 	},
 	"Define a PRAGMA": {
 		"prefix": "PRAGMA",
@@ -113,6 +113,16 @@
 			"VIOLATION (TXT \"{EX} DelPair;$1;$2;\", SRC I[$2], TXT \";$2;\", TGT I[$2])",
 			"$0"
 		]
+	},
+	"InsPair": {
+		"prefix": "InsPair",
+		"description": "InsPair;SRCConcept;SRCAtom,TGTConcept,TGTAtom",
+		"body": [ "InsPair;${1:RelatioName};${2:srcConcept};\", SRC ${3|I,${4:SrcAtom}|}, TXT \";${5:tgtConcept};\", TGT ${6|I,${7:TgtAtom}|}" ]
+	},
+	"DelPair": {
+		"prefix": "DelPair",
+		"description": "DelPair;SRCConcept;SRCAtom,TGTConcept,TGTAtom",
+		"body": [ "DelPair;${1:RelatioName};${2:srcConcept};\", SRC ${3|I,${4:SrcAtom}|}, TXT \";${5:tgtConcept};\", TGT ${6|I,${7:TgtAtom}|}" ]
 	},
 	"_SESSION": {
 		"prefix": "_SESSION",
