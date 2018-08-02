@@ -1,6 +1,14 @@
 # Change Log
 
 ## [Unreleased]
+
+## [0.0.7] - 2018-08-01
+
+- upgrade gulp
+
+## [0.0.6] - 2018-08-01
+
+- trying to get automatic publishing at vs-code markteplace to work.
 - syntax coloring grammar is testable.
 - syntax coloring theme 'ampersand' is testable.
 - snippets are available for most language constructs.

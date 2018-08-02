@@ -1,7 +1,7 @@
 {
   "name": "language-ampersand",
   "displayName": "Ampersand (ADL) language support",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "AmpersandTarski",
   "description": "Language support for Ampersand scripts",
   "categories": [
@@ -10,7 +10,7 @@
     "Snippets"
   ],
   "engines": {
-    "vscode": "^0.10.2"
+    "vscode": "^1.25.1"
   },
   "activationEvents": [
     "onLanguage:ampersand"
@@ -78,24 +78,26 @@
   },
   "scripts": {
     "vscode:prepublish": "tsc -p ./",
-    "compile": "tsc -watch -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
+    "compile": "tsc -watch -p ./",
     "test": "node ./node_modules/vscode/bin/test",
     "package": "vsce package",
     "publish": "vsce publish"
   },
   "dependencies": {
-    "tslint": "^5.11.0",
-    "typescript": "^2.9.2",
-    "vscode": "^1.1.18"
+    "typescript": "^2.6.1"
   },
   "devDependencies": {
-    "jshint": "^2.9.5",
-    "@types/node": "^10.5.2",
-    "mocha": "^5.2.0"
-  },
-  "directories": {
-    "test": "test"
+    "@types/chai": "^4.0.5",
+    "@types/mocha": "^2.2.44",
+    "@types/node": "^10.5.5",
+    "chai": "^4.1.2",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-typescript": "^3.2.3",
+    "mocha": "^4.0.1",
+    "mochawesome": "^2.3.1",
+    "vscode": "^1.1.18"
   },
   "author": "* Joosten"
 }

@@ -27,7 +27,7 @@ export function activate(ctx: vscode.ExtensionContext) {
 }
 export class WordCounter {
 
-    private _statusBarItem: StatusBarItem;
+    private _statusBarItem!: StatusBarItem;
 
     public updateWordCount() {
         
