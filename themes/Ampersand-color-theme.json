@@ -20,14 +20,11 @@
 			"settings": { "foreground": "#808080" }
 		},
 		{	"scope": [ "source.ampersand comment.line.double-dash.sectionheader"
-						, "source.ampersand comment.snippet.keyword.ampersand"
+						, "source.ampersand comment.line.double-dash.keyword.snippet"
 						],
 			"settings": { "foreground": "#f0d0b0", "fontStyle": "bold italic underline" }
 		},
-		{  "scope": "source.ampersand comment.snippets.double-dash.ampersand",
-			"settings": { "foreground": "#80b0d0" }
-		},
-		{  "scope": "source.ampersand comment.block.documentation",
+		{  "scope": "source.ampersand meta.block.documentation",
 			"settings": { "foreground": "#209020" }
 		},
 		{  "scope": "source.ampersand comment.block.endcontext",
@@ -37,7 +34,7 @@
 		{	"scope": "source.ampersand statement",
 			"settings": { "foreground": "#c0a040" }
 		},
-		{	"scope": "source.ampersand statement.boxitem.crud",
+		{	"scope": "source.ampersand meta.boxitem.crud",
 			"settings": { "foreground": "#c0a040", "fontStyle": "bold" }
 		},
 		
@@ -47,27 +44,27 @@
 		{  "scope": "source.ampersand keyword.operator",
 			"settings": { "foreground": "#C06060", "fontStyle": "bold" }
 		},
-		{  "scope": [ "source.ampersand keyword.statement.violation.txt"
+		{  "scope": [ "source.ampersand keyword.operator.violation.txt"
 						, "source.ampersand punctuation.statement.violation"
-						, "keyword.statement.violation.txt.arguments.reserved"
+						, "keyword.operator.violation.txt.arguments.reserved"
 						],
 			"settings": { "foreground": "#60A080", "fontStyle": "" }
 		},
 		{  "scope": [ "source.ampersand punctuation.statement.violation.txt"
-						, "keyword.statement.violation.txt.arguments.reserved"
+						, "keyword.operator.violation.txt.arguments.reserved"
 						],
 			"settings": { "fontStyle": "bold" }
 		},
-		{  "scope": "source.ampersand keyword.statement.violation.txt.arguments",
+		{  "scope": "source.ampersand keyword.operator.violation.txt.arguments",
 			"settings": { "foreground": "#60A000", "fontStyle": "" }
 		},
-		{  "scope": "source.ampersand keyword.statement.violation.txt.wellknown-function",
+		{  "scope": "source.ampersand keyword.operator.violation.txt.wellknown-function",
 			"settings": { "foreground": "#60A000", "fontStyle": "bold" }
 		},
-		{  "scope": "source.ampersand keyword.statement.violation.txt.unknown-function",
+		{  "scope": "source.ampersand keyword.operator.violation.txt.unknown-function",
 			"settings": { "foreground": "#60A000", "fontStyle": "bold italic underline" }
 		},
-		{  "scope": "source.ampersand keyword.statement.violation.txt.arguments.reserved",
+		{  "scope": "source.ampersand keyword.operator.violation.txt.arguments.reserved",
 			"settings": { "foreground": "#60A000", "fontStyle": "bold" }
 		},	
 		
@@ -79,9 +76,9 @@
 			"settings": { "foreground": "#80A060", "fontStyle": "bold underline" }
 		},
 		{	"scope": [
-				"source.ampersand definition.concept",
-				"source.ampersand definition.relation",
-				"source.ampersand definition.rule"
+				"source.ampersand entity.name.concept",
+				"source.ampersand entity.name.relation",
+				"source.ampersand entity.name.rule"
 			],
 			"settings": { "foreground": "#40A060"}
 		},
@@ -90,19 +87,19 @@
 			"settings": { "foreground": "#80A060"}
 		},
 		{	"scope": [
-				"source.ampersand use.concept",
-				"source.ampersand use.relation",
-				"source.ampersand use.rule",
-				"source.ampersand use.boxtype.userdefined",
-				"source.ampersand use.view.userdefined"
+				"source.ampersand variable.concept",
+				"source.ampersand variable.relation",
+				"source.ampersand variable.rule",
+				"source.ampersand variable.boxtype.userdefined",
+				"source.ampersand variable.view.userdefined"
 			],
 			"settings": { "foreground": "#40A060"}
 		},
-		{	"scope": "source.ampersand use.filename",
+		{	"scope": "source.ampersand variable.filename",
 			"settings": { "foreground": "#4080C0"}
 		},
-		{	"scope": [	"source.ampersand use.boxtype.predefined",
-							"source.ampersand use.view.predefined"
+		{	"scope": [	"source.ampersand variable.boxtype.predefined",
+							"source.ampersand variable.view.predefined"
 						],
 			"settings": { "foreground": "#FFC080F0", "fontStyle": "" }
 		},
@@ -110,17 +107,17 @@
 
 		{  "scope": [
 				"source.ampersand string.quoted",
-				"source.ampersand statement.box.body.label.text"
+				"source.ampersand meta.box.body.label.text"
 			],
 			"settings": { "foreground": "#C0c040" }
 		},            
-		{  "scope": "source.ampersand highlight.ampersand",
+		{  "scope": "source.ampersand markup.other.highlight.ampersand",
 			"settings": { "foreground": "#ffc000" }
 		},
-		{  "scope": "source.ampersand backticked.ampersand",
+		{  "scope": "source.ampersand markup.raw.inline.ampersand",
 			"settings": { "foreground": "#c04000" }
 		},
-		{  "scope": "source.ampersand filename.ampersand",
+		{  "scope": "source.ampersand markup.other.filename.ampersand",
 			"settings": { "foreground": "#4080ff", "fontStyle": "underline" }
 		},
 		
@@ -129,7 +126,7 @@
 			"name": "Comment",
 			"scope": [
 				"comment",
-				"punctuation.definition.comment"
+				"punctuation.entity.name.comment"
 			],
 			"settings": {
 				"fontStyle": "bold",
@@ -169,8 +166,8 @@
 			"name": "Keyword, Storage",
 			"scope": [
 				"keyword",
-				"storage.type",
-				"storage.modifier"
+				"entity.name.type",
+				"entity.name.modifier"
 			],
 			"settings": {
 				"foreground": "#C792EA"
@@ -183,11 +180,11 @@
 				"constant.other.color",
 				"punctuation",
 				"meta.tag",
-				"punctuation.definition.tag",
+				"punctuation.entity.name.tag",
 				"punctuation.separator.inheritance.php",
-				"punctuation.definition.tag.html",
-				"punctuation.definition.tag.begin.html",
-				"punctuation.definition.tag.end.html",
+				"punctuation.entity.name.tag.html",
+				"punctuation.entity.name.tag.begin.html",
+				"punctuation.entity.name.tag.end.html",
 				"punctuation.section.embedded",
 				"keyword.other.template",
 				"keyword.other.substitution"
@@ -277,8 +274,8 @@
 				"entity.name",
 				"support.type",
 				"support.class",
-				"support.orther.namespace.use.php",
-				"meta.use.php",
+				"support.orther.namespace.variable.php",
+				"meta.variable.php",
 				"support.other.namespace.php",
 				"markup.changed.git_gutter",
 				"support.type.sys-types"
@@ -449,7 +446,7 @@
 			"name": "Decorators",
 			"scope": [
 				"tag.decorator.js entity.name.tag.js",
-				"tag.decorator.js punctuation.definition.tag.js"
+				"tag.decorator.js punctuation.entity.name.tag.js"
 			],
 			"settings": {
 				"fontStyle": "italic",
@@ -551,7 +548,7 @@
 			"name": "Markdown - Plain",
 			"scope": [
 				"text.html.markdown",
-				"punctuation.definition.list_item.markdown"
+				"punctuation.entity.name.list_item.markdown"
 			],
 			"settings": {
 				"foreground": "#EEFFFF"
@@ -569,7 +566,7 @@
 		{
 			"name": "Markdown - Markup Raw Inline Punctuation",
 			"scope": [
-				"text.html.markdown markup.inline.raw.markdown punctuation.definition.raw.markdown"
+				"text.html.markdown markup.inline.raw.markdown punctuation.entity.name.raw.markdown"
 			],
 			"settings": {
 				"foreground": "#65737E"
@@ -589,7 +586,7 @@
 			"scope": [
 				"markdown.heading",
 				"markup.heading | markup.heading entity.name",
-				"markup.heading.markdown punctuation.definition.heading.markdown"
+				"markup.heading.markdown punctuation.entity.name.heading.markdown"
 			],
 			"settings": {
 				"foreground": "#C3E88D"
@@ -654,7 +651,7 @@
 		{
 			"name": "Markdown - Blockquote",
 			"scope": [
-				"markup.quote punctuation.definition.blockquote.markdown"
+				"markup.quote punctuation.entity.name.blockquote.markdown"
 			],
 			"settings": {
 				"foreground": "#65737E"
@@ -718,7 +715,7 @@
 		{
 			"name": "Markdown - Fenced Bode Block",
 			"scope": [
-				"punctuation.definition.fenced.markdown"
+				"punctuation.entity.name.fenced.markdown"
 			],
 			"settings": {
 				"foreground": "#00000050"
