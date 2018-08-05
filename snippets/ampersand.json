@@ -39,10 +39,10 @@
 		"description": "Define a POPULATION of Concept Atoms",
 		"body":[ "POPULATION \"${1:concept}\" CONTAINS [ \"$0\" ]" ]
 	},
-	"REPRESENT statement": {
-		"prefix": "REPRESENT",
-		"description": "Define a REPRESENTation of Concept Atoms",
-		"body":[ "REPRESENT ${1:concept} TYPE ${2|ALPHANUMERIC,BIGALPHANUMERIC,DATE,DATETIME,BOOLEAN,INTEGER,FLOAT,PASSWORD,BINARY,BIGBINARY,HUGEALPHANUMERIC,HUGEBINARY|}" ]
+	"TYPE statement": {
+		"prefix": "TYPE",
+		"description": "Choose one of the allowed TYPEs",
+		"body":[ "TYPE ${1|ALPHANUMERIC,BIGALPHANUMERIC,DATE,DATETIME,BOOLEAN,INTEGER,FLOAT,PASSWORD,BINARY,BIGBINARY,HUGEALPHANUMERIC,HUGEBINARY|}" ]
 	},
 	"Define a RELATION statement": {
 		"prefix": "RELATION",

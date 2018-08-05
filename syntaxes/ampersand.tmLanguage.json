@@ -226,7 +226,7 @@
 				},
 				{	"comment": "CLASSIFY <Concept> IS <Concept1> /\\ <Concept2> ...", 
 					"name": "meta.classify.is.ampersand",
-					"begin": "\\b(CLASSIFY)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))\\s+(IS)",
+					"begin": "\\b(CLASSIFY)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))\\s+(IS)\\s+",
 					"beginCaptures": {
 						"0": { "name":"meta.classify.is.begin.ampersand"},
 						"1": { "name":"keyword.operator.classify.ampersand"},
