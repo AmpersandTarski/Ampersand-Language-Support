@@ -42,7 +42,7 @@ script:
 before_deploy:
 - npm install -g vsce;
 - vsce package;
-- git tag "test-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+- git tag "test-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)";
 
 deploy:
   provider: releases
