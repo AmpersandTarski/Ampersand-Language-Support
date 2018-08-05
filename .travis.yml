@@ -52,13 +52,12 @@ deploy:
   skip_cleanup: true
   on:
     repo: AmpersandTarski/Ampersand-Language-Support
-    tags: true
+    branch: travisTest
     condition: $TRAVIS_OS_NAME = linux
 - provider: script
   script: vsce publish -p $VS_TOKEN
   skip_cleanup: true
   on:
     repo: AmpersandTarski/Ampersand-Language-Support
-    branch: master
-    tags: true
+    branch: travisTest
     condition: $TRAVIS_OS_NAME = linux
