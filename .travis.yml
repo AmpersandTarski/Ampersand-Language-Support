@@ -43,7 +43,7 @@ before_deploy:
 - npm install -g json;
 - npm install -g vsce;
 - vsce package;
-- git tag "test-$v(cat package.json | json version)";
+- git tag "test-v$(cat package.json | json version)";
 
 deploy:
 - provider: releases
@@ -57,7 +57,7 @@ deploy:
     branch: travisTest
     condition: $TRAVIS_OS_NAME = linux
 - provider: script
-  script: vsce publish -p $VS_TOKEN
+  script: vsce publish patch -p $VS_TOKEN
   skip_cleanup: true
   on:
     repo: AmpersandTarski/Ampersand-Language-Support
