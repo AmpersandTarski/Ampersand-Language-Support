@@ -40,9 +40,10 @@ script:
 - npm test
 
 before_deploy:
+- npm install -g json;
 - npm install -g vsce;
 - vsce package;
-- git tag "test-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+- git tag "test-$v(cat package.json | json version)";
 
 deploy:
 - provider: releases
