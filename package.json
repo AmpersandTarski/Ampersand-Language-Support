@@ -16,6 +16,10 @@
     "onLanguage:ampersand"
   ],
   "icon": "images/ampersandLogo.png",
+  "galleryBanner": {
+    "color": "#5c2d91",
+    "theme": "dark"
+  },
   "license": "GPL-3.0",
   "homepage": "https://github.com/AmpersandTarski/Ampersand-Language-Support",
   "repository": {
