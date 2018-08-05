@@ -366,12 +366,15 @@
 		{	"patterns": 
 			[	{	"comment": "POPULATION <Concept> CONTAINS",
 					"name":"meta.population.concept.ampersand",
-					"begin": "\\b(POPULATION)\\s*([A-Z]\\w*)\\s*(CONTAINS)",
+					"begin": "\\b(POPULATION)\\s+(?:\\b([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))\\s+(CONTAINS)",
 					"beginCaptures": {
 						"0": { "name":"meta.population.concept.begin.ampersand"},
 						"1": { "name":"keyword.operator.population.concept.ampersand"},
 						"2": { "name":"variable.concept.ampersand"},
-						"3": { "name":"keyword.operator.population.concept.ampersand"}
+						"3": { "name":"punctuation.statement.population.ampersand"},
+						"4": { "name":"variable.concept.ampersand"},
+						"5": { "name":"punctuation.statement.population.ampersand"},
+						"6": { "name":"keyword.operator.population.concept.ampersand"}
 					},
 					"end": "(?<=\\])",
 					"patterns": [
@@ -383,12 +386,15 @@
 				},
 				{	"comment": "POPULATION <relation> CONTAINS",
 					"name":"meta.population.relation.ampersand",
-					"begin": "\\b(POPULATION)\\s*([a-z]\\w*)\\s*(CONTAINS)",
+					"begin": "\\b(POPULATION)\\s+(?:\\b([a-z]\\w*)|(\")([a-z][^\"]*)(\"))\\s+(CONTAINS)",
 					"beginCaptures": {
 						"0": { "name":"meta.population.relation.begin.ampersand"},
 						"1": { "name":"keyword.operator.population.relation.ampersand"},
 						"2": { "name":"variable.relation.ampersand"},
-						"3": { "name":"keyword.operator.population.relation.ampersand"}
+						"3": { "name":"punctuation.statement.population.ampersand"},
+						"4": { "name":"variable.relation.ampersand"},
+						"5": { "name":"punctuation.statement.population.ampersand"},
+						"6": { "name":"keyword.operator.population.relation.ampersand"}
 					},
 					"end": "(?<=\\])",
 					"patterns": [
