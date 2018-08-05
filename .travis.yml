@@ -42,10 +42,10 @@ script:
 before_deploy:
 - npm install -g vsce;
 - vsce package;
-- git tag "test-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)";
+- git tag "test-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
 
 deploy:
-  provider: releases
+- provider: releases
   api_key:
     secure: naSU5fSd+PoIiV4EpDwWchQ3XCAr6PK2TJQbgXXoRhU8WZgvw9++gZ3G8lhbcH7EkSSW7WyBEQQmggJvcUVkcKC9IvpDHFE+Aj2v7LtaAbzH3s7YxcNoVXe54viocSNn+KucdLzTw8QaLQJI0G6mNzMG2m/XCjPby3o/pxsPpl5bw0qsmaySif7Vw0ifMo6yUiYDUfMr1pCoLanW1qZHzhdXZPLS45bcceOGk4NQQ9bM1AmUgVRXv+ns2CpTOYKFgktI+XCys/JJOcCjQ2seNtgxHDmsTKY5J7KSnpl5Bsp0IYAVrzHriVwR/xD6no7OlYInfucreFvJg1MbvCIfZBSdO+UyEtVwDNh5Pv+s6kAsZZ0ZzO59I4PIVFNKorpN9B3ZkGy6U+U0fALU1wOwNabDEuNcqHs99zscjA4eBMgF8m+jfkwm4isG9fz23eXesvMm9fQYYMwpMmwfHmeI5QljTFcVqVmhl3VT8vTjlFMDMzDvRncYmZHmXVN8Jbq0RZAC7EQjt5vmMSHtgBgjNSKm5pYXRXFJrn1qTLGYDJt1tDBNhlk01LKiI8R//5WW69q8DHO67rhKgwZKrDkDMVR8v1WEGtoy2D6BLG0T6KeJaElBXggcLR3SMYQvpBKNDuh/8Z+56KEt2rBIJoFEPokI/sIImd5Gt9ZjV3/rAPo=
   file_glob: true
