@@ -1,3 +1,7 @@
+env:
+  global:
+    secure: m2sFB9qxxe80sfPUD3Asjyaopk49fXmQRz2so23sFagk05f5GJ7ueJYZUhl/2KE5uGv6YQmMCTKMkyLhbdSwD/81Bh6gLWgTIbrPbS9K3QX1j/ZpQQwEYfMJFdTCuCoa7AZly8bQ+x2J1/GZKs5BHejPeYve3SlMYn3bj29rq6Pz6u29T9BQg70Qgp+TGDNNAVLH892/E/rt/rwdFMKyBuz5kLnQCT3bRQWWfUBu2Q3imaLPuxHuBlGgG4/K7DSY6SvFYLsefl9BYfjkHOFk2Uxl8XTo5CcBl38lrncU3uDm3AkVPk/Y7dyAS4/stH3HEHiymvioKHpUoF7pRwDW3g+mg7+O+0iOr9dinbTSgHI/LEmSnCs2R4NZopjBEl1t2QEod/OFsWNyuMSGqq7ec4xz7Vjai4KRaOjpCjWU3Q6d0CbOw0cA7ewY6+yUSS+Hl1gIFf/0cOBP2v1fnJs1Nz+oHqQbZPophUvbn389niT/3Bq7gyb8e6HBRIcTD+gMj356VyPa/rLCqui5B2HDtb3mIIqTOXjm2H+1r/t5Ol7jhR6HprRJAHS2ry+XGOTy7O/DeH6izmRTXg7FQ8knTGBhCXunAYghenD5eJ00qATxuUOx8xhpqj6APjO6gALhR4mIXLT27kNTTZ6j4r3f/x+ksO5yoomT2NCVquf+VTI=
+
 notifications:
   email: false
   webhooks:
@@ -26,11 +30,11 @@ addons:
       - libsecret-1-dev
 
 before_install:
-- if [ $TRAVIS_OS_NAME == "linux" ]; then
+- if [ $TRAVIS_OS_NAME == "linux" ]; then 
     export CXX="g++-4.9" CC="gcc-4.9" DISPLAY=:99.0;
     sh -e /etc/init.d/xvfb start;
     sleep 3;
-  fi
+    fi
 
 install:
 - echo "Installing"
