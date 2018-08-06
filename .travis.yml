@@ -67,7 +67,7 @@ deploy:
 # - provider: script
 #   script: vsce publish -p $VS_TOKEN
 #   skip_cleanup: true
-#   on:
+#   on: 
 #     repo: AmpersandTarski/Ampersand-Language-Support
 #     branch: travisTest
 #     condition: $TRAVIS_OS_NAME = linux
