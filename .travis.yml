@@ -38,6 +38,7 @@ before_install:
 
 install:
 - echo "Installing"
+- npm upgrade
 - npm install
 - npm run vscode:prepublish
 
