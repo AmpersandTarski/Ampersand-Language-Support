@@ -33,13 +33,16 @@ before_install:
   fi
 
 install:
+- echo "Installing"
 - npm install
 - npm run vscode:prepublish
 
 script:
+- echo "scripting"
 - npm test
 
 before_deploy:
+- echo "before deploy"
 - npm install -g json;
 - npm install -g vsce;
 - vsce package;
