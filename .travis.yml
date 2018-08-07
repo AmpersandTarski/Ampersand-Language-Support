@@ -1,7 +1,6 @@
 env:
   global:
-    secure: m2sFB9qxxe80sfPUD3Asjyaopk49fXmQRz2so23sFagk05f5GJ7ueJYZUhl/2KE5uGv6YQmMCTKMkyLhbdSwD/81Bh6gLWgTIbrPbS9K3QX1j/ZpQQwEYfMJFdTCuCoa7AZly8bQ+x2J1/GZKs5BHejPeYve3SlMYn3bj29rq6Pz6u29T9BQg70Qgp+TGDNNAVLH892/E/rt/rwdFMKyBuz5kLnQCT3bRQWWfUBu2Q3imaLPuxHuBlGgG4/K7DSY6SvFYLsefl9BYfjkHOFk2Uxl8XTo5CcBl38lrncU3uDm3AkVPk/Y7dyAS4/stH3HEHiymvioKHpUoF7pRwDW3g+mg7+O+0iOr9dinbTSgHI/LEmSnCs2R4NZopjBEl1t2QEod/OFsWNyuMSGqq7ec4xz7Vjai4KRaOjpCjWU3Q6d0CbOw0cA7ewY6+yUSS+Hl1gIFf/0cOBP2v1fnJs1Nz+oHqQbZPophUvbn389niT/3Bq7gyb8e6HBRIcTD+gMj356VyPa/rLCqui5B2HDtb3mIIqTOXjm2H+1r/t5Ol7jhR6HprRJAHS2ry+XGOTy7O/DeH6izmRTXg7FQ8knTGBhCXunAYghenD5eJ00qATxuUOx8xhpqj6APjO6gALhR4mIXLT27kNTTZ6j4r3f/x+ksO5yoomT2NCVquf+VTI=
-
+    secure: "ewqJLq5whn5csJKf9BIvuTA6t2BGnxnRlj35ukiRSe0OnoKzr1K/SY9BbjZHmlZV55M9yR+AZIL1xWwihxXuI0M6fdLM/z1oMo+3QCGLuKuLheCxjqKbm/60Wi/acGgyC8JaZCwXXCfVk4UmwgxkT5qxY4gY96VhaBjZInOPde5xabUKyzvb8wiiD3IciBqW+s1e8UG4hnEY+YIup9BxA9tODtZAeaiFadwqBAngL9/KmrGcDZ5HK+vyYN67UXQNBut0SXOir3YBLxXqfFheNKKni8v2gkkHfAmrR+FVL/3IgLypfninCbuIgdtVYZveAhrN9RzzCJnKLZx6tG9/ZbK5UmZ+1ZGjk3QmF6/TYEVd1VD9TkWrlwtjZIVlcfJhW58O0q5U3pA7b4/ui7sk99aOE4ax79DCw4NB9jjHwAnyaBU3z1e83HUfhdWg9HH0nMJ4/DxR5BSQSxa4xgmSp13iYpPvJKvMNuNe5c3n35r3vd0JNyaE2suWoHK15ZFUfaHiG7JA4n6IprnAXDNTMdvfeSFqJZXM13ldHbHqKGIS85Qp43sPWpw1qYSVD+H3IvODAvr3CMI7liiW/+YFtACn+RVeHcuD060UPrffws7WryobotAZ6nvyPex8GPztIEdnTJfGyFcJofWbVH2Ng6W6z7GZ+q/xALucHHnZ6gE="
 notifications:
   email: false
   webhooks:
@@ -62,7 +61,7 @@ deploy:
   skip_cleanup: true
   on:
     repo: AmpersandTarski/Ampersand-Language-Support
-    branch: development
+    branch: travisTest
     condition: $TRAVIS_OS_NAME = linux
     tag: true
 - provider: script
@@ -70,6 +69,6 @@ deploy:
   skip_cleanup: true
   on: 
     repo: AmpersandTarski/Ampersand-Language-Support
-    branch: travisTest
+    branch: development
     condition: $TRAVIS_OS_NAME = linux
     tag: true
