@@ -1,6 +1,8 @@
 # Change Log
 
-## [Unreleased]
+## [0.2.6] - 2018-08-07
+
+- first automatically build & deployed version
 
 ## [0.0.7] - 2018-08-01
 
