@@ -61,7 +61,7 @@ deploy:
   skip_cleanup: true
   on:
     repo: AmpersandTarski/Ampersand-Language-Support
-    branch: travisTest
+    branch: development
     condition: $TRAVIS_OS_NAME = linux
     tag: true
 - provider: script
