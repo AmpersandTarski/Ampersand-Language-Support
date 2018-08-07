@@ -52,10 +52,10 @@ before_deploy:
 - vsce package;
 - thetag="v$(cat package.json | json version)"
 - echo $thetag
-- if git rev-parse -q --verify "refs/tags/$thetag" >/dev/null then \
-    echo "tag already exists." \
-  else \
-    git tag $thetag\
+- if git rev-parse -q --verify "refs/tags/$thetag" >/dev/null then
+    echo "tag already exists."
+  else
+    git tag $thetag
   fi
 
 deploy:
