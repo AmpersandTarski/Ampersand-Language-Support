@@ -1,3 +1,6 @@
+env:
+  global:
+    secure: "kNIrwu9xazVClE1GsKz3zMMauQlBxQT5uwP7pBHiZ0/Ukz6dTvZCxSP67hVZxc8tnKPbyM1KiPKnpMd7tIJPTNbv+fS/Q7Ji9hxDe66JDgbW1Qszm5B2MBWY1n4n0hVugbYmQBqti/YXWsEq24DBYZMumSske7kKv5Gv99MA2Bz5iEvGewuxYy0TwVpaYxmDSUYjN0Hgx1oHD91JWQc/7+tA40GQORF0sA3yNvCobcSXwzWYIi6a61QhhDy8EjOphmYXjlViNrv0UWrd0BJyohotIZfWz84I+nHROJVWeG4zOWlOvc4z4Wwot4Wzl87rII77gxoX8tUxXSRUK0B1m+nZl/sL0nawAx+ABjLmr9SrOLik4izZJiz0HDosq0HpqoXSXgS6dsCuyPjzoh90BSNfYmJmArcujfGuoJclH0lEGm5Uf6sSFRR0BhJjIkJsoAdow4SYAW/0oZpCxOdVs0tK3+YLRA7281WZSKMJ/sg9NP1Pbdk1wvXSOibAN/x4eBy2Ff0VadQovHIuSg42Yqozty+8mMie4TMiNru9ZFSNmmFTslP55n3Fo/6Mv/QXzFVd7PWaWIZzYEfT3M3PPBjXCp6XQDXl2qig+SYn8MRfbWKJAZaDkGjgDeQx+5kujhfwpPJO0trzgmF20ScopWRrwatheo746I0crKBja9Q="
 notifications:
   email: false
   webhooks:
@@ -26,39 +29,52 @@ addons:
       - libsecret-1-dev
 
 before_install:
-- if [ $TRAVIS_OS_NAME == "linux" ]; then
+- if [ $TRAVIS_OS_NAME == "linux" ]; then 
     export CXX="g++-4.9" CC="gcc-4.9" DISPLAY=:99.0;
     sh -e /etc/init.d/xvfb start;
     sleep 3;
-  fi
+    fi
 
 install:
+- echo "Installing"
+- npm upgrade
 - npm install
 - npm run vscode:prepublish
 
 script:
+- echo "scripting"
 - npm test
 
 before_deploy:
+- echo "before deploy"
+- npm install -g json;
 - npm install -g vsce;
 - vsce package;
+- thetag="v$(cat package.json | json version)"
+- echo $thetag
+- if git rev-parse -q --verify "refs/tags/$thetag" >/dev/null; then \
+    echo "tag already exists." \
+  else \
+    git tag $thetag\
+  fi
 
 deploy:
 - provider: releases
   api_key:
-    secure: TODO-TOKENTOBEPROVIDED
+    secure: naSU5fSd+PoIiV4EpDwWchQ3XCAr6PK2TJQbgXXoRhU8WZgvw9++gZ3G8lhbcH7EkSSW7WyBEQQmggJvcUVkcKC9IvpDHFE+Aj2v7LtaAbzH3s7YxcNoVXe54viocSNn+KucdLzTw8QaLQJI0G6mNzMG2m/XCjPby3o/pxsPpl5bw0qsmaySif7Vw0ifMo6yUiYDUfMr1pCoLanW1qZHzhdXZPLS45bcceOGk4NQQ9bM1AmUgVRXv+ns2CpTOYKFgktI+XCys/JJOcCjQ2seNtgxHDmsTKY5J7KSnpl5Bsp0IYAVrzHriVwR/xD6no7OlYInfucreFvJg1MbvCIfZBSdO+UyEtVwDNh5Pv+s6kAsZZ0ZzO59I4PIVFNKorpN9B3ZkGy6U+U0fALU1wOwNabDEuNcqHs99zscjA4eBMgF8m+jfkwm4isG9fz23eXesvMm9fQYYMwpMmwfHmeI5QljTFcVqVmhl3VT8vTjlFMDMzDvRncYmZHmXVN8Jbq0RZAC7EQjt5vmMSHtgBgjNSKm5pYXRXFJrn1qTLGYDJt1tDBNhlk01LKiI8R//5WW69q8DHO67rhKgwZKrDkDMVR8v1WEGtoy2D6BLG0T6KeJaElBXggcLR3SMYQvpBKNDuh/8Z+56KEt2rBIJoFEPokI/sIImd5Gt9ZjV3/rAPo=
   file_glob: true
   file: "*.vsix"
   skip_cleanup: true
   on:
     repo: AmpersandTarski/Ampersand-Language-Support
-    tags: true
+    branch: master
     condition: $TRAVIS_OS_NAME = linux
+    tag: true
 - provider: script
   script: vsce publish -p $VS_TOKEN
   skip_cleanup: true
-  on:
+  on: 
     repo: AmpersandTarski/Ampersand-Language-Support
     branch: master
-    tags: true
     condition: $TRAVIS_OS_NAME = linux
+    tag: true

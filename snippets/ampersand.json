@@ -39,10 +39,10 @@
 		"description": "Define a POPULATION of Concept Atoms",
 		"body":[ "POPULATION \"${1:concept}\" CONTAINS [ \"$0\" ]" ]
 	},
-	"REPRESENT statement": {
-		"prefix": "REPRESENT",
-		"description": "Define a REPRESENTation of Concept Atoms",
-		"body":[ "REPRESENT ${1:concept} TYPE ${2|ALPHANUMERIC,BIGALPHANUMERIC,DATE,DATETIME,BOOLEAN,INTEGER,FLOAT,PASSWORD,BINARY,BIGBINARY,HUGEALPHANUMERIC,HUGEBINARY|}" ]
+	"TYPE statement": {
+		"prefix": "TYPE",
+		"description": "Choose one of the allowed TYPEs",
+		"body":[ "TYPE ${1|ALPHANUMERIC,BIGALPHANUMERIC,DATE,DATETIME,BOOLEAN,INTEGER,FLOAT,PASSWORD,BINARY,BIGBINARY,HUGEALPHANUMERIC,HUGEBINARY|}" ]
 	},
 	"Define a RELATION statement": {
 		"prefix": "RELATION",
@@ -59,30 +59,41 @@
 		"description": "Define a POPULATION of Relation pairs/links",
 		"body":[ "POPULATION \"${1:Relname}\" CONTAINS [ (\"$2\", \"$3\") ]"	]
 	},
-	"Define a PRAGMA": {
-		"prefix": "PRAGMA",
-		"description": "Define a PRAGMA for a relation, rule, ...",
-		"body":[ "PRAGMA \"${1:}\" \"${2:}\" \"${3:}\"" ]
-	},
-	"Define a MEANING": {
-		"prefix": "MEANING",
-		"description": "Define a MEANING for a relation, rule, ...",
-		"body":[ "MEANING \"$0\"" ]
-	},
-	"Define a MESSAGE": {
-		"prefix": "MESSAGE",
-		"description": "Define a MESSAGE for a (violated) rule",
-		"body":[ "MESSAGE \"$0\"" ]
-	},
-	"ExecEngine rule": {
+	"ExecEngine RULE": {
 		"prefix": "ROLE ExecEngine MAINTAINS",
-		"description": "Define a RULE that the ExecEngine will maintain (including the VIOLATION statement)",
+		"description": "Define a RULE that the ExecEngine will maintain",
 		"body":[
 			"ROLE ExecEngine MAINTAINS \"$1\"",
-			"RULE \"${1:rulename}\": ${2:Expression} |- ${3:Expression}",
-			"VIOLATION (TXT \"{EX} ${4|InsPair,DelPair,InsAtom,DelAtom|};${5:Relname};${6:srcConcept};\", SRC I[$6], TXT \";${7:tgtConcept};\", TGT I[$7])",
-			"$0"
+			"RULE \"${1:rulename}\": "
 		]
+	},
+	"ExecEngine VIOLATION": {
+		"prefix": "VIOLATION (TXT \"{EX} ",
+		"description": "Define a VIOLATION that the ExecEngine will execute",
+		"body":[ "VIOLATION (TXT \"{EX} $0\")" ]
+	},
+	"InsPair": {
+		"prefix": "InsPair",
+		"description": "most common way in which InsPairs are done",
+		"body":[ "InsPair;${1:Relname};${2:srcConcept};\", SRC I, TXT \";${3:tgtConcept};\", TGT I" ]
+	},
+	"DelPair": {
+		"prefix": "DelPair",
+		"description": "most common way in which DelPairs are done",
+		"body":[ "DelPair;${1:Relname};${2:srcConcept};\", SRC I, TXT \";${3:tgtConcept};\", TGT I" ]
+	},
+	"InsAtom": {
+		"prefix": "InsAtom",
+		"description": "most common way in which InsAtoms are done",
+		"body":[
+			"InsAtom;${1:concept}\"",
+			"          ,TXT \"{EX} $0" 
+		]
+	},
+	"DelAtom": {
+		"prefix": "DelAtom",
+		"description": "most common way in which DelAtoms are done",
+		"body":[ "DelAtom;${1:concept};${2:atomid}\")"	]
 	},
 	"Equivalence rule": {
 		"prefix": "eqv-relation",
@@ -113,16 +124,6 @@
 			"VIOLATION (TXT \"{EX} DelPair;$1;$2;\", SRC I[$2], TXT \";$2;\", TGT I[$2])",
 			"$0"
 		]
-	},
-	"InsPair": {
-		"prefix": "InsPair",
-		"description": "InsPair;SRCConcept;SRCAtom,TGTConcept,TGTAtom",
-		"body": [ "InsPair;${1:RelatioName};${2:srcConcept};\", SRC ${3|I,${4:SrcAtom}|}, TXT \";${5:tgtConcept};\", TGT ${6|I,${7:TgtAtom}|}" ]
-	},
-	"DelPair": {
-		"prefix": "DelPair",
-		"description": "DelPair;SRCConcept;SRCAtom,TGTConcept,TGTAtom",
-		"body": [ "DelPair;${1:RelatioName};${2:srcConcept};\", SRC ${3|I,${4:SrcAtom}|}, TXT \";${5:tgtConcept};\", TGT ${6|I,${7:TgtAtom}|}" ]
 	},
 	"_SESSION": {
 		"prefix": "_SESSION",

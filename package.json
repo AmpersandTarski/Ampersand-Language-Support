@@ -1,7 +1,7 @@
 {
   "name": "language-ampersand",
   "displayName": "Ampersand (ADL) language support",
-  "version": "0.2.0",
+  "version": "0.2.5",
   "publisher": "AmpersandTarski",
   "description": "Language support for Ampersand scripts",
   "categories": [
@@ -16,6 +16,10 @@
     "onLanguage:ampersand"
   ],
   "icon": "images/ampersandLogo.png",
+  "galleryBanner": {
+    "color": "#5c2d91",
+    "theme": "dark"
+  },
   "license": "GPL-3.0",
   "homepage": "https://github.com/AmpersandTarski/Ampersand-Language-Support",
   "repository": {
@@ -91,7 +95,7 @@
   "devDependencies": {
     "@types/chai": "^4.0.5",
     "@types/mocha": "^2.2.44",
-    "@types/node": "^10.5.5",
+    "@types/node": "^10.5.6",
     "chai": "^4.1.2",
     "del": "^3.0.0",
     "gulp": "^4.0.0",
