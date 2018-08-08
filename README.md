@@ -10,7 +10,7 @@ This extension provides langauge support for the [Ampersand](http://ampersandtar
 
 ## Requirements
 
-* none
+* In order to use the ampersand commands, it is required that you have [the ampersand executable](https://github.com/AmpersandTarski/Ampersand/releases/latest) in your path.
 
 ## Extension Settings
 
