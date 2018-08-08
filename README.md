@@ -1,20 +1,12 @@
 # Ampersand-Language-Support
 
-This extension is a first attempt to provide langauge support for the [Ampersand](http://ampersandtarski.github.io/) Definition Language [(ADL)](https://ampersandtarski.gitbook.io/documentation). This is a language that allows one to define an application in terms of state (expressed in terms of concepts, relations and relation algebraic invariant rules), and interfaces that allow for state changes. The [tooling](https://github.com/AmpersandTarski/Ampersand) takes an ADL-script, and generates a complete web-application.
+This extension provides langauge support for the [Ampersand](http://ampersandtarski.github.io/) Definition Language [(ADL)](https://ampersandtarski.gitbook.io/documentation). This is a language that allows one to define an application in terms of state (expressed in terms of concepts, relations and relation algebraic invariant rules), and interfaces that allow for state changes. The [tooling](https://github.com/AmpersandTarski/Ampersand) takes an ADL-script, and generates a complete web-application.
 
 ## Features
 
 - syntax coloring grammar
 - syntax coloring theme (ampersand)
 - snippets that help you write the common language constructs
-
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
 
 ## Requirements
 
