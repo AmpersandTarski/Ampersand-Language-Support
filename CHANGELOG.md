@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.2.7] - 2018-08-09
+
+- Add default build task. 
+
 ## [0.2.6] - 2018-08-07
 
 - first automatically build & deployed version
