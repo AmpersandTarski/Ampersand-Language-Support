@@ -7,7 +7,7 @@
             "label": "Ampersand check script",
             "type": "shell",
             "command": "ampersand ${file}",
-            "problemMatcher": "$tsc-watch",
+            "problemMatcher": "$amp-err",
             "isBackground": true,
             "presentation": {
                 "reveal": "always"
@@ -21,24 +21,7 @@
             "label": "Ampersand version",
             "type": "shell",
             "command": "ampersand --version",
-            "problemMatcher": {
-                "owner": "ampersand",
-                "fileLocation": ["absolute"],
-                "pattern": [{
-                        "regexp": "^In file +(.*) \\(line (\\d+), column (\\d+)\\):(\n.*)+$",
-                        "file": 1,
-                        "line": 2,
-                        "column": 3,
-                        "message": 0
-                    },
-                    {   "regexp": "^(Error).* in file +(.*) at line (\\d+) : (\\d+)\n  (.*)$",
-                        "severity": 1,
-                        "file": 2,
-                        "line": 3,
-                        "column": 4,
-                        "message": 5
-                  }]
-            },
+            "problemMatcher": "$amp-err",
             "isBackground": false,
             "presentation": {
                 "reveal": "always"
