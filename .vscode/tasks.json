@@ -4,10 +4,24 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "npm",
+            "type": "shell",
+            "command": "npm watch",
+            "problemMatcher": "$tsc-watch",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "never"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "Ampersand check script",
             "type": "shell",
             "command": "ampersand ${file}",
-            "problemMatcher": "$amp-err",
+            //"problemMatcher": "$amp-err",
             "isBackground": true,
             "presentation": {
                 "reveal": "always"
@@ -21,12 +35,20 @@
             "label": "Ampersand version",
             "type": "shell",
             "command": "ampersand --version",
-            "problemMatcher": "$amp-err",
+            //"problemMatcher": "$amp-err",
             "isBackground": false,
             "presentation": {
                 "reveal": "always"
             },
             "group": "none"
+        },
+        {
+            "type": "typescript",
+            "tsconfig": "tsconfig.json",
+            "option": "watch",
+            "problemMatcher": [
+                "$tsc-watch"
+            ]
         }
     ]
 }

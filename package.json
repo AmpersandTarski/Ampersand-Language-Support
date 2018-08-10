@@ -1,7 +1,7 @@
 {
   "name": "language-ampersand",
   "displayName": "Ampersand (ADL) language support",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "publisher": "AmpersandTarski",
   "description": "Language support for Ampersand scripts",
   "categories": [
@@ -112,7 +112,8 @@
     "vscode:prepublish": "tsc -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
     "compile": "tsc -watch -p ./",
-    "test": "node ./node_modules/vscode/bin/test",
+    "test": "node ./node_modules/mocha/bin/mocha",
+    "testOld": "node ./node_modules/vscode/bin/test",
     "package": "vsce package",
     "publish": "vsce publish"
   },
