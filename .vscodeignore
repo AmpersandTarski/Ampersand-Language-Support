@@ -5,5 +5,4 @@ src/**
 test/**
 tsconfig.json
 typings/**
-vsc-extension-quickstart.md
 **/*.map

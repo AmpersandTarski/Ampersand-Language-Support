@@ -106,30 +106,30 @@
           }
         ]
       }
-    ],
-    "scripts": {
-      "vscode:prepublish": "tsc -p ./",
-      "postinstall": "node ./node_modules/vscode/bin/install",
-      "compile": "tsc -watch -p ./",
-      "test": "node ./node_modules/vscode/bin/test",
-      "package": "vsce package",
-      "publish": "vsce publish"
-    },
-    "dependencies": {
-      "typescript": "^2.6.1"
-    },
-    "devDependencies": {
-      "@types/chai": "^4.0.5",
-      "@types/mocha": "^2.2.44",
-      "@types/node": "^10.5.6",
-      "chai": "^4.1.2",
-      "del": "^3.0.0",
-      "gulp": "^4.0.0",
-      "gulp-typescript": "^3.2.3",
-      "mocha": "^4.0.1",
-      "mochawesome": "^2.3.1",
-      "vscode": "^1.1.18"
-    },
-    "author": "* Joosten"
-  }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "tsc -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "compile": "tsc -watch -p ./",
+    "test": "node ./node_modules/vscode/bin/test",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "dependencies": {
+    "typescript": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.5",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.5.6",
+    "chai": "^4.1.2",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-typescript": "^5.0.0-alpha.3",
+    "mocha": "^5.2.0",
+    "mochawesome": "^3.0.3",
+    "vscode": "^1.1.18"
+  },
+  "author": "* Joosten"
 }
