@@ -1,7 +1,7 @@
 {
   "name": "language-ampersand",
   "displayName": "Ampersand (ADL) language support",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "publisher": "AmpersandTarski",
   "description": "Language support for Ampersand scripts",
   "categories": [
@@ -79,6 +79,33 @@
         "language": "ampersand",
         "path": "./snippets/ampersand.json"
       }
+    ],
+    "commands": [],
+    "problemMatchers": [
+      {
+        "name": "amp-err",
+        "owner": "ampersand",
+        "fileLocation": [
+          "absolute"
+        ],
+        "pattern": [
+          {
+            "regexp": "^In file +(.*) \\(line (\\d+), column (\\d+)\\):(\n.*)+$",
+            "file": 1,
+            "line": 2,
+            "column": 3,
+            "message": 0
+          },
+          {
+            "regexp": "^(Error).* in file +(.*) at line (\\d+) : (\\d+)\n  (.*)$",
+            "severity": 1,
+            "file": 2,
+            "line": 3,
+            "column": 4,
+            "message": 5
+          }
+        ]
+      }
     ]
   },
   "scripts": {
@@ -90,18 +117,18 @@
     "publish": "vsce publish"
   },
   "dependencies": {
-    "typescript": "^2.6.1"
+    "typescript": "^3.0.1"
   },
   "devDependencies": {
     "@types/chai": "^4.0.5",
-    "@types/mocha": "^2.2.44",
+    "@types/mocha": "^5.2.5",
     "@types/node": "^10.5.6",
     "chai": "^4.1.2",
     "del": "^3.0.0",
     "gulp": "^4.0.0",
-    "gulp-typescript": "^3.2.3",
-    "mocha": "^4.0.1",
-    "mochawesome": "^2.3.1",
+    "gulp-typescript": "^5.0.0-alpha.3",
+    "mocha": "^5.2.0",
+    "mochawesome": "^3.0.3",
     "vscode": "^1.1.18"
   },
   "author": "* Joosten"
