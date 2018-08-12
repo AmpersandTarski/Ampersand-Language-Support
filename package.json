@@ -1,13 +1,24 @@
 {
   "name": "language-ampersand",
   "displayName": "Ampersand (ADL) language support",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "publisher": "AmpersandTarski",
   "description": "Language support for Ampersand scripts",
   "categories": [
     "Programming Languages",
     "Themes",
     "Snippets"
+  ],
+  "contributors": [
+    {
+      "name": "Rieks",
+      "url": "https://github.com/RieksJ"
+    },
+    {
+      "name": "Han Joosten",
+      "url": "https://github.com/hanjoosten",
+      "email": "han.joosten.han@gmail.com"
+    }
   ],
   "engines": {
     "vscode": "^1.25.1"
@@ -17,8 +28,8 @@
   ],
   "icon": "images/ampersandLogo.png",
   "galleryBanner": {
-    "color": "#5c2d91",
-    "theme": "dark"
+    "color": "#f6a615",
+    "theme": "light"
   },
   "license": "GPL-3.0",
   "homepage": "https://github.com/AmpersandTarski/Ampersand-Language-Support",
@@ -131,6 +142,5 @@
     "mocha": "^5.2.0",
     "mochawesome": "^3.0.3",
     "vscode": "^1.1.18"
-  },
-  "author": "* Joosten"
+  }
 }
