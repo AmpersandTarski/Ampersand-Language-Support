@@ -33,7 +33,7 @@
 	{	"comments":
 		{	"patterns": 
 			[	{	"comment":"--[sectionheader] line comments",
-					"name": "comment.line.double-dash.sectionheader.ampersand",
+					"name": "comment.line.double-dash.ampersand",
 					"begin": "(--)(\\[)([^\\]]*)(\\])",
 					"beginCaptures": { 
 						"1": { "name": "punctuation.comment.line.double-dash.sectionheader.ampersand" },
