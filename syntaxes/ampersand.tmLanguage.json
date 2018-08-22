@@ -640,7 +640,7 @@
 						"5": { "name":"meta.box.body.label.text.ampersand"},
 						"6": { "name":"punctuation.statement.box.body.ampersand"}
 					},
-					"end": "(,|(?=(\\s(?=[CcRrUuDd])[Cc]?[Rr]?[Uu]?[Dd]?\\s|<|LINKTO|INTERFACE|BOX|ROWS|COLS|TABS|PANELS|\\])))",
+					"end": "(,|(?=(\\s(?=[CcRrUuDd])[Cc]?[Rr]?[Uu]?[Dd]?\\s|<(?!>)|LINKTO|INTERFACE|BOX|ROWS|COLS|TABS|PANELS|\\])))",
 					"endCaptures": {
 						"0": { "name":"meta.boxitem.end.ampersand"},
 						"1": { "name":"punctuation.statement.box.body.ampersand"}
@@ -976,10 +976,10 @@
       "relname": {
 			"name": "meta.structure.relname.ampersand",
 			"patterns": [
-            	{	"comment": "relationName[Concept1*Concept2]",
+            {	"comment": "relationName[Concept1*Concept2]",
 					"match": "\\b([a-z]\\w*)\\s*(\\[)\\s*([A-Z]\\w*)\\s*(\\*)\\s*([A-Z]\\w*)(\\])",
 					"captures": {
-						"1": { "name":"variable.relation.ampersand"},
+						"1": { "name":"variable.relation.cc.ampersand"},
 						"2": { "name":"punctuation.section.atoms.begin.ampersand"},
 						"3": { "name":"variable.concept.ampersand"},
 						"4": { "name":"punctuation.section.atoms.delimiter.ampersand"},
@@ -990,14 +990,14 @@
 				{	"comment": "relationName[Concept]",
 					"match": "\\b([a-z]\\w*)\\s*(\\[)\\s*([A-Z]\\w*)\\s*(\\])",
 					"captures": {
-						"1": { "name":"variable.relation.ampersand"},
+						"1": { "name":"variable.relation.c.ampersand"},
 						"2": { "name":"punctuation.section.atoms.begin.ampersand"},
 						"3": { "name":"variable.concept.ampersand"},
 						"4": { "name":"punctuation.section.atoms.end.ampersand"}
 					}
 				},
 				{	"comment": "relationName",
-					"name": "variable.relation.ampersand",
+					"name": "variable.relation.x.ampersand",
             		"match": "\\b[a-z]\\w*\\b"
 				}
 			]
