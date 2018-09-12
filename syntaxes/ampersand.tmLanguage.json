@@ -152,13 +152,15 @@
 
 		"INCLUDE":
 		{	"patterns": 
-			[	{	"match": "\\b(INCLUDE)\\s*(\")([^\"]*)(\")",
+			[	{	"match": "\\b(INCLUDE)\\s+(\")([^\"]+)(\")(?:\\s+\\[\\s*\"(\\w+)\"\\s*(?:,\\s*\"(\\w+)\"\\s*)*\\])?",
 					"captures": {
 						"0": { "name":"meta.include.ampersand"},
 						"1": { "name":"keyword.operator.include.ampersand"},
 						"2": { "name":"punctuation.statement.include.ampersand"},
 						"3": { "name":"variable.markup.other.filename.ampersand"},
-						"4": { "name":"punctuation.statement.include.ampersand"}
+						"4": { "name":"punctuation.statement.include.ampersand"},
+						"5": { "name":"variable.other.preprocessor.ampersand"},
+						"6": { "name":"variable.other.preprocessor.ampersand"}
 					}
 				}
 			]
