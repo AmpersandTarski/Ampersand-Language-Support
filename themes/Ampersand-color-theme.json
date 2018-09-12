@@ -24,6 +24,12 @@
 						],
 			"settings": { "foreground": "#f0d0b0", "fontStyle": "bold italic underline" }
 		},
+		{	"scope": "source.ampersand markup.other.preprocessor.keyword.ampersand",
+			"settings": { "foreground": "#f0d0b0", "fontStyle": "bold italic" }
+		},
+		{	"scope": "variable.other.preprocessor.ampersand",
+			"settings": { "foreground": "#f0d0b0", "fontStyle": "italic" }
+			},
 		{  "scope": "source.ampersand meta.block.documentation",
 			"settings": { "foreground": "#209020" }
 		},

@@ -6,7 +6,7 @@
 	"foldingStopMarker":"^(?=--\\[[^\\[])",
 	"patterns":
 	[	{	"comment": "to be reviewed using https://www.sublimetext.com/docs/3/scope_naming.html"},
-		{	"include": "#comments"     },
+		{	"include": "#COMMENTS"     },
 		{	"include": "#CONTEXT"      },
 		{	"include": "#PURPOSE"      },
 		{	"include": "#INCLUDE"      },
@@ -30,9 +30,19 @@
 	],
 
 	"repository": 
-	{	"comments":
+	{	"COMMENTS":
 		{	"patterns": 
-			[	{	"comment":"--[sectionheader] line comments",
+			[	{	"comment":"preprocessor syntax",
+					"name": "comment.line.preprocessor.ampersand",
+					"begin": "^(--)(#)",
+					"beginCaptures": { 
+						"1": { "name": "punctuation.comment.preprocessor.double-dash.ampersand" },
+						"2": { "name": "punctuation.comment.preprocessor.hash-sign.ampersand" } 
+					},
+					"end": "$",
+					"patterns": [ {"include": "#preprocessor patterns"} ]
+				},
+				{	"comment":"--[sectionheader] line comments",
 					"name": "comment.line.double-dash.ampersand",
 					"begin": "(--)(\\[)([^\\]]*)(\\])",
 					"beginCaptures": { 
@@ -142,13 +152,15 @@
 
 		"INCLUDE":
 		{	"patterns": 
-			[	{	"match": "\\b(INCLUDE)\\s*(\")([^\"]*)(\")",
+			[	{	"match": "\\b(INCLUDE)\\s+(\")([^\"]+)(\")(?:\\s+\\[\\s*\"(\\w+)\"\\s*(?:,\\s*\"(\\w+)\"\\s*)*\\])?",
 					"captures": {
 						"0": { "name":"meta.include.ampersand"},
 						"1": { "name":"keyword.operator.include.ampersand"},
 						"2": { "name":"punctuation.statement.include.ampersand"},
 						"3": { "name":"variable.markup.other.filename.ampersand"},
-						"4": { "name":"punctuation.statement.include.ampersand"}
+						"4": { "name":"punctuation.statement.include.ampersand"},
+						"5": { "name":"variable.other.preprocessor.ampersand"},
+						"6": { "name":"variable.other.preprocessor.ampersand"}
 					}
 				}
 			]
@@ -238,7 +250,7 @@
 					},
 					"end": "^(?=\\s*([^A-Z/]|VIOLATION|ROLE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|VIEW|MEANING|MESSAGE|PRAGMA))",
 					"patterns": [
-						{  "include": "#comments" },
+						{  "include": "#COMMENTS" },
 						{	"match": "\\s*(/\\\\)",
 							"captures": {
 								"0": { "name":"meta.classify.and-operator.ampersand"},
@@ -272,7 +284,7 @@
 					"2": { "name":"keyword.operator.represent.ampersand"}
 				},
 				"patterns": [
-					{  "include": "#comments" },
+					{  "include": "#COMMENTS" },
 					{  "match": "(,)\\s*([A-Z]\\w*)",
 						"captures": {
 							"1": { "name":"punctuation.statement.represent.ampersand"},
@@ -381,7 +393,7 @@
 						{  "include": "#bracket-open" },
 						{  "include": "#atom" },
 						{  "include": "#comma" },
-						{  "include": "#comments" }
+						{  "include": "#COMMENTS" }
 					]
 				},
 				{	"comment": "POPULATION <relation> CONTAINS",
@@ -401,7 +413,7 @@
 						{  "include": "#bracket-open" },
 						{  "include": "#atompair" },
 						{  "include": "#semi-colon" },
-						{  "include": "#comments" }
+						{  "include": "#COMMENTS" }
 					]
 				}
 			]
@@ -468,7 +480,7 @@
 						"1": { "name":"punctuation.statement.violation.ampersand"}
 					},
 					"patterns": [
-						{	"include": "#comments" },
+						{	"include": "#COMMENTS" },
 						{	"include": "#exectext-item" },
 						{	"include": "#src-tgt-item" },
 						{	"include": "#plaintext-item" }
@@ -585,7 +597,7 @@
 						},
 					"end": "(?=\\[)",
 					"patterns": [ 
-						{	"include":"#comments" },
+						{	"include":"#COMMENTS" },
 						{	"match": "[^\\s]+",
 							"name": "invalid.illegal.box.header.ampersand"
 						}
@@ -610,7 +622,7 @@
 						"1": { "name":"punctuation.box.body.ampersand"}
 					},
 					"patterns": [
-						{	"include": "#comments" },
+						{	"include": "#COMMENTS" },
 						{  "include": "#boxitems" },
 						{  "include": "#crud" },
 						{	"include": "#useview" },
@@ -646,7 +658,7 @@
 						"1": { "name":"punctuation.statement.box.body.ampersand"}
 					},
 					"patterns": [
-						{ 	"include": "#comments" },
+						{ 	"include": "#COMMENTS" },
 						{	"include": "#term" },
 						{	"match": "\\s(?=[CcRrUuDd])[Cc]?[Rr]?[Uu]?[Dd]?\\s+(LINKTO\\s+)?INTERFACE",
 							"captures": { 
@@ -718,7 +730,7 @@
 						"1": { "name":"punctuation.statement.view.ampersand"}
 					},
 					"patterns": [
-						{	"include":"#comments" },
+						{	"include":"#COMMENTS" },
 						{	"include":"#plaintext-item" },
 						{  "include":"#term" },
 						{	"match": "[^\\s]+",
@@ -750,7 +762,7 @@
 						"7": { "name":"keyword.operator.view.ampersand"}
 					},
 					"patterns": [
-						{	"include":"#comments" },
+						{	"include":"#COMMENTS" },
 						{	"include":"#view-body" },
 						{	"match": "[^\\s]+",
 							"name": "invalid.illegal.statement.view.ampersand"
@@ -774,7 +786,7 @@
 						"1": { "name":"punctuation.view.body.ampersand"}
 					},
 					"patterns": [
-						{	"include":"#comments" },
+						{	"include":"#COMMENTS" },
 						{  "comment": "like TXT statements in violations, we start to look for the (optional) comma",
 							"match": "(,\\s*)?((\")([^\"]*)(\")|([^\\]\"\\s]*))\\s*(:)",
 							"captures": {
@@ -943,7 +955,7 @@
 		"term": {
 			"name": "meta.structure.term.ampersand",
             "patterns": [
-				{	"include": "#comments" },
+				{	"include": "#COMMENTS" },
 				{	"match": "\\b(TXT|SRC|TGT)\\b",
 					"name": "invalid.illegal.term.txtsrctgt.ampersand"
 				},
@@ -1109,6 +1121,38 @@
 			"patterns": [
 				{	"name": "keyword.operator.term.ampersand",
 					"match": "((?<!-)-(?!-)|~|\\+|;|!|\\*|\\\\/|/\\\\|\\\\|/|<>)"
+				}
+			]
+		},
+
+		"preprocessor patterns":
+		{	"patterns": 
+			[	{	"comment":"IF-statement",
+					"begin": "\\b(IF)\\s+(\\w*)",
+					"beginCaptures": { 
+						"1": { "name":"markup.other.preprocessor.keyword.ampersand"},
+						"2": { "name":"variable.other.preprocessor.ampersand"}
+					},
+					"end": "$",
+					"patterns": [ {"include": "#comment patterns"} ]
+				},
+				{	"comment":"IF-statement",
+					"match": "\\b(IF)\\s+(\\w*)",
+					"captures": { 
+						"1": { "name":"markup.other.preprocessor.keyword.ampersand"},
+						"2": { "name":"variable.other.preprocessor.ampersand"}
+				 	}
+				},
+				{	"comment":"ELSE, ENDIF statements",
+					"begin": "\\b(ELSE|ENDIF)\\b",
+					"beginCaptures": { 
+						"1": { "name":"markup.other.preprocessor.keyword.ampersand"}
+					},
+					"end": "$",
+					"patterns": [ {"include": "#comment patterns"} ]
+				},
+				{	"name": "invalid.illegal.preprocessor.ampersand",
+					"match": "[^\\s\\)]" 
 				}
 			]
 		},
