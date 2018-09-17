@@ -1127,21 +1127,14 @@
 
 		"preprocessor patterns":
 		{	"patterns": 
-			[	{	"comment":"IF-statement",
-					"begin": "\\b(IF)\\s+(\\w*)",
+			[	{	"comment":"IF, IFNOT statements",
+					"begin": "\\b(IF|IFNOT)\\s+(\\w*)",
 					"beginCaptures": { 
 						"1": { "name":"markup.other.preprocessor.keyword.ampersand"},
 						"2": { "name":"variable.other.preprocessor.ampersand"}
 					},
 					"end": "$",
 					"patterns": [ {"include": "#comment patterns"} ]
-				},
-				{	"comment":"IF-statement",
-					"match": "\\b(IF)\\s+(\\w*)",
-					"captures": { 
-						"1": { "name":"markup.other.preprocessor.keyword.ampersand"},
-						"2": { "name":"variable.other.preprocessor.ampersand"}
-				 	}
 				},
 				{	"comment":"ELSE, ENDIF statements",
 					"begin": "\\b(ELSE|ENDIF)\\b",

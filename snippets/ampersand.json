@@ -11,7 +11,7 @@
 	"Preprocessor statements": {
 		"prefix": "--#",
 		"description": "Preprocessor statement",
-		"body":[ "--#${1:|IF ${2:variable},ELSE,ENDIF|}" ]
+		"body":[ "--#${1:|IF ${2:variable},IFNOT ${2:variable},ELSE,ENDIF|}" ]
 	},
 	"Define a context": {
 		"prefix": "CONTEXT",
