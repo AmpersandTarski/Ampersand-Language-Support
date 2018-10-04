@@ -10,7 +10,7 @@
 	},
 	"Preprocessor statements": {
 		"prefix": "--#",
-		"description": "Preprocessor statement",
+		"description": "Preprocessor statements",
 		"body":[ "--#${1:|IF ${2:variable},IFNOT ${2:variable},ELSE,ENDIF|}" ]
 	},
 	"Define a context": {
