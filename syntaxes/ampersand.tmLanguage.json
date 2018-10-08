@@ -34,7 +34,7 @@
 		{	"patterns": 
 			[	{	"comment":"preprocessor syntax",
 					"name": "comment.line.preprocessor.ampersand",
-					"begin": "^(--)(#)",
+					"begin": "^\\s*(--+)\\s*(#)\\s*",
 					"beginCaptures": { 
 						"1": { "name": "punctuation.comment.preprocessor.double-dash.ampersand" },
 						"2": { "name": "punctuation.comment.preprocessor.hash-sign.ampersand" } 
@@ -152,15 +152,30 @@
 
 		"INCLUDE":
 		{	"patterns": 
-			[	{	"match": "\\b(INCLUDE)\\s+(\")([^\"]+)(\")(?:\\s+\\[\\s*\"(\\w+)\"\\s*(?:,\\s*\"(\\w+)\"\\s*)*\\])?",
+			[	
+				{	"comment": "INCLUDE with preprocessor parameter list",
+					"begin": "\\b(INCLUDE)\\s+(\")([^\"]+)(\")\\s*(--+#)\\s*\\[\\s*\"(\\w+)\"\\s*(?:,\\s*\"(\\w+)\"\\s*)*\\]",
+					"beginCaptures": {
+						"0": { "name":"meta.include.ampersand"},
+						"1": { "name":"keyword.operator.include.ampersand"},
+						"2": { "name":"punctuation.statement.include.ampersand"},
+						"3": { "name":"markup.other.filename.ampersand"},
+						"4": { "name":"punctuation.statement.include.ampersand"},
+						"5": { "name":"punctuation.comment.preprocessor.double-dash.ampersand"},
+						"6": { "name":"variable.other.preprocessor.ampersand"},
+						"7": { "name":"variable.other.preprocessor.ampersand"}
+					},
+					"end": "$",
+					"patterns": [ {"include": "#comment patterns"} ]
+				},
+				{	"comment": "INCLUDE without preprocessor parameter list",
+					"match": "\\b(INCLUDE)\\s+(\")([^\"]+)(\")",
 					"captures": {
 						"0": { "name":"meta.include.ampersand"},
 						"1": { "name":"keyword.operator.include.ampersand"},
 						"2": { "name":"punctuation.statement.include.ampersand"},
-						"3": { "name":"variable.markup.other.filename.ampersand"},
-						"4": { "name":"punctuation.statement.include.ampersand"},
-						"5": { "name":"variable.other.preprocessor.ampersand"},
-						"6": { "name":"variable.other.preprocessor.ampersand"}
+						"3": { "name":"markup.other.filename.ampersand"},
+						"4": { "name":"punctuation.statement.include.ampersand"}
 					}
 				}
 			]
@@ -390,7 +405,7 @@
 					},
 					"end": "(?<=\\])",
 					"patterns": [
-						{  "include": "#bracket-open" },
+						{  "include": "#brackets" },
 						{  "include": "#atom" },
 						{  "include": "#comma" },
 						{  "include": "#COMMENTS" }
@@ -410,7 +425,7 @@
 					},
 					"end": "(?<=\\])",
 					"patterns": [
-						{  "include": "#bracket-open" },
+						{  "include": "#brackets" },
 						{  "include": "#atompair" },
 						{  "include": "#semi-colon" },
 						{  "include": "#COMMENTS" }
@@ -712,7 +727,8 @@
 
 		"VIEW":
 		{	"patterns": 
-			[	{	"name": "meta.view.ampersand",
+			[	{	"comment": "Traditional VIEW statement - must have open paren on first line",
+					"name": "meta.view.ampersand",
 					"begin": "\\b(VIEW)\\s+(\"?)(\\w+)(\\2)\\s*(:)\\s+([A-Z]\\w*)?\\s*(\\()",
 					"beginCaptures": {
 						"0": { "name":"meta.view.begin.ampersand"},
@@ -738,7 +754,8 @@
 						}
 					]
 				},
-				{	"name": "meta.view.ampersand",
+				{	"comment": "New VIEW statement - uses curly brackets",
+					"name": "meta.view.ampersand",
 					"begin": "\\b(VIEW)\\s+(\"?)(\\w+)(\\2)\\s*(:)\\s+([A-Z]\\w*)(\\s+DEFAULT)?",
 					"beginCaptures": {
 						"0": { "name":"meta.view.begin.ampersand"},
@@ -757,7 +774,7 @@
 						"2": { "name":"keyword.operator.view.ampersand"},
 						"3": { "name":"keyword.operator.view.ampersand"},
 						"4": { "name":"punctuation.statement.view.ampersand"},
-						"5": { "name":"variable.markup.other.filename.ampersand"},
+						"5": { "name":"markup.other.filename.ampersand"},
 						"6": { "name":"punctuation.statement.view.ampersand"},
 						"7": { "name":"keyword.operator.view.ampersand"}
 					},
@@ -780,10 +797,16 @@
 						"0": { "name":"meta.view.body.begin.ampersand"},
 						"1": { "name":"punctuation.view.body.ampersand"}
 					},
-					"end": "(\\})",
+					"end": "(\\})(\\s+(HTML)\\s+(TEMPLATE)\\s+(\"?)([^\"]+)(\"?)\\s+)?",
 					"endCaptures": {
 						"0": { "name":"meta.view.body.end.ampersand"},
-						"1": { "name":"punctuation.view.body.ampersand"}
+						"1": { "name":"punctuation.view.body.ampersand"},
+						"2": { "name":"meta.view.templatespec.ampersand"},
+						"3": { "name":"keyword.operator.view.ampersand"},
+						"4": { "name":"keyword.operator.view.ampersand"},
+						"5": { "name":"punctuation.statement.view.ampersand"},
+						"6": { "name":"markup.other.filename.ampersand"},
+						"7": { "name":"punctuation.statement.view.ampersand"}
 					},
 					"patterns": [
 						{	"include":"#COMMENTS" },
@@ -1127,21 +1150,14 @@
 
 		"preprocessor patterns":
 		{	"patterns": 
-			[	{	"comment":"IF-statement",
-					"begin": "\\b(IF)\\s+(\\w*)",
+			[	{	"comment":"IF, IFNOT statements",
+					"begin": "\\b(IF|IFNOT)\\s+(\\w*)",
 					"beginCaptures": { 
 						"1": { "name":"markup.other.preprocessor.keyword.ampersand"},
 						"2": { "name":"variable.other.preprocessor.ampersand"}
 					},
 					"end": "$",
 					"patterns": [ {"include": "#comment patterns"} ]
-				},
-				{	"comment":"IF-statement",
-					"match": "\\b(IF)\\s+(\\w*)",
-					"captures": { 
-						"1": { "name":"markup.other.preprocessor.keyword.ampersand"},
-						"2": { "name":"variable.other.preprocessor.ampersand"}
-				 	}
 				},
 				{	"comment":"ELSE, ENDIF statements",
 					"begin": "\\b(ELSE|ENDIF)\\b",
@@ -1218,9 +1234,9 @@
 			]
 		},
 
-		"bracket-open":
+		"brackets":
 		{	"patterns": 
-			[	{	"match": "\\[",
+			[	{	"match": "\\[|\\]",
 					"name":"punctuation.section.bracket.begin.ampersand"
 				}
 			]
