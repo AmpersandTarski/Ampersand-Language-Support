@@ -184,7 +184,7 @@
 		"CONCEPT":
 		{	"patterns": 
 			[	{	"comment": "CONCEPT statement with illegal Concept name",
-					"match": "\\b(CONCEPT|CLASSIFY)\\s+\"?([a-z]\\w*)",
+					"match": "\\b(CONCEPT)\\s+\"?([a-z]\\w*)",
 					"captures": {
 						"0": { "name":"meta.concept.ampersand"},
 						"1": { "name":"keyword.operator.concept.ampersand"},
@@ -235,8 +235,8 @@
 						"2": { "name":"invalid.illegal.statement.classify.ampersand"}
 					}
 				},
-				{	"comment": "CLASSIFY <Concept> ISA <CONCEPT>",
-					"match": "\\b(CLASSIFY)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))\\s+(ISA)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))",
+				{	"comment": "CLASSIFY <ConceptList> ISA <CONCEPT>",
+					"match": "\\b(CLASSIFY)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))(?:\\s*(,)\\s*(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\")))*\\s+(ISA)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))",
 					"captures": {
 						"0": { "name":"meta.classify.ampersand"},
 						"1": { "name":"keyword.operator.classify.ampersand"},
@@ -244,16 +244,21 @@
 						"3": { "name":"punctuation.statement.classify.ampersand"},
 						"4": { "name":"variable.concept.ampersand"},
 						"5": { "name":"punctuation.statement.classify.ampersand"},
-						"6": { "name":"keyword.operator.classify.ampersand"},
+						"6": { "name":"punctuation.statement.classify.ampersand"},
 						"7": { "name":"variable.concept.ampersand"},
 						"8": { "name":"punctuation.statement.classify.ampersand"},
 						"9": { "name":"variable.concept.ampersand"},
-						"10": { "name":"punctuation.statement.classify.ampersand"}
+						"10": { "name":"punctuation.statement.classify.ampersand"},
+						"11": { "name":"keyword.operator.classify.ampersand"},
+						"12": { "name":"variable.concept.ampersand"},
+						"13": { "name":"punctuation.statement.classify.ampersand"},
+						"14": { "name":"variable.concept.ampersand"},
+						"15": { "name":"punctuation.statement.classify.ampersand"}
 					}
 				},
-				{	"comment": "CLASSIFY <Concept> IS <Concept1> /\\ <Concept2> ...", 
+				{	"comment": "CLASSIFY <Conceptlist> IS <Concept1> /\\ <Concept2> ...", 
 					"name": "meta.classify.is.ampersand",
-					"begin": "\\b(CLASSIFY)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))\\s+(IS)\\s+",
+					"begin": "\\b(CLASSIFY)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))(?:\\s*(,)\\s*(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\")))*\\s+(IS)\\s+",
 					"beginCaptures": {
 						"0": { "name":"meta.classify.is.begin.ampersand"},
 						"1": { "name":"keyword.operator.classify.ampersand"},
@@ -261,7 +266,12 @@
 						"3": { "name":"punctuation.statement.classify.ampersand"},
 						"4": { "name":"variable.concept.ampersand"},
 						"5": { "name":"punctuation.statement.classify.ampersand"},
-						"6": { "name":"keyword.operator.classify.ampersand"}
+						"6": { "name":"punctuation.statement.classify.ampersand"},
+						"7": { "name":"variable.concept.ampersand"},
+						"8": { "name":"punctuation.statement.classify.ampersand"},
+						"9": { "name":"variable.concept.ampersand"},
+						"10": { "name":"punctuation.statement.classify.ampersand"},
+						"11": { "name":"keyword.operator.classify.ampersand"}
 					},
 					"end": "^(?=\\s*([^A-Z/]|VIOLATION|ROLE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|VIEW|MEANING|MESSAGE|PRAGMA))",
 					"patterns": [

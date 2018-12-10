@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.2.9] - 2018-12-10
+
+- Minor changes in functionality of snippets.
+- Syntax coloring allows concept lists in `CLASSIFY` statements
+
 ## [0.2.8] - 2018-08-09
 
 - Parse error messages. 
