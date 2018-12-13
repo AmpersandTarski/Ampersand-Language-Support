@@ -154,7 +154,7 @@
 		{	"patterns": 
 			[	
 				{	"comment": "INCLUDE with preprocessor parameter list",
-					"begin": "\\b(INCLUDE)\\s+(\")([^\"]+)(\")\\s*(--+#)\\s*\\[\\s*\"(\\w+)\"\\s*(?:,\\s*\"(\\w+)\"\\s*)*\\]",
+					"begin": "\\b(INCLUDE)\\s+(\")([^\"]+)(\")\\s*(--+#)\\s*\\[\\s*\"(!?\\w+)\"\\s*(?:,\\s*\"(!?\\w+)\"\\s*)*\\]",
 					"beginCaptures": {
 						"0": { "name":"meta.include.ampersand"},
 						"1": { "name":"keyword.operator.include.ampersand"},
