@@ -31,13 +31,13 @@
 	},
 	"Define a CLASSIFY ISA statement": {
 		"prefix": "CLASSIFY",
-		"description": "CLASSIFY <Concept> ISA <GenericConcept>",
-		"body":[ "CLASSIFY ${1:specConcept} ISA ${2:genericConcept}" ]
+		"description": "CLASSIFY <Conceptlist> ISA <GenericConcept>",
+		"body":[ "CLASSIFY ${1:ConceptList} ISA ${2:genericConcept}" ]
 	},
 	"Define a CLASSIFY IS statement": {
 		"prefix": "CLASSIFY",
-		"description": "CLASSIFY <Concept> IS <GenericConcept1> /\\ <GenericConcept2> /\\... <GenericConcept<n>>",
-		"body":[ "CLASSIFY ${1:specConcept} IS ${2:genericConcept} /\\ ${3:genericConcept}" ]
+		"description": "CLASSIFY <Conceptlist> IS <GenericConcept1> /\\ <GenericConcept2> /\\... <GenericConcept<n>>",
+		"body":[ "CLASSIFY ${1:ConceptList} IS ${2:genericConcept} /\\ ${3:genericConcept}" ]
 	},
 	"Define a Concepts population": {
 		"prefix": "POPULATION",
@@ -76,6 +76,11 @@
 		"prefix": "VIOLATION (TXT \"{EX} ",
 		"description": "Define a VIOLATION that the ExecEngine will execute",
 		"body":[ "VIOLATION (TXT \"{EX} $0\")" ]
+	},
+	"ExecEngine TXT": {
+		"prefix": ",TXT \"{EX} ",
+		"description": "Define a new execution statement (to be used within a VIOLATION statement)",
+		"body":[ ",TXT \"{EX} $0\")" ]
 	},
 	"InsPair": {
 		"prefix": "InsPair",

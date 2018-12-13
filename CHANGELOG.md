@@ -1,7 +1,8 @@
 # Change Log
 
-## [0.2.9] - 2018-12-10
+## [0.2.15] - 2018-12-13
 
+- Synchronized version number of this changelog and that of `package.json`
 - Minor changes in functionality of snippets.
 - Syntax coloring supports concept lists in `CLASSIFY` statements
 - Syntax coloring supports negations (!-chars) in preprocessor argument lists of `INCLUDE` statements
