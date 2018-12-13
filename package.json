@@ -1,7 +1,7 @@
 {
   "name": "language-ampersand",
   "displayName": "Ampersand (ADL) language support",
-  "version": "0.2.15",
+  "version": "0.2.16",
   "publisher": "AmpersandTarski",
   "description": "Language support for Ampersand scripts",
   "categories": [
@@ -10,7 +10,7 @@
     "Snippets"
   ],
   "author": "Ampersand Tarski",
-  "preview": true,
+  "preview": false,
   "contributors": [
     {
       "name": "Rieks",
