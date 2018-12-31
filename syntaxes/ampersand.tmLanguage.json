@@ -889,7 +889,7 @@
 					}
 				},
 				{	"comment": "{EX} - well-known miscellaneous functions",
-					"match": "({EX})(\\s*|_;)(MrgAtoms|SetConcept|ClearConcept|InsPairCond|SetConceptCond|SetNavToOnCommit|SetNavToOnRollback)(?=;)",
+					"match": "({EX})(\\s*|_;)(MrgAtoms|SetConcept|ClearConcept|InsPairCond|SetConceptCond|SetNavToOnCommit|SetNavToOnRollback|TerminateThisExecEngine|TriggerService)(?=;)",
 					"captures": {
 						"0": { "name":"meta.violation.execengine.wellknown-function.atom.ampersand"},
 						"1": { "name":"keyword.operator.violation.txt.ampersand"},
