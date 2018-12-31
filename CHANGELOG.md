@@ -1,5 +1,15 @@
 # Change Log
 
+## [0.2.17] - 2018-12-13
+
+- Syntax coloring now better distinguishes between keywords, errors and deprecated stuff
+- Support for SERVICEs and ExecEngine termination requests in syntax coloring and snippets
+- Support for OBJECT keyword in REPRESENT statement
+
+## [0.2.16] - 2018-12-13
+
+- Preview disabled
+
 ## [0.2.15] - 2018-12-13
 
 - Synchronized version number of this changelog and that of `package.json`
