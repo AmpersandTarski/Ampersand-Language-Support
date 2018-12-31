@@ -273,7 +273,7 @@
 						"10": { "name":"punctuation.statement.classify.ampersand"},
 						"11": { "name":"keyword.operator.classify.ampersand"}
 					},
-					"end": "^(?=\\s*([^A-Z/]|VIOLATION|ROLE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|VIEW|MEANING|MESSAGE|PRAGMA))",
+					"end": "^(?=\\s*([^A-Z/]|VIOLATION|ROLE|SERVICE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|VIEW|MEANING|MESSAGE|PRAGMA))",
 					"patterns": [
 						{  "include": "#COMMENTS" },
 						{	"match": "\\s*(/\\\\)",
@@ -446,9 +446,9 @@
 
 		"ROLE":
 		{	"patterns": [
-				{	"comment":"ROLE <role> MAINTAINS <rulename>",
+				{	"comment":"ROLE,SERVICE <role> MAINTAINS <rulename>",
 					"name":"meta.role.ampersand",
-					"match": "\\b(ROLE)\\s+(?:\\b([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))\\s+(MAINTAINS)\\s+(\")([^\"]*)(\")",
+					"match": "\\b(ROLE|SERVICE)\\s+(?:\\b([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))\\s+(MAINTAINS)\\s+(\")([^\"]*)(\")",
 					"captures": {
 						"1": { "name":"keyword.operator.role.ampersand"},
 						"2": { "name":"variable.role.ampersand"},
@@ -477,7 +477,7 @@
 						"4": { "name":"punctuation.statement.rule.ampersand"},
 						"5": { "name":"punctuation.statement.rule.ampersand"}
 					},
-					"end": "^(?=([^-\\|\\s]|(\\s+(VIOLATION|ROLE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|VIEW|MEANING|MESSAGE|PRAGMA))))",
+					"end": "^(?=([^-\\|\\s]|(\\s+(VIOLATION|ROLE|SERVICE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|VIEW|MEANING|MESSAGE|PRAGMA))))",
 					"patterns": [
 						{	"name": "keyword.operator.rule-expression.ampersand",
 							"match": "(\\|-|=)"
@@ -849,7 +849,7 @@
 		"OTHERKWDS":
 		{	"patterns": 
 			[	{	"name": "invalid.deprecated.keywords.ampersand",
-					"match": "\\b(PATTERN|ENDPATTERN|PROCESS|ENDPROCESS|SERVICE|ENDSERVICE|LATEX|MARKDOWN|SPEC|REST)\\b"
+					"match": "\\b((END)?PATTERN|(END)?PROCESS|LATEX|MARKDOWN|SPEC|REST)\\b"
 				}
 			]
 		},
