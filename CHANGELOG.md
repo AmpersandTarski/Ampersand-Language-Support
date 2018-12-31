@@ -1,9 +1,5 @@
 # Change Log
 
-## [0.2.18]
-
-- 
-
 ## [0.2.17] - 2018-12-31
 
 - Syntax coloring now better distinguishes between keywords, errors and deprecated stuff
