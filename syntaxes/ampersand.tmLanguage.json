@@ -302,7 +302,7 @@
 					"1": { "name":"keyword.operator.represent.ampersand"},
 					"2": { "name":"variable.concept.ampersand"}
 				},
-				"end": "(TYPE)\\s+((BIG|HUGE)?(ALPHANUMERIC|BINARY)|PASSWORD|DATE(TIME)?|BOOLEAN|INTEGER|FLOAT)\\b",
+				"end": "(TYPE)\\s+((BIG|HUGE)?(ALPHANUMERIC|BINARY)|PASSWORD|DATE(TIME)?|BOOLEAN|INTEGER|FLOAT|OBJECT)\\b",
 				"endCaptures": {
 					"0": { "name":"meta.represent.end.ampersand"},
 					"1": { "name":"keyword.operator.represent.ampersand"},
