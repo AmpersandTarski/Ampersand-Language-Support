@@ -48,7 +48,7 @@
 			"settings": { "foreground": "#FFC080F0", "fontStyle": "bold" }
 		},
 		{  "scope": "source.ampersand keyword.operator",
-			"settings": { "foreground": "#C06060", "fontStyle": "bold" }
+			"settings": { "foreground": "#F0A080F0", "fontStyle": "bold" }
 		},
 		{  "scope": [ "source.ampersand keyword.operator.violation.txt"
 						, "source.ampersand punctuation.statement.violation"
