@@ -47,7 +47,7 @@
 	"TYPE statement": {
 		"prefix": "TYPE",
 		"description": "Choose one of the allowed TYPEs",
-		"body":[ "TYPE ${1|ALPHANUMERIC,BIGALPHANUMERIC,DATE,DATETIME,BOOLEAN,INTEGER,FLOAT,PASSWORD,BINARY,BIGBINARY,HUGEALPHANUMERIC,HUGEBINARY|}" ]
+		"body":[ "TYPE ${1|ALPHANUMERIC,BIGALPHANUMERIC,DATE,DATETIME,BOOLEAN,INTEGER,FLOAT,PASSWORD,OBJECT,BINARY,BIGBINARY,HUGEALPHANUMERIC,HUGEBINARY|}" ]
 	},
 	"Define a RELATION statement": {
 		"prefix": "RELATION",
@@ -64,7 +64,15 @@
 		"description": "Define a POPULATION of Relation pairs/links",
 		"body":[ "POPULATION \"${1:Relname}\" CONTAINS [ (\"$2\", \"$3\") ]"	]
 	},
-	"ExecEngine RULE": {
+	"SERVICE MAINTAINS RULE": {
+		"prefix": "SERVICE",
+		"description": "Define a RULE that the specified SERVICE will maintain",
+		"body":[
+			"SERVICE \"$1\" MAINTAINS \"$2\"",
+			"RULE \"${2:rulename}\": "
+		]
+	},
+	"ExecEngine MAINTAINS RULE": {
 		"prefix": "ROLE ExecEngine MAINTAINS",
 		"description": "Define a RULE that the ExecEngine will maintain",
 		"body":[
@@ -72,15 +80,15 @@
 			"RULE \"${1:rulename}\": "
 		]
 	},
-	"ExecEngine VIOLATION": {
-		"prefix": "VIOLATION (TXT \"{EX} ",
-		"description": "Define a VIOLATION that the ExecEngine will execute",
-		"body":[ "VIOLATION (TXT \"{EX} $0\")" ]
-	},
 	"ExecEngine TXT": {
 		"prefix": ",TXT \"{EX} ",
 		"description": "Define a new execution statement (to be used within a VIOLATION statement)",
-		"body":[ ",TXT \"{EX} $0\")" ]
+		"body":[ ",TXT \"{EX} $0" ]
+	},
+	"VIOLATION": {
+		"prefix": "VIOLATION (TXT \"{EX} ",
+		"description": "Define a VIOLATION that the ExecEngine will execute",
+		"body":[ "VIOLATION (TXT \"{EX} $0" ]
 	},
 	"InsPair": {
 		"prefix": "InsPair",
@@ -91,6 +99,14 @@
 		"prefix": "DelPair",
 		"description": "most common way in which DelPairs are done",
 		"body":[ "DelPair;${1:Relname};${2:srcConcept};\", SRC I, TXT \";${3:tgtConcept};\", TGT I" ]
+	},
+	"NewStruct": {
+		"prefix": "NewStruct",
+		"description": "NewStruct is deprecated - change to InsAtom",
+		"body":[
+			"InsAtom;${1:concept}\"",
+			"          ,TXT \"{EX} $0" 
+		]
 	},
 	"InsAtom": {
 		"prefix": "InsAtom",
