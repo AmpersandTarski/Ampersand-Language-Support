@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.2.18] - 2019-01-02
+
+- Supports relations with signature in POPULATION statements (Fixes #17)
+
 ## [0.2.17] - 2018-12-31
 
 - Syntax coloring now better distinguishes between keywords, errors and deprecated stuff
