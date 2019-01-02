@@ -12,7 +12,7 @@
 			"settings": { "foreground": "#E00000", "fontStyle": "bold underline" }
 		},
 		{	"scope": "source.ampersand invalid.deprecated",
-			"settings": { "foreground": "#E05070", "fontStyle": "bold" }
+			"settings": { "foreground": "#E05070", "fontStyle": "italic underline" }
 		},
 		
 		
@@ -48,7 +48,7 @@
 			"settings": { "foreground": "#FFC080F0", "fontStyle": "bold" }
 		},
 		{  "scope": "source.ampersand keyword.operator",
-			"settings": { "foreground": "#C06060", "fontStyle": "bold" }
+			"settings": { "foreground": "#F0A080F0", "fontStyle": "bold" }
 		},
 		{  "scope": [ "source.ampersand keyword.operator.violation.txt"
 						, "source.ampersand punctuation.statement.violation"
