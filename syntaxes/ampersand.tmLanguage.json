@@ -542,6 +542,7 @@
 					},
 					"patterns": [
 						{	"include": "#COMMENTS" },
+						{  "include": "#comma" },
 						{	"include": "#exectext-item" },
 						{	"include": "#src-tgt-item" },
 						{	"include": "#plaintext-item" }
@@ -720,6 +721,7 @@
 					},
 					"patterns": [
 						{ 	"include": "#COMMENTS" },
+						{  "include": "#markdowntext-item"},
 						{	"include": "#term" },
 						{	"match": "\\s(?=[CcRrUuDd])[Cc]?[Rr]?[Uu]?[Dd]?\\s+(LINKTO\\s+)?INTERFACE",
 							"captures": { 
@@ -793,7 +795,8 @@
 					},
 					"patterns": [
 						{	"include":"#COMMENTS" },
-						{	"include":"#plaintext-item" },
+						{  "include":"#comma" },
+						{	"include":"#markdowntext-item" },
 						{  "include":"#term" },
 						{	"match": "[^\\s]+",
 							"name": "invalid.illegal.statement.view.ampersand"
@@ -869,7 +872,7 @@
 								"7": { "name":"punctuation.statement.view.body.ampersand"}
 							}
 						},
-						{	"include":"#plaintext-item" },
+						{	"include":"#markdowntext-item" },
 						{  "include":"#term" },
 						{	"match": "[^\\s]+",
 							"name": "invalid.illegal.statement.view.body.ampersand"
@@ -982,10 +985,32 @@
 			]
 		},
 
+		"markdowntext-item":
+		{	"comment": "TXT \"markdowntext\"",
+			"name":"meta.txt.markdown.ampersand",
+			"begin": "(TXT)\\s+(\")",
+			"captures": {
+				"0": { "name":"meta.txt.markdown.begin.ampersand"},
+				"1": { "name":"punctuation.statement.txt.ampersand"},
+				"2": { "name":"keyword.operator.txt.ampersand"},
+				"3": { "name":"punctuation.statement.txt.ampersand"}
+			},
+			"end": "(?<!\\\\)(\")",
+			"endCaptures": {
+				"0": { "name":"meta.txt.markdown.end.ampersand"},
+				"1": { "name":"punctuation.statement.txt.ampersand"}
+			},
+			"patterns": [
+				{	"name": "txt.markdown.ampersand",
+					"match": "."
+				}
+			]
+		},
+				
 		"plaintext-item":
 		{	"patterns": [
 				{	"comment": "TXT \"plaintext\"",
-					"match": "(,\\s*)?(TXT)\\s+(\")((?:[^\"\\\\]|\\\\.)*)(\")",
+					"match": "(TXT)\\s+(\")((?:[^\"\\\\]|\\\\.)*)(\")",
 					"captures": {
 						"0": { "name":"meta.txt.ampersand"},
 						"1": { "name":"punctuation.statement.txt.ampersand"},
