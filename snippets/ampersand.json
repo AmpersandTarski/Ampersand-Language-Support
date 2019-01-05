@@ -119,7 +119,50 @@
 	"DelAtom": {
 		"prefix": "DelAtom",
 		"description": "most common way in which DelAtoms are done",
-		"body":[ "DelAtom;${1:concept};${2:atomid}\")"	]
+		"body":[ "DelAtom;${1:concept};\", ${2:atomid}"	]
+	},
+	"SetConcept": {
+		"prefix": "SetConcept",
+		"description": "Add atomId[ConceptA] to [ConceptB]-set",
+		"body":[ "SetConcept;${1:CurrentConcept};${2:NewConcept};\", ${3:atomid}"	]
+	},
+	"ClearConcept": {
+		"prefix": ["ClearConcept", "ClrConcept"],
+		"description": "Remove atomId as member from [Concept] set. Can only be done if [Concept] is a specialization of another concept",
+		"body":[ "ClearConcept;${1:concept};\", ${2:atomid}"	]
+	},
+	"SetNavToOnCommit": {
+		"prefix": "SetNavToOnCommit",
+		"description": "Specify INTERFACE to which to navigate in case the current transaction is committed to",
+		"body":[ "SetNavToOnCommit;\", ${1:/InterfaceID}"	]
+	},
+	"SetNavToOnRollBack": {
+		"prefix": "SetNavToOnRollBack",
+		"description": "Specify INTERFACE to which to navigate in case the current transaction rolled back",
+		"body":[ "SetNavToOnRollBack;\", ${1:/InterfaceID}"	]
+	},
+	"TerminateThisExecEngine": {
+		"prefix": "TerminateThisExecEngine",
+		"description": "Terminate the ExecEngine that maintains the rule in which this function is executed",
+		"body":[ "TerminateThisExecEngine;${1:Optional message for userlog}\""	]
+	},
+	"TriggerService": {
+		"prefix": "TriggerService",
+		"description": "Trigger the specified service (i.e. SERVICE that maintains a set of rules)",
+		"body":[ "TriggerService;${1:SERVICE that maintains a set of rules}\""	]
+	},
+	"Warshall": {
+		"prefix": [ "Warshall", "TransitiveClosure", "star" ],
+		"description": "Compute transitive closure of a relation r",
+		"body":[ "--[Transitive Closure of ${1:Relation}[${2:concept}]]",
+			"$1 :: $2 * $2 -- relation `r` of which r+ will be computed",
+			"$1Copy :: $2 * $2 -- copied value of `r` allows for detecting modification events",
+			"$1Plus :: $2 * $2 -- transitive closure of `r`, i.e. `r+`",
+		   " ",
+			"ROLE ExecEngine MAINTAINS \"Compute $1Plus\"",
+			"RULE \"Compute $1Plus\": $1[$2] = $1Copy[$2]",
+			"VIOLATION (TXT \"{EX} TransitiveClosure;$1;$2;$1Copy;$1Plus\")"
+		]
 	},
 	"Equivalence rule": {
 		"prefix": "eqv-relation",
