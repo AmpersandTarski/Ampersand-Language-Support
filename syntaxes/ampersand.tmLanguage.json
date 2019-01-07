@@ -236,25 +236,26 @@
 					}
 				},
 				{	"comment": "CLASSIFY <ConceptList> ISA <CONCEPT>",
-					"match": "\\b(CLASSIFY)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))(?:\\s*(,)\\s*(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\")))*\\s+(ISA)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))",
-					"captures": {
-						"0": { "name":"meta.classify.ampersand"},
+					"name": "meta.classify.ampersand",
+					"begin": "\\b(CLASSIFY)",
+					"beginCaptures": {
+						"1": { "name":"keyword.operator.classify.ampersand"}
+					},
+					"end": "(ISA)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))",
+					"endCaptures": {
 						"1": { "name":"keyword.operator.classify.ampersand"},
 						"2": { "name":"variable.concept.ampersand"},
 						"3": { "name":"punctuation.statement.classify.ampersand"},
 						"4": { "name":"variable.concept.ampersand"},
-						"5": { "name":"punctuation.statement.classify.ampersand"},
-						"6": { "name":"punctuation.statement.classify.ampersand"},
-						"7": { "name":"variable.concept.ampersand"},
-						"8": { "name":"punctuation.statement.classify.ampersand"},
-						"9": { "name":"variable.concept.ampersand"},
-						"10": { "name":"punctuation.statement.classify.ampersand"},
-						"11": { "name":"keyword.operator.classify.ampersand"},
-						"12": { "name":"variable.concept.ampersand"},
-						"13": { "name":"punctuation.statement.classify.ampersand"},
-						"14": { "name":"variable.concept.ampersand"},
-						"15": { "name":"punctuation.statement.classify.ampersand"}
-					}
+						"5": { "name":"punctuation.statement.classify.ampersand"}
+					},
+					"patterns": [ 
+						{	"include": "#comma" },
+						{	"include": "#concept" },
+						{	"name": "invalid.illegal.statement.ident.ampersand",
+							"match": "[^\\s\\)]"
+						}
+					]
 				},
 				{	"comment": "CLASSIFY <Conceptlist> IS <Concept1> /\\ <Concept2> ...", 
 					"name": "meta.classify.is.ampersand",
@@ -1291,6 +1292,20 @@
 			"patterns":
 			[	{  "include": "#comma" },
 				{  "include": "#atom" }
+			]
+		},
+		
+		"concept":
+		{	"patterns": 
+			[	{	"name": "variable.concept.ampersand",
+					"match": "\\b([A-Z]\\w*)|(\")([A-Z][^\"]*)(\")",
+					"captures": {
+						"1": { "name":"variable.concept.ampersand"},
+						"2": { "name":"punctuation.statement.classify.ampersand"},
+						"3": { "name":"variable.concept.ampersand"},
+						"4": { "name":"punctuation.statement.classify.ampersand"}
+					}
+			}
 			]
 		},
 
