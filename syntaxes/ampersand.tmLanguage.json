@@ -1250,8 +1250,21 @@
 		"comment patterns":
 		{	"patterns": 
 			[	{	"comment":"**highlighted**",
-					"match": "\\*\\*(.*?)\\*\\*",
-					"captures": { "0": { "name":"markup.other.highlight.ampersand"} }
+					"begin": "\\*\\*",
+					"beginCaptures": { 
+							"1": { "name":"markup.other.highlight.ampersand"}
+						},
+					"end": "(?:\\*\\*|$)",
+					"endCaptures": { 
+							"1": { "name":"markup.other.highlight.ampersand"}
+						},
+					"patterns": [ 
+						{	"include": "#comment patterns"},
+						{
+							"name": "markup.other.highlight.ampersand",
+							"match": "."
+						}
+					] 
 				},
 				{	"comment":"`backticked`",
 					"match": "`([^`]*)`",
