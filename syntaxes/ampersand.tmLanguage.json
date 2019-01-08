@@ -1277,17 +1277,19 @@
 					}
 				},
 				{	"comment":"file: \"filename\"",
-					"match": "file:?\\s*(\")([^\"]*)(\")",
+					"match": "(?<=[Ff]ile|[Ff]ile:)\\s*(\")([^\"]*)(\")",
 					"captures": {
+						"0": { "name":"comment.filename.ampersand"},
 						"1": { "name":"punctuation.definition.string.begin.ampersand"},
 						"2": { "name":"markup.other.filename.ampersand"},
 						"3": { "name":"punctuation.definition.string.end.ampersand"}
 					}
 				},
 				{	"comment":"Issue: #nnn",
-					"match": "\\b(|[Ii]ssue:?\\s*)(#[0-9]{1,5})\\b",
+					"match": "(?<=[Ii]ssue|[Ii]ssue:)\\s*(#[0-9]{1,5})\\b",
 					"captures": {
-						"2": { "name":"markup.other.issue.ampersand"}
+						"0": { "name":"comment.issue.ampersand"},
+						"1": { "name":"markup.other.issue.ampersand"}
 					}
 				}
 			]
