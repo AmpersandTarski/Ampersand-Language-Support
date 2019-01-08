@@ -252,7 +252,7 @@
 					"patterns": [ 
 						{	"include": "#comma" },
 						{	"include": "#concept" },
-						{	"name": "invalid.illegal.statement.ident.ampersand",
+						{	"name": "invalid.illegal.statement.classify.ampersand",
 							"match": "[^\\s\\)]"
 						}
 					]
@@ -296,31 +296,33 @@
 		
 		"REPRESENT":
 		{	"patterns": 
-			[	{	"name": "meta.represent.ampersand",
-				"begin": "\\b(REPRESENT)\\s+([A-Z]\\w*)",
-				"beginCaptures": {
-					"0": { "name":"meta.represent.begin.ampersand"},
-					"1": { "name":"keyword.operator.represent.ampersand"},
-					"2": { "name":"variable.concept.ampersand"}
-				},
-				"end": "(TYPE)\\s+((BIG|HUGE)?(ALPHANUMERIC|BINARY)|PASSWORD|DATE(TIME)?|BOOLEAN|INTEGER|FLOAT|OBJECT)\\b",
-				"endCaptures": {
-					"0": { "name":"meta.represent.end.ampersand"},
-					"1": { "name":"keyword.operator.represent.ampersand"},
-					"2": { "name":"keyword.operator.represent.ampersand"}
-				},
-				"patterns": [
-					{  "include": "#COMMENTS" },
-					{  "match": "(,)\\s*([A-Z]\\w*)",
-						"captures": {
-							"1": { "name":"punctuation.statement.represent.ampersand"},
-							"2": { "name":"variable.concept.ampersand"}
-						}
-					},
-					{	"match": "([^\\s]+)",
-						"captures": { "1": { "name":"invalid.illegal.statement.classify.ampersand"} }
+			[	{	"comment": "REPRESENT statement with illegal Concept name",
+					"match": "\\b(REPRESENT)\\s*\"?([a-z]\\w*)",
+					"captures": {
+						"0": { "name":"meta.represent.ampersand"},
+						"1": { "name":"keyword.operator.represent.ampersand"},
+						"2": { "name":"invalid.illegal.statement.represent.ampersand"}
 					}
-				]
+				},
+				{	"comment": "REPRESENT <ConceptList> REPRESENT <REPRENTTYPE>",
+					"name": "meta.represent.ampersand",
+					"begin": "\\b(REPRESENT)",
+					"beginCaptures": {
+						"1": { "name":"keyword.operator.represent.ampersand"}
+					},
+					"end": "(TYPE)\\s+((BIG|HUGE)?(ALPHANUMERIC|BINARY)|PASSWORD|DATE(TIME)?|BOOLEAN|INTEGER|FLOAT|OBJECT)\\b",
+					"endCaptures": {
+						"0": { "name":"meta.represent.end.ampersand"},
+						"1": { "name":"keyword.operator.represent.ampersand"},
+						"2": { "name":"keyword.operator.represent.ampersand"}
+					},
+					"patterns": [ 
+						{	"include": "#comma" },
+						{	"include": "#concept" },
+						{	"name": "invalid.illegal.statement.represent.ampersand",
+							"match": "[^\\s\\)]"
+						}
+					]
 				}
 			]
 		},
