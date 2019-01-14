@@ -507,7 +507,7 @@
 		{	"patterns": [
 				{	"comment": "RULE definition",
 					"name":"meta.rule.ampersand",
-					"begin": "\\b(RULE)\\s+(\")([^\"]*)(\")\\s*(:)",
+					"begin": "\\b(RULE)\\s+(\"?)([^\"]*)(\\2)\\s*(:)",
 					"beginCaptures": {
 						"0": { "name":"meta.rule.begin.ampersand"},
 						"1": { "name":"keyword.operator.rule.ampersand"},
