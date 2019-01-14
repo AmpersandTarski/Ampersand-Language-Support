@@ -304,7 +304,14 @@
 						"2": { "name":"invalid.illegal.statement.represent.ampersand"}
 					}
 				},
-				{	"comment": "REPRESENT <ConceptList> REPRESENT <REPRENTTYPE>",
+				{	"comment": "REPRESENT statement without a TYPE keyword",
+					"match": "\\b(REPRESENT.*(?<!TYPE)\\s+((BIG|HUGE)?(ALPHANUMERIC|BINARY)|PASSWORD|DATE(TIME)?|BOOLEAN|INTEGER|FLOAT|OBJECT))\\b",
+					"captures": {
+						"0": { "name":"meta.represent.ampersand"},
+						"1": { "name":"invalid.illegal.statement.represent.ampersand"}
+					}
+				},
+				{	"comment": "REPRESENT <ConceptList> TYPE <REPRENTTYPE>",
 					"name": "meta.represent.ampersand",
 					"begin": "\\b(REPRESENT)",
 					"beginCaptures": {
@@ -372,7 +379,7 @@
 					}
 				},
 				{	"comment": "RELATION relname [Concept1 * Concept2]",
-					"match": "\\b(RELATION)\\s*([a-z]\\w*)\\s*(\\[)\\s*([A-Z]\\w*)\\s*(\\*)\\s*([A-Z]\\w*)(\\])",
+					"match": "\\b(RELATION)\\s+([a-z]\\w*)\\s*(\\[)\\s*([A-Z]\\w*)\\s*(\\*)\\s*([A-Z]\\w*)(\\])",
 					"captures": {
 						"0": { "name":"meta.relation.ampersand"},
 						"1": { "name":"keyword.operator.relation.ampersand"},
@@ -385,7 +392,7 @@
 					}
 				},
 				{	"comment": "RELATION relname [Concept]",
-					"match": "\\b(RELATION)\\s*([a-z]\\w*)\\s*(\\[)\\s*([A-Z]\\w*)(\\])",
+					"match": "\\b(RELATION)\\s+([a-z]\\w*)\\s*(\\[)\\s*([A-Z]\\w*)(\\])",
 					"captures": {
 						"0": { "name":"meta.relation.ampersand"},
 						"1": { "name":"keyword.operator.relation.ampersand"},
