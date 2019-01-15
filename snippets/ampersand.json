@@ -80,15 +80,10 @@
 			"RULE \"${1:rulename}\": "
 		]
 	},
-	"ExecEngine TXT": {
-		"prefix": ",TXT \"{EX} ",
-		"description": "Define a new execution statement (to be used within a VIOLATION statement)",
-		"body":[ ",TXT \"{EX} $0" ]
-	},
 	"VIOLATION": {
-		"prefix": "VIOLATION (TXT \"{EX} ",
-		"description": "Define a VIOLATION that the ExecEngine will execute",
-		"body":[ "VIOLATION (TXT \"{EX} $0" ]
+		"prefix": "VIOLATION (TXT ",
+		"description": "Define a VIOLATION",
+		"body":[ "VIOLATION (TXT \"$0\")" ]
 	},
 	"InsPair": {
 		"prefix": "InsPair",
@@ -193,16 +188,6 @@
 			"VIOLATION (TXT \"{EX} DelPair;$1;$2;\", SRC I, TXT \";$2;\", TGT I)",
 			"$0"
 		]
-	},
-	"_SESSION": {
-		"prefix": "_SESSION",
-		"description": "current session atom",
-		"body": [ "\"_SESSION\"${1:[SESSION]}" ]
-	},
-	"Q_SESSION": {
-		"prefix": "\"_SESSION",
-		"description": "current session atom",
-		"body": [ "\"_SESSION" ]
 	},
 	"INTERFACE -- FOR -- BOX <BOXTYPE>": {
 		"prefix": "INTERFACE -- FOR -- BOX <BOXTYPE>",
