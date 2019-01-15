@@ -6,6 +6,7 @@
 - Issue: TXT statements contain markdown; however, I cannot get VSCode to show the associated markdown syntax coloring
 - Added snippets for most of the well-known ExecEngine functions
 - Added snippet for computing transitive closure (r -> r+) using Warshall
+- Various fixes for minor bugs and enhancements
 
 ## [0.2.18] - 2019-01-02
 
