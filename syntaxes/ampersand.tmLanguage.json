@@ -305,7 +305,7 @@
 					}
 				},
 				{	"comment": "REPRESENT statement without a TYPE keyword",
-					"match": "\\b(REPRESENT.*(?<!TYPE)\\s+((BIG|HUGE)?(ALPHANUMERIC|BINARY)|PASSWORD|DATE(TIME)?|BOOLEAN|INTEGER|FLOAT|OBJECT))\\b",
+					"match": "\\b(REPRESENT((?!TYPE).)*((BIG|HUGE)?(ALPHANUMERIC|BINARY)|PASSWORD|DATE(TIME)?|BOOLEAN|INTEGER|FLOAT|OBJECT))\\b",
 					"captures": {
 						"0": { "name":"meta.represent.ampersand"},
 						"1": { "name":"invalid.illegal.statement.represent.ampersand"}
