@@ -1,6 +1,6 @@
 # Change Log
 
-## [0.2.19] - tbd
+## [0.2.19] - 2019-02-19
 
 - Support for TXT statements in INTERFACEs
 - Issue: TXT statements contain markdown; however, I cannot get VSCode to show the associated markdown syntax coloring
