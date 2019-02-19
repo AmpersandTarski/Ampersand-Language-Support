@@ -1,5 +1,13 @@
 # Change Log
 
+## [0.2.19] - 2019-02-19
+
+- Support for TXT statements in INTERFACEs
+- Issue: TXT statements contain markdown; however, I cannot get VSCode to show the associated markdown syntax coloring
+- Added snippets for most of the well-known ExecEngine functions
+- Added snippet for computing transitive closure (r -> r+) using Warshall
+- Various fixes for minor bugs and enhancements
+
 ## [0.2.18] - 2019-01-02
 
 - Supports relations with signature in POPULATION statements (Fixes #17)

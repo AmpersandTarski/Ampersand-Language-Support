@@ -104,6 +104,9 @@
 		{	"scope": "source.ampersand variable.filename",
 			"settings": { "foreground": "#4080C0"}
 		},
+		{	"scope": "source.ampersand txt.markdown.ampersand",
+			"settings": { "foreground": "#6090E0"}
+		},
 		{	"scope": [	"source.ampersand variable.boxtype.predefined",
 							"source.ampersand variable.view.predefined"
 						],
