@@ -125,8 +125,7 @@
     "vscode:prepublish": "tsc -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
     "compile": "tsc -watch -p ./",
-    "testNew": "node ./node_modules/mocha/bin/mocha",
-    "test": "node ./node_modules/vscode/bin/test",
+    "test": "mocha",
     "package": "vsce package",
     "publish": "vsce publish"
   },

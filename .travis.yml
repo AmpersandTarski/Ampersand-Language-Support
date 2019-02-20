@@ -38,6 +38,7 @@ before_install:
 install:
 - npm upgrade
 - npm install
+- npm install -g mocha
 - npm run vscode:prepublish
 
 script:
