@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.2.20] - 2019-02-20
+
+- Minor sanitation of dependencies
+
 ## [0.2.19] - 2019-02-19
 
 - Support for TXT statements in INTERFACEs

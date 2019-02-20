@@ -1,7 +1,7 @@
 {
   "name": "language-ampersand",
   "displayName": "Ampersand (ADL) language support",
-  "version": "0.2.19",
+  "version": "0.2.20",
   "publisher": "AmpersandTarski",
   "description": "Language support for Ampersand scripts",
   "categories": [
@@ -134,15 +134,15 @@
     "typescript": "^3.0.1"
   },
   "devDependencies": {
-    "@types/chai": "^4.0.5",
-    "@types/mocha": "^5.2.5",
-    "@types/node": "^10.5.6",
-    "chai": "^4.1.2",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^10.12.26",
+    "chai": "^4.2.0",
     "del": "^3.0.0",
     "gulp": "^4.0.0",
-    "gulp-typescript": "^5.0.0-alpha.3",
+    "gulp-typescript": "^5.0.0",
     "mocha": "^5.2.0",
-    "mochawesome": "^3.0.3",
+    "mochawesome": "^3.1.1",
     "vscode": "^1.1.29"
   }
 }
