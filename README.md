@@ -10,13 +10,13 @@ This extension provides langauge support for the [Ampersand](http://ampersandtar
 
 ## Requirements
 
-* In order to use the ampersand commands, it is required that you have [the ampersand executable](https://github.com/AmpersandTarski/Ampersand/releases/latest) in your path. The default build task is now set to check the current script.
-* In order to get syntax coloring, select the Ampersand coloring theme as the default theme for .adl files. The reason for this is that default syntax coloring is designed for traditional languages (e.g. PHP), and Ampersand is far from that.
+- In order to use the ampersand commands, it is required that you have [the ampersand executable](https://github.com/AmpersandTarski/Ampersand/releases/latest) in your path. The default build task is now set to check the current script.
+- In order to get syntax coloring, select the Ampersand coloring theme as the default theme for .adl files. The reason for this is that default syntax coloring is designed for traditional languages (e.g. PHP), and Ampersand is far from that.
 
 ## Extension Settings
 
-* `ampersand.enable`: enable/disable this extension
-* Select theme `Ampersand` (File > Preferences > Color Theme > Ampersand)
+- `ampersand.enable`: enable/disable this extension
+- Select theme `Ampersand` (File > Preferences > Color Theme > Ampersand)
 
 ## Known Issues
 
