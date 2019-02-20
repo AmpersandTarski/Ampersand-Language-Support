@@ -14,7 +14,7 @@ import testRunner = require('vscode/lib/testrunner');
 // You can directly control Mocha options by uncommenting the following lines
 // See https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically#set-options for more info
 testRunner.configure({
-	ui: 'tdd', 		// the TDD UI is being used in extension.test.ts (suite, test, etc.)
+	ui: 'bdd', 		// we use bdd, the default. See [the difference with tdd](https://joshldavis.com/2013/05/27/difference-between-tdd-and-bdd/)
 	useColors: true // colored output from test results
 });
 
