@@ -143,6 +143,6 @@
     "gulp-typescript": "^5.0.0-alpha.3",
     "mocha": "^5.2.0",
     "mochawesome": "^3.0.3",
-    "vscode": "^1.1.18"
+    "vscode": "^1.1.29"
   }
 }
