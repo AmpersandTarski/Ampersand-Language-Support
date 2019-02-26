@@ -1,5 +1,5 @@
 import { should } from 'chai';
-import { HelloWorld } from '../src/HelloWorld';
+import { HelloWorld } from '../HelloWorld';
 should();
 
 describe('Hello World test suite', function() {

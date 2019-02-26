@@ -1,5 +1,5 @@
 import { should } from 'chai';
-import { Calc } from '../src/Calc';
+import { Calc } from '../Calc';
 should();
 
 describe('Calc test suite', function() {
