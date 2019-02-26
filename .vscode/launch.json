@@ -6,7 +6,7 @@
 	"version": "0.2.0",
     "configurations": [
 		{
-			"name": "Launch Extension",
+			"name": "Run Extension",
 			"type": "extensionHost",
 			"request": "launch",
 			"runtimeExecutable": "${execPath}",
@@ -16,10 +16,10 @@
 			"outFiles": [
 				"${workspaceFolder}/out/**/*.js"
 			],
-			"preLaunchTask": "npm"
+			"preLaunchTask": "npm: watch"
 		},
 		{
-			"name": "Launch Tests",
+			"name": "Extension Tests",
 			"type": "extensionHost",
 			"request": "launch",
 			"runtimeExecutable": "${execPath}",
@@ -27,13 +27,10 @@
          "--extensionDevelopmentPath=${workspaceRoot}",
 				 "--extensionTestsPath=${workspaceRoot}/out/test" 
 			],
-			"stopOnEntry": false,
-			"sourceMaps": true,
 			"outFiles": [
-				"${workspaceRoot}/{out,node_modules}/**/*.js",
-				"!${workspaceRoot}/out/tests/**/*.js"
+				"${workspaceFolder}/out/test/**/*.js"
 			],
-      "preLaunchTask": "npm"
+      "preLaunchTask": "npm: watch"
 		}
 	]
 }

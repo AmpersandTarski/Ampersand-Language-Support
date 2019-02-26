@@ -4,19 +4,18 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "npm",
-            "type": "shell",
-            "command": "npm watch",
-            "problemMatcher": "$tsc-watch",
-            "isBackground": true,
-            "presentation": {
-                "reveal": "never"
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
+			"type": "npm",
+			"script": "watch",
+			"problemMatcher": "$tsc-watch",
+			"isBackground": true,
+			"presentation": {
+				"reveal": "never"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
         {
             "label": "Ampersand check script",
             "type": "shell",
