@@ -119,7 +119,8 @@
   "scripts": {
     "vscode:prepublish": "tsc -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
-    "compile": "tsc -watch -p ./",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
     "test": "mocha",
     "package": "vsce package",
     "publish": "vsce publish"
