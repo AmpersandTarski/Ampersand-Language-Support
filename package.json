@@ -26,7 +26,8 @@
     "vscode": "^1.25.1"
   },
   "activationEvents": [
-    "onLanguage:ampersand"
+    "onLanguage:ampersand",
+    "onCommand:extension.helloWorld"
   ],
   "icon": "images/ampersandLogo.png",
   "galleryBanner": {
@@ -44,17 +45,6 @@
   },
   "main": "./out/src/extension",
   "contributes": {
-    "configuration": {
-      "type": "object",
-      "title": "Ampersand configuration",
-      "properties": {
-        "ampersand.indentationRules.enabled": {
-          "type": "boolean",
-          "default": false,
-          "description": "Set to 'true' to enable automatically increasing indent on newlines after '=', 'do', 'where' etc."
-        }
-      }
-    },
     "languages": [
       {
         "id": "ampersand",
@@ -93,7 +83,12 @@
         "path": "./snippets/ampersand.json"
       }
     ],
-    "commands": [],
+    "commands": [
+      {
+        "command": "extension.helloWorld",
+        "title": "Hallo Wereld"
+      }
+    ],
     "problemMatchers": [
       {
         "name": "amp-err",
