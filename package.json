@@ -1,7 +1,7 @@
 {
   "name": "language-ampersand",
   "displayName": "Ampersand (ADL) language support",
-  "version": "0.2.20",
+  "version": "0.2.21",
   "publisher": "AmpersandTarski",
   "description": "Language support for Ampersand scripts",
   "categories": [
@@ -26,7 +26,8 @@
     "vscode": "^1.25.1"
   },
   "activationEvents": [
-    "onLanguage:ampersand"
+    "onLanguage:ampersand",
+    "onCommand:extension.checkVersion"
   ],
   "icon": "images/ampersandLogo.png",
   "galleryBanner": {
@@ -42,19 +43,8 @@
   "bugs": {
     "url": "https://github.com/AmpersandTarski/Ampersand-Language-Support/issues"
   },
-  "main": "./out/src/extension",
+  "main": "./out/extension.js",
   "contributes": {
-    "configuration": {
-      "type": "object",
-      "title": "Ampersand configuration",
-      "properties": {
-        "ampersand.indentationRules.enabled": {
-          "type": "boolean",
-          "default": false,
-          "description": "Set to 'true' to enable automatically increasing indent on newlines after '=', 'do', 'where' etc."
-        }
-      }
-    },
     "languages": [
       {
         "id": "ampersand",
@@ -93,7 +83,12 @@
         "path": "./snippets/ampersand.json"
       }
     ],
-    "commands": [],
+    "commands": [
+      {
+        "command": "extension.checkVersion",
+        "title": "Ampersand: version"
+      }
+    ],
     "problemMatchers": [
       {
         "name": "amp-err",
@@ -124,24 +119,22 @@
   "scripts": {
     "vscode:prepublish": "tsc -p ./",
     "postinstall": "node ./node_modules/vscode/bin/install",
-    "compile": "tsc -watch -p ./",
-    "test": "mocha",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "mocha --require ts-node/register --watch-extensions ts \"test/**/*.ts\"",
     "package": "vsce package",
     "publish": "vsce publish"
   },
-  "dependencies": {
-    "typescript": "^3.0.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
-    "@types/node": "^10.12.26",
+    "@types/node": "^10.12.27",
     "chai": "^4.2.0",
-    "del": "^3.0.0",
-    "gulp": "^4.0.0",
-    "gulp-typescript": "^5.0.0",
     "mocha": "^5.2.0",
     "mochawesome": "^3.1.1",
-    "vscode": "^1.1.29"
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.3333",
+    "vscode": "^1.1.30"
   }
 }
