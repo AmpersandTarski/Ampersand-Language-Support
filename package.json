@@ -121,23 +121,20 @@
     "postinstall": "node ./node_modules/vscode/bin/install",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "test": "mocha",
+    "test": "mocha --require ts-node/register --watch-extensions ts \"test/**/*.ts\"",
     "package": "vsce package",
     "publish": "vsce publish"
   },
-  "dependencies": {
-    "typescript": "^3.0.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
-    "@types/node": "^10.12.26",
+    "@types/node": "^10.12.27",
     "chai": "^4.2.0",
-    "del": "^3.0.0",
-    "gulp": "^4.0.0",
-    "gulp-typescript": "^5.0.0",
     "mocha": "^5.2.0",
     "mochawesome": "^3.1.1",
-    "vscode": "^1.1.29"
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.3333",
+    "vscode": "^1.1.30"
   }
 }
