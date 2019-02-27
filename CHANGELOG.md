@@ -1,5 +1,9 @@
 # Change Log
 
+## not yet released functionality
+
+- Check availability of ampersand in path when activating extension.
+
 ## [0.2.21] - 2019-02-27
 
 - First step in attaching ampersand executable. Still work in progress.
