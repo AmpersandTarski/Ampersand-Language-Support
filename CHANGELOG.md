@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.2.21] - 2019-02-27
+
+- First step in attaching ampersand executable. Still work in progress.
+
 ## [0.2.20] - 2019-02-20
 
 - Minor sanitation of dependencies
