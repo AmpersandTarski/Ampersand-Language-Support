@@ -1,7 +1,7 @@
 {
   "name": "language-ampersand",
   "displayName": "Ampersand (ADL) language support",
-  "version": "0.2.21",
+  "version": "0.2.22",
   "publisher": "AmpersandTarski",
   "description": "Language support for Ampersand scripts",
   "categories": [
@@ -43,7 +43,7 @@
   "bugs": {
     "url": "https://github.com/AmpersandTarski/Ampersand-Language-Support/issues"
   },
-  "main": "./out/extension.js",
+  "main": "./out/src/extension.js",
   "contributes": {
     "languages": [
       {
@@ -121,7 +121,7 @@
     "postinstall": "node ./node_modules/vscode/bin/install",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "test": "mocha --require ts-node/register --watch-extensions ts \"test/**/*.ts\"",
+    "test": "mocha --require ts-node/register --watch-extensions ts \"test\\**\\*.ts\"",
     "package": "vsce package",
     "publish": "vsce publish"
   },
