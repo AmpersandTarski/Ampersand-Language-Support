@@ -2,6 +2,8 @@
 
 ## not yet released functionality
 
+## [0.2.22] - 2019-03-01
+
 - Check availability of ampersand in path when activating extension.
 
 ## [0.2.21] - 2019-02-27
@@ -43,11 +45,11 @@
 
 ## [0.2.8] - 2018-08-09
 
-- Parse error messages. 
+- Parse error messages.
 
 ## [0.2.7] - 2018-08-09
 
-- Add default build task. 
+- Add default build task.
 
 ## [0.2.6] - 2018-08-07
 
