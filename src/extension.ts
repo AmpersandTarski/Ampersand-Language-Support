@@ -5,6 +5,7 @@ import * as fs from 'fs';
 import * as child_process from 'child_process';
 import * as os from 'os';
 import * as crypto from 'crypto'
+import { constants } from './constants';
 
 function pair<a,b>(a : a, b : b) : [a,b] {return [a,b];}
 
@@ -110,8 +111,10 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Use the console to output diagnostic information (console.log) and errors (console.error).
     // This line of code will only be executed once when your extension is activated.
-    console.log('Congratulations, your extension "Ampersand" is now active!');
-    
+    console.info(
+		`[${constants.extension.name}] v${constants.extension.version} activated!`,
+	  );
+	checkVersion();
     // The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
@@ -119,10 +122,30 @@ export function activate(context: vscode.ExtensionContext) {
 		// The code you place here will be executed every time your command is executed
 
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Checking the version of ampersand will be available soon!');
+		checkVersion();
+		
 	});
 
 	// add to a list of disposables which are disposed when this extension
     // is deactivated again.
     context.subscriptions.push(disposable);
+}
+
+function checkVersion ()  {
+	const { exec } = require('child_process');
+	let command = `${constants.extension.generatorName} --version`
+	exec(command, (err:string, stdout:string, stderr:string) => {
+	  if (err) {
+		// node couldn't execute the command
+		console.log(`err: ${err}`);
+		vscode.window.showWarningMessage('`ampersand` could not be found in your path.')
+	  } else {
+		  // the *entire* stdout and stderr (buffered)
+		  let message : string = `Your version of ampersand:
+		       ${stdout}`;
+		  vscode.window.showInformationMessage(message )
+	  };
+	
+	});
+
 }
