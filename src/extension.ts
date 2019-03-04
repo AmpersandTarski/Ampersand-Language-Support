@@ -6,6 +6,7 @@ import * as child_process from 'child_process';
 import * as os from 'os';
 import * as crypto from 'crypto'
 import { constants } from './constants';
+import { runInContext } from 'vm';
 
 function pair<a,b>(a : a, b : b) : [a,b] {return [a,b];}
 
@@ -132,17 +133,49 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 function checkVersion ()  {
+	
+	// grab the version number from a string that holds the
+	// output of ampersand --version
+	function grabVersion (xs : string) : string | null {
+		
+		
+		let f = (b : string, isModified : boolean) => {
+			if (b == "master" && !isModified) {
+        return ""
+			} else if (isModified) {
+				return " " + b + " (modified)"
+			} else {
+				return " " + b
+			}
+		}
+		let r1 = /Ampersand-(v[0-9]+\.[0-9]+\.[0-9]+) \[(.*)?\],/ ;
+		var m : RegExpMatchArray | null ;
+		var result : string | null = null ;
+		if (m = xs.match(r1)) {
+				let m1 = m ;
+				let r2 = /(.*)?:(.*)?([\*]*)$/ ;
+				var m2 : RegExpMatchArray | null ;
+				if (m2 = m1[2].match(r2)) {
+					result = m1[1] + f(m2[1],(null == m2[2]))
+					}  
+				} else {
+					result = null
+		}
+		return result
+	};
 	const { exec } = require('child_process');
 	let command = `${constants.extension.generatorName} --version`
 	exec(command, (err:string, stdout:string, stderr:string) => {
 	  if (err) {
 		// node couldn't execute the command
 		console.log(`err: ${err}`);
-		vscode.window.showWarningMessage('`ampersand` could not be found in your path.')
+		vscode.window.showErrorMessage
+		   ('Make sure `ampersand` is in your path if you want to fully leverage this extention. ')
 	  } else {
-		  // the *entire* stdout and stderr (buffered)
+			let v = grabVersion(stdout) ;
+			// the *entire* stdout and stderr (buffered)
 		  let message : string = `Your version of ampersand:
-		       ${stdout}`;
+		       ${v}`;
 		  vscode.window.showInformationMessage(message )
 	  };
 	
