@@ -137,10 +137,62 @@ export function activate(context: vscode.ExtensionContext) {
 		
 	});
 
-	// add to a list of disposables which are disposed when this extension
-    // is deactivated again.
-    context.subscriptions.push(disposable);
+    // Pointer to the last running watcher, so we can undo it
+    var oldWatcher : fs.FSWatcher | null = null;
+    var oldTerminal : vscode.Terminal | null = null;
+
+    let cleanup = () => {
+        if (oldWatcher != null)
+            oldWatcher.close();
+        oldWatcher = null;
+        if (oldTerminal != null)
+            oldTerminal.dispose();
+        oldTerminal = null;
+    }
+    context.subscriptions.push({dispose: cleanup});
+
+    let add = (name : string, act : () => fs.FSWatcher | null ) => {
+        let dispose = vscode.commands.registerCommand(name, () => {
+            try {
+                cleanup();
+                oldWatcher = act();
+            }
+            catch (e) {
+                console.error("Ampersand extension failed in " + name + ": " + e);
+                throw e;
+            }
+        });
+        context.subscriptions.push(dispose);
+    }
+
+    add('extension.startDaemon', () => {
+        if (!vscode.workspace.rootPath) {
+            vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.")
+            return null;
+        }
+        // hashing the rootPath ensures we create a finite number of temp files
+        var hash = crypto.createHash('sha256').update(vscode.workspace.rootPath).digest('hex').substring(0, 20);
+        let file = path.join(os.tmpdir(), "ampersandDaemon-" + hash + ".txt");
+        context.subscriptions.push({dispose: () => {try {fs.unlinkSync(file);} catch (e) {};}});
+        fs.writeFileSync(file, "");
+
+        let runAmpersandCommand : string = "ampersand --daemon";
+
+        let opts : vscode.TerminalOptions =
+            os.type().startsWith("Windows") ?
+                {shellPath: "cmd.exe", shellArgs: ["/k", runAmpersandCommand]} :
+                {shellPath: runAmpersandCommand, shellArgs: []};
+        opts.name = "ampersand daemon";
+     //   opts.shellArgs.push("--outputfile=" + file);
+        oldTerminal = vscode.window.createTerminal(opts);
+        oldTerminal.show();
+        return watchOutput(vscode.workspace.rootPath, file);
+    });
+
+
 }
+
+
 
 function checkVersion ()  {
 	

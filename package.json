@@ -1,7 +1,7 @@
 {
   "name": "language-ampersand",
   "displayName": "Ampersand (ADL) language support",
-  "version": "0.2.22",
+  "version": "0.3.0",
   "publisher": "AmpersandTarski",
   "description": "Language support for Ampersand scripts",
   "categories": [
@@ -27,7 +27,8 @@
   },
   "activationEvents": [
     "onLanguage:ampersand",
-    "onCommand:extension.checkVersion"
+    "onCommand:extension.checkVersion",
+    "onCommand:extension.startDaemon"
   ],
   "icon": "images/ampersandLogo.png",
   "galleryBanner": {
@@ -87,6 +88,10 @@
       {
         "command": "extension.checkVersion",
         "title": "Ampersand: version"
+      },
+      {
+        "command": "extension.startDaemon",
+        "title": "Ampersand: Start checker daemon"
       }
     ],
     "problemMatchers": [
@@ -129,12 +134,12 @@
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
-    "@types/node": "^10.12.27",
+    "@types/node": "^10.14.4",
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
     "mochawesome": "^3.1.1",
-    "ts-node": "^8.0.2",
-    "typescript": "^3.3.3333",
-    "vscode": "^1.1.30"
+    "ts-node": "^8.0.3",
+    "typescript": "^3.3.4000",
+    "vscode": "^1.1.33"
   }
 }
