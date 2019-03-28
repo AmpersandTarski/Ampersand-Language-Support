@@ -1,7 +1,7 @@
 {
   "name": "language-ampersand",
   "displayName": "Ampersand (ADL) language support",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "publisher": "AmpersandTarski",
   "description": "Language support for Ampersand scripts",
   "categories": [
@@ -91,7 +91,7 @@
       },
       {
         "command": "extension.startDaemon",
-        "title": "Ampersand: Start checker daemon"
+        "title": "Ampersand: Start checker"
       }
     ],
     "problemMatchers": [

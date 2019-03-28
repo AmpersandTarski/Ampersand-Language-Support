@@ -2,7 +2,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
-import * as child_process from 'child_process';
 import * as os from 'os';
 import * as crypto from 'crypto'
 import { constants } from './constants';
@@ -42,6 +41,7 @@ export function parseAmpersandOutput(dir : string, s : string) : [vscode.Uri, vs
     }
 
     function parse(xs : string[]) : [vscode.Uri, vscode.Diagnostic][] {
+        let cont: any[] = [];  
         let r1 = /(..[^:]+):([0-9]+):([0-9]+):/
         let r2 = /(..[^:]+):([0-9]+):([0-9]+)-([0-9]+):/
         let r3 = /(..[^:]+):\(([0-9]+),([0-9]+)\)-\(([0-9]+),([0-9]+)\):/
@@ -50,7 +50,7 @@ export function parseAmpersandOutput(dir : string, s : string) : [vscode.Uri, vs
         let f = (l1: number,c1: number,l2: number,c2: number) => {
             let range = new vscode.Range(parseInt(m[l1])-1,parseInt(m[c1])-1,parseInt(m[l2])-1,parseInt(m[c2]));
             let file = vscode.Uri.file(path.isAbsolute(m[1]) ? m[1] : path.join(dir, m[1]));
-            var s = xs[0].substring(m[0].length).trim();
+            var s : string = xs[0].substring(m[0].length).trim();
             let i = s.indexOf(':');
             var sev = vscode.DiagnosticSeverity.Error;
             if (i !== -1) {
@@ -58,8 +58,7 @@ export function parseAmpersandOutput(dir : string, s : string) : [vscode.Uri, vs
                     sev = vscode.DiagnosticSeverity.Warning;
                 s = s.substr(i+1).trim();
             }
-        //    let msg = [].concat([s],xs.slice(1)).join('\n');
-            let msg = "TODO this needs fixing in the extention"
+            let msg = cont.concat([s],xs.slice(1)).join('\n');
             return [pair(file, new vscode.Diagnostic(range, msg, sev))];
         };
         if (xs[0].startsWith("All good"))
@@ -77,12 +76,9 @@ export function parseAmpersandOutput(dir : string, s : string) : [vscode.Uri, vs
 						return [[vscode.Uri.file("") , new vscode.Diagnostic(new vscode.Range(0,0,0,0), xs.join('\n'))]];
 				};		
     }
-    return [] // .concat(... newFunction());
-
-	function newFunction() : [vscode.Uri, vscode.Diagnostic][][] {
-		return split(lines(s)).map(parse);
+    let cont: any[] = [];
+    return cont.concat(... split(lines(s)).map(parse));
 	}
-}
 
 function groupDiagnostic(xs : [vscode.Uri, vscode.Diagnostic[]][]) : [vscode.Uri, vscode.Diagnostic[]][] {
     let seen = new Map<string, [number, vscode.Uri, vscode.Diagnostic[]]>();
@@ -126,16 +122,6 @@ export function activate(context: vscode.ExtensionContext) {
 		`[${constants.extension.name}] v${constants.extension.version} activated!`,
 	  );
 	checkVersion();
-    // The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.checkVersion', () => {
-		// The code you place here will be executed every time your command is executed
-
-		// Display a message box to the user
-		checkVersion();
-		
-	});
 
     // Pointer to the last running watcher, so we can undo it
     var oldWatcher : fs.FSWatcher | null = null;
@@ -227,7 +213,7 @@ function checkVersion ()  {
 	};
 	const { exec } = require('child_process');
 	let command = `${constants.extension.generatorName} --version`
-	exec(command, (err:string, stdout:string, stderr:string) => {
+	exec(command, (err:string, stdout:string) => {
 	  if (err) {
 		// node couldn't execute the command
 		console.log(`err: ${err}`);
