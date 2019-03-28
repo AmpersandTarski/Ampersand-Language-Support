@@ -1,6 +1,8 @@
 # Change Log
 
-## not yet released functionality
+## [0.3.1] - 2019-03-28
+
+- Syntax- and typechecking of your script as you type is now available. (Needs ampersand v3.16.0 or higher)
 
 ## [0.2.22] - 2019-03-01
 
