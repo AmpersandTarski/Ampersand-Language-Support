@@ -118,6 +118,42 @@
 
 		"PURPOSE":
 		{	"patterns":[
+				{	"comment":"PURPOSE RELATION \"<identifier>\"",
+					"name": "meta.purpose.relation.ampersand",
+					"begin": "\\b(PURPOSE)\\s+(RELATION)\\s+(?:([a-z]\\w*)|(\")([^\"]+)(\"))(?:\\s*\\[\\s*([A-Z]\\w*)\\s*(\\*)\\s*([A-Z]\\w*\\s*\\]))",
+					"beginCaptures": {
+						"0": { "name":"meta.purpose.begin.ampersand"},
+						"1": { "name":"keyword.operator.purpose.ampersand"},
+						"2": { "name":"keyword.operator.purpose.ampersand"},
+						"3": { "name":"variable.purpose.ampersand"},
+						"4": { "name":"punctuation.statement.purpose.ampersand"},
+						"5": { "name":"variable.purpose.ampersand"},
+						"6": { "name":"punctuation.statement.purpose.ampersand"},
+						"7": { "name":"punctuation.statement.purpose.ampersand"},
+						"8": { "name":"variable.purpose.ampersand"},
+						"9": { "name":"punctuation.statement.purpose.ampersand"},
+						"10": { "name":"variable.purpose.ampersand"},
+						"11": { "name":"punctuation.statement.purpose.ampersand"}
+					},
+					"end": "(?<=\\+})",
+					"patterns": [
+						{	"comment":"inside {+ section",
+							"name": "meta.block.documentation.ampersand",
+							"begin": "{\\+",
+							"beginCaptures": { "0": { "name": "punctuation.comment.block.ampersand" } },
+							"end": "\\+}",
+							"endCaptures": { "0": { "name": "punctuation.comment.block.ampersand" } },
+							"patterns": [ {"include": "#comment patterns"} ]
+						},
+						{  "include": "#COMMENTS" 
+						},
+						{	"comment":"outside {+ section",
+							"name": "invalid.illegal.statement.purpose.ampersand",
+							"begin": "[^\\s]+",
+							"end": "(?=\\bENDCONTEXT|{\\+)"
+						}
+					]
+				},
 				{	"comment":"PURPOSE <keyword> \"<identifier>\" -- tnx to https://github.com/Microsoft/vscode-textmate/issues/41",
 					"name": "meta.purpose.ampersand",
 					"begin": "\\b(PURPOSE)\\s+(CONTEXT|CONCEPT|RELATION|RULE)\\s+(?:(\\w+)|(\")([^\"]+)(\"))",
@@ -139,6 +175,8 @@
 							"end": "\\+}",
 							"endCaptures": { "0": { "name": "punctuation.comment.block.ampersand" } },
 							"patterns": [ {"include": "#comment patterns"} ]
+						},
+						{  "include": "#COMMENTS" 
 						},
 						{	"comment":"outside {+ section",
 							"name": "invalid.illegal.statement.purpose.ampersand",
@@ -379,7 +417,7 @@
 					}
 				},
 				{	"comment": "RELATION relname [Concept1 * Concept2]",
-					"match": "\\b(RELATION)\\s+([a-z]\\w*)\\s*(\\[)\\s*([A-Z]\\w*)\\s*(\\*)\\s*([A-Z]\\w*)(\\])",
+					"match": "\\b(RELATION)\\s+([a-z]\\w*)\\s*(\\[)\\s*([A-Z]\\w*)\\s*(\\*)\\s*([A-Z]\\w*)\\s*(\\])",
 					"captures": {
 						"0": { "name":"meta.relation.ampersand"},
 						"1": { "name":"keyword.operator.relation.ampersand"},
@@ -392,7 +430,7 @@
 					}
 				},
 				{	"comment": "RELATION relname [Concept]",
-					"match": "\\b(RELATION)\\s+([a-z]\\w*)\\s*(\\[)\\s*([A-Z]\\w*)(\\])",
+					"match": "\\b(RELATION)\\s+([a-z]\\w*)\\s*(\\[)\\s*([A-Z]\\w*)\\s*(\\])",
 					"captures": {
 						"0": { "name":"meta.relation.ampersand"},
 						"1": { "name":"keyword.operator.relation.ampersand"},

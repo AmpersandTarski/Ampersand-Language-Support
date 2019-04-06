@@ -79,6 +79,12 @@
 			"ROLE ExecEngine MAINTAINS \"$1\"",
 			"RULE \"${1:rulename}\": "
 		]
+	},	"RULE": {
+		"prefix": "RULE",
+		"description": "Template for invariant rule",
+		"body":[
+			"RULE \"${1:rulename}\": ${0:rule-expression}"
+		]
 	},
 	"VIOLATION": {
 		"prefix": "VIOLATION (TXT ",
