@@ -417,7 +417,7 @@
 					}
 				},
 				{	"comment": "RELATION relname [Concept1 * Concept2]",
-					"match": "\\b(RELATION)\\s+([a-z]\\w*)\\s*(\\[)\\s*([A-Z]\\w*)\\s*(\\*)\\s*([A-Z]\\w*)(\\])",
+					"match": "\\b(RELATION)\\s+([a-z]\\w*)\\s*(\\[)\\s*([A-Z]\\w*)\\s*(\\*)\\s*([A-Z]\\w*)\\s*(\\])",
 					"captures": {
 						"0": { "name":"meta.relation.ampersand"},
 						"1": { "name":"keyword.operator.relation.ampersand"},
@@ -430,7 +430,7 @@
 					}
 				},
 				{	"comment": "RELATION relname [Concept]",
-					"match": "\\b(RELATION)\\s+([a-z]\\w*)\\s*(\\[)\\s*([A-Z]\\w*)(\\])",
+					"match": "\\b(RELATION)\\s+([a-z]\\w*)\\s*(\\[)\\s*([A-Z]\\w*)\\s*(\\])",
 					"captures": {
 						"0": { "name":"meta.relation.ampersand"},
 						"1": { "name":"keyword.operator.relation.ampersand"},
