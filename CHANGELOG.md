@@ -1,5 +1,11 @@
 # Change Log
 
+<!--
+    Special reminder for Rieks ;) 
+    Please do not forget to update the version number. You can find it in the
+    file `package.json` 
+-->
+
 ## [0.3.2] - 2019-04-06
 
 - Fixes issues #22, #23 and #24.
