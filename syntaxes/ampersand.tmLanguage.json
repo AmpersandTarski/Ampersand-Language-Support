@@ -8,6 +8,7 @@
 	[	{	"comment": "to be reviewed using https://www.sublimetext.com/docs/3/scope_naming.html"},
 		{	"include": "#COMMENTS"     },
 		{	"include": "#CONTEXT"      },
+		{	"include": "#META"         },
 		{	"include": "#PURPOSE"      },
 		{	"include": "#INCLUDE"      },
 		{	"include": "#CONCEPT"      },
@@ -102,7 +103,7 @@
 
 		"CONTEXT":
 		{	"patterns": 
-			[	{	"match": "\\b(CONTEXT)\\s*(\")?([^\"]*)(\\2)?(\\s*IN\\s*(DUTCH|ENGLISH))?",
+			[	{	"match": "\\b(CONTEXT)\\s+(\")?([^\"]*)(\\2)?(\\s+IN\\s+(DUTCH|ENGLISH))?",
 					"captures": {
 						"0": { "name":"meta.context.ampersand"},
 						"1": { "name":"keyword.operator.context.ampersand"},
@@ -111,6 +112,23 @@
 						"4": { "name":"punctuation.statement.context.ampersand"},
 						"5": { "name":"keyword.operator.context.ampersand"},
 						"6": { "name":"keyword.operator.context.language.ampersand"}
+					}
+				}
+			]
+		},
+
+		"META":
+		{	"patterns": 
+			[	{	"match": "\\b(META)\\s+(\")([^\"]*)(\")\\s+(\")([^\"]*)(\")",
+					"captures": {
+						"0": { "name":"meta.meta.ampersand"},
+						"1": { "name":"keyword.operator.meta.ampersand"},
+						"2": { "name":"punctuation.statement.meta.ampersand"},
+						"3": { "name":"entity.name.meta.ampersand"},
+						"4": { "name":"punctuation.statement.meta.ampersand"},
+						"5": { "name":"punctuation.statement.meta.ampersand"},
+						"6": { "name":"entity.name.meta.ampersand"},
+						"7": { "name":"punctuation.statement.meta.ampersand"}
 					}
 				}
 			]
