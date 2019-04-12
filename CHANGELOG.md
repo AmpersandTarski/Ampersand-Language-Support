@@ -6,6 +6,11 @@
     It is in the file `package.json` 
 -->
 
+## [0.3.3] - date to be determined
+
+- Fixes issues #27, #28, #30.
+- Updated snippets to accommodate for current set of well-known BOX templates
+
 ## [0.3.2] - 2019-04-06
 
 - Fixes issues #22, #23 and #24.
