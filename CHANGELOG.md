@@ -6,7 +6,7 @@
     It is in the file `package.json` 
 -->
 
-## [0.3.3] - date to be determined
+## [0.3.3] - 2019-04-12
 
 - Fixes issues #27, #28, #30.
 - Updated snippets to accommodate for current set of well-known BOX templates
