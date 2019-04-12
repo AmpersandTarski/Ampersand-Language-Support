@@ -8,6 +8,7 @@
 	[	{	"comment": "to be reviewed using https://www.sublimetext.com/docs/3/scope_naming.html"},
 		{	"include": "#COMMENTS"     },
 		{	"include": "#CONTEXT"      },
+		{	"include": "#META"         },
 		{	"include": "#PURPOSE"      },
 		{	"include": "#INCLUDE"      },
 		{	"include": "#CONCEPT"      },
@@ -102,7 +103,7 @@
 
 		"CONTEXT":
 		{	"patterns": 
-			[	{	"match": "\\b(CONTEXT)\\s*(\")?([^\"]*)(\\2)?(\\s*IN\\s*(DUTCH|ENGLISH))?",
+			[	{	"match": "\\b(CONTEXT)\\s+(\")?([^\"]*)(\\2)?(\\s+IN\\s+(DUTCH|ENGLISH))?",
 					"captures": {
 						"0": { "name":"meta.context.ampersand"},
 						"1": { "name":"keyword.operator.context.ampersand"},
@@ -116,11 +117,28 @@
 			]
 		},
 
+		"META":
+		{	"patterns": 
+			[	{	"match": "\\b(META)\\s+(\")([^\"]*)(\")\\s+(\")([^\"]*)(\")",
+					"captures": {
+						"0": { "name":"meta.meta.ampersand"},
+						"1": { "name":"keyword.operator.meta.ampersand"},
+						"2": { "name":"punctuation.statement.meta.ampersand"},
+						"3": { "name":"entity.name.meta.ampersand"},
+						"4": { "name":"punctuation.statement.meta.ampersand"},
+						"5": { "name":"punctuation.statement.meta.ampersand"},
+						"6": { "name":"entity.name.meta.ampersand"},
+						"7": { "name":"punctuation.statement.meta.ampersand"}
+					}
+				}
+			]
+		},
+
 		"PURPOSE":
 		{	"patterns":[
 				{	"comment":"PURPOSE RELATION \"<identifier>\"",
 					"name": "meta.purpose.relation.ampersand",
-					"begin": "\\b(PURPOSE)\\s+(RELATION)\\s+(?:([a-z]\\w*)|(\")([^\"]+)(\"))(?:\\s*\\[\\s*([A-Z]\\w*)\\s*(\\*)\\s*([A-Z]\\w*\\s*\\]))",
+					"begin": "\\b(PURPOSE)\\s+(RELATION)\\s+(?:([a-z]\\w*)|(\")([^\"]+)(\"))(?:\\s*\\[\\s*([A-Z]\\w*)\\s*(\\*)\\s*([A-Z]\\w*\\s*\\]))(?:\\s+(REF)\\s+(\")([^\"]*)(\"))?",
 					"beginCaptures": {
 						"0": { "name":"meta.purpose.begin.ampersand"},
 						"1": { "name":"keyword.operator.purpose.ampersand"},
@@ -133,7 +151,11 @@
 						"8": { "name":"variable.purpose.ampersand"},
 						"9": { "name":"punctuation.statement.purpose.ampersand"},
 						"10": { "name":"variable.purpose.ampersand"},
-						"11": { "name":"punctuation.statement.purpose.ampersand"}
+						"11": { "name":"punctuation.statement.purpose.ampersand"},
+						"12": { "name":"keyword.operator.purpose.ampersand"},
+						"13": { "name":"punctuation.statement.purpose.ampersand"},
+						"14": { "name":"variable.purpose.ampersand"},
+						"15": { "name":"punctuation.statement.purpose.ampersand"}
 					},
 					"end": "(?<=\\+})",
 					"patterns": [
@@ -156,7 +178,7 @@
 				},
 				{	"comment":"PURPOSE <keyword> \"<identifier>\" -- tnx to https://github.com/Microsoft/vscode-textmate/issues/41",
 					"name": "meta.purpose.ampersand",
-					"begin": "\\b(PURPOSE)\\s+(CONTEXT|CONCEPT|RELATION|RULE)\\s+(?:(\\w+)|(\")([^\"]+)(\"))",
+					"begin": "\\b(PURPOSE)\\s+(CONTEXT|CONCEPT|RELATION|RULE)\\s+(?:(\\w+)|(\")([^\"]+)(\"))(?:\\s+(REF)\\s+(\")([^\"]*)(\"))?",
 					"beginCaptures": {
 						"0": { "name":"meta.purpose.begin.ampersand"},
 						"1": { "name":"keyword.operator.purpose.ampersand"},
@@ -164,7 +186,11 @@
 						"3": { "name":"variable.purpose.ampersand"},
 						"4": { "name":"punctuation.statement.purpose.ampersand"},
 						"5": { "name":"variable.purpose.ampersand"},
-						"6": { "name":"punctuation.statement.purpose.ampersand"}
+						"6": { "name":"punctuation.statement.purpose.ampersand"},
+						"7": { "name":"keyword.operator.purpose.ampersand"},
+						"8": { "name":"punctuation.statement.purpose.ampersand"},
+						"9": { "name":"variable.purpose.ampersand"},
+						"10": { "name":"punctuation.statement.purpose.ampersand"}
 					},
 					"end": "(?<=\\+})",
 					"patterns": [
@@ -695,7 +721,7 @@
 		{	"patterns": 
 			[	{	"comment":"All kind of BOX-related constructs (including ROWS, COLS, etc.)",
 				   "name": "meta.box.ampersand",
-					"begin": "\\b(ROWS|COLS|TABS|PANELS)|\\b(BOX)\\s*(?:(<)(?:(DIV|ROWSNL|ROWSNH|HROWS|COLSNL|HCOLS|SCOLS|SHCOLS|SPCOLS|SPHCOLS|PROPBUTTON|SSIFORM)|([^>\\s\"\\\\]+))(>))?",
+					"begin": "\\b(ROWS|COLS|TABS|PANELS)|\\b(BOX)\\s*(?:(<)(?:(DIV|ROWSNL|HROWS|HROWSNL|COLSNL|HCOLS|SCOLS|SHCOLS|PROPBUTTON|GRID|SSIFORM)|([^>\\s\"\\\\]+))(>))?",
 					"beginCaptures": {
 						"0": { "name":"meta.box.header.begin.ampersand"},
 						"1": { "name":"keyword.operator.box.header.ampersand"},

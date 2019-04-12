@@ -1,13 +1,23 @@
 # Change Log
 
+<!--
+    Special reminder for Rieks ;) 
+    Please do not forget to update the version number.
+    It is in the file `package.json` 
+-->
+
+## [0.3.3] - 2019-04-12
+
+- Fixes issues #27, #28, #30.
+- Updated snippets to accommodate for current set of well-known BOX templates
+
 ## [0.3.2] - 2019-04-06
 
 - Fixes issues #22, #23 and #24.
-- Updated the comment of version 0.3.1 here below.
 
 ## [0.3.1] - 2019-03-28
 
-- Syntax- and typechecking of your script as you type is now available. (Needs ampersand v3.16.0 or higher, but the latest v3.15.0 also works)
+- Syntax- and typechecking of your script as you type is now available. (Needs ampersand v3.16.0 or higher)
 
 ## [0.2.22] - 2019-03-01
 
