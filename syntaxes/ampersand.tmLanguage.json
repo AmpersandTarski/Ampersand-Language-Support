@@ -695,7 +695,7 @@
 		{	"patterns": 
 			[	{	"comment":"All kind of BOX-related constructs (including ROWS, COLS, etc.)",
 				   "name": "meta.box.ampersand",
-					"begin": "\\b(ROWS|COLS|TABS|PANELS)|\\b(BOX)\\s*(?:(<)(?:(DIV|ROWSNL|ROWSNH|HROWS|COLSNL|HCOLS|SCOLS|SHCOLS|SPCOLS|SPHCOLS|PROPBUTTON|SSIFORM)|([^>\\s\"\\\\]+))(>))?",
+					"begin": "\\b(ROWS|COLS|TABS|PANELS)|\\b(BOX)\\s*(?:(<)(?:(DIV|ROWSNL|HROWS|HROWSNL|COLSNL|HCOLS|SCOLS|SHCOLS|PROPBUTTON|GRID|SSIFORM)|([^>\\s\"\\\\]+))(>))?",
 					"beginCaptures": {
 						"0": { "name":"meta.box.header.begin.ampersand"},
 						"1": { "name":"keyword.operator.box.header.ampersand"},
