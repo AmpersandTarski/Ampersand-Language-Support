@@ -563,7 +563,7 @@
 		{	"patterns": [
 				{	"comment":"ROLE,SERVICE <role> MAINTAINS <rulename>",
 					"name":"meta.role.ampersand",
-					"match": "\\b(ROLE|SERVICE)\\s+(?:\\b([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))\\s+(MAINTAINS)\\s+(\")([^\"]*)(\")",
+					"match": "\\b(ROLE|SERVICE)\\s+(?:\\b([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))\\s+(MAINTAINS)\\s+(\"?)([^\"]*)(\\7)",
 					"captures": {
 						"1": { "name":"keyword.operator.role.ampersand"},
 						"2": { "name":"variable.role.ampersand"},
