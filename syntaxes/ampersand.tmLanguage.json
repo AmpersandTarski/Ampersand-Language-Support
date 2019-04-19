@@ -1067,7 +1067,7 @@
 		"markdowntext-item":
 		{	"comment": "TXT \"markdowntext\"",
 			"name":"meta.txt.markdown.ampersand",
-			"begin": "(TXT)\\s+(\")",
+			"begin": "(TXT)\\s*(\")",
 			"captures": {
 				"0": { "name":"meta.txt.markdown.begin.ampersand"},
 				"1": { "name":"punctuation.statement.txt.ampersand"},
@@ -1089,7 +1089,7 @@
 		"plaintext-item":
 		{	"patterns": [
 				{	"comment": "TXT \"plaintext\"",
-					"match": "(TXT)\\s+(\")((?:[^\"\\\\]|\\\\.)*)(\")",
+					"match": "(TXT)\\s*(\")((?:[^\"\\\\]|\\\\.)*)(\")",
 					"captures": {
 						"0": { "name":"meta.txt.ampersand"},
 						"1": { "name":"punctuation.statement.txt.ampersand"},
