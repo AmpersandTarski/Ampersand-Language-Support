@@ -6,7 +6,7 @@
     It is in the file `package.json` 
 -->
 
-## [0.3.4] - 2019-xx-yy
+## [0.3.4] - 2019-04-20
 
 - fixed PROPBUTTON snippet bug that Sterre reported by mail
 - fixes #32
