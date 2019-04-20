@@ -6,6 +6,12 @@
     It is in the file `package.json` 
 -->
 
+## [0.3.4] - 2019-04-20
+
+- fixed PROPBUTTON snippet bug that Sterre reported by mail
+- fixes #32
+- fixes some syntax coloring bugs that had not been mentioned as issues
+
 ## [0.3.3] - 2019-04-12
 
 - Fixes issues #27, #28, #30.

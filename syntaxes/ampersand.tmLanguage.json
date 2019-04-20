@@ -299,6 +299,45 @@
 						"2": { "name":"invalid.illegal.statement.classify.ampersand"}
 					}
 				},
+				{	"comment": "CLASSIFY <Conceptlist> IS <Concept1> /\\ <Concept2> ...", 
+					"name": "meta.classify.is.ampersand",
+					"begin": "\\b(CLASSIFY)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))(?:\\s*(,)\\s*(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\")))*\\s+(IS)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))",
+					"beginCaptures": {
+						"0": { "name":"meta.classify.is.begin.ampersand"},
+						"1": { "name":"keyword.operator.classify.ampersand"},
+						"2": { "name":"variable.concept.ampersand"},
+						"3": { "name":"punctuation.statement.classify.ampersand"},
+						"4": { "name":"variable.concept.ampersand"},
+						"5": { "name":"punctuation.statement.classify.ampersand"},
+						"6": { "name":"punctuation.statement.classify.ampersand"},
+						"7": { "name":"variable.concept.ampersand"},
+						"8": { "name":"punctuation.statement.classify.ampersand"},
+						"9": { "name":"variable.concept.ampersand"},
+						"10": { "name":"punctuation.statement.classify.ampersand"},
+						"11": { "name":"keyword.operator.classify.ampersand"},
+						"12": { "name":"variable.concept.ampersand"},
+						"13": { "name":"punctuation.statement.classify.ampersand"},
+						"14": { "name":"variable.concept.ampersand"},
+						"15": { "name":"punctuation.statement.classify.ampersand"}
+					},
+					"end": "^(?=\\s*([^A-Z/]|VIOLATION|ROLE|SERVICE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|VIEW|MEANING|MESSAGE|PRAGMA))",
+					"patterns": [
+						{  "include": "#COMMENTS" },
+						{	"match": "\\s*(/\\\\)\\s*(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))",
+							"captures": {
+								"0": { "name":"meta.classify.and-operator-concept.ampersand"},
+								"1": { "name":"keyword.operator.term.ampersand"},
+								"2": { "name":"variable.concept.ampersand"},
+								"3": { "name":"punctuation.statement.classify.ampersand"},
+								"4": { "name":"variable.concept.ampersand"},
+								"5": { "name":"punctuation.statement.classify.ampersand"}
+							}
+						},
+						{	"match": "([^\\s]+)",
+							"captures": { "1": { "name":"invalid.illegal.statement.classify.ampersand"} }
+						}
+					]
+				},
 				{	"comment": "CLASSIFY <ConceptList> ISA <CONCEPT>",
 					"name": "meta.classify.ampersand",
 					"begin": "\\b(CLASSIFY)",
@@ -318,40 +357,6 @@
 						{	"include": "#concept" },
 						{	"name": "invalid.illegal.statement.classify.ampersand",
 							"match": "[^\\s\\)]"
-						}
-					]
-				},
-				{	"comment": "CLASSIFY <Conceptlist> IS <Concept1> /\\ <Concept2> ...", 
-					"name": "meta.classify.is.ampersand",
-					"begin": "\\b(CLASSIFY)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))(?:\\s*(,)\\s*(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\")))*\\s+(IS)\\s+",
-					"beginCaptures": {
-						"0": { "name":"meta.classify.is.begin.ampersand"},
-						"1": { "name":"keyword.operator.classify.ampersand"},
-						"2": { "name":"variable.concept.ampersand"},
-						"3": { "name":"punctuation.statement.classify.ampersand"},
-						"4": { "name":"variable.concept.ampersand"},
-						"5": { "name":"punctuation.statement.classify.ampersand"},
-						"6": { "name":"punctuation.statement.classify.ampersand"},
-						"7": { "name":"variable.concept.ampersand"},
-						"8": { "name":"punctuation.statement.classify.ampersand"},
-						"9": { "name":"variable.concept.ampersand"},
-						"10": { "name":"punctuation.statement.classify.ampersand"},
-						"11": { "name":"keyword.operator.classify.ampersand"}
-					},
-					"end": "^(?=\\s*([^A-Z/]|VIOLATION|ROLE|SERVICE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|VIEW|MEANING|MESSAGE|PRAGMA))",
-					"patterns": [
-						{  "include": "#COMMENTS" },
-						{	"match": "\\s*(/\\\\)",
-							"captures": {
-								"0": { "name":"meta.classify.and-operator.ampersand"},
-								"1": { "name":"keyword.operator.term.ampersand"}
-							}
-						},
-						{	"match": "([A-Z]\\w*)",
-							"captures": { "1": { "name":"variable.concept.ampersand"} }
-						},
-						{	"match": "([^\\s]+)",
-							"captures": { "1": { "name":"invalid.illegal.statement.classify.ampersand"} }
 						}
 					]
 				}
@@ -558,7 +563,7 @@
 		{	"patterns": [
 				{	"comment":"ROLE,SERVICE <role> MAINTAINS <rulename>",
 					"name":"meta.role.ampersand",
-					"match": "\\b(ROLE|SERVICE)\\s+(?:\\b([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))\\s+(MAINTAINS)\\s+(\")([^\"]*)(\")",
+					"match": "\\b(ROLE|SERVICE)\\s+(?:\\b([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))\\s+(MAINTAINS)\\s+(\"?)([^\"]*)(\\7)",
 					"captures": {
 						"1": { "name":"keyword.operator.role.ampersand"},
 						"2": { "name":"variable.role.ampersand"},
@@ -1062,7 +1067,7 @@
 		"markdowntext-item":
 		{	"comment": "TXT \"markdowntext\"",
 			"name":"meta.txt.markdown.ampersand",
-			"begin": "(TXT)\\s+(\")",
+			"begin": "(TXT)\\s*(\")",
 			"captures": {
 				"0": { "name":"meta.txt.markdown.begin.ampersand"},
 				"1": { "name":"punctuation.statement.txt.ampersand"},
@@ -1084,7 +1089,7 @@
 		"plaintext-item":
 		{	"patterns": [
 				{	"comment": "TXT \"plaintext\"",
-					"match": "(TXT)\\s+(\")((?:[^\"\\\\]|\\\\.)*)(\")",
+					"match": "(TXT)\\s*(\")((?:[^\"\\\\]|\\\\.)*)(\")",
 					"captures": {
 						"0": { "name":"meta.txt.ampersand"},
 						"1": { "name":"punctuation.statement.txt.ampersand"},
