@@ -255,8 +255,8 @@
 		"body":[
 			"<PROPBUTTON>",
 			"[ property: ${1:propertyrelation} cRUd",
-			"  disabled: ${2:expression} cRud",
-			"  hide: ${3:expression} cRud",
+			", disabled: ${2:expression} cRud",
+			", hide: ${3:expression} cRud",
 			"]"
 		]
 	}
