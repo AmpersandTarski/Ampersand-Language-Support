@@ -89,7 +89,12 @@
 	"VIOLATION": {
 		"prefix": "VIOLATION (TXT ",
 		"description": "Define a VIOLATION",
-		"body":[ "VIOLATION (TXT \"$0\")" ]
+		"body":[ "VIOLATION (TXT \"" ]
+	},
+	"{EX}": {
+		"prefix": "{EX}",
+		"description": "Marks the start of an ExecEngine function",
+		"body":[ "{EX} ${1|InsPair,DelPair,InsAtom,DelAtom,SetConcept,ClearConcept,SetNavToOnCommit,SetNavToOnRollBack,TerminateThisExecEngine,TriggerService|}" ]
 	},
 	"InsPair": {
 		"prefix": "InsPair",
@@ -105,6 +110,7 @@
 		"prefix": "NewStruct",
 		"description": "NewStruct is deprecated - change to InsAtom",
 		"body":[
+			"-- The function `NewStruct` is deprecated. Please use `InsAtom` instead.",
 			"InsAtom;${1:concept}\"",
 			"          ,TXT \"{EX} $0" 
 		]

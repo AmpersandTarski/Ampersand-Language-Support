@@ -8,8 +8,9 @@
 
 ## [0.3.5] - 2019-mm-dd
 
-- bugfix: `IN <LANGUAGESPEC>` is now supported in PURPOSE statements
 - fixes issues #35
+- bugfix: `IN <LANGUAGESPEC>` is now supported in PURPOSE statements
+- snippets better support the creation of ExecEngine violation statements
 
 ## [0.3.4] - 2019-04-20
 
