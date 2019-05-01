@@ -62,7 +62,7 @@
 	"Define a Relation population": {
 		"prefix": "POPULATION",
 		"description": "Define a POPULATION of Relation pairs/links",
-		"body":[ "POPULATION \"${1:Relname}\" CONTAINS [ (\"$2\", \"$3\") ]"	]
+		"body":[ "POPULATION ${1:Relname} CONTAINS [ (\"$2\", \"$3\") ]"	]
 	},
 	"SERVICE MAINTAINS RULE": {
 		"prefix": "SERVICE",
