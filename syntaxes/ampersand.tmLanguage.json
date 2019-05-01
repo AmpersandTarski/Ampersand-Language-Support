@@ -138,7 +138,7 @@
 		{	"patterns":[
 				{	"comment":"PURPOSE RELATION \"<identifier>\"",
 					"name": "meta.purpose.relation.ampersand",
-					"begin": "\\b(PURPOSE)\\s+(RELATION)\\s+(?:([a-z]\\w*)|(\")([^\"]+)(\"))(?:\\s*\\[\\s*([A-Z]\\w*)\\s*(\\*)\\s*([A-Z]\\w*\\s*\\]))(?:\\s+(REF)\\s+(\")([^\"]*)(\"))?",
+					"begin": "\\b(PURPOSE)\\s+(RELATION)\\s+(?:([a-z]\\w*)|(\")([^\"]+)(\"))(?:\\s*\\[\\s*([A-Z]\\w*)\\s*(\\*)\\s*([A-Z]\\w*\\s*\\]))(?:\\s*(IN)\\s+(DUTCH|ENGLISH))?(?:\\s+(REF)\\s+(\")([^\"]*)(\"))?",
 					"beginCaptures": {
 						"0": { "name":"meta.purpose.begin.ampersand"},
 						"1": { "name":"keyword.operator.purpose.ampersand"},
@@ -151,11 +151,15 @@
 						"8": { "name":"variable.purpose.ampersand"},
 						"9": { "name":"punctuation.statement.purpose.ampersand"},
 						"10": { "name":"variable.purpose.ampersand"},
-						"11": { "name":"punctuation.statement.purpose.ampersand"},
+
+						"11": { "name":"keyword.operator.purpose.ampersand"},
 						"12": { "name":"keyword.operator.purpose.ampersand"},
+
 						"13": { "name":"punctuation.statement.purpose.ampersand"},
-						"14": { "name":"variable.purpose.ampersand"},
-						"15": { "name":"punctuation.statement.purpose.ampersand"}
+						"14": { "name":"keyword.operator.purpose.ampersand"},
+						"15": { "name":"punctuation.statement.purpose.ampersand"},
+						"16": { "name":"variable.purpose.ampersand"},
+						"17": { "name":"punctuation.statement.purpose.ampersand"}
 					},
 					"end": "(?<=\\+})",
 					"patterns": [
@@ -178,7 +182,7 @@
 				},
 				{	"comment":"PURPOSE <keyword> \"<identifier>\" -- tnx to https://github.com/Microsoft/vscode-textmate/issues/41",
 					"name": "meta.purpose.ampersand",
-					"begin": "\\b(PURPOSE)\\s+(CONTEXT|CONCEPT|RELATION|RULE)\\s+(?:(\\w+)|(\")([^\"]+)(\"))(?:\\s+(REF)\\s+(\")([^\"]*)(\"))?",
+					"begin": "\\b(PURPOSE)\\s+(CONTEXT|CONCEPT|RELATION|RULE)\\s+(?:(\\w+)|(\")([^\"]+)(\"))(?:\\s*(IN)\\s+(DUTCH|ENGLISH))?(?:\\s+(REF)\\s+(\")([^\"]*)(\"))?",
 					"beginCaptures": {
 						"0": { "name":"meta.purpose.begin.ampersand"},
 						"1": { "name":"keyword.operator.purpose.ampersand"},
@@ -188,9 +192,11 @@
 						"5": { "name":"variable.purpose.ampersand"},
 						"6": { "name":"punctuation.statement.purpose.ampersand"},
 						"7": { "name":"keyword.operator.purpose.ampersand"},
-						"8": { "name":"punctuation.statement.purpose.ampersand"},
-						"9": { "name":"variable.purpose.ampersand"},
-						"10": { "name":"punctuation.statement.purpose.ampersand"}
+						"8": { "name":"keyword.operator.purpose.ampersand"},
+						"9": { "name":"keyword.operator.purpose.ampersand"},
+						"10": { "name":"punctuation.statement.purpose.ampersand"},
+						"11": { "name":"variable.purpose.ampersand"},
+						"12": { "name":"punctuation.statement.purpose.ampersand"}
 					},
 					"end": "(?<=\\+})",
 					"patterns": [

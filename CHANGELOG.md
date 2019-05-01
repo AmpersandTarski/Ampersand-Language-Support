@@ -6,6 +6,10 @@
     It is in the file `package.json` 
 -->
 
+## [0.3.5] - 2019-mm-dd
+
+- bugfix: `IN <LANGUAGESPEC>` is now supported in PURPOSE statements
+
 ## [0.3.4] - 2019-04-20
 
 - fixed PROPBUTTON snippet bug that Sterre reported by mail
