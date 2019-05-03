@@ -18,9 +18,9 @@
 		"description": "Define a CONTEXT, and its PURPOSE. You need to add the ENDCONTEXT statement yourself",
 		"comment": "this snippet ensures that you do not forget to document the PURPOSE of a CONTEXT that you define",
 		"body":[
-			"CONTEXT \"${1:name}\" IN ${2|DUTCH,ENGLISH|}",
-			"PURPOSE CONTEXT \"$1\"",
-			"{+$0+}"
+			"CONTEXT \"${1:name}\"${2:|, IN ${3|DUTCH,ENGLISH|}|}",
+			"${4:|,PURPOSE CONTEXT \"$1\" {+$0+}",
+			"ENDCONTEXT"
 		]
 	},
 	"Define a concept": {
