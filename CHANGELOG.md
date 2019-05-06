@@ -6,7 +6,7 @@
     It is in the file `package.json` 
 -->
 
-## [0.3.5] - 2019-mm-dd
+## [0.3.5] - 2019-05-06
 
 - fixes issues #35
 - bugfix: `IN <LANGUAGESPEC>` is now supported in PURPOSE statements
