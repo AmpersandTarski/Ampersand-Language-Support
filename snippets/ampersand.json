@@ -18,9 +18,9 @@
 		"description": "Define a CONTEXT, and its PURPOSE. You need to add the ENDCONTEXT statement yourself",
 		"comment": "this snippet ensures that you do not forget to document the PURPOSE of a CONTEXT that you define",
 		"body":[
-			"CONTEXT \"${1:name}\" IN ${2|DUTCH,ENGLISH|}",
-			"PURPOSE CONTEXT \"$1\"",
-			"{+$0+}"
+			"CONTEXT \"${1:name}\"${2:|, IN ${3|DUTCH,ENGLISH|}|}",
+			"${4:|,PURPOSE CONTEXT \"$1\" {+$0+}",
+			"ENDCONTEXT"
 		]
 	},
 	"Define a concept": {
@@ -62,7 +62,7 @@
 	"Define a Relation population": {
 		"prefix": "POPULATION",
 		"description": "Define a POPULATION of Relation pairs/links",
-		"body":[ "POPULATION \"${1:Relname}\" CONTAINS [ (\"$2\", \"$3\") ]"	]
+		"body":[ "POPULATION ${1:Relname} CONTAINS [ (\"$2\", \"$3\") ]"	]
 	},
 	"SERVICE MAINTAINS RULE": {
 		"prefix": "SERVICE",
@@ -89,7 +89,12 @@
 	"VIOLATION": {
 		"prefix": "VIOLATION (TXT ",
 		"description": "Define a VIOLATION",
-		"body":[ "VIOLATION (TXT \"$0\")" ]
+		"body":[ "VIOLATION (TXT \"" ]
+	},
+	"{EX}": {
+		"prefix": "{EX}",
+		"description": "Marks the start of an ExecEngine function",
+		"body":[ "{EX} ${1|InsPair,DelPair,InsAtom,DelAtom,SetConcept,ClearConcept,SetNavToOnCommit,SetNavToOnRollBack,TerminateThisExecEngine,TriggerService|}" ]
 	},
 	"InsPair": {
 		"prefix": "InsPair",
@@ -105,6 +110,7 @@
 		"prefix": "NewStruct",
 		"description": "NewStruct is deprecated - change to InsAtom",
 		"body":[
+			"-- The function `NewStruct` is deprecated. Please use `InsAtom` instead.",
 			"InsAtom;${1:concept}\"",
 			"          ,TXT \"{EX} $0" 
 		]
