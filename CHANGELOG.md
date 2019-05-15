@@ -6,6 +6,12 @@
     It is in the file `package.json` 
 -->
 
+## [0.3.6] - 2019-05-15
+
+- support/bugfix for INTERFACE references
+- Update VIOLATION and TXT snippets
+- bugfix in CONTEXT snippet
+
 ## [0.3.5] - 2019-05-06
 
 - fixes issues #35
