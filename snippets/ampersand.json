@@ -15,11 +15,11 @@
 	},
 	"Define a context": {
 		"prefix": "CONTEXT",
-		"description": "Define a CONTEXT, and its PURPOSE. You need to add the ENDCONTEXT statement yourself",
-		"comment": "this snippet ensures that you do not forget to document the PURPOSE of a CONTEXT that you define",
+		"description": "Define a CONTEXT. You may need to add the PURPOSE statement yourself",
+		"comment": "this snippet ensures that you do not forget the corresponding 'ENDCONTEXT' statement",
 		"body":[
-			"CONTEXT \"${1:name}\"${2:|, IN ${3|DUTCH,ENGLISH|}|}",
-			"${4:|,PURPOSE CONTEXT \"$1\" {+$0+}",
+			"CONTEXT \"${1:name}\"",
+			"$0",	
 			"ENDCONTEXT"
 		]
 	},
@@ -86,10 +86,15 @@
 			"RULE \"${1:rulename}\": ${0:rule-expression}"
 		]
 	},
+	"TXT": {
+		"prefix": "TXT ",
+		"description": "Define a TXT fragment within a VIOLATION or VIEW",
+		"body":[ "TXT \"$0\"" ]
+	},
 	"VIOLATION": {
 		"prefix": "VIOLATION (TXT ",
 		"description": "Define a VIOLATION",
-		"body":[ "VIOLATION (TXT \"" ]
+		"body":[ "VIOLATION (TXT \"$0\"" ]
 	},
 	"{EX}": {
 		"prefix": "{EX}",
@@ -112,7 +117,7 @@
 		"body":[
 			"-- The function `NewStruct` is deprecated. Please use `InsAtom` instead.",
 			"InsAtom;${1:concept}\"",
-			"          ,TXT \"{EX} $0" 
+			"          ,TXT \"{EX} $0\"" 
 		]
 	},
 	"InsAtom": {
@@ -120,7 +125,7 @@
 		"description": "most common way in which InsAtoms are done",
 		"body":[
 			"InsAtom;${1:concept}\"",
-			"          ,TXT \"{EX} $0" 
+			"          ,TXT \"{EX} $0\""
 		]
 	},
 	"DelAtom": {

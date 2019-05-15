@@ -666,20 +666,33 @@
 
 		"INTERFACE":
 		{ "patterns": 
-			[	{	"comment":"INTERFACE/API/GUI \"<ifcname>\" ... up to `BOX`-like stuff",
+			[	{	"comment":"INTERFACE/API/GUI \"<ifcname>\" [FOR <roles>]: ... etc. ... up to `BOX`-like stuff",
 					"name":"meta.interface.ampersand",
-					"begin": "\\b(INTERFACE|API|GUI)\\s+(?:(\\b\\w+)|(\")([^\"]+)(\"))",
+					"begin": "\\b(INTERFACE|API|GUI)\\s+(?:(\\b\\w+)|(\")([^\"]+)(\"))(?:\\s+(FOR)\\s+(?:(\\w+)|(\")([^\"]+)(\"))\\s*(?:(,)\\s*(?:(\\w+)|(\")([^\"]+)(\")))*)?\\s*(:)",
 					"beginCaptures": {
 						"0": { "name":"meta.interface.begin.ampersand"},
 						"1": { "name":"keyword.operator.interface.ampersand"},
 						"2": { "name":"entity.name.interface.ampersand"},
 						"3": { "name":"punctuation.statement.interface.ampersand"},
 						"4": { "name":"entity.name.interface.ampersand"},
-						"5": { "name":"punctuation.statement.interface.ampersand"}
+						"5": { "name":"punctuation.statement.interface.ampersand"},
+
+						"6": { "name":"keyword.operator.interface.ampersand"},
+						"7": { "name":"entity.name.interface.ampersand"},
+						"8": { "name":"punctuation.statement.interface.ampersand"},
+						"9": { "name":"entity.name.interface.ampersand"},
+						"10": { "name":"punctuation.statement.interface.ampersand"},
+
+						"11": { "name":"punctuation.statement.interface.ampersand"},
+						"12": { "name":"entity.name.interface.ampersand"},
+						"13": { "name":"punctuation.statement.interface.ampersand"},
+						"14": { "name":"entity.name.interface.ampersand"},
+						"15": { "name":"punctuation.statement.interface.ampersand"},
+
+						"16": { "name":"punctuation.statement.interface.ampersand"}
 						},
-					"end": "\\b(?=BOX|ROWS|COLS|TABS|PANELS|INTERFACE)",
-					"patterns": [ 
-						{	"include":"#for-roles-colon" },
+					"end": "\\b(?=BOX|ROWS|COLS|TABS|PANELS|INTERFACE|API|GUI)",
+					"patterns": [
 						{	"include":"#crud" },
 						{	"include":"#term" },
 						{	"match": "(<)([^>\\s\"\\\\]+)(>)",
@@ -693,6 +706,17 @@
 							"name": "invalid.illegal.interface.ampersand"
 						}
 					]
+				},
+				{	"comment":"INTERFACE/API/GUI \"<ifcname>\" without colon, i.e. for reference purposes",
+					"match": "\\b(INTERFACE|API|GUI)\\s+(?:(\\b\\w+)|(\")([^\"]+)(\"))(?=\\s*[^:])",
+					"captures": {
+						"0": { "name":"meta.interface.reference.ampersand"},
+						"1": { "name":"keyword.operator.interface.ampersand"},
+						"2": { "name":"entity.name.interface.ampersand"},
+						"3": { "name":"punctuation.statement.interface.ampersand"},
+						"4": { "name":"entity.name.interface.ampersand"},
+						"5": { "name":"punctuation.statement.interface.ampersand"}
+					}
 				}
 			]
 		},
