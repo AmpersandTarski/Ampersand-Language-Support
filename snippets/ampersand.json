@@ -260,7 +260,7 @@
 			"   } HTML TEMPLATE \"${3:templatefilename.html}\" ENDVIEW"
 		]
 	},
-	"PROPBUTTON": {
+	"PROPBUTTON (extended)": {
 		"prefix": "<PROPBUTTON>",
 		"description": "propbutton arguments",
 		"body":[
@@ -268,7 +268,15 @@
 			"[ property: ${1:propertyrelation} cRUd",
 			", disabled: ${2:expression} cRud",
 			", hide: ${3:expression} cRud",
+			", popovertext: ${4:expression} cRud",
 			"]"
+		]
+	},
+	"PROPBUTTON (simple)": {
+		"prefix": "<PROPBUTTON>",
+		"description": "simple property-button",
+		"body":[
+			"<PROPBUTTON> [ property: ${0:propertyrelation} cRUd ]"
 		]
 	}
 }

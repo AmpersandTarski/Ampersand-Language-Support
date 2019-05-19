@@ -6,6 +6,10 @@
     It is in the file `package.json` 
 -->
 
+## [0.3.7] - 2019-mm-dd
+
+- Enhancement of PROPBUTTON snippet
+
 ## [0.3.6] - 2019-05-15
 
 - support/bugfix for INTERFACE references
