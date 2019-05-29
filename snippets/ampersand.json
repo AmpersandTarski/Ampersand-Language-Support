@@ -99,7 +99,7 @@
 	"{EX}": {
 		"prefix": "{EX}",
 		"description": "Marks the start of an ExecEngine function",
-		"body":[ "{EX} ${1|InsPair,DelPair,InsAtom,DelAtom,SetConcept,ClearConcept,SetNavToOnCommit,SetNavToOnRollBack,TerminateThisExecEngine,TriggerService|}" ]
+		"body":[ "{EX} ${1|InsPair,DelPair,InsAtom,DelAtom,MrgAtom,SetConcept,ClearConcept,SetNavToOnCommit,SetNavToOnRollBack,TerminateThisExecEngine,TriggerService|}" ]
 	},
 	"InsPair": {
 		"prefix": "InsPair",
