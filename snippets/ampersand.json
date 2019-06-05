@@ -94,7 +94,7 @@
 	"VIOLATION": {
 		"prefix": "VIOLATION (TXT ",
 		"description": "Define a VIOLATION",
-		"body":[ "VIOLATION (TXT \"$0\"" ]
+		"body":[ "VIOLATION (TXT \"{EX} $0\"" ]
 	},
 	"{EX}": {
 		"prefix": "{EX}",
