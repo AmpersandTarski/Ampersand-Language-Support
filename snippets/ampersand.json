@@ -133,6 +133,11 @@
 		"description": "most common way in which DelAtoms are done",
 		"body":[ "DelAtom;${1:concept};\", ${2:atomid}"	]
 	},
+	"MrgAtom": {
+		"prefix": "MrgAtom",
+		"description": "Unify both atoms, i.e. merge (and then delete) TGT atom into SRC atom",
+		"body":[ "MrgAtom;${1:concept};\", SRC I, TXT \";${2:concept};\", TGT I" ]
+	},
 	"SetConcept": {
 		"prefix": "SetConcept",
 		"description": "Add atomId[ConceptA] to [ConceptB]-set",
