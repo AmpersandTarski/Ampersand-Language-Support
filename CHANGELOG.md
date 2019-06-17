@@ -6,8 +6,12 @@
     It is in the file `package.json` 
 -->
 
-## [0.3.7] - 2019-mm-dd
+## [0.3.7] - 2019-06-17
 
+- Syntax coloring for `INTERFACE`, `API` and `GUI` `PURPOSE` statements
+- Added `{EX}` in `VIOLATION` snippet
+- Added snippet for ExecEnging function MrgAtom
+- Added `MrgAtom` to the list of predefined ExecEngine functions
 - Enhancement of PROPBUTTON snippet
 
 ## [0.3.6] - 2019-05-15
