@@ -567,19 +567,24 @@
 
 		"ROLE":
 		{	"patterns": [
-				{	"comment":"ROLE,SERVICE <role> MAINTAINS <rulename>",
+				{	"comment":"ROLE,SERVICE <list of roles> MAINTAINS <rulename>",
 					"name":"meta.role.ampersand",
-					"match": "\\b(ROLE|SERVICE)\\s+(?:\\b([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))\\s+(MAINTAINS)\\s+(\"?)([^\"]*)(\\7)",
+					"match": "\\b(ROLE|SERVICE)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))(?:\\s*(,)\\s*(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\")))*\\s+(MAINTAINS)\\s+(\"?)([^\"]*)(\\12)",
 					"captures": {
 						"1": { "name":"keyword.operator.role.ampersand"},
 						"2": { "name":"variable.role.ampersand"},
 						"3": { "name":"punctuation.statement.role.ampersand"},
 						"4": { "name":"variable.role.ampersand"},
 						"5": { "name":"punctuation.statement.role.ampersand"},
-						"6": { "name":"keyword.operator.role.ampersand"},
-						"7": { "name":"punctuation.statement.role.ampersand"},
-						"8": { "name":"variable.rule.ampersand"},
-						"9": { "name":"punctuation.statement.role.ampersand"}
+						"6": { "name":"punctuation.statement.role.ampersand"},
+						"7": { "name":"variable.role.ampersand"},
+						"8": { "name":"punctuation.statement.role.ampersand"},
+						"9": { "name":"variable.role.ampersand"},
+						"10": { "name":"punctuation.statement.role.ampersand"},
+						"11": { "name":"keyword.operator.role.ampersand"},
+						"12": { "name":"punctuation.statement.role.ampersand"},
+						"13": { "name":"variable.rule.ampersand"},
+						"14": { "name":"punctuation.statement.role.ampersand"}
 					}
 				}
 			]
