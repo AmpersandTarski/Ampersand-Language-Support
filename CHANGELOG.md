@@ -6,6 +6,10 @@
     It is in the file `package.json` 
 -->
 
+## [0.3.8] - 2019-06-27
+
+- Bugfix in `ROLE` statement
+
 ## [0.3.7] - 2019-06-17
 
 - Syntax coloring for `INTERFACE`, `API` and `GUI` `PURPOSE` statements
