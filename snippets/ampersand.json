@@ -269,7 +269,7 @@
 		"prefix": "<PROPBUTTON>",
 		"description": "propbutton arguments",
 		"body":[
-			"<PROPBUTTON>",
+			"BOX <PROPBUTTON>",
 			"[ property: ${1:propertyrelation} cRUd",
 			", disabled: ${2:expression} cRud",
 			", hide: ${3:expression} cRud",
@@ -281,7 +281,29 @@
 		"prefix": "<PROPBUTTON>",
 		"description": "simple property-button",
 		"body":[
-			"<PROPBUTTON> [ property: ${0:propertyrelation} cRUd ]"
+			"BOX <PROPBUTTON> [ property: ${0:propertyrelation} cRUd ]"
+		]
+	},
+	"OBJECTDROPDOWN": {
+		"prefix": "<OBJECTDROPDOWN>",
+		"description": "BOX for selecting one out of a set of OBJECTs",
+		"body":[
+			"BOX <OBJECTDROPDOWN>",
+			"[ selectfrom: ${1:TOTrelContainsOBJECTsToChooseFrom} cRud <${2:ViewToDisplaySelectableOBJECTs}>",
+			", setrelation: ${3:UNIrelThatWillContainSelectedOBJECT} cRUd",
+		   ", selectflag: ${4:PROPrelThatTogglesUponSelection} cRUd",
+			"]"
+		]
+	},
+	"VALUEDROPDOWN": {
+		"prefix": "<VALUEDROPDOWN>",
+		"description": "BOX for selecting one out of a set of VALUEs (i.e. non-objects)",
+		"body":[
+			"BOX <VALUEDROPDOWN>",
+			"[ selectfrom: ${1:TOTrelContainsVALUEsToChooseFrom} cRud <${2:ViewToDisplaySelectableVALUE}>",
+			", setrelation: ${3:UNIrelThatWillContainSelectedVALUE} cRUd",
+		   ", selectflag: ${4:PROPrelThatTogglesUponSelection} cRUd",
+			"]"
 		]
 	}
 }
