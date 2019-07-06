@@ -6,6 +6,11 @@
     It is in the file `package.json` 
 -->
 
+## [0.3.9] - 2019-xx-yy
+
+- New snippets for `BOX <OBJECTDROPDOWN>` and `BOX <VALUEDROPDOWN>`.  Using these requires developers to include the associated templates, which can be found in [this commit](https://github.com/AmpersandTarski/ampersand-models/commit/bfd03a0a627e115f374659258396c0c003bc95f2) (i.e. in the `templates` directory of the application `ButtonCRUD` in the ampersand-models repo)
+- PROPBUTTON snippet now inserts `BOX <PROPBUTTON>` rather than just `<PROPBUTTON>`
+
 ## [0.3.8] - 2019-06-27
 
 - Bugfix in `ROLE` statement
