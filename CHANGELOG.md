@@ -8,8 +8,12 @@
 
 ## [0.3.9] - 2019-xx-yy
 
-- New snippets for `BOX <OBJECTDROPDOWN>` and `BOX <VALUEDROPDOWN>`.  Using these requires developers to include the associated templates, which can be found in [this commit](https://github.com/AmpersandTarski/ampersand-models/commit/bfd03a0a627e115f374659258396c0c003bc95f2) (i.e. in the `templates` directory of the application `ButtonCRUD` in the ampersand-models repo)
-- PROPBUTTON snippet now inserts `BOX <PROPBUTTON>` rather than just `<PROPBUTTON>`
+A reference is needed to the commit(s) where can get the new PROPBUTTON and DROPDOWN templates
+
+- New snippets created for `BOX <OBJECTDROPDOWN>` and `BOX <VALUEDROPDOWN>`. Using these requires developers to include the associated templates
+- `PROPBUTTON (simple)` snippet now inserts `BOX <PROPBUTTON>` rather than just `<PROPBUTTON>`
+- `PROPBUTTON (extended)` snippet now includes `label` and `color` arguments. New arguments require a new PROPBUTTON template. If you don't have it, the arguments are ignored.
+- `PROPBUTTON (documented)` snippet is as `PROPBUTTON (extended)`, and adds documentation lines for each of the arguments.
 
 ## [0.3.8] - 2019-06-27
 

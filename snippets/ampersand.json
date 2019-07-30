@@ -265,15 +265,31 @@
 			"   } HTML TEMPLATE \"${3:templatefilename.html}\" ENDVIEW"
 		]
 	},
+	"PROPBUTTON (documented)": {
+		"prefix": "<PROPBUTTON>",
+		"description": "propbutton arguments",
+		"body":[
+			"BOX <PROPBUTTON>",
+			"[ label: TXT \"${1:buttontext}\" -- text to show on the button",
+			", property: ${2:propertyrelation} cRUd -- relation of type [PROP] whose value is toggled when user presses button",
+			", disabled: ${3:expression} cRud -- when expression is not empty, button is disabled (user cannot click it)",
+			", hide: ${4:expression} cRud -- when expression is not empty, button does not show on screen",
+			", color: TXT \"${5|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- (outline-)primary=blue, secondary=grey, success=green, warning=yellow, danger=red, info=lightblue, light=grey, dark=black",
+			", popovertext: TXT \"${6:expression}\" -- text that shows when user hovers cursor over the button",
+			"]"
+		]
+	},
 	"PROPBUTTON (extended)": {
 		"prefix": "<PROPBUTTON>",
 		"description": "propbutton arguments",
 		"body":[
 			"BOX <PROPBUTTON>",
-			"[ property: ${1:propertyrelation} cRUd",
-			", disabled: ${2:expression} cRud",
-			", hide: ${3:expression} cRud",
-			", popovertext: ${4:expression} cRud",
+			"[ label: TXT \"${1:buttontext}\"",
+			", property: ${2:propertyrelation} cRUd",
+			", disabled: ${3:expression} cRud",
+			", hide: ${4:expression} cRud",
+			", color: TXT \"${5|primary,secondary,success,warning,danger,info,light,dark,link|}",
+			", popovertext: TXT \"${6:expression}\"",
 			"]"
 		]
 	},
@@ -284,14 +300,15 @@
 			"BOX <PROPBUTTON> [ property: ${0:propertyrelation} cRUd ]"
 		]
 	},
-	"OBJECTDROPDOWN": {
+		"OBJECTDROPDOWN": {
 		"prefix": "<OBJECTDROPDOWN>",
 		"description": "BOX for selecting one out of a set of OBJECTs",
 		"body":[
 			"BOX <OBJECTDROPDOWN>",
 			"[ selectfrom: ${1:TOTrelContainsOBJECTsToChooseFrom} cRud <${2:ViewToDisplaySelectableOBJECTs}>",
 			", setrelation: ${3:UNIrelThatWillContainSelectedOBJECT} cRUd",
-		   ", selectflag: ${4:PROPrelThatTogglesUponSelection} cRUd",
+			", instruction: TXT \"${4:TextToInviteUserToSelect}",
+		   ", selectflag: ${5:PROPrelThatTogglesUponSelection} cRUd",
 			"]"
 		]
 	},
@@ -302,7 +319,8 @@
 			"BOX <VALUEDROPDOWN>",
 			"[ selectfrom: ${1:TOTrelContainsVALUEsToChooseFrom} cRud <${2:ViewToDisplaySelectableVALUE}>",
 			", setrelation: ${3:UNIrelThatWillContainSelectedVALUE} cRUd",
-		   ", selectflag: ${4:PROPrelThatTogglesUponSelection} cRUd",
+			", instruction: TXT \"${4:TextToInviteUserToSelect}",
+		   ", selectflag: ${5:PROPrelThatTogglesUponSelection} cRUd",
 			"]"
 		]
 	}
