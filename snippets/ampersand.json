@@ -269,13 +269,14 @@
 		"prefix": "<PROPBUTTON>",
 		"description": "propbutton arguments",
 		"body":[
-			"BOX <PROPBUTTON>",
+			"cRud BOX <PROPBUTTON>",
 			"[ label: TXT \"${1:buttontext}\" -- text to show on the button",
 			", property: ${2:propertyrelation} cRUd -- relation of type [PROP] whose value is toggled when user presses button",
-			", disabled: ${3:expression} cRud -- when expression is not empty, button is disabled (user cannot click it)",
-			", hide: ${4:expression} cRud -- when expression is not empty, button does not show on screen",
-			", color: TXT \"${5|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- (outline-)primary=blue, secondary=grey, success=green, warning=yellow, danger=red, info=lightblue, light=grey, dark=black",
-			", popovertext: TXT \"${6:expression}\" -- text that shows when user hovers cursor over the button",
+			", color: TXT \"${3|primary,secondary,success,warning,danger,info,light,dark,link,outline-primary,outline-secondary,outline-success,outline-warning,outline-danger,outline-info,outline-light,outline-dark,outline-link|}\" -- primary=blue secondary=grey, success=green, warning=yellow, danger=red, info=lightblue, light=grey, dark=black",
+			", disabledcolor: TXT \"${4|primary,secondary,success,warning,danger,info,light,dark,link,outline-primary,outline-secondary,outline-success,outline-warning,outline-danger,outline-info,outline-light,outline-dark,outline-link|}\" -- precede color with `outline-` (e.g. `outline-primary`) to make an outline-button",
+			", disabled: ${5:expression} cRud -- when expression is not empty, button is disabled (user cannot click it)",
+			", hide: ${6:expression} cRud -- when expression is not empty, button does not show on screen",
+			", popovertext: TXT \"${7:expression}\" -- text that shows when user hovers cursor over the button",
 			"]"
 		]
 	},
@@ -283,13 +284,14 @@
 		"prefix": "<PROPBUTTON>",
 		"description": "propbutton arguments",
 		"body":[
-			"BOX <PROPBUTTON>",
+			"cRud BOX <PROPBUTTON>",
 			"[ label: TXT \"${1:buttontext}\"",
 			", property: ${2:propertyrelation} cRUd",
-			", disabled: ${3:expression} cRud",
-			", hide: ${4:expression} cRud",
-			", color: TXT \"${5|primary,secondary,success,warning,danger,info,light,dark,link|}",
-			", popovertext: TXT \"${6:expression}\"",
+			", color: TXT \"${3|primary,secondary,success,warning,danger,info,light,dark,link,outline-primary,outline-secondary,outline-success,outline-warning,outline-danger,outline-info,outline-light,outline-dark,outline-link|}\"",
+			", disabledcolor: TXT \"${4|primary,secondary,success,warning,danger,info,light,dark,link,outline-primary,outline-secondary,outline-success,outline-warning,outline-danger,outline-info,outline-light,outline-dark,outline-link|}\"",
+			", disabled: ${5:expression} cRud",
+			", hide: ${6:expression} cRud",
+			", popovertext: TXT \"${7:expression}\"",
 			"]"
 		]
 	},
@@ -297,30 +299,32 @@
 		"prefix": "<PROPBUTTON>",
 		"description": "simple property-button",
 		"body":[
-			"BOX <PROPBUTTON> [ property: ${0:propertyrelation} cRUd ]"
+			"cRud BOX <PROPBUTTON> [ property: ${0:propertyrelation} cRUd ]"
 		]
 	},
-		"OBJECTDROPDOWN": {
+	"OBJECTDROPDOWN": {
 		"prefix": "<OBJECTDROPDOWN>",
-		"description": "BOX for selecting one out of a set of OBJECTs",
+		"description": "BOX that adds an OBJECT that the user selects, to the population of a relation",
 		"body":[
-			"BOX <OBJECTDROPDOWN>",
-			"[ selectfrom: ${1:TOTrelContainsOBJECTsToChooseFrom} cRud <${2:ViewToDisplaySelectableOBJECTs}>",
-			", setrelation: ${3:UNIrelThatWillContainSelectedOBJECT} cRUd",
+			"cRud BOX <OBJECTDROPDOWN>",
+			"[ selectfrom: ${1:exprThatSpecifiesOBJECTsToSelectFrom} cRud <${2:ViewToDisplaySelectableOBJECTs}>",
+			", setrelation: ${3:relToWhichSelectedOBJECTisAdded} cRUd",
 			", instruction: TXT \"${4:TextToInviteUserToSelect}",
-		   ", selectflag: ${5:PROPrelThatTogglesUponSelection} cRUd",
+		   ", selectflag: ${5:PROPrelThatTogglesWhenOBJECTisSelected} cRUd",
+		   ", deselectflag: ${6:PROPrelThatTogglesWhenOBJECTisNOTSelected} cRUd",
 			"]"
 		]
 	},
 	"VALUEDROPDOWN": {
 		"prefix": "<VALUEDROPDOWN>",
-		"description": "BOX for selecting one out of a set of VALUEs (i.e. non-objects)",
+		"description": "BOX that adds a VALUE that the user selects, to the population of a relation",
 		"body":[
-			"BOX <VALUEDROPDOWN>",
-			"[ selectfrom: ${1:TOTrelContainsVALUEsToChooseFrom} cRud <${2:ViewToDisplaySelectableVALUE}>",
-			", setrelation: ${3:UNIrelThatWillContainSelectedVALUE} cRUd",
+			"cRud BOX <VALUEDROPDOWN>",
+			"[ selectfrom: ${1:exprThatSpecifiesVALUEsToSelectFrom} cRud <${2:ViewToDisplaySelectableVALUEs}>",
+			", setrelation: ${3:relToWhichSelectedVALUEisAdded} cRUd",
 			", instruction: TXT \"${4:TextToInviteUserToSelect}",
-		   ", selectflag: ${5:PROPrelThatTogglesUponSelection} cRUd",
+		   ", selectflag: ${5:PROPrelThatTogglesWhenVALUEisSelected} cRUd",
+		   ", deselectflag: ${6:PROPrelThatTogglesWhenVALUEisNOTSelected} cRUd",
 			"]"
 		]
 	}

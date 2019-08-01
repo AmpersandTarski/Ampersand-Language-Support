@@ -10,10 +10,8 @@
 
 A reference is needed to the commit(s) where can get the new PROPBUTTON and DROPDOWN templates
 
-- New snippets created for `BOX <OBJECTDROPDOWN>` and `BOX <VALUEDROPDOWN>`. Using these requires developers to include the associated templates
-- `PROPBUTTON (simple)` snippet now inserts `BOX <PROPBUTTON>` rather than just `<PROPBUTTON>`
-- `PROPBUTTON (extended)` snippet now includes `label` and `color` arguments. New arguments require a new PROPBUTTON template. If you don't have it, the arguments are ignored.
-- `PROPBUTTON (documented)` snippet is as `PROPBUTTON (extended)`, and adds documentation lines for each of the arguments.
+- Snippets now support the templates `BOX <OBJECTDROPDOWN>` and `BOX <VALUEDROPDOWN>`. These templates provide dropdown-boxes that allow users to select OBJECTS or VALUEs respectively. The snippets provide some (minimal) documentation w.r.t. to how these templates must be used in scripts. At the time of writing, developers that want to use them have to get hold of them (commit ref needed), and include them in their `templates` directory.
+- Three snippets now support the (new) `PROPBUTTON` template, which extends the previous templates by allowing developers to specify the color of the button, as well as its label (the text that shows on the button). One snippet (PROPBUTTON 'documented') provides all options and includes documentary comments. Another snippet (PROPBUTTON 'extended') is the same, but does not include documentary comments. The last snippet (PROPBUTTON 'simple') provides the minimum number of arguments that is still useable (no documentary comments).
 
 ## [0.3.8] - 2019-06-27
 
