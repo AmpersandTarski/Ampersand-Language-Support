@@ -265,6 +265,16 @@
 			"   } HTML TEMPLATE \"${3:templatefilename.html}\" ENDVIEW"
 		]
 	},
+	"COLOR (for use in PROPBUTTONs)": {
+		"prefix": "color:",
+		"description": "specify color for (solid) PROPBUTTONs",
+		"body": "TXT \"${1|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- primary=blue secondary=grey, success=green, warning=yellow, danger=red, info=lightblue, light=grey, dark=black"
+	},
+	"OUTLINECOLOR (for use in PROPBUTTONs)": {
+		"prefix": "outlinecolor",
+		"description": "specify color for outlined PROPBUTTONs",
+		"body": "TXT \"outline-${1|primary,secondary,success,warning,danger,info,light,dark,link,|}\" -- primary=blue secondary=grey, success=green, warning=yellow, danger=red, info=lightblue, light=grey, dark=black"
+	},
 	"PROPBUTTON (documented)": {
 		"prefix": "<PROPBUTTON>",
 		"description": "propbutton arguments",
@@ -309,9 +319,9 @@
 			"cRud BOX <OBJECTDROPDOWN>",
 			"[ selectfrom: ${1:exprThatSpecifiesOBJECTsToSelectFrom} cRud <${2:ViewToDisplaySelectableOBJECTs}>",
 			", setrelation: ${3:relToWhichSelectedOBJECTisAdded} cRUd",
-			", instruction: TXT \"${4:TextToInviteUserToSelect}",
-		   ", selectflag: ${5:PROPrelThatTogglesWhenOBJECTisSelected} cRUd",
-		   ", deselectflag: ${6:PROPrelThatTogglesWhenOBJECTisNOTSelected} cRUd",
+			", instruction: TXT \"${4:selectText}\" -- Text that shows when nothing is selected yet",
+		   ", selectflag: ${5:selectEventFlag} cRUd -- [PROP]-type relation that toggles when OBJECT is selected",
+		   ", deselectflag: ${6:deselectEventFlag} cRUd -- [PROP]-type relation that toggles when NO OBJECT is selected",
 			"]"
 		]
 	},
@@ -322,9 +332,9 @@
 			"cRud BOX <VALUEDROPDOWN>",
 			"[ selectfrom: ${1:exprThatSpecifiesVALUEsToSelectFrom} cRud <${2:ViewToDisplaySelectableVALUEs}>",
 			", setrelation: ${3:relToWhichSelectedVALUEisAdded} cRUd",
-			", instruction: TXT \"${4:TextToInviteUserToSelect}",
-		   ", selectflag: ${5:PROPrelThatTogglesWhenVALUEisSelected} cRUd",
-		   ", deselectflag: ${6:PROPrelThatTogglesWhenVALUEisNOTSelected} cRUd",
+			", instruction: TXT \"${4:selectText}\" -- Text that shows when nothing is selected yet",
+		   ", selectflag: ${5:selectEventFlag} cRUd -- [PROP]-type relation that toggles when Value is selected",
+		   ", deselectflag: ${6:deselectEventFlag} cRUd -- [PROP]-type relation that toggles when NO Value is selected",
 			"]"
 		]
 	}
