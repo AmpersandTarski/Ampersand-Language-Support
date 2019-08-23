@@ -6,9 +6,9 @@
     It is in the file `package.json` 
 -->
 
-## [0.3.9] - 2019-xx-yy
+## [0.3.9] - 2019-08-23
 
-A reference is needed to the commit(s) where can get the new PROPBUTTON and DROPDOWN templates
+- Fix launching on MacOS
 
 - Snippets now support the templates `BOX <OBJECTDROPDOWN>` and `BOX <VALUEDROPDOWN>`. These templates provide dropdown-boxes that allow users to select OBJECTS or VALUEs respectively. The snippets provide some (minimal) documentation w.r.t. to how these templates must be used in scripts. At the time of writing, developers that want to use them have to get hold of them (commit ref needed), and include them in their `templates` directory.
 - Support is included for the newly enhanced PROPBUTTON template, which now allows developers to specify:
