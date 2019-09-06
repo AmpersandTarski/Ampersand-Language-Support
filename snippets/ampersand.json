@@ -265,23 +265,60 @@
 			"   } HTML TEMPLATE \"${3:templatefilename.html}\" ENDVIEW"
 		]
 	},
-	"PROPBUTTON (extended)": {
-		"prefix": "<PROPBUTTON>",
-		"description": "propbutton arguments",
-		"body":[
-			"<PROPBUTTON>",
-			"[ property: ${1:propertyrelation} cRUd",
-			", disabled: ${2:expression} cRud",
-			", hide: ${3:expression} cRud",
-			", popovertext: ${4:expression} cRud",
-			"]"
-		]
+	"COLOR (for use in PROPBUTTONs)": {
+		"prefix": "color:",
+		"description": "specify color for (solid) PROPBUTTONs",
+		"body": "TXT \"${1|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- primary=blue secondary=grey, success=green, warning=yellow, danger=red, info=lightblue, light=grey, dark=black"
+	},
+	"OUTLINECOLOR (for use in PROPBUTTONs)": {
+		"prefix": "outlinecolor",
+		"description": "specify color for (outlined) PROPBUTTONs",
+		"body": "TXT \"outline-${1|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- primary=blue secondary=grey, success=green, warning=yellow, danger=red, info=lightblue, light=grey, dark=black"
 	},
 	"PROPBUTTON (simple)": {
 		"prefix": "<PROPBUTTON>",
 		"description": "simple property-button",
+		"body": "cRud BOX <PROPBUTTON> [ property: ${0:propertyrelation} cRUd ]"
+	},
+	"PROPBUTTON (extended)": {
+		"prefix": "<PROPBUTTON>",
+		"description": "propbutton arguments",
 		"body":[
-			"<PROPBUTTON> [ property: ${0:propertyrelation} cRUd ]"
+			"cRud BOX <PROPBUTTON>",
+			"   [ label: TXT \"${1:buttontext}\" -- text to show on the button",
+			"   , property: ${2:propertyrelation} cRUd -- relation of type [PROP] whose value is toggled when user presses button",
+			"   , color: TXT \"${3|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- primary=blue secondary=grey, success=green, warning=yellow, danger=red, info=lightblue, light=grey, dark=black",
+			"   , disabledcolor: TXT \"${4|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- precede color with `outline-` (e.g. `outline-primary`) to make an outline-button",
+			"   , disabled: ${5:propertyExpression} cRud -- when [PROP]-type expression is not empty, button is disabled (user cannot click it)",
+			"   , hide: ${6:propertyExpression} cRud -- when [PROP]-type expression is not empty, button does not show on screen",
+			"   , popovertext: TXT \"${7:hovertext}\" -- text that shows when user hovers cursor over the button",
+			"   ]"
+		]
+	},
+	"OBJECTDROPDOWN": {
+		"prefix": "<OBJECTDROPDOWN>",
+		"description": "BOX that adds an OBJECT that the user selects, to the population of a relation",
+		"body":[
+			"cRud BOX <OBJECTDROPDOWN>",
+			"[ selectfrom: ${1:exprThatSpecifiesOBJECTsToSelectFrom} cRud <${2:ViewToDisplaySelectableOBJECTs}>",
+			", setrelation: ${3:relToWhichSelectedOBJECTisAdded} cRUd",
+			", instruction: TXT \"${4:selectText}\" -- Text that shows when nothing is selected yet",
+		   ", selectflag: ${5:selectEventFlag} cRUd -- [PROP]-type relation that toggles when OBJECT is selected",
+		   ", deselectflag: ${6:deselectEventFlag} cRUd -- [PROP]-type relation that toggles when NO OBJECT is selected",
+			"]"
+		]
+	},
+	"VALUEDROPDOWN": {
+		"prefix": "<VALUEDROPDOWN>",
+		"description": "BOX that adds a VALUE that the user selects, to the population of a relation",
+		"body":[
+			"cRud BOX <VALUEDROPDOWN>",
+			"[ selectfrom: ${1:exprThatSpecifiesVALUEsToSelectFrom} cRud <${2:ViewToDisplaySelectableVALUEs}>",
+			", setrelation: ${3:relToWhichSelectedVALUEisAdded} cRUd",
+			", instruction: TXT \"${4:selectText}\" -- Text that shows when nothing is selected yet",
+		   ", selectflag: ${5:selectEventFlag} cRUd -- [PROP]-type relation that toggles when Value is selected",
+		   ", deselectflag: ${6:deselectEventFlag} cRUd -- [PROP]-type relation that toggles when NO Value is selected",
+			"]"
 		]
 	}
 }

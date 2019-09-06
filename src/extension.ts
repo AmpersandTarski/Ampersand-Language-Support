@@ -162,12 +162,12 @@ export function activate(context: vscode.ExtensionContext) {
         context.subscriptions.push({dispose: () => {try {fs.unlinkSync(file);} catch (e) {};}});
         fs.writeFileSync(file, "");
 
-        let runAmpersandCommand : string = "ampersand --daemon";
-
+        let runAmpersandCommand : string = "ampersand";
+        let runAmpersandArgs : string = "--daemon";
         let opts : vscode.TerminalOptions =
             os.type().startsWith("Windows") ?
-                {shellPath: "cmd.exe", shellArgs: ["/k", runAmpersandCommand]} :
-                {shellPath: runAmpersandCommand, shellArgs: []};
+                {shellPath: "cmd.exe", shellArgs: ["/k", runAmpersandCommand , runAmpersandArgs]} :
+                {shellPath: runAmpersandCommand, shellArgs: [runAmpersandArgs]};
         opts.name = "ampersand daemon";
      //   opts.shellArgs.push("--outputfile=" + file);
         oldTerminal = vscode.window.createTerminal(opts);

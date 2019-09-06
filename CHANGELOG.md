@@ -6,6 +6,24 @@
     It is in the file `package.json` 
 -->
 
+## [0.3.9] - 2019-08-23
+
+- Fix launching on MacOS
+
+- Snippets now support the templates `BOX <OBJECTDROPDOWN>` and `BOX <VALUEDROPDOWN>`. These templates provide dropdown-boxes that allow users to select OBJECTS or VALUEs respectively. The snippets provide some (minimal) documentation w.r.t. to how these templates must be used in scripts. At the time of writing, developers that want to use them have to get hold of them (commit ref needed), and include them in their `templates` directory.
+- Support is included for the newly enhanced PROPBUTTON template, which now allows developers to specify:
+  - its label (the text that shows on the button);
+  - the `[PROP]`type relation that will be flipped when the user presses the button;
+  - its regular color, i.e. when it is not disabled;
+  - its color when it is disabled;
+  - `[PROP]`type expressions that indicate whether or not the button should be
+    - disabled (you see it but cannot click it); or
+    - hidden (you cannot see it); and
+  - a text that shows when the user hovers over the button.
+- Snippets that support the use of the new `PROPBUTTON` template are:
+  - `PROPBUTTON (simple)`, which helps to create a button if you only want to specify the flippable `[PROP]`-type relation;
+  - `PROPBUTTON (extended)`, which includes all supported extensions, and associated documentation.
+
 ## [0.3.8] - 2019-06-27
 
 - Bugfix in `ROLE` statement
