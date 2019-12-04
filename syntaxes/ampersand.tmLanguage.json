@@ -8,13 +8,14 @@
 	[	{	"comment": "to be reviewed using https://www.sublimetext.com/docs/3/scope_naming.html"},
 		{	"include": "#COMMENTS"     },
 		{	"include": "#CONTEXT"      },
+		{	"include": "#ENDPATTERN"   },
 		{	"include": "#META"         },
 		{	"include": "#PURPOSE"      },
 		{	"include": "#INCLUDE"      },
 		{	"include": "#CONCEPT"      },
 		{	"include": "#CLASSIFY"     },
-		{  "include": "#REPRESENT"    },
-		{  "include": "#IDENT"        },
+		{  	"include": "#REPRESENT"    },
+		{  	"include": "#IDENT"        },
 		{	"include": "#RELATION"     },
 		{	"include": "#MSGMEANING"   },
 		{	"include": "#PRAGMA"       },
@@ -103,7 +104,7 @@
 
 		"CONTEXT":
 		{	"patterns": 
-			[	{	"match": "\\b(CONTEXT)\\s+(\")?([^\"]*)(\\2)?(\\s+IN\\s+(DUTCH|ENGLISH))?",
+			[	{	"match": "\\b(CONTEXT|PATTERN|PROCESS|SERVICE)\\s+(\")?([^\"]*)(\\2)?(\\s+IN\\s+(DUTCH|ENGLISH))?",
 					"captures": {
 						"0": { "name":"meta.context.ampersand"},
 						"1": { "name":"keyword.operator.context.ampersand"},
@@ -112,6 +113,16 @@
 						"4": { "name":"punctuation.statement.context.ampersand"},
 						"5": { "name":"keyword.operator.context.ampersand"},
 						"6": { "name":"keyword.operator.context.language.ampersand"}
+					}
+				}
+			]
+		},
+
+		"ENDPATTERN":
+		{	"patterns": 
+			[	{	"match": "\\b(ENDPATTERN|ENDPROCESS|ENDSERVICE)\\b",
+					"captures": {
+						"1": { "name":"keyword.operator.context.language.ampersand"}
 					}
 				}
 			]
@@ -182,7 +193,7 @@
 				},
 				{	"comment":"PURPOSE <keyword> \"<identifier>\" -- tnx to https://github.com/Microsoft/vscode-textmate/issues/41",
 					"name": "meta.purpose.ampersand",
-					"begin": "\\b(PURPOSE)\\s+(CONTEXT|CONCEPT|RELATION|RULE|INTERFACE|API|GUI)\\s+(?:(\\w+)|(\")([^\"]+)(\"))(?:\\s*(IN)\\s+(DUTCH|ENGLISH))?(?:\\s+(REF)\\s+(\")([^\"]*)(\"))?",
+					"begin": "\\b(PURPOSE)\\s+(CONTEXT|PATTERN|PROCESS|CONCEPT|RELATION|RULE|INTERFACE|API|GUI)\\s+(?:(\\w+)|(\")([^\"]+)(\"))(?:\\s*(IN)\\s+(DUTCH|ENGLISH))?(?:\\s+(REF)\\s+(\")([^\"]*)(\"))?",
 					"beginCaptures": {
 						"0": { "name":"meta.purpose.begin.ampersand"},
 						"1": { "name":"keyword.operator.purpose.ampersand"},

@@ -6,6 +6,10 @@
     It is in the file `package.json` 
 -->
 
+## [0.3.10] - 2019-12-04
+
+- Support for (deprecated!!) `PATTERN`/`ENDPATTERN`, `PROCESS`/`ENDPROCESS`, and `SERVICE`/`ENDSERVICE` syntax reinstated
+
 ## [0.3.9] - 2019-08-23
 
 - Fix launching on MacOS
