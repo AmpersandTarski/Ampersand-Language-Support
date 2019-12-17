@@ -6,8 +6,10 @@
     It is in the file `package.json` 
 -->
 
-## [0.3.10] - 2019-12-04
+## [0.3.10] - 2019-12-17
 
+- Enable Ampersand 4.0. This release of ampersand has a new command line interface. The plugin now 
+  automatically detects the version you use. The daemon is launched using the correct command.
 - Support for (deprecated!!) `PATTERN`/`ENDPATTERN`, `PROCESS`/`ENDPROCESS`, and `SERVICE`/`ENDSERVICE` syntax reinstated
 
 ## [0.3.9] - 2019-08-23
