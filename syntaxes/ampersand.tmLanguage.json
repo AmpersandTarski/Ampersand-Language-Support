@@ -104,7 +104,7 @@
 
 		"CONTEXT":
 		{	"patterns": 
-			[	{	"match": "\\b(CONTEXT|PATTERN|PROCESS|SERVICE)\\s+(\")?([^\"]*)(\\2)?(\\s+IN\\s+(DUTCH|ENGLISH))?",
+			[	{	"match": "\\b(CONTEXT|PATTERN|PROCESS)\\s+(\")?([^\"]*)(\\2)?(\\s+IN\\s+(DUTCH|ENGLISH))?",
 					"captures": {
 						"0": { "name":"meta.context.ampersand"},
 						"1": { "name":"keyword.operator.context.ampersand"},
@@ -120,7 +120,7 @@
 
 		"ENDPATTERN":
 		{	"patterns": 
-			[	{	"match": "\\b(ENDPATTERN|ENDPROCESS|ENDSERVICE)\\b",
+			[	{	"match": "\\b(ENDPATTERN|ENDPROCESS)\\b",
 					"captures": {
 						"1": { "name":"keyword.operator.context.language.ampersand"}
 					}
@@ -318,23 +318,23 @@
 				},
 				{	"comment": "CLASSIFY <Conceptlist> IS <Concept1> /\\ <Concept2> ...", 
 					"name": "meta.classify.is.ampersand",
-					"begin": "\\b(CLASSIFY)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))(?:\\s*(,)\\s*(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\")))*\\s+(IS)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))",
+					"begin": "\\b(CLASSIFY)\\s(?:\\s*(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))\\s*(,))*(?:\\s*(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\")))\\s+(IS)\\s+(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))",
 					"beginCaptures": {
 						"0": { "name":"meta.classify.is.begin.ampersand"},
 						"1": { "name":"keyword.operator.classify.ampersand"},
-						"2": { "name":"variable.concept.ampersand"},
+						"2": { "name":"variable.unquoted.concept.ampersand"},
 						"3": { "name":"punctuation.statement.classify.ampersand"},
-						"4": { "name":"variable.concept.ampersand"},
+						"4": { "name":"variable.quoted.concept.ampersand"},
 						"5": { "name":"punctuation.statement.classify.ampersand"},
 						"6": { "name":"punctuation.statement.classify.ampersand"},
-						"7": { "name":"variable.concept.ampersand"},
+						"7": { "name":"variable.unquoted.concept.ampersand"},
 						"8": { "name":"punctuation.statement.classify.ampersand"},
-						"9": { "name":"variable.concept.ampersand"},
+						"9": { "name":"variable.quoted.concept.ampersand"},
 						"10": { "name":"punctuation.statement.classify.ampersand"},
 						"11": { "name":"keyword.operator.classify.ampersand"},
-						"12": { "name":"variable.concept.ampersand"},
+						"12": { "name":"variable.unquoted.concept.ampersand"},
 						"13": { "name":"punctuation.statement.classify.ampersand"},
-						"14": { "name":"variable.concept.ampersand"},
+						"14": { "name":"variable.quoted.concept.ampersand"},
 						"15": { "name":"punctuation.statement.classify.ampersand"}
 					},
 					"end": "^(?=\\s*([^A-Z/]|VIOLATION|ROLE|SERVICE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|VIEW|MEANING|MESSAGE|PRAGMA))",
