@@ -196,7 +196,7 @@ function checkVersion ()  {
 				return " " + b
 			}
 		}
-		let r1 = /Ampersand-(v[0-9]+\.[0-9]+\.[0-9]+) \[(.*)?\],/ ;
+		let r1 = /Ampersand-(v[0-9]+\.[0-9]+\.[0-9]+) \[(.*)?\]/ ;
 		var m : RegExpMatchArray | null ;
 		var result : string | null = null ;
 		if (m = xs.match(r1)) {
