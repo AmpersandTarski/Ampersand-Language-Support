@@ -161,9 +161,20 @@ export function activate(context: vscode.ExtensionContext) {
         let file = path.join(os.tmpdir(), "ampersandDaemon-" + hash + ".txt");
         context.subscriptions.push({dispose: () => {try {fs.unlinkSync(file);} catch (e) {};}});
         fs.writeFileSync(file, "");
-
+        let versionString : string = getVersion();
         let runAmpersandCommand : string = "ampersand";
-        let runAmpersandArgs : string = "--daemon";
+        var runAmpersandArgs : string = "";
+        let version : string = versionString.substr(10,3) 
+        if (version === "v4.") {
+          runAmpersandArgs = "daemon"
+        } else if (version === "v3.") {
+          runAmpersandArgs = "--daemon"
+        } else {
+       		vscode.window.showErrorMessage
+		        ('The version of ampersand you have installed, is not supported: '+versionString)
+
+        }
+        
         let opts : vscode.TerminalOptions =
             os.type().startsWith("Windows") ?
                 {shellPath: "cmd.exe", shellArgs: ["/k", runAmpersandCommand , runAmpersandArgs]} :
@@ -178,6 +189,16 @@ export function activate(context: vscode.ExtensionContext) {
 
 }
 
+function getVersion() : string {
+	const { execSync } = require('child_process');
+  // stderr is sent to stderr of parent process
+  // you can set options.stdio if you want it to go elsewhere
+	let command = `${constants.extension.generatorName} --version`;
+  let version = execSync(command);
+  var string = new TextDecoder("utf-8").decode(version);  
+  return string
+    
+}
 
 
 function checkVersion ()  {
@@ -196,7 +217,7 @@ function checkVersion ()  {
 				return " " + b
 			}
 		}
-		let r1 = /Ampersand-(v[0-9]+\.[0-9]+\.[0-9]+) \[(.*)?\],/ ;
+		let r1 = /Ampersand-(v[0-9]+\.[0-9]+\.[0-9]+) \[(.*)?\]/ ;
 		var m : RegExpMatchArray | null ;
 		var result : string | null = null ;
 		if (m = xs.match(r1)) {
