@@ -6,6 +6,10 @@
     It is in the file `package.json` 
 -->
 
+## [0.3.11] - 2020-mm-dd
+
+- fixes #48 - syntax coloring for `PURPOSE VIEW` and `PURPOSE IDENT`
+
 ## [0.3.10] - 2020-01-20
 
 - Add support for Ampersand 4.0. This release of ampersand has a new command line interface. The plugin now
