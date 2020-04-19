@@ -193,7 +193,7 @@
 				},
 				{	"comment":"PURPOSE <keyword> \"<identifier>\" -- tnx to https://github.com/Microsoft/vscode-textmate/issues/41",
 					"name": "meta.purpose.ampersand",
-					"begin": "\\b(PURPOSE)\\s+(CONTEXT|PATTERN|PROCESS|CONCEPT|RELATION|RULE|INTERFACE|API|GUI)\\s+(?:(\\w+)|(\")([^\"]+)(\"))(?:\\s*(IN)\\s+(DUTCH|ENGLISH))?(?:\\s+(REF)\\s+(\")([^\"]*)(\"))?",
+					"begin": "\\b(PURPOSE)\\s+(CONTEXT|PATTERN|PROCESS|CONCEPT|RELATION|RULE|IDENT|VIEW|INTERFACE|API|GUI)\\s+(?:(\\w+)|(\")([^\"]+)(\"))(?:\\s*(IN)\\s+(DUTCH|ENGLISH))?(?:\\s+(REF)\\s+(\")([^\"]*)(\"))?",
 					"beginCaptures": {
 						"0": { "name":"meta.purpose.begin.ampersand"},
 						"1": { "name":"keyword.operator.purpose.ampersand"},
