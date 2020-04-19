@@ -6,9 +6,10 @@
     It is in the file `package.json` 
 -->
 
-## [0.3.11] - 2020-mm-dd
+## [0.3.11] - 2020-04-19
 
 - fixes #48 - syntax coloring for `PURPOSE VIEW` and `PURPOSE IDENT`
+- security fixes
 
 ## [0.3.10] - 2020-01-20
 
