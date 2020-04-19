@@ -10,6 +10,7 @@
 
 - fixes #48 - syntax coloring for `PURPOSE VIEW` and `PURPOSE IDENT`
 - security fixes
+- update dependencies
 
 ## [0.3.10] - 2020-01-20
 
