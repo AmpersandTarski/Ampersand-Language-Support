@@ -5,7 +5,10 @@
 		"body":[
 			"These Snippets are intended to make life easier for Ampersand developers.",
 			"We use the convention to start names of placeholders with an illegal character,",
-			"so that it will be colored red while it has not been replaced with user text."
+			"so that it will be colored red while it has not been replaced with user text.",
+			" ",
+			"Also, we have snippets that also insert comments",
+			"that document how the content is to be used (example: OBJECTDROPDOWN)"
 		]
 	},
 	"Preprocessor statements": {
@@ -299,29 +302,29 @@
 			"   ]"
 		]
 	},
-	"OBJECTDROPDOWN": {
+	"OBJECTDROPDOWN (incl. doc comments)": {
 		"prefix": "<OBJECTDROPDOWN>",
 		"description": "BOX that adds an OBJECT that the user selects, to the population of a relation",
 		"body":[
-			"cRud BOX <OBJECTDROPDOWN>",
+			"cRud BOX <OBJECTDROPDOWN> -- You should use <VALUEDROPDOWN> if the concept is an ALPHANUMERIC, INTEGER, DATE, ...",
 			"[ selectfrom: ${1:exprThatSpecifiesOBJECTsToSelectFrom} cRud <${2:ViewToDisplaySelectableOBJECTs}>",
-			", setrelation: ${3:relToWhichSelectedOBJECTisAdded} cRUd",
+			", setrelation: ${3:relToWhichSelectedOBJECTisAdded} cRUd -- If the relation is [UNI], a newly selected object will replace the existing population.",
 			", instruction: TXT \"${4:selectText}\" -- Text that shows when nothing is selected yet",
-		   ", selectflag: ${5:selectEventFlag} cRUd -- [PROP]-type relation that toggles when OBJECT is selected",
-		   ", deselectflag: ${6:deselectEventFlag} cRUd -- [PROP]-type relation that toggles when NO OBJECT is selected",
+		   	", selectflag: ${5:selectEventFlag} cRUd -- [PROP]-type relation that toggles when OBJECT is selected",
+		   	", deselectflag: ${6:deselectEventFlag} cRUd -- [PROP]-type relation that toggles when NO OBJECT is selected",
 			"]"
 		]
 	},
-	"VALUEDROPDOWN": {
+	"VALUEDROPDOWN (incl. doc comments)": {
 		"prefix": "<VALUEDROPDOWN>",
 		"description": "BOX that adds a VALUE that the user selects, to the population of a relation",
 		"body":[
-			"cRud BOX <VALUEDROPDOWN>",
+			"cRud BOX <VALUEDROPDOWN> -- You should use <OBJECTDROPDOWN> if the concept is not an ALPHANUMERIC, INTEGER, DATE, ...",
 			"[ selectfrom: ${1:exprThatSpecifiesVALUEsToSelectFrom} cRud <${2:ViewToDisplaySelectableVALUEs}>",
-			", setrelation: ${3:relToWhichSelectedVALUEisAdded} cRUd",
+			", setrelation: ${3:relToWhichSelectedVALUEisAdded} cRUd -- If the relation is [UNI], a newly selected object will replace the existing population.",
 			", instruction: TXT \"${4:selectText}\" -- Text that shows when nothing is selected yet",
-		   ", selectflag: ${5:selectEventFlag} cRUd -- [PROP]-type relation that toggles when Value is selected",
-		   ", deselectflag: ${6:deselectEventFlag} cRUd -- [PROP]-type relation that toggles when NO Value is selected",
+		   	", selectflag: ${5:selectEventFlag} cRUd -- [PROP]-type relation that toggles when Value is selected",
+		   	", deselectflag: ${6:deselectEventFlag} cRUd -- [PROP]-type relation that toggles when NO Value is selected",
 			"]"
 		]
 	}
