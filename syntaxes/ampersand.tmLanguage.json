@@ -771,8 +771,8 @@
 		"BOX-HEADER":
 		{	"patterns": 
 			[	{	"comment":"All kind of BOX-related constructs (including ROWS, COLS, etc.)",
-				   "name": "meta.box.ampersand",
-					"begin": "\\b(ROWS|COLS|TABS|PANELS)|\\b(BOX)\\s*(?:(<)(?:(DIV|ROWSNL|HROWS|HROWSNL|COLSNL|HCOLS|SCOLS|SHCOLS|PROPBUTTON|GRID|SSIFORM)|([^>\\s\"\\\\]+))(>))?",
+				    "name": "meta.box.ampersand",
+					"begin": "\\b(ROWS|COLS|TABS|PANELS)|\\b(BOX)\\s*(?:(<)(\\w+)(?:\\s+(\\w+)(?:(=\")(\\w+)(\"))?)*(>))?",
 					"beginCaptures": {
 						"0": { "name":"meta.box.header.begin.ampersand"},
 						"1": { "name":"keyword.operator.box.header.ampersand"},
@@ -780,7 +780,10 @@
 						"3": { "name":"punctuation.statement.box.header.ampersand"},
 						"4": { "name":"variable.boxtype.predefined.ampersand"},
 						"5": { "name":"variable.boxtype.userdefined.ampersand"},
-						"6": { "name":"punctuation.statement.box.header.ampersand"}
+						"6": { "name":"punctuation.statement.box.header.ampersand"},
+						"7": { "name":"variable.boxtype.userdefined.ampersand"},
+						"8": { "name":"punctuation.statement.box.header.ampersand"},
+						"9": { "name":"punctuation.statement.box.header.ampersand"}
 						},
 					"end": "(?=\\[)",
 					"patterns": [ 
