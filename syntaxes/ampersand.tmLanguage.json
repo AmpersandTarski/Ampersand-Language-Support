@@ -774,20 +774,19 @@
 
 		"BOX-HEADER":
 		{	"patterns": 
-			[	{	"comment":"All kind of BOX-related constructs (including ROWS, COLS, etc.)",
+			[	{	"comment":"BOX <TEMPLATE attrib key=\"value\"> -- see https://github.com/AmpersandTarski/prototype/tree/development/templates",
 				    "name": "meta.box.ampersand",
-					"begin": "\\b(ROWS|COLS|TABS|PANELS)|\\b(BOX)\\s*(?:(<)(\\w+)(?:\\s+(\\w+)(?:(=\")(\\w+)(\"))?)*(>))?",
+					"begin": "\\b(BOX)\\s*(?:(<)(\\w+)(?:\\s+(\\w+)(?:(=\")(\\w+)(\"))?)*(>))?",
 					"beginCaptures": {
 						"0": { "name":"meta.box.header.begin.ampersand"},
 						"1": { "name":"keyword.operator.box.header.ampersand"},
-						"2": { "name":"keyword.operator.box.header.ampersand"},
-						"3": { "name":"punctuation.statement.box.header.ampersand"},
-						"4": { "name":"variable.boxtype.predefined.ampersand"},
-						"5": { "name":"variable.boxtype.userdefined.ampersand"},
-						"6": { "name":"punctuation.statement.box.header.ampersand"},
-						"7": { "name":"variable.boxtype.userdefined.ampersand"},
-						"8": { "name":"punctuation.statement.box.header.ampersand"},
-						"9": { "name":"punctuation.statement.box.header.ampersand"}
+						"2": { "name":"punctuation.statement.box.header.ampersand"},
+						"3": { "name":"variable.boxtype.predefined.ampersand"},
+						"4": { "name":"variable.boxtype.userdefined.ampersand"},
+						"5": { "name":"punctuation.statement.box.header.ampersand"},
+						"6": { "name":"variable.boxtype.userdefined.ampersand"},
+						"7": { "name":"punctuation.statement.box.header.ampersand"},
+						"8": { "name":"punctuation.statement.box.header.ampersand"}
 						},
 					"end": "(?=\\[)",
 					"patterns": [ 
@@ -817,13 +816,13 @@
 					},
 					"patterns": [
 						{	"include": "#COMMENTS" },
-						{  "include": "#boxitems" },
-						{  "include": "#crud" },
+						{	"include": "#boxitems" },
+						{	"include": "#crud" },
 						{	"include": "#useview" },
 						{	"include": "#useinterface" },
-						{  "include": "#BOX-HEADER" },
-						{  "include": "#BOX-BODY" },
-						{  "include": "#comma" },
+						{	"include": "#BOX-HEADER" },
+						{	"include": "#BOX-BODY" },
+						{	"include": "#comma" },
 						{	"match": "[^\\s]+",
 							"name": "invalid.illegal.box.body.ampersand"
 						}

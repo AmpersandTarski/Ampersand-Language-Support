@@ -10,6 +10,10 @@ dit is een te
 
 ROLE XXX MAINTAINS "aap", "noot", "mies", "wim" zus 
 
+INTERFACE Aap: I[A] cRud BOX <FORM wim aap="noot">
+[ noot: noot
+]
+
 PURPOSE RULE "BurgerAuthenticatie"
 {+  **this stuff sits** `at` this stuff sits at https://github.com/AmpersandTarski/Ampersand-Language-Support (did you know that)?
 we have issue #903 and want to **emphasize text** and `test`  'test' "test", (test), [test],

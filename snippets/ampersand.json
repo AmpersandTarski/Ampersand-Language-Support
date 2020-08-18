@@ -218,16 +218,7 @@
 		"prefix": "INTERFACE -- FOR -- BOX <BOXTYPE>",
 		"description": "e.g. DIV/ROWSNL/SHCOLS etc.",
 		"body":[
-			"INTERFACE \"${1:ifcname}\" FOR ${2|User,Anonymous,${3:role}|}: ${4:Expression} ${5|cRud,CRud,CRUD|} BOX <${6|DIV,ROWSNL,HROWS,HROWSNL,COLSNL,HCOLS,SCOLS,SHCOLS,PROPBUTTON,GRID,SSIFORM}>",
-			"   [ $0",
-			"   ]"
-		]
-	},
-	"INTERFACE -- FOR -- BOX/COLS/TABS/ROWS": {
-		"prefix": "INTERFACE -- FOR --",
-		"description": "BOX/COLS/TABS/ROWS",
-		"body":[
-			"INTERFACE \"${1:ifcname}\" FOR ${2|User,Anonymous,${3:role}|}: ${4:Expression} ${5|cRud,CRud,CRUD|} ${6|BOX,COLS,TABS,ROWS|}",
+			"INTERFACE \"${1:ifcname}\" FOR ${2|User,Anonymous,${3:role}|}: ${4:Expression} ${5|cRud,CRud,CRUD|} BOX <${6|FORM,TABLE,TABS,RAW,PROPBUTTON}>",
 			"   [ $0",
 			"   ]"
 		]
@@ -236,16 +227,7 @@
 		"prefix": "INTERFACE with <BOXTYPE> for all users",
 		"description": "e.g. DIV/ROWSNL/SHCOLS etc.",
 		"body":[
-			"INTERFACE \"${1:ifcname}\": ${2:Expression} ${3|cRud,CRud,CRUD|} BOX <${4|DIV,ROWSNL,HROWS,HROWSNL,COLSNL,HCOLS,SCOLS,SHCOLS,PROPBUTTON,GRID,SSIFORM|}>",
-			"   [ $0",
-			"   ]"
-		]
-	},
-	"INTERFACE BOX/COLS/TABS/ROWS for all users": {
-		"prefix": "INTERFACE for all users",
-		"description": "BOX/COLS/TABS/ROWS",
-		"body":[
-			"INTERFACE \"${1:ifcname}\": ${2:Expression} ${3|cRud,CRud,CRUD|} ${4|BOX,COLS,TABS,ROWS|}",
+			"INTERFACE \"${1:ifcname}\": ${2:Expression} ${3|cRud,CRud,CRUD|} BOX <${4|FORM,TABLE,TABS,RAW,PROPBUTTON}>",
 			"   [ $0",
 			"   ]"
 		]
