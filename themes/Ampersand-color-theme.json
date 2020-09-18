@@ -19,10 +19,13 @@
 		{	"scope": "source.ampersand comment.block",
 			"settings": { "foreground": "#808080" }
 		},
-		{	"scope": [ "source.ampersand comment.line.double-dash.sectionheader"
-						, "source.ampersand comment.line.double-dash.keyword.snippet"
-						],
+		{	"scope":[ "source.ampersand comment.line.double-dash.sectionheader"
+ 					, "source.ampersand comment.line.double-dash.keyword.snippet"
+					],
 			"settings": { "foreground": "#f0d0b0", "fontStyle": "bold italic underline" }
+		},
+		{	"scope": "source.ampersand comment.line.double-dash.subsectionheader",
+			"settings": { "foreground": "#4050b0", "fontStyle": "bold italic underline" }
 		},
 		{	"scope": "source.ampersand markup.other.preprocessor.keyword.ampersand",
 			"settings": { "foreground": "#f0d0b0", "fontStyle": "bold italic" }

@@ -2,6 +2,10 @@ CONTEXT "BurgerAuthenticatie" IN DUTCH
 {- dit is een 
 blokcomment -}
 
+INTERFACE "Piet": I[Aap] cRud BOX 
+[ "label": test cRud
+]
+
 PURPOSE CONTEXT "BurgerAuthenticatie" {+ dit is een **this stuff sits** `at` thi
 blokcomment +}
 PURPOSE RULE "asdfasd" 

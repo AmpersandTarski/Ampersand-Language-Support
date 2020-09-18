@@ -6,6 +6,12 @@
     It is in the file `package.json` 
 -->
 
+## [0.3.12] - 2020-09-18
+
+- added snippet for REPRESENT statmemnt
+- updated Ampersand color theme to support `--$` comment coloring (subsections)
+- deprecated ROWS, COLS, TABS, PANELS (superseded by new `BOX` syntax with templates `FORM`, `TABLE`, `TABS`)
+
 ## [0.3.12] - 2020-07-20
 
 - fixes [#52](https://github.com/AmpersandTarski/Ampersand-Language-Support/issues/52) - syntax coloring for BOX <TEMPLATE {key[=value]}*>

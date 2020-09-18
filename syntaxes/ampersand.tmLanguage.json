@@ -711,7 +711,7 @@
 
 						"16": { "name":"punctuation.statement.interface.ampersand"}
 						},
-					"end": "\\b(?=BOX|ROWS|COLS|TABS|PANELS|INTERFACE|API|GUI)",
+					"end": "\\b(?=BOX|INTERFACE|API|GUI)",
 					"patterns": [
 						{	"include":"#crud" },
 						{	"include":"#term" },
@@ -1019,7 +1019,7 @@
 		"OTHERKWDS":
 		{	"patterns": 
 			[	{	"name": "invalid.deprecated.keywords.ampersand",
-					"match": "\\b((END)?PATTERN|(END)?PROCESS|LATEX|MARKDOWN|SPEC|REST)\\b"
+					"match": "\\b(ROWS|COLS|TABS|PANELS|(END)?PATTERN|(END)?PROCESS|LATEX|MARKDOWN|SPEC|REST)\\b"
 				}
 			]
 		},
