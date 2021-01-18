@@ -2,7 +2,7 @@ CONTEXT "BurgerAuthenticatie" IN DUTCH
 {- dit is een 
 blokcomment -}
 
-INTERFACE "Piet": I[Aap] cRud BOX 
+INTERFACE "Piet": I[Aap] cRud BOX <TABLE noheader >
 [ "label": test cRud
 ]
 

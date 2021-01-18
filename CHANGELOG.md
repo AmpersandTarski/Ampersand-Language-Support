@@ -6,12 +6,16 @@
     It is in the file `package.json` 
 -->
 
+## [0.3.13] - 2021-01-18
+- Snippets update: shortened rule names for EQUIVALENCEs.
+- minor bug fix in BOX headers
+
 ## [0.3.12] - 2020-09-18
 
 - added snippet for REPRESENT statmemnt
 - updated Ampersand color theme to support `--$` comment coloring (subsections)
 - deprecated ROWS, COLS, TABS, PANELS (superseded by new `BOX` syntax with templates `FORM`, `TABLE`, `TABS`)
-
+  For now, some old syntaxes are still recognized and colored (that will change in future)
 ## [0.3.12] - 2020-07-20
 
 - fixes [#52](https://github.com/AmpersandTarski/Ampersand-Language-Support/issues/52) - syntax coloring for BOX <TEMPLATE {key[=value]}*>

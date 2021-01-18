@@ -776,7 +776,7 @@
 		{	"patterns": 
 			[	{	"comment":"BOX <TEMPLATE attrib key=\"value\"> -- see https://github.com/AmpersandTarski/prototype/tree/development/templates",
 				    "name": "meta.box.ampersand",
-					"begin": "\\b(BOX)\\s*(?:(<)(\\w+)(?:\\s+(\\w+)(?:(=\")(\\w+)(\"))?)*(>))?",
+					"begin": "\\b(BOX)\\s*(?:(<)(\\w+)(?:\\s+(\\w+)(?:(=\")(\\w+)(\"))?)*\\s*(>))?",
 					"beginCaptures": {
 						"0": { "name":"meta.box.header.begin.ampersand"},
 						"1": { "name":"keyword.operator.box.header.ampersand"},
