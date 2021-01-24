@@ -5,8 +5,12 @@
     Please do not forget to update the version number.
     It is in the file `package.json` 
 -->
+## [0.4.0] - 2021-01-25
+- Added syntax coloring for ampersand log files (with extension `.amplog`)
+- Modified Ampersand theme to include colors for ampersand log files.
 
 ## [0.3.13] - 2021-01-18
+
 - Snippets update: shortened rule names for EQUIVALENCEs.
 - minor bug fix in BOX headers
 

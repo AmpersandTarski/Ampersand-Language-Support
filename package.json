@@ -1,145 +1,158 @@
 {
-  "name": "language-ampersand",
-  "displayName": "Ampersand (ADL) language support",
-  "version": "0.3.12",
-  "publisher": "AmpersandTarski",
-  "description": "Language support for Ampersand scripts",
-  "categories": [
-    "Programming Languages",
-    "Themes",
-    "Snippets"
-  ],
-  "author": "Ampersand Tarski",
-  "preview": false,
-  "contributors": [
-    {
-      "name": "Rieks",
-      "url": "https://github.com/RieksJ"
-    },
-    {
-      "name": "Han Joosten",
-      "url": "https://github.com/hanjoosten",
-      "email": "han.joosten.han@gmail.com"
-    }
-  ],
-  "engines": {
-    "vscode": "^1.25.1"
-  },
-  "activationEvents": [
-    "onLanguage:ampersand",
-    "onCommand:extension.checkVersion",
-    "onCommand:extension.startDaemon"
-  ],
-  "icon": "images/ampersandLogo.png",
-  "galleryBanner": {
-    "color": "#f6a615",
-    "theme": "light"
-  },
-  "license": "GPL-3.0",
-  "homepage": "https://github.com/AmpersandTarski/Ampersand-Language-Support",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/AmpersandTarski/Ampersand-Language-Support.git"
-  },
-  "bugs": {
-    "url": "https://github.com/AmpersandTarski/Ampersand-Language-Support/issues"
-  },
-  "main": "./out/src/extension.js",
-  "contributes": {
-    "languages": [
-      {
-        "id": "ampersand",
-        "aliases": [
-          "Ampersand",
-          "ampersand",
-          "ADL",
-          "Ampersand Definition Language"
-        ],
-        "extensions": [
-          ".adl",
-          ".ifc",
-          ".pop",
-          ".docadl"
-        ],
-        "configuration": "./ampersand-configuration.json"
-      }
-    ],
-    "grammars": [
-      {
-        "language": "ampersand",
-        "scopeName": "source.ampersand",
-        "path": "./syntaxes/ampersand.tmLanguage.json"
-      }
-    ],
-    "themes": [
-      {
-        "label": "Ampersand",
-        "uiTheme": "vs-dark",
-        "path": "./themes/Ampersand-color-theme.json"
-      }
-    ],
-    "snippets": [
-      {
-        "language": "ampersand",
-        "path": "./snippets/ampersand.json"
-      }
-    ],
-    "commands": [
-      {
-        "command": "extension.checkVersion",
-        "title": "Ampersand: version"
-      },
-      {
-        "command": "extension.startDaemon",
-        "title": "Ampersand: Start checker"
-      }
-    ],
-    "problemMatchers": [
-      {
-        "name": "amp-err",
-        "owner": "ampersand",
-        "fileLocation": [
-          "absolute"
-        ],
-        "pattern": [
-          {
-            "regexp": "^In file +(.*) \\(line (\\d+), column (\\d+)\\):(\n.*)+$",
-            "file": 1,
-            "line": 2,
-            "column": 3,
-            "message": 0
-          },
-          {
-            "regexp": "^(Error).* in file +(.*) at line (\\d+) : (\\d+)\n  (.*)$",
-            "severity": 1,
-            "file": 2,
-            "line": 3,
-            "column": 4,
-            "message": 5
-          }
-        ]
-      }
-    ]
-  },
-  "scripts": {
-    "vscode:prepublish": "tsc -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "test": "mocha --require ts-node/register --watch-extensions ts \"test\\**\\*.ts\"",
-    "package": "vsce package",
-    "publish": "vsce publish"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "@types/chai": "^4.2.11",
-    "@types/mocha": "^7.0.2",
-    "@types/node": "^13.13.0",
-    "chai": "^4.2.0",
-    "mocha": "^7.1.1",
-    "mochawesome": "^6.1.0",
-    "ts-node": "^8.8.2",
-    "typescript": "^3.8.3",
-    "vscode": "^1.1.36"
-  }
+	"name": "language-ampersand",
+	"displayName": "Ampersand (ADL) language support",
+	"version": "0.3.12",
+	"publisher": "AmpersandTarski",
+	"description": "Language support for Ampersand scripts",
+	"categories": [
+		"Programming Languages",
+		"Themes",
+		"Snippets"
+	],
+	"author": "Ampersand Tarski",
+	"preview": false,
+	"contributors": [
+		{
+			"name": "Rieks",
+			"url": "https://github.com/RieksJ"
+		},
+		{
+			"name": "Han Joosten",
+			"url": "https://github.com/hanjoosten",
+			"email": "han.joosten.han@gmail.com"
+		}
+	],
+	"engines": {
+		"vscode": "^1.25.1"
+	},
+	"activationEvents": [
+		"onLanguage:ampersand",
+		"onCommand:extension.checkVersion",
+		"onCommand:extension.startDaemon"
+	],
+	"icon": "images/ampersandLogo.png",
+	"galleryBanner": {
+		"color": "#f6a615",
+		"theme": "light"
+	},
+	"license": "GPL-3.0",
+	"homepage": "https://github.com/AmpersandTarski/Ampersand-Language-Support",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/AmpersandTarski/Ampersand-Language-Support.git"
+	},
+	"bugs": {
+		"url": "https://github.com/AmpersandTarski/Ampersand-Language-Support/issues"
+	},
+	"main": "./out/src/extension.js",
+	"contributes": {
+		"languages": [
+			{
+				"id": "ampersand",
+				"aliases": [
+					"Ampersand",
+					"ampersand",
+					"ADL",
+					"Ampersand Definition Language"
+				],
+				"extensions": [ ".adl", ".ifc", ".pop", ".docadl" ],
+				"configuration": "./ampersand-configuration.json"
+		  	},
+			{
+				"id": "amplog",
+				"aliases": [
+					"amplog"
+				],
+				"extensions": [ ".amplog" ],
+				"configuration": "./amplog-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "ampersand",
+				"scopeName": "source.ampersand",
+				"path": "./syntaxes/ampersand.tmLanguage.json"
+			},
+			{
+				"language": "amplog",
+				"scopeName": "text.amplog",
+				"path": "./syntaxes/amplog.tmLanguage.json"
+			}
+		],
+		"themes": [
+			{
+				"label": "Ampersand",
+				"uiTheme": "vs-dark",
+				"path": "./themes/Ampersand-color-theme.json"
+			}
+		],
+		"snippets": [
+			{
+				"language": "ampersand",
+				"path": "./snippets/ampersand.json"
+			}
+		],
+		"commands": [
+			{
+				"command": "extension.checkVersion",
+				"title": "Ampersand: version"
+			},
+			{
+				"command": "extension.startDaemon",
+				"title": "Ampersand: Start checker"
+			}
+		],
+		"problemMatchers": [
+			{
+				"name": "amp-err",
+				"owner": "ampersand",
+				"fileLocation": [
+					"absolute"
+				],
+				"pattern": [
+					{
+						"regexp": "^In file +(.*) \\(line (\\d+), column (\\d+)\\):(\n.*)+$",
+						"file": 1,
+						"line": 2,
+						"column": 3,
+						"message": 0
+					},
+					{
+						"regexp": "^(Error).* in file +(.*) at line (\\d+) : (\\d+)\n  (.*)$",
+						"severity": 1,
+						"file": 2,
+						"line": 3,
+						"column": 4,
+						"message": 5
+					}
+				]
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "tsc -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"test": "mocha --require ts-node/register --watch-extensions ts \"test\\**\\*.ts\"",
+		"package": "vsce package",
+		"publish": "vsce publish"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@types/chai": "^4.2.11",
+		"@types/mocha": "^7.0.2",
+		"@types/node": "^13.13.0",
+		"chai": "^4.2.0",
+		"mocha": "^7.1.1",
+		"mochawesome": "^6.1.0",
+		"ts-node": "^8.8.2",
+		"typescript": "^3.8.3",
+		"vscode": "^1.1.36"
+	},
+	"__metadata": {
+		"id": "e189bda7-80e7-483e-92ac-aa5e8946b228",
+		"publisherId": "8bc6e032-563e-47c6-bab1-130ea4d6d8d7",
+		"publisherDisplayName": "AmpersandTarski"
+	}
 }

@@ -1,0 +1,147 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"scopeName": "text.amplog",
+	"name": "amplog",
+	"patterns":
+	[	{	"comment": "to be reviewed using https://www.sublimetext.com/docs/3/scope_naming.html"},
+		{	"include": "#Transaction" },
+		{	"include": "#ExcelImport" },
+		{	"include": "#ExecEngine"  },
+		{	"include": "#ExecEngineFixing"  }
+	],
+
+	"repository": 
+	{	"Transaction":
+		{	"patterns": 
+			[	{	"name": "transaction.amplog",
+					"begin": "^.*TRANSACTION.*(Opening transaction): (\\d+)",
+					"beginCaptures": {
+						"0": { "name":"opening.transaction.amplog"},
+						"1": { "name":"keyword.transaction.amplog"},
+						"2": { "name":"variable.transaction.amplog"}
+					},
+					"end": "^.*TRANSACTION.*((?:Commit|Rollback) transaction) (\\d+).*$",
+					"endCaptures": {
+						"0": { "name":"closing.transaction.amplog"},
+						"1": { "name":"keyword.transaction.amplog"},
+						"2": { "name":"variable.transaction.amplog"}
+					},
+					"patterns": [
+						{ 	"include": "#Atom" },
+						{ 	"include": "#Link" },
+						{  	"include": "#ExcelImport" },
+						{  	"include": "#ExecEngine" }
+					]
+				}
+         	]
+      	},
+      	"ExcelImport":
+		{	"patterns": 
+			[	{	"name": "excelimport.amplog",
+					"begin": "^.*(Excel import started)",
+					"beginCaptures": { 
+						"0": { "name":"opening.excelimport.amplog"},
+						"1": { "name":"keyword.excelimport.amplog"},
+						"2": { "name":"variable.excelimport.amplog"}
+					},
+					"end": "^.*(Excel import completed).*$",
+					"endCaptures": { 
+						"0": { "name":"closing.excelimport.amplog"},
+						"1": { "name":"keyword.excelimport.amplog"},
+						"2": { "name":"variable.excelimport.amplog"}
+					},
+					"patterns": [
+						{ 	"include": "#Atom"},
+						{ 	"include": "#Link"}
+					]
+            	}
+         	]
+      	},
+      	"ExecEngine":
+		{	"patterns": 
+			[	{	"name": "execengine.amplog",
+					"begin": "^.*ExecEngine started",
+					"beginCaptures": { "0": { "name": "started.execengine.amplog" } },
+					"end": "^.*ExecEngine finished",
+					"endCaptures": { "0": { "name": "finished.execengine.amplog" } },
+					"patterns": [
+						{	"match": "^.*(ExecEngine run) (#)(\\d+)(-)(\\d+)",
+							"captures": {
+								"0": { "name":"run.execengine.amplog"},
+								"1": { "name":"run.execengine.amplog"},
+								"2": { "name":"punctuation.run.execengine.amplog"},
+								"3": { "name":"variable.run.execengine.amplog"},
+								"4": { "name":"punctuation.run.execengine.amplog"},
+								"5": { "name":"variable.run.execengine.amplog"}
+							}
+						},
+						{ 	"include": "#ExecEngineFixing"}
+					]
+            	}
+         	]
+      	},
+      	"ExecEngineFixing":
+		{	"patterns": 
+			[	{	"name": "fixing.execengine.amplog",
+					"begin": "^.*(ExecEngine fixing )(\\d+)( violations for rule )(')([^']+)(')",
+					"beginCaptures": { 
+						"0": { "name":"rulefixing.execengine.amplog" },
+						"1": { "name":"fixing.rulefixing.execengine.amplog"},
+						"2": { "name":"variable.rulefixing.execengine.amplog"},
+						"3": { "name":"rulefixing.rulefixing.execengine.amplog"},
+						"4": { "name":"punctuation.rulefixing.execengine.amplog"},
+						"5": { "name":"rulename.rulefixing.execengine.amplog"},
+						"6": { "name":"punctuation.rulefixing.execengine.amplog"}
+					},
+					"end": "^.*(fixed )(\\d+)( violations for rule )(')([^']+)(')",
+					"endCaptures": { 
+						"0": { "name":"rulefixed.execengine.amplog" },
+						"1": { "name":"fixed.rulefixed.execengine.amplog"},
+						"2": { "name":"variable.rulefixed.execengine.amplog"},
+						"3": { "name":"rulefixing.rulefixed.execengine.amplog"},
+						"4": { "name":"punctuation.rulefixed.execengine.amplog"},
+						"5": { "name":"rulename.rulefixed.execengine.amplog"},
+						"6": { "name":"punctuation.rulefixed.execengine.amplog"}
+					},
+					"patterns": [
+						{	"match": "([^\\s\\(]+?)(\\()([^\\)]+?)(\\))",
+							"captures": {
+								"0": { "name":"function.run.execengine.amplog"},
+								"1": { "name":"keyword.run.execengine.amplog"},
+								"2": { "name":"punctuation.run.execengine.amplog"},
+								"3": { "name":"variable.run.execengine.amplog"},
+								"4": { "name":"punctuation.run.execengine.amplog"}
+							}
+						},
+						{ 	"include": "#Atom"},
+						{ 	"include": "#Link"}
+					]
+            	}
+			]
+		},
+		"Atom":
+		{	"patterns": 
+			[	{	"name": "atom.amplog",
+					"match": "^.*(Atom) (added to concept|deleted)",
+					"captures": {  
+						"0": { "name":"atom.amplog" },
+						"1": { "name":"keyword.atom.execengine.amplog"},
+						"2": { "name":"constant.other.atom.execengine.amplog"}
+					}
+	            }
+    	    ]
+      	},
+		"Link":
+		{	"patterns": 
+			[	{	"name": "link.amplog",
+					"match": "^.*(Link) (added to relation|deleted)",
+					"captures": {  
+						"0": { "name":"link.amplog" },
+						"1": { "name":"keyword.link.execengine.amplog"},
+						"2": { "name":"constant.other.link.execengine.amplog"}
+					}
+				}
+			]
+		}
+	}
+}
