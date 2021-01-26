@@ -7,7 +7,8 @@
 		{	"include": "#Transaction" },
 		{	"include": "#ExcelImport" },
 		{	"include": "#ExecEngine"  },
-		{	"include": "#ExecEngineFixing"  }
+		{	"include": "#ExecEngineFixing"  },
+		{	"include": "#Invariants"  }
 	],
 
 	"repository": 
@@ -20,7 +21,7 @@
 						"1": { "name":"keyword.transaction.amplog"},
 						"2": { "name":"variable.transaction.amplog"}
 					},
-					"end": "^.*TRANSACTION.*((?:Commit|Rollback) transaction) (\\d+).*$",
+					"end": "^.*TRANSACTION.*(Commit transaction|Rollback transaction): (\\d+).*$",
 					"endCaptures": {
 						"0": { "name":"closing.transaction.amplog"},
 						"1": { "name":"keyword.transaction.amplog"},
@@ -30,7 +31,8 @@
 						{ 	"include": "#Atom" },
 						{ 	"include": "#Link" },
 						{  	"include": "#ExcelImport" },
-						{  	"include": "#ExecEngine" }
+						{  	"include": "#ExecEngine" },
+						{  	"include": "#Invariants" }
 					]
 				}
          	]
@@ -104,13 +106,14 @@
 						"6": { "name":"punctuation.rulefixed.execengine.amplog"}
 					},
 					"patterns": [
-						{	"match": "([^\\s\\(]+?)(\\()([^\\)]+?)(\\))",
+						{	"match": "([^\\s\\(]+?)(\\()([^,]+)([^\\)]+?)(\\))",
 							"captures": {
 								"0": { "name":"function.run.execengine.amplog"},
 								"1": { "name":"keyword.run.execengine.amplog"},
 								"2": { "name":"punctuation.run.execengine.amplog"},
-								"3": { "name":"variable.run.execengine.amplog"},
-								"4": { "name":"punctuation.run.execengine.amplog"}
+								"3": { "name":"relation.run.execengine.amplog"},
+								"4": { "name":"variable.run.execengine.amplog"},
+								"5": { "name":"punctuation.run.execengine.amplog"}
 							}
 						},
 						{ 	"include": "#Atom"},
@@ -119,10 +122,32 @@
             	}
 			]
 		},
+		"Invariants":
+		{	"patterns": 
+			[	{	"match": "^.*(Checking invariant rules)",
+					"captures": { 
+						"0": { "name":"checking.invariants.amplog" },
+						"1": { "name":"keyword.checking.invariants.amplog"}
+					}
+				},
+				{	"match": "^.*(INVARIANT) (')([^']+)(') (RULE): (')([^']+)(')",
+					"captures": {
+						"0": { "name":"violation.invariants.amplog"},
+						"1": { "name":"keyword.invariants.amplog"},
+						"2": { "name":"punctuation.invariants.amplog"},
+						"3": { "name":"variable.invariants.amplog"},
+						"4": { "name":"punctuation.invariants.amplog"},
+						"5": { "name":"keyword.invariants.amplog"},
+						"6": { "name":"punctuation.invariants.amplog"},
+						"7": { "name":"rulename.invariants.amplog"},
+						"8": { "name":"punctuation.invariants.amplog"}
+					}
+            	}
+			]
+		},
 		"Atom":
 		{	"patterns": 
-			[	{	"name": "atom.amplog",
-					"match": "^.*(Atom) (added to concept|deleted)",
+			[	{	"match": "^.*(Atom) (added to concept|deleted)",
 					"captures": {  
 						"0": { "name":"atom.amplog" },
 						"1": { "name":"keyword.atom.execengine.amplog"},
@@ -133,8 +158,7 @@
       	},
 		"Link":
 		{	"patterns": 
-			[	{	"name": "link.amplog",
-					"match": "^.*(Link) (added to relation|deleted)",
+			[	{	"match": "^.*(Link) (added to relation|deleted)",
 					"captures": {  
 						"0": { "name":"link.amplog" },
 						"1": { "name":"keyword.link.execengine.amplog"},

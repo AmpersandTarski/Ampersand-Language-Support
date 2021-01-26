@@ -17,6 +17,9 @@
 			],
 			"settings": { "foreground": "#cea6a6", "fontStyle": "bold underline" }
 		},
+		{	"scope": "text.amplog variable.transaction.amplog",
+			"settings": { "foreground": "#c040c0", "fontStyle": "" }
+		},
 
 		{	"scope": "text.amplog excelimport.amplog",
 			"settings": { "foreground": "#a6ceaf", "fontStyle": "" }
@@ -52,6 +55,20 @@
 		{	"scope": "text.amplog rulename.rulefixing.execengine.amplog",
 			"settings": { "foreground": "#18c000", "fontStyle": "bold underline" }
 		},
+
+		{	"scope": "text.amplog function.run.execengine.amplog",
+			"settings": { "foreground": "#c040c0", "fontStyle": "bold underline" }
+		},
+		{	"scope": "text.amplog keyword.run.execengine.amplog",
+			"settings": { "foreground": "#c040c0", "fontStyle": "bold italic" }
+		},
+		{	"scope": "text.amplog relation.run.execengine.amplog",
+			"settings": { "foreground": "#c040c0", "fontStyle": "bold underline" }
+		},
+		{	"scope": "text.amplog variable.run.execengine.amplog",
+			"settings": { "foreground": "#c040c0", "fontStyle": "" }
+		},
+
 		{	"scope": [
 				"text.amplog rulefixed.execengine.amplog",
 				"text.amplog fixed.rulefixed.execengine.amplog",
@@ -64,6 +81,26 @@
 		},
 		{	"scope": "text.amplog rulename.rulefixed.execengine.amplog",
 			"settings": { "foreground": "#108000", "fontStyle": "bold underline" }
+		},
+
+		{	"scope": [
+			"text.amplog checking.invariants.amplog", 
+			"text.amplog violation.invariants.amplog",
+			"text.amplog keyword.invariants.amplog",
+			"text.amplog punctuation.invariants.amplog",
+			"text.amplog variable.invariants.amplog",
+			"text.amplog rulename.invariants.amplog",
+		],
+			"settings": { "foreground": "#ff6060", "fontStyle": "" }
+		},
+		{	"scope": [
+			"text.amplog keyword.invariants.amplog", 
+			"text.amplog rulename.invariants.amplog", 
+			],
+			"settings": { "foreground": "#ff0000", "fontStyle": "underline" }
+		},
+		{	"scope": "text.amplog rulename.invariants.amplog",
+			"settings": { "foreground": "#ffc000", "fontStyle": "bold" }
 		},
 
 
