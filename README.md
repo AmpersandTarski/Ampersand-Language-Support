@@ -4,16 +4,15 @@ This extension provides langauge support for the [Ampersand](http://ampersandtar
 
 ## Features
 
-- syntax coloring grammar
-- syntax coloring theme (ampersand)
+- syntax coloring grammar (also for prototype logfiles)
+- syntax coloring theme (for ADL, and prototype logfiles)
 - snippets that help you write the common language constructs
 - syntax and type checking as you type
 
 ## Requirements
 
 - In order to use the ampersand commands, it is required that you have [the ampersand executable](https://github.com/AmpersandTarski/Ampersand/releases/latest) in your path. Make sure it is a recent version.
-
-- In order to get syntax coloring, select the Ampersand coloring theme as the default theme for .adl files. The reason for this is that default syntax coloring is designed for traditional languages (e.g. PHP), and Ampersand is far from that.
+- In order to get syntax coloring, select the Ampersand coloring theme as the default theme for `.adl` (and `*.amplog`) files. The reason for this is that default syntax coloring is designed for traditional languages (e.g. PHP), and Ampersand is far from that. 
 
 ## How to use this extension
 
