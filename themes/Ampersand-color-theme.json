@@ -103,6 +103,9 @@
 			"settings": { "foreground": "#ffc000", "fontStyle": "bold" }
 		},
 
+		{	"scope": "error.amplog",
+			"settings": { "foreground": "#E00000", "fontStyle": "bold underline" }
+		},
 
 		{	"scope": "source.ampersand invalid.illegal",
 			"settings": { "foreground": "#E00000", "fontStyle": "bold underline" }

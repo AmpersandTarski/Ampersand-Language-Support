@@ -5,7 +5,12 @@
     Please do not forget to update the version number.
     It is in the file `package.json` 
 -->
+## Unreleased changes
+
+- Added coloring for ERRORs and CRITICALs in .amplog files
+
 ## [0.4.0] - 2021-01-26
+
 - Added syntax coloring for ampersand log files (with extension `.amplog`)
 - Modified Ampersand theme to include colors for ampersand log files.
 
