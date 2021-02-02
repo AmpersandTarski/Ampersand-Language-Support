@@ -16,6 +16,14 @@
 		"description": "Preprocessor statements",
 		"body":[ "--#${1:|IF ${2:variable},IFNOT ${2:variable},ELSE,ENDIF|}" ]
 	},
+	"INLUCDE statements": {
+		"prefix": "INCLUDE",
+		"description": "INCLUDE with preprocessor variables",
+		"body":[ 
+			"INCLUDE \"${path/file.ext}\" --# [ \"${1:variable}\", \"${2:variable}\" ]",
+			"$0"
+		]
+	},
 	"Define a context": {
 		"prefix": "CONTEXT",
 		"description": "Define a CONTEXT. You may need to add the PURPOSE statement yourself",
@@ -197,10 +205,10 @@
 			"-- EQUIVALENCE ${1:Relname}[${2:srcConcept}*${3:tgtConcept}] == ${4:Expression}",
 			"$1 :: $2 * $3 -- define relation $1 as shorthand for $4",
 			"ROLE ExecEngine MAINTAINS \"EQV-InsPair $1\"",
-			"RULE \"Eqv-InsPair $1\": $4 |- $1[$2*$3]",
+			"RULE \"Eqv-InsPair $1\": $4 |- $1",
 			"VIOLATION (TXT \"{EX} InsPair;$1;$2;\", SRC I, TXT \";$3;\", TGT I)",
 			"ROLE ExecEngine MAINTAINS \"EQV-DelPair $1\"",
-			"RULE \"Eqv-DelPair $1\": $1[$2*$3] |- $4",
+			"RULE \"Eqv-DelPair $1\": $1 |- $4",
 			"VIOLATION (TXT \"{EX} DelPair;$1;$2;\", SRC I, TXT \";$3;\", TGT I)",
 			"$0"
 		]
@@ -212,10 +220,10 @@
 			"-- EQUIVALENCE ${1:Relname}[${2:concept}] [PROP] == ${3:Expression}",
 			"$1 :: $2 * $2 [PROP] -- define relation $1 as shorthand for $3",
 			"ROLE ExecEngine MAINTAINS \"EQV-InsPair $1\"",
-			"RULE \"Eqv-InsPair $1\": $3 |- $1[$2]",
+			"RULE \"Eqv-InsPair $1\": $3 |- $1",
 			"VIOLATION (TXT \"{EX} InsPair;$1;$2;\", SRC I, TXT \";$2;\", TGT I)",
 			"ROLE ExecEngine MAINTAINS \"EQV-DelPair $1\"",
-			"RULE \"Eqv-DelPair $1\": $1[$2] |- $3",
+			"RULE \"Eqv-DelPair $1\": $1 |- $3",
 			"VIOLATION (TXT \"{EX} DelPair;$1;$2;\", SRC I, TXT \";$2;\", TGT I)",
 			"$0"
 		]
@@ -243,7 +251,8 @@
 		"description": "simple VIEW for a concept",
 		"body":[
 			"VIEW \"${1:viewname}\": ${2:concept}",
-			"   { $0",
+			"   { \"${3:label}\": $4:Expression}",
+			"   , $0",
 			"   } ENDVIEW"
 		]
 	},
@@ -252,7 +261,8 @@
 		"description": "VIEW using a HTML-template",
 		"body":[
 			"VIEW \"${1:viewname}\": ${2:concept}",
-			"   { $0",
+			"   { \"${3:label}\": $4:Expression}",
+			"   , $0",
 			"   } HTML TEMPLATE \"${3:templatefilename.html}\" ENDVIEW"
 		]
 	},
@@ -269,25 +279,81 @@
 	"PROPBUTTON (simple)": {
 		"prefix": "<PROPBUTTON>",
 		"description": "simple property-button",
-		"body": "cRud BOX <PROPBUTTON> [ property: ${0:propertyrelation} cRUd ]"
+		"body": "BOX <PROPBUTTON> [ property: ${0:propertyrelation} cRUd ]"
+	},
+	"PROPBUTTON (medium, no comments)": {
+		"prefix": "<PROPBUTTON>",
+		"description": "propbutton arguments",
+		"body":[
+			"BOX <PROPBUTTON>",
+			"      [ label: TXT \"${1:buttontext}\"", 
+			"      , property: ${2:[prop]-relation} cRUd",
+			"      , hide: ${3:[prop]-expression} cRud",
+			"      , disabled: ${4:[prop]-expression} cRud",
+			"      , disabledpopovertext: TXT \"disabled-popovertext\"",
+			"      , popovertext: TXT \"popovertext\"",
+			"      ]"
+		]
+	},
+	"PROPBUTTON (extended, no comments)": {
+		"prefix": "<PROPBUTTON>",
+		"description": "propbutton arguments",
+		"body":[
+			"BOX <PROPBUTTON>",
+			"      [ label: TXT \"${1:buttontext}\"", 
+			"$0      , label1: TXT \"+label1\"",
+			"      , label2: TXT \"+label2\"",
+			"      , label3: TXT \"+label3\"",
+			"      , property: proprel cRUd",
+			"      , flipprop: proprel cRUd",
+			"      , setprop:  proprel cRUd",
+			"      , setprop2: proprel cRUd",
+			"      , clrprop:  proprel cRUd",
+			"      , clrprop2: proprel cRUd",
+			"      , color: TXT \"primary,secondary,success,warning,danger,info,light,dark,link\"",
+			"      , disabledcolor: TXT \"primary,secondary,success,warning,danger,info,light,dark,link\"",
+			"      , disabled: proprel cRud",
+			"      , hide: proprel cRud",
+			"      , disabledpopovertext: TXT \"disabled-popovertext\"",
+			"      , popovertext: TXT \"popovertext\"",
+			"      ]"
+		]
 	},
 	"PROPBUTTON (extended)": {
 		"prefix": "<PROPBUTTON>",
 		"description": "propbutton arguments",
 		"body":[
-			"cRud BOX <PROPBUTTON>",
-			"   [ label: TXT \"${1:buttontext}\" -- text to show on the button (label text)",
-			"   , label1: TXT \"${2:buttontext}\" -- label text = label+label1",
-			"   , label2: TXT \"${3:buttontext}\" -- label text = label+label1+label2",
-			"   , label3: TXT \"${4:buttontext}\" -- label text = label+label1+label2+label3",
-			"   , property: ${5:propertyrelation} cRUd -- relation of type [PROP] whose value is toggled when user presses button",
-			"   , color: TXT \"${6|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- primary=blue secondary=grey, success=green, warning=yellow, danger=red, info=lightblue, light=grey, dark=black",
-			"   , disabledcolor: TXT \"${7|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- precede color with `outline-` (e.g. `outline-primary`) to make an outline-button",
-			"   , disabled: ${8:propertyExpression} cRud -- when [PROP]-type expression is not empty, button is disabled (user cannot click it)",
-			"   , hide: ${9:propertyExpression} cRud -- when [PROP]-type expression is not empty, button does not show on screen",
-			"   , disabledpopovertext: TXT \"${11:disabledhovertext}\" -- text that shows when user hovers cursor over the button when it is disabled",
-			"   , popovertext: TXT \"${10:hovertext}\" -- text that shows when user hovers cursor over the button",
-			"   ]"
+			"BOX <PROPBUTTON>",
+			"      [ label: TXT \"${1:buttontext}\"", 
+			"      , label1: TXT \"${2:buttontext}\" -- label text = label+label1",
+			"      , label2: TXT \"${3:buttontext}\" -- label text = label+label1+label2",
+			"      , label3: TXT \"${4:buttontext}\" -- label text = label+label1+label2+label3",
+			"      , property: ${5:propertyrelation} cRUd -- change/flip the value of the [PROP] relation",
+			"      , flipprop: ${6:propertyrelation} cRUd -- as 'property'",
+			"      , setprop:  ${7:propertyrelation} cRUd -- set propertyrelation (InsPair)",
+			"      , setprop2: ${8:propertyrelation} cRUd -- as 'setprop'",
+			"      , clrprop:  ${9:propertyrelation} cRUd -- clear propertyrelation (DelPair)",
+			"      , clrprop2: ${10:propertyrelation} cRUd -- as 'delprop'",
+			"      , color: TXT \"${11|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- primary=blue secondary=grey, success=green, warning=yellow, danger=red, info=lightblue, light=grey, dark=black",
+			"      , disabledcolor: TXT \"${12|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- precede color with `outline-` (e.g. `outline-primary`) to make an outline-button",
+			"      , disabled: ${13:propertyExpression} cRud -- when [PROP]-type expression is not empty, button is disabled (user cannot click it)",
+			"      , hide: ${14:propertyExpression} cRud -- when [PROP]-type expression is not empty, button does not show on screen",
+			"      , disabledpopovertext: TXT \"${15:disabledhovertext}\" -- text that shows when user hovers cursor over the button when it is disabled",
+			"      , popovertext: TXT \"${16:hovertext}\" -- text that shows when user hovers cursor over the button",
+			"      ]"
+		]
+	},
+	"OBJECTDROPDOWN (no comments)": {
+		"prefix": "<OBJECTDROPDOWN>",
+		"description": "BOX that adds an OBJECT that the user selects, to the population of a relation",
+		"body":[
+			"cRud BOX <OBJECTDROPDOWN>",
+			"[ selectfrom: ${1:expr} cRud <${2:View}>",
+			", setrelation: ${3:rel} cRUd",
+			", instruction: TXT \"${4:text}\"",
+		   	", selectflag: ${5:property-rel} cRUd",
+		   	", deselectflag: ${6:property-rel} cRUd",
+			"]"
 		]
 	},
 	"OBJECTDROPDOWN (incl. doc comments)": {
@@ -295,11 +361,24 @@
 		"description": "BOX that adds an OBJECT that the user selects, to the population of a relation",
 		"body":[
 			"cRud BOX <OBJECTDROPDOWN> -- **use <VALUEDROPDOWN> if the concept is an ALPHANUMERIC, INTEGER, DATE, ...**",
-			"[ selectfrom: ${1:exprThatSpecifiesOBJECTsToSelectFrom} cRud <${2:ViewToDisplaySelectableOBJECTs}>",
-			", setrelation: ${3:relToWhichSelectedOBJECTisAdded} cRUd -- If the relation is [UNI], a newly selected object will replace the existing population.",
-			", instruction: TXT \"${4:selectText}\" -- Text that shows when nothing is selected yet",
-		   	", selectflag: ${5:selectEventFlag} cRUd -- [PROP]-type relation that toggles when OBJECT is selected",
-		   	", deselectflag: ${6:deselectEventFlag} cRUd -- [PROP]-type relation that toggles when NO OBJECT is selected",
+			"[ selectfrom: ${1:expr} cRud <${2:View}> -- 'expr' specifies OBJECTS to select from, 'View' how they show up in the dropdown box",
+			", setrelation: ${3:rel} cRUd -- if UNI(rel): selected object replaces TGT; else, TGT is added to populatio of 'rel'",
+			", instruction: TXT \"${4:text}\" -- Text that shows when nothing is selected yet",
+		   	", selectflag: ${5:property-rel} cRUd -- [PROP]-type relation that toggles when OBJECT is selected",
+		   	", deselectflag: ${6:property-rel} cRUd -- [PROP]-type relation that toggles when NO OBJECT is selected",
+			"]"
+		]
+	},
+	"VALUEDROPDOWN (no comments)": {
+		"prefix": "<VALUEDROPDOWN>",
+		"description": "BOX that adds a VALUE that the user selects, to the population of a relation",
+		"body":[
+			"cRud BOX <VALUEDROPDOWN>",
+			"[ selectfrom: ${1:expr} cRud <${2:View}>",
+			", setrelation: ${3:rel} cRUd",
+			", instruction: TXT \"${4:text}\"",
+		   	", selectflag: ${5:prop-rel} cRUd",
+		   	", deselectflag: ${6:prop-rel} cRUd",
 			"]"
 		]
 	},
