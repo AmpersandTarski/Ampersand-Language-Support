@@ -5,7 +5,7 @@
     Please do not forget to update the version number.
     It is in the file `package.json` 
 -->
-## Unreleased changes
+## [0.4.1] - 2021-02-02
 
 - Added coloring for ERRORs and CRITICALs in .amplog files
 
