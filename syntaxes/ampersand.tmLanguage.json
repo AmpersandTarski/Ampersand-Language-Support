@@ -772,11 +772,53 @@
 			]
 		},
 
+		"BOX-template":
+		{	"patterns": 
+			[	{	"comment":"<TEMPLATE attrib key=\"value\"> -- see https://github.com/AmpersandTarski/prototype/tree/development/templates",
+				    "name": "template.box.ampersand",
+					"begin": "(<)(?:(RAW|FORM|TABLE|TABS|PROPBUTTON|(?:OBJECT|VALUE)DROPDOWN)|(H?ROWSN?L?|S?H?COLSN?L?)|(\\w+))\\b",
+					"beginCaptures": {
+						"0": { "name":"template.box.header.begin.ampersand"},
+						"1": { "name":"punctuation.statement.box.header.ampersand"},
+						"2": { "name":"wellknown.templatename.box.header.ampersand"},
+						"3": { "name":"invalid.deprecated.box.header.ampersand"},
+						"4": { "name":"unknown.templatename.box.header.ampersand"}
+					},
+					"end": "(>)",
+					"endCaptures": {
+						"0": { "name":"template.box.header.end.ampersand"},
+						"1": { "name":"punctuation.statement.box.header.ampersand"}
+					},
+					"patterns": [ 
+						{	"include":"#COMMENTS" },
+						{	"match": "(\\w+)(?=[\\s>])",
+							"captures": {
+								"0": { "name":"keyword.template.box.header.begin.ampersand"},
+								"1": { "name":"keyword.operator.box.header.ampersand"}
+							}
+						},
+						{	"match": "(\\w+)(=)(\")([^\"]*)(\")",
+							"captures": {
+								"0": { "name":"variable.template.box.header.begin.ampersand"},
+								"1": { "name":"keyword.operator.box.header.ampersand"},
+								"2": { "name":"punctuation.statement.interface.view.ampersand"},
+								"3": { "name":"punctuation.statement.interface.view.ampersand"},
+								"4": { "name":"variable.view.ampersand"},
+								"5": { "name":"punctuation.statement.interface.view.ampersand"}
+							}
+						},
+						{	"match": "[^\\s]+",
+							"name": "invalid.illegal.box.header.ampersand"
+						}
+					]
+				}
+			]
+		},
 		"BOX-HEADER":
 		{	"patterns": 
 			[	{	"comment":"BOX <TEMPLATE attrib key=\"value\"> -- see https://github.com/AmpersandTarski/prototype/tree/development/templates",
 				    "name": "meta.box.ampersand",
-					"begin": "\\b(BOX)\\s*(?:(<)(\\w+)(?:\\s+(\\w+)(?:(=\")(\\w+)(\"))?)*\\s*(>))?",
+					"begin": "\\b(BOX)\\s*",
 					"beginCaptures": {
 						"0": { "name":"meta.box.header.begin.ampersand"},
 						"1": { "name":"keyword.operator.box.header.ampersand"},
@@ -790,6 +832,7 @@
 						},
 					"end": "(?=\\[)",
 					"patterns": [ 
+						{	"include":"#BOX-template" },
 						{	"include":"#COMMENTS" },
 						{	"match": "[^\\s]+",
 							"name": "invalid.illegal.box.header.ampersand"

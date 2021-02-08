@@ -29,9 +29,29 @@
 						"2": { "name":"variable.transaction.amplog"}
 					},
 					"patterns": [
+						{   "include": "#LastAccess" },
 						{ 	"include": "#Atom" },
 						{ 	"include": "#Link" },
 						{  	"include": "#ExcelImport" },
+						{  	"include": "#ExecEngine" },
+						{  	"include": "#Invariants" },
+						{  	"include": "#ERROR" }
+					]
+				}
+         	]
+      	},
+      	"LastAccess":
+		{	"patterns": 
+			[	{	"name": "lastaccess.transaction.amplog",
+					"begin": "^.*Link added to relation:.*lastAccess\\[SESSION\\*DateTime\\]",
+					"beginCaptures": { 
+						"0": { "name":"opening.lastaccess.transaction.amplog"}
+					},
+					"end": "^.*(Checking invariant rules).*$",
+					"endCaptures": { 
+						"0": { "name":"closing.lastaccess.transaction.amplog"}
+					},
+					"patterns": [
 						{  	"include": "#ExecEngine" },
 						{  	"include": "#Invariants" },
 						{  	"include": "#ERROR" }
@@ -89,7 +109,7 @@
       	"ExecEngineFixing":
 		{	"patterns": 
 			[	{	"name": "fixing.execengine.amplog",
-					"begin": "^.*(ExecEngine fixing )(\\d+)( violations for rule )(')([^']+)(')",
+					"begin": "^.*(ExecEngine fixing )(\\d+)( violations for rule )(')(.+?)(')(?= \\[\\])",
 					"beginCaptures": { 
 						"0": { "name":"rulefixing.execengine.amplog" },
 						"1": { "name":"fixing.rulefixing.execengine.amplog"},
@@ -99,7 +119,7 @@
 						"5": { "name":"rulename.rulefixing.execengine.amplog"},
 						"6": { "name":"punctuation.rulefixing.execengine.amplog"}
 					},
-					"end": "^.*(fixed )(\\d+)( violations for rule )(')([^']+)(')",
+					"end": "^.*(fixed )(\\d+)( violations for rule )(')(.+?)(')(?= \\[\\])",
 					"endCaptures": { 
 						"0": { "name":"rulefixed.execengine.amplog" },
 						"1": { "name":"fixed.rulefixed.execengine.amplog"},
@@ -135,7 +155,7 @@
 						"1": { "name":"keyword.checking.invariants.amplog"}
 					}
 				},
-				{	"match": "^.*(INVARIANT) (')([^']+)(') (RULE): (')([^']+)(')",
+				{	"match": "^(.*INVARIANT) (')([^']+)(') (RULE): (')(.+?)(')(?= \\[\\])",
 					"captures": {
 						"0": { "name":"violation.invariants.amplog"},
 						"1": { "name":"keyword.invariants.amplog"},

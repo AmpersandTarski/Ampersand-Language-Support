@@ -17,6 +17,14 @@
 			],
 			"settings": { "foreground": "#cea6a6", "fontStyle": "bold underline" }
 		},
+		{	"scope": [
+				"text.amplog lastaccess.transaction.amplog",
+				"text.amplog opening.lastaccess.transaction.amplog",
+				"text.amplog closing.lastaccess.transaction.amplog"
+			],
+			"settings": { "foreground": "#cea6a680", "fontStyle": "bold underline" }
+		},
+
 		{	"scope": "text.amplog variable.transaction.amplog",
 			"settings": { "foreground": "#c040c0", "fontStyle": "" }
 		},

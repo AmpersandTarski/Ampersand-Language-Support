@@ -5,6 +5,11 @@
     Please do not forget to update the version number.
     It is in the file `package.json` 
 -->
+
+## Unversioned changes
+
+- attempt to reduce distraction by 'lastAccess'-transactions in logfiles
+- bugfix in BOX <TEMPLATE ...> constructions.
 ## [0.4.1] - 2021-02-02
 
 - Added coloring for ERRORs and CRITICALs in .amplog files
