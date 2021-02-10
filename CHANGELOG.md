@@ -10,6 +10,7 @@
 
 - attempt to reduce distraction by 'lastAccess'-transactions in logfiles
 - bugfix in BOX <TEMPLATE ...> constructions.
+- support for 'setprop' and 'clrprop' attributes in the <PROPBUTTON> template
 ## [0.4.1] - 2021-02-02
 
 - Added coloring for ERRORs and CRITICALs in .amplog files
