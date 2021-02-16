@@ -18,16 +18,27 @@
 			"settings": { "foreground": "#cea6a6", "fontStyle": "bold underline" }
 		},
 		{	"scope": [
+				"text.amplog AtomAddedToConceptDateTime.transaction.amplog",
 				"text.amplog lastaccess.transaction.amplog",
 				"text.amplog opening.lastaccess.transaction.amplog",
 				"text.amplog closing.lastaccess.transaction.amplog"
 			],
-			"settings": { "foreground": "#cea6a680", "fontStyle": "bold underline" }
+			"settings": { "foreground": "#cea6a680", "fontStyle": "" }
 		},
 
-		{	"scope": "text.amplog variable.transaction.amplog",
-			"settings": { "foreground": "#c040c0", "fontStyle": "" }
+		{	"scope": [
+				"text.amplog variable.transaction.amplog",
+				"text.amplog keyword.addlink.transaction.amplog",
+				"text.amplog constant.other.addlink.transaction.amplog",
+				"text.amplog punctutation.other.addlink.transaction.amplog"
+			],
+			"settings": { "foreground": "#c080c0", "fontStyle": "" }
 		},
+		{	"scope": [
+				"text.amplog constant.other.addlink.transaction.amplog",
+			],
+			"settings": { "foreground": "#20a0c0", "fontStyle": "bold" }
+			},
 
 		{	"scope": "text.amplog excelimport.amplog",
 			"settings": { "foreground": "#a6ceaf", "fontStyle": "" }

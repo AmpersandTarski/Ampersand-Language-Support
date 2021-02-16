@@ -28,8 +28,9 @@
 						"1": { "name":"keyword.transaction.amplog"},
 						"2": { "name":"variable.transaction.amplog"}
 					},
-					"patterns": [
+					"patterns": [ 
 						{   "include": "#LastAccess" },
+						{   "include": "#AddLink"},
 						{ 	"include": "#Atom" },
 						{ 	"include": "#Link" },
 						{  	"include": "#ExcelImport" },
@@ -56,8 +57,23 @@
 						{  	"include": "#Invariants" },
 						{  	"include": "#ERROR" }
 					]
+				},
+			 	{	"name": "AtomAddedToConceptDateTime.transaction.amplog",
+					"begin": "^.*Atom added to concept: \\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\+\\d{2}:\\d{2}\\[DateTime\\]",
+					"beginCaptures": { 
+						"0": { "name":"opening.lastaccess.transaction.amplog"}
+					},
+					"end": "^.*(Checking invariant rules).*$",
+					"endCaptures": { 
+						"0": { "name":"closing.lastaccess.transaction.amplog"}
+					},
+					"patterns": [
+						{  	"include": "#ExecEngine" },
+						{  	"include": "#Invariants" },
+						{  	"include": "#ERROR" }
+					]
 				}
-         	]
+			]
       	},
       	"ExcelImport":
 		{	"patterns": 
@@ -181,6 +197,26 @@
 					}
 	            }
     	    ]
+		},
+		"AddLink":
+		{	"patterns": 
+			[	{	"match": "^.*(Link) (added to relation:\\s+(\\()([^\\)]*?)(\\))\\s+(\\w+)(\\[)(\\w+)(\\*)(\\w+)(\\])|deleted)",
+					"captures": {  
+						"0": { "name":"addlink.amplog" },
+						"1": { "name":"keyword.addlink.transaction.amplog"},
+						"2": { "name":"constant.other.addlink.transaction.amplog"},
+						"3": { "name":"punctutation.other.addlink.transaction.amplog"},
+						"4": { "name":"constant.other.addlink.transaction.amplog"},
+						"5": { "name":"punctutation.other.addlink.transaction.amplog"},
+						"6": { "name":"constant.other.addlink.transaction.amplog"},
+						"7": { "name":"punctutation.other.addlink.transaction.amplog"},
+						"8": { "name":"constant.other.addlink.transaction.amplog"},
+						"9": { "name":"punctutation.other.addlink.transaction.amplog"},
+						"10": { "name":"constant.other.addlink.transaction.amplog"},
+						"11": { "name":"punctutation.other.addlink.transaction.amplog"}
+					}
+				}
+			]
 		},
 		"Link":
 		{	"patterns": 
