@@ -200,7 +200,7 @@
 		},
 		"AddLink":
 		{	"patterns": 
-			[	{	"match": "^.*(Link) (added to relation:\\s+(\\()([^\\)]*?)(\\))\\s+(\\w+)(\\[)(\\w+)(\\*)(\\w+)(\\])|deleted)",
+			[	{	"match": "^.*(Link) (added to relation|deleted):\\s+(\\()([^\\)]*?)(\\))\\s+(\\w+)(\\[)(\\w+)(\\*)(\\w+)(\\])",
 					"captures": {  
 						"0": { "name":"addlink.amplog" },
 						"1": { "name":"keyword.addlink.transaction.amplog"},
