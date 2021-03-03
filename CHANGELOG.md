@@ -6,11 +6,12 @@
     It is in the file `package.json` 
 -->
 
-## Unversioned changes
+## [0.4.2] - 2021-03-03
 
 - attempt to reduce distraction by 'lastAccess'-transactions in logfiles.
 - attempt to emphasize relations to which content is added.
-- bugfix in BOX `<TEMPLATE ...>` constructions.
+- Snippet support for BOX <TEMPLATE> constructs (so you know what the most commonly used templates are)
+- Snippet supports keywords for all standard templates
 - support for 'setprop' and 'clrprop' attributes in the `<PROPBUTTON>` template.
 
 ## [0.4.1] - 2021-02-02
