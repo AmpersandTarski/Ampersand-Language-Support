@@ -823,7 +823,7 @@
 						"1": { "name":"punctuation.statement.box.header.ampersand"}
 					},
 					"patterns": [ 
-						{	"match": "(noHeader|hideOnNoRecords||noRootTitle|sortable|showNavMenu)(?=[\\s>])",
+						{	"match": "(noHeader|hideOnNoRecords|noRootTitle|sortable|showNavMenu)(?=[\\s>])",
 							"captures": { "1": { "name":"keyword.template.box.header.begin.ampersand"} }
 						},
 						{	"match": "(title|sortby)(=)(\")([^\"]*)(\")",
