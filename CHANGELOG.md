@@ -6,6 +6,8 @@
     It is in the file `package.json` 
 -->
 
+## Unversioned changes
+- Syntax highlighting checks for correct keywords/parameters in well-known BOX-templates
 ## [0.4.2] - 2021-03-03
 
 - attempt to reduce distraction by 'lastAccess'-transactions in logfiles.

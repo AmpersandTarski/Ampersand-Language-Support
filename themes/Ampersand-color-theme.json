@@ -185,11 +185,15 @@
 		{  "scope": "source.ampersand keyword.operator.violation.txt.arguments",
 			"settings": { "foreground": "#60A000", "fontStyle": "" }
 		},
-		{  "scope": "source.ampersand keyword.operator.violation.txt.wellknown-function",
+		{  "scope": [ "source.ampersand keyword.operator.violation.txt.wellknown-function"
+			         , "source.ampersand wellknown.templatename.box.header.ampersand"
+						],
 			"settings": { "foreground": "#60A000", "fontStyle": "bold" }
 		},
-		{  "scope": "source.ampersand keyword.operator.violation.txt.unknown-function",
-			"settings": { "foreground": "#60A000", "fontStyle": "bold italic underline" }
+		{  "scope": [ "source.ampersand keyword.operator.violation.txt.unknown-function"
+						, "source.ampersand unknown.templatename.box.header.ampersand"
+						],
+			"settings": { "foreground": "#70C000", "fontStyle": "bold italic underline" }
 		},
 		{  "scope": "source.ampersand keyword.operator.violation.txt.arguments.reserved",
 			"settings": { "foreground": "#60A000", "fontStyle": "bold" }

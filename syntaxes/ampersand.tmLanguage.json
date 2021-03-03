@@ -14,8 +14,8 @@
 		{	"include": "#INCLUDE"      },
 		{	"include": "#CONCEPT"      },
 		{	"include": "#CLASSIFY"     },
-		{  	"include": "#REPRESENT"    },
-		{  	"include": "#IDENT"        },
+		{  "include": "#REPRESENT"    },
+		{  "include": "#IDENT"        },
 		{	"include": "#RELATION"     },
 		{	"include": "#MSGMEANING"   },
 		{	"include": "#PRAGMA"       },
@@ -24,7 +24,7 @@
 		{	"include": "#RULE"         },
 		{	"include": "#VIOLATION"    },
 		{	"include": "#INTERFACE"    },
-		{	"include": "#BOX-HEADER"   },
+		{	"include": "#BOX-TEMPLATE" },
 		{	"include": "#BOX-BODY"     },
 		{	"include": "#VIEW"         },
 		{	"include": "#OTHERKWDS"    },
@@ -337,7 +337,7 @@
 						"14": { "name":"variable.quoted.concept.ampersand"},
 						"15": { "name":"punctuation.statement.classify.ampersand"}
 					},
-					"end": "^(?=\\s*([^A-Z/]|VIOLATION|ROLE|SERVICE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|VIEW|MEANING|MESSAGE|PRAGMA))",
+					"end": "^(?=\\s*([^A-Z/]|VIOLATION|ROLE|SERVICE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|API|GUI|VIEW|MEANING|MESSAGE|PRAGMA))",
 					"patterns": [
 						{  "include": "#COMMENTS" },
 						{	"match": "\\s*(/\\\\)\\s*(?:([A-Z]\\w*)|(\")([A-Z][^\"]*)(\"))",
@@ -618,7 +618,7 @@
 						"4": { "name":"punctuation.statement.rule.ampersand"},
 						"5": { "name":"punctuation.statement.rule.ampersand"}
 					},
-					"end": "^(?=([^-\\|\\s]|(\\s+(VIOLATION|ROLE|SERVICE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|VIEW|MEANING|MESSAGE|PRAGMA))))",
+					"end": "^(?=([^-\\|\\s]|(\\s+(VIOLATION|ROLE|SERVICE|RULE|INCLUDE|CONCEPT|CLASSIFY|REPRESENT|IDENT|RELATION|[a-z]\\w*\\s*::|POPULATION|INTERFACE|API|GUI|VIEW|MEANING|MESSAGE|PRAGMA))))",
 					"patterns": [
 						{	"name": "keyword.operator.rule-expression.ampersand",
 							"match": "(\\|-|=)"
@@ -772,21 +772,172 @@
 			]
 		},
 
-		"BOX-template":
+		"BOX-FORM":
 		{	"patterns": 
-			[	{	"comment":"<TEMPLATE attrib key=\"value\"> -- see https://github.com/AmpersandTarski/prototype/tree/development/templates",
-				    "name": "template.box.ampersand",
-					"begin": "(<)(?:(RAW|FORM|TABLE|TABS|PROPBUTTON|(?:OBJECT|VALUE)DROPDOWN)|(H?ROWSN?L?|S?H?COLSN?L?)|(\\w+))\\b",
+			[	{	"comment":"<FORM attrib key=\"value\"> -- see https://github.com/AmpersandTarski/prototype/tree/development/templates",
+ 					"name": "form.template.box.ampersand",
+					"begin": "(<)(FORM)\\b",
 					"beginCaptures": {
-						"0": { "name":"template.box.header.begin.ampersand"},
+						"0": { "name":"form.template.box.header.begin.ampersand"},
 						"1": { "name":"punctuation.statement.box.header.ampersand"},
-						"2": { "name":"wellknown.templatename.box.header.ampersand"},
-						"3": { "name":"invalid.deprecated.box.header.ampersand"},
-						"4": { "name":"unknown.templatename.box.header.ampersand"}
+						"2": { "name":"wellknown.templatename.box.header.ampersand"}
 					},
 					"end": "(>)",
 					"endCaptures": {
-						"0": { "name":"template.box.header.end.ampersand"},
+						"0": { "name":"form.template.box.header.end.ampersand"},
+						"1": { "name":"punctuation.statement.box.header.ampersand"}
+					},
+					"patterns": [ 
+						{	"match": "(hideLabels|hideOnNoRecords|hideSubOnNoRecords|noRootTitle|showNavMenu)(?=[\\s>])",
+							"captures": { "1": { "name":"keyword.template.box.header.begin.ampersand"} }
+						},
+						{	"match": "(title)(=)(\")([^\"]*)(\")",
+							"captures": {
+								"1": { "name":"keyword.operator.box.header.ampersand"},
+								"2": { "name":"punctuation.statement.interface.view.ampersand"},
+								"3": { "name":"punctuation.statement.interface.view.ampersand"},
+								"4": { "name":"variable.view.ampersand"},
+								"5": { "name":"punctuation.statement.interface.view.ampersand"}
+							}
+						},
+						{	"match": "\\w+",
+							"name": "invalid.illegal.box.header.ampersand"
+						}
+					]
+				}
+			]
+		},
+		"BOX-TABLE":
+		{	"patterns": 
+			[	{	"comment":"<TABLE attrib key=\"value\"> -- see https://github.com/AmpersandTarski/prototype/tree/development/templates",
+					 "name": "table.template.box.ampersand",
+					"begin": "(<)(TABLE)\\b",
+					"beginCaptures": {
+						"0": { "name":"table.template.box.header.begin.ampersand"},
+						"1": { "name":"punctuation.statement.box.header.ampersand"},
+						"2": { "name":"wellknown.templatename.box.header.ampersand"}
+					},
+					"end": "(>)",
+					"endCaptures": {
+						"0": { "name":"table.template.box.header.end.ampersand"},
+						"1": { "name":"punctuation.statement.box.header.ampersand"}
+					},
+					"patterns": [ 
+						{	"match": "(noHeader|hideOnNoRecords||noRootTitle|sortable|showNavMenu)(?=[\\s>])",
+							"captures": { "1": { "name":"keyword.template.box.header.begin.ampersand"} }
+						},
+						{	"match": "(title|sortby)(=)(\")([^\"]*)(\")",
+							"captures": {
+								"1": { "name":"keyword.operator.box.header.ampersand"},
+								"2": { "name":"punctuation.statement.interface.view.ampersand"},
+								"3": { "name":"punctuation.statement.interface.view.ampersand"},
+								"4": { "name":"variable.view.ampersand"},
+								"5": { "name":"punctuation.statement.interface.view.ampersand"}
+							}
+						},
+						{	"match": "(order)(=)(\")(desc|asc)(\")",
+							"captures": {
+								"1": { "name":"keyword.operator.box.header.ampersand"},
+								"2": { "name":"punctuation.statement.interface.view.ampersand"},
+								"3": { "name":"punctuation.statement.interface.view.ampersand"},
+								"4": { "name":"variable.view.ampersand"},
+								"5": { "name":"punctuation.statement.interface.view.ampersand"}
+							}
+						},
+						{	"match": "\\w+",
+							"name": "invalid.illegal.box.header.ampersand"
+						}
+					]
+				}
+			]
+		},
+		"BOX-TABS":
+		{	"patterns": 
+			[	{	"comment":"<TABS attrib key=\"value\"> -- see https://github.com/AmpersandTarski/prototype/tree/development/templates",
+					 "name": "tabs.template.box.ampersand",
+					"begin": "(<)(TABS)\\b",
+					"beginCaptures": {
+						"0": { "name":"tabs.template.box.header.begin.ampersand"},
+						"1": { "name":"punctuation.statement.box.header.ampersand"},
+						"2": { "name":"wellknown.templatename.box.header.ampersand"}
+					},
+					"end": "(>)",
+					"endCaptures": {
+						"0": { "name":"tabs.template.box.header.end.ampersand"},
+						"1": { "name":"punctuation.statement.box.header.ampersand"}
+					},
+					"patterns": [ 
+						{	"match": "(hideLabels|hideOnNoRecords|hideSubOnNoRecords|noRootTitle|showNavMenu)(?=[\\s>])",
+							"captures": { "1": { "name":"keyword.template.box.header.begin.ampersand"} }
+						},
+						{	"match": "(title)(=)(\")([^\"]*)(\")",
+							"captures": {
+								"1": { "name":"keyword.operator.box.header.ampersand"},
+								"2": { "name":"punctuation.statement.interface.view.ampersand"},
+								"3": { "name":"punctuation.statement.interface.view.ampersand"},
+								"4": { "name":"variable.view.ampersand"},
+								"5": { "name":"punctuation.statement.interface.view.ampersand"}
+							}
+						},
+						{	"match": "\\w+",
+							"name": "invalid.illegal.box.header.ampersand"
+						}
+					]
+				}
+			]
+		},
+		"BOX-RAW":
+		{	"patterns": 
+			[	{	"comment":"<RAW form,table> -- see https://github.com/AmpersandTarski/prototype/tree/development/templates",
+					"name": "raw.template.box.ampersand",
+					"begin": "(<)(RAW)\\b",
+					"beginCaptures": {
+						"0": { "name":"raw.template.box.header.begin.ampersand"},
+						"1": { "name":"punctuation.statement.box.header.ampersand"},
+						"2": { "name":"wellknown.templatename.box.header.ampersand"}
+					},
+					"end": "(>)",
+					"endCaptures": {
+						"0": { "name":"raw.template.box.header.end.ampersand"},
+						"1": { "name":"punctuation.statement.box.header.ampersand"}
+					},
+					"patterns": [ 
+						{	"match": "(form|table)",
+							"captures": { "1": { "name":"keyword.template.box.header.begin.ampersand"} }
+						},
+						{	"match": "\\w+",
+							"name": "invalid.illegal.box.header.ampersand"
+						}
+					]
+				}
+			]
+		},
+		"BOX-noargs":
+		{	"patterns": 
+			[	{	"comment":"well-known <TEMPLATE>s -- see https://github.com/AmpersandTarski/prototype/tree/development/templates",
+				   "name": "noargs.template.box.ampersand",
+					"match": "(<)(PROPBUTTON|OBJECTDROPDOWN|VALUEDROPDOWN)(>)",
+					"captures": {
+						"1": { "name":"punctuation.statement.box.header.ampersand"},
+						"2": { "name":"wellknown.templatename.box.header.ampersand"},
+						"3": { "name":"punctuation.statement.box.header.ampersand"}
+					}
+				}
+			]
+		},
+		"BOX-custom-defined":
+		{	"patterns": 
+			[	{	"comment":"<CUSTOM_TEMPLATE attrib key=\"value\"> -- see https://github.com/AmpersandTarski/prototype/tree/development/templates",
+				   "name": "custom.template.box.ampersand",
+					"begin": "(<)(?!(RAW|FORM|TABLE|TABS|PROPBUTTON|OBJECTDROPDOWN|VALUEDROPDOWN)\\b)(\\w+)\\b",
+					"beginCaptures": {
+						"0": { "name":"custom.template.box.header.begin.ampersand"},
+						"1": { "name":"punctuation.statement.box.header.ampersand"},
+						"3": { "name":"unknown.templatename.box.header.ampersand"}
+					},
+					"end": "(>)",
+					"endCaptures": {
+						"0": { "name":"custom.template.box.header.end.ampersand"},
 						"1": { "name":"punctuation.statement.box.header.ampersand"}
 					},
 					"patterns": [ 
@@ -807,14 +958,14 @@
 								"5": { "name":"punctuation.statement.interface.view.ampersand"}
 							}
 						},
-						{	"match": "[^\\s]+",
+						{	"match": "[^\\s>]+",
 							"name": "invalid.illegal.box.header.ampersand"
 						}
 					]
 				}
 			]
 		},
-		"BOX-HEADER":
+		"BOX-TEMPLATE":
 		{	"patterns": 
 			[	{	"comment":"BOX <TEMPLATE attrib key=\"value\"> -- see https://github.com/AmpersandTarski/prototype/tree/development/templates",
 				    "name": "meta.box.ampersand",
@@ -832,7 +983,12 @@
 						},
 					"end": "(?=\\[)",
 					"patterns": [ 
-						{	"include":"#BOX-template" },
+						{	"include":"#BOX-FORM" },
+						{	"include":"#BOX-TABLE" },
+						{	"include":"#BOX-TABS" },
+						{	"include":"#BOX-RAW" },
+						{	"include":"#BOX-noargs" },
+						{	"include":"#BOX-custom-defined" },
 						{	"include":"#COMMENTS" },
 						{	"match": "[^\\s]+",
 							"name": "invalid.illegal.box.header.ampersand"
@@ -863,7 +1019,7 @@
 						{	"include": "#crud" },
 						{	"include": "#useview" },
 						{	"include": "#useinterface" },
-						{	"include": "#BOX-HEADER" },
+						{	"include": "#BOX-TEMPLATE" },
 						{	"include": "#BOX-BODY" },
 						{	"include": "#comma" },
 						{	"match": "[^\\s]+",
@@ -888,7 +1044,7 @@
 						"5": { "name":"meta.box.body.label.text.ampersand"},
 						"6": { "name":"punctuation.statement.box.body.ampersand"}
 					},
-					"end": "(,|(?=(\\s(?=[CcRrUuDd])[Cc]?[Rr]?[Uu]?[Dd]?\\s|<(?!>)|LINKTO|INTERFACE|BOX|ROWS|COLS|TABS|PANELS|\\])))",
+					"end": "(,|(?=(\\s(?=[CcRrUuDd])[Cc]?[Rr]?[Uu]?[Dd]?\\s|<(?!>)|LINKTO|INTERFACE|API|GUI|BOX|ROWS|COLS|TABS|PANELS|\\])))",
 					"endCaptures": {
 						"0": { "name":"meta.boxitem.end.ampersand"},
 						"1": { "name":"punctuation.statement.box.body.ampersand"}
@@ -897,7 +1053,7 @@
 						{ 	"include": "#COMMENTS" },
 						{  "include": "#markdowntext-item"},
 						{	"include": "#term" },
-						{	"match": "\\s(?=[CcRrUuDd])[Cc]?[Rr]?[Uu]?[Dd]?\\s+(LINKTO\\s+)?INTERFACE",
+						{	"match": "\\s(?=[CcRrUuDd])[Cc]?[Rr]?[Uu]?[Dd]?\\s+(LINKTO\\s+)?(INTERFACE|API|GUI)",
 							"captures": { 
 								"0": { "name":"invalid.illegal.crud.interface.ampersand" }
 							}
@@ -919,7 +1075,7 @@
 
 		"useinterface":
 		{	"patterns": [
-				{	"match": "(?:(LINKTO)\\s+)?(INTERFACE)\\s+(?:([A-Z]\\w*)|(\")([^\"]+)(\"))",
+				{	"match": "(?:(LINKTO)\\s+)?(INTERFACE|API|GUI)\\s+(?:([A-Z]\\w*)|(\")([^\"]+)(\"))",
 					"captures": { 
 						"0": { "name":"meta.boxitem.interface.ampersand"},
 						"1": { "name":"keyword.operator.boxitem.ampersand"},

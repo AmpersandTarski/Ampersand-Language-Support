@@ -274,7 +274,7 @@
 	"<TABLE>": {
 		"prefix": "<TABLE",
 		"description": "shows all possible attributes of TABLEs",
-		"body":[ "<TABLE noHeader hideOnNoRecords title=\"Table Title\" noRootTitle sortable sortBy=\"ifc-label\" order=${1:asc|desc} showNavMenu>" ]
+		"body":[ "<TABLE noHeader hideOnNoRecords title=\"Table Title\" noRootTitle sortable sortBy=\"ifc-label\" order=\"${1:asc|desc}\" showNavMenu>" ]
 	},
 	"<TABS>": {
 		"prefix": "<TABS",
