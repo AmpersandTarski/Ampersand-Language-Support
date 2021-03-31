@@ -16,7 +16,7 @@
 		"description": "Preprocessor statements",
 		"body":[ "--#${1:|IF ${2:variable},IFNOT ${2:variable},ELSE,ENDIF|}" ]
 	},
-	"INLUCDE statements": {
+	"INCLUDE statements": {
 		"prefix": "INCLUDE",
 		"description": "INCLUDE with preprocessor variables",
 		"body":[ 
