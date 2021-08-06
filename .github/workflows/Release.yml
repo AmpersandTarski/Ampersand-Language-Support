@@ -2,7 +2,6 @@ on:
   push:
     branches:
       - master
-      - feature/revitalizeProject
       
 name: Deploy Extension
 jobs:
