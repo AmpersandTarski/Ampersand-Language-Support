@@ -7,7 +7,10 @@
 -->
 
 ## Unversioned changes
+
+- Add devcontainer for ease of use for maintainers of this extention.
 - Syntax highlighting checks for correct keywords/parameters in well-known BOX-templates
+
 ## [0.4.2] - 2021-03-03
 
 - attempt to reduce distraction by 'lastAccess'-transactions in logfiles.
