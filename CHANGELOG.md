@@ -6,7 +6,7 @@
     It is in the file `package.json` 
 -->
 
-## Unversioned changes
+## [0.4.3] - 2021-08-06
 
 - Add devcontainer for ease of use for maintainers of this extention.
 - Syntax highlighting checks for correct keywords/parameters in well-known BOX-templates
