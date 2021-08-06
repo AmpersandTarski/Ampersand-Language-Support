@@ -8,6 +8,124 @@
 		"sideBarTitle.foreground": "#bbbbbb"
 	},
 	"tokenColors": [
+		{	"scope": "text.amplog transaction.amplog",
+			"settings": { "foreground": "#cea6a6", "fontStyle": "" }
+		},
+		{	"scope": [
+				"text.amplog opening.transaction.amplog",
+				"text.amplog closing.transaction.amplog"
+			],
+			"settings": { "foreground": "#cea6a6", "fontStyle": "bold underline" }
+		},
+		{	"scope": [
+				"text.amplog AtomAddedToConceptDateTime.transaction.amplog",
+				"text.amplog lastaccess.transaction.amplog",
+				"text.amplog opening.lastaccess.transaction.amplog",
+				"text.amplog closing.lastaccess.transaction.amplog"
+			],
+			"settings": { "foreground": "#cea6a680", "fontStyle": "" }
+		},
+
+		{	"scope": [
+				"text.amplog variable.transaction.amplog",
+				"text.amplog keyword.addlink.transaction.amplog",
+				"text.amplog constant.other.addlink.transaction.amplog",
+				"text.amplog punctutation.other.addlink.transaction.amplog"
+			],
+			"settings": { "foreground": "#c080c0", "fontStyle": "" }
+		},
+		{	"scope": [
+				"text.amplog constant.other.addlink.transaction.amplog",
+			],
+			"settings": { "foreground": "#20a0c0", "fontStyle": "bold" }
+			},
+
+		{	"scope": "text.amplog excelimport.amplog",
+			"settings": { "foreground": "#a6ceaf", "fontStyle": "" }
+		},
+		{	"scope": [
+				"text.amplog opening.excelimport.amplog",
+				"text.amplog closing.excelimport.amplog"
+			],
+			"settings": { "foreground": "#a6ceaf", "fontStyle": "bold underline" }
+		},
+
+		{	"scope": "text.amplog execengine.amplog",
+			"settings": { "foreground": "#c5cea6", "fontStyle": "" }
+		},
+		{	"scope": [
+				"text.amplog started.execengine.amplog",
+				"text.amplog run.execengine.amplog",
+				"text.amplog finished.execengine.amplog"
+			],
+			"settings": { "foreground": "#c29e00", "fontStyle": "bold underline" }
+		},
+
+		{	"scope": [
+           		"text.amplog rulefixing.execengine.amplog", 
+           		"text.amplog fixing.rulefixing.execengine.amplog",
+           		"text.amplog rulename.rulefixing.execengine.amplog",
+			],
+			"settings": { "foreground": "#00d0ff", "fontStyle": "" }
+		},
+		{	"scope": "text.amplog variable.rulefixing.execengine.amplog",
+			"settings": { "foreground": "#80d0ff", "fontStyle": "bold" }
+		},
+		{	"scope": "text.amplog rulename.rulefixing.execengine.amplog",
+			"settings": { "foreground": "#18c000", "fontStyle": "bold underline" }
+		},
+
+		{	"scope": "text.amplog function.run.execengine.amplog",
+			"settings": { "foreground": "#c040c0", "fontStyle": "bold underline" }
+		},
+		{	"scope": "text.amplog keyword.run.execengine.amplog",
+			"settings": { "foreground": "#c040c0", "fontStyle": "bold italic" }
+		},
+		{	"scope": "text.amplog relation.run.execengine.amplog",
+			"settings": { "foreground": "#c040c0", "fontStyle": "bold underline" }
+		},
+		{	"scope": "text.amplog variable.run.execengine.amplog",
+			"settings": { "foreground": "#c040c0", "fontStyle": "" }
+		},
+
+		{	"scope": [
+				"text.amplog rulefixed.execengine.amplog",
+				"text.amplog fixed.rulefixed.execengine.amplog",
+				"text.amplog rulename.rulefixed.execengine.amplog",
+	 		],
+			"settings": { "foreground": "#0090c0", "fontStyle": "" }
+	 	},
+	 	{	"scope": "text.amplog variable.rulefixing.execengine.amplog",
+			"settings": { "foreground": "#8090c0", "fontStyle": "bold" }
+		},
+		{	"scope": "text.amplog rulename.rulefixed.execengine.amplog",
+			"settings": { "foreground": "#108000", "fontStyle": "bold underline" }
+		},
+
+		{	"scope": [
+			"text.amplog checking.invariants.amplog", 
+			"text.amplog violation.invariants.amplog",
+			"text.amplog keyword.invariants.amplog",
+			"text.amplog punctuation.invariants.amplog",
+			"text.amplog variable.invariants.amplog",
+			"text.amplog rulename.invariants.amplog",
+		],
+			"settings": { "foreground": "#ff6060", "fontStyle": "" }
+		},
+		{	"scope": [
+			"text.amplog keyword.invariants.amplog", 
+			"text.amplog rulename.invariants.amplog", 
+			],
+			"settings": { "foreground": "#ff0000", "fontStyle": "underline" }
+		},
+		{	"scope": "text.amplog rulename.invariants.amplog",
+			"settings": { "foreground": "#ffc000", "fontStyle": "bold" }
+		},
+
+		{	"scope": "error.amplog",
+			"settings": { "foreground": "#E00000", "fontStyle": "bold underline" }
+		},
+
 		{	"scope": "source.ampersand invalid.illegal",
 			"settings": { "foreground": "#E00000", "fontStyle": "bold underline" }
 		},
@@ -19,10 +137,13 @@
 		{	"scope": "source.ampersand comment.block",
 			"settings": { "foreground": "#808080" }
 		},
-		{	"scope": [ "source.ampersand comment.line.double-dash.sectionheader"
-						, "source.ampersand comment.line.double-dash.keyword.snippet"
-						],
+		{	"scope":[ "source.ampersand comment.line.double-dash.sectionheader"
+ 					, "source.ampersand comment.line.double-dash.keyword.snippet"
+					],
 			"settings": { "foreground": "#f0d0b0", "fontStyle": "bold italic underline" }
+		},
+		{	"scope": "source.ampersand comment.line.double-dash.subsectionheader",
+			"settings": { "foreground": "#4050b0", "fontStyle": "bold italic underline" }
 		},
 		{	"scope": "source.ampersand markup.other.preprocessor.keyword.ampersand",
 			"settings": { "foreground": "#f0d0b0", "fontStyle": "bold italic" }
@@ -64,11 +185,15 @@
 		{  "scope": "source.ampersand keyword.operator.violation.txt.arguments",
 			"settings": { "foreground": "#60A000", "fontStyle": "" }
 		},
-		{  "scope": "source.ampersand keyword.operator.violation.txt.wellknown-function",
+		{  "scope": [ "source.ampersand keyword.operator.violation.txt.wellknown-function"
+			         , "source.ampersand wellknown.templatename.box.header.ampersand"
+						],
 			"settings": { "foreground": "#60A000", "fontStyle": "bold" }
 		},
-		{  "scope": "source.ampersand keyword.operator.violation.txt.unknown-function",
-			"settings": { "foreground": "#60A000", "fontStyle": "bold italic underline" }
+		{  "scope": [ "source.ampersand keyword.operator.violation.txt.unknown-function"
+						, "source.ampersand unknown.templatename.box.header.ampersand"
+						],
+			"settings": { "foreground": "#70C000", "fontStyle": "bold italic underline" }
 		},
 		{  "scope": "source.ampersand keyword.operator.violation.txt.arguments.reserved",
 			"settings": { "foreground": "#60A000", "fontStyle": "bold" }

@@ -2,11 +2,21 @@ CONTEXT "BurgerAuthenticatie" IN DUTCH
 {- dit is een 
 blokcomment -}
 
+INTERFACE "Piet": I[Aap] cRud BOX <TABLE noheader >
+[ "label": test cRud
+]
+
 PURPOSE CONTEXT "BurgerAuthenticatie" {+ dit is een **this stuff sits** `at` thi
 blokcomment +}
 PURPOSE RULE "asdfasd" 
 {+asdfasdf+}
 dit is een te
+
+ROLE XXX MAINTAINS "aap", "noot", "mies", "wim" zus 
+
+INTERFACE Aap: I[A] cRud BOX <FORM wim aap="noot">
+[ noot: noot
+]
 
 PURPOSE RULE "BurgerAuthenticatie"
 {+  **this stuff sits** `at` this stuff sits at https://github.com/AmpersandTarski/Ampersand-Language-Support (did you know that)?

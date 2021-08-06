@@ -6,6 +6,43 @@
     It is in the file `package.json` 
 -->
 
+## [0.4.3] - 2021-08-06
+
+- Add devcontainer for ease of use for maintainers of this extention.
+- Syntax highlighting checks for correct keywords/parameters in well-known BOX-templates
+
+## [0.4.2] - 2021-03-03
+
+- attempt to reduce distraction by 'lastAccess'-transactions in logfiles.
+- attempt to emphasize relations to which content is added.
+- Snippet support for BOX <TEMPLATE> constructs (so you know what the most commonly used templates are)
+- Snippet supports keywords for all standard templates
+- support for 'setprop' and 'clrprop' attributes in the `<PROPBUTTON>` template.
+
+## [0.4.1] - 2021-02-02
+
+- Added coloring for ERRORs and CRITICALs in .amplog files.
+
+## [0.4.0] - 2021-01-26
+
+- Added syntax coloring for ampersand log files (with extension `.amplog`)
+- Modified Ampersand theme to include colors for ampersand log files.
+
+## [0.3.13] - 2021-01-18
+
+- Snippets update: shortened rule names for EQUIVALENCEs.
+- minor bug fix in BOX headers
+
+## [0.3.12] - 2020-09-18
+
+- added snippet for REPRESENT statmemnt
+- updated Ampersand color theme to support `--$` comment coloring (subsections)
+- deprecated ROWS, COLS, TABS, PANELS (superseded by new `BOX` syntax with templates `FORM`, `TABLE`, `TABS`)
+  For now, some old syntaxes are still recognized and colored (that will change in future)
+## [0.3.12] - 2020-07-20
+
+- fixes [#52](https://github.com/AmpersandTarski/Ampersand-Language-Support/issues/52) - syntax coloring for BOX <TEMPLATE {key[=value]}*>
+
 ## [0.3.11] - 2020-04-19
 
 - fixes #48 - syntax coloring for `PURPOSE VIEW` and `PURPOSE IDENT`
