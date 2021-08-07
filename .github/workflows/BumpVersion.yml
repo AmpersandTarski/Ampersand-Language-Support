@@ -21,6 +21,10 @@ jobs:
         uses: 'actions/setup-node@v1'
         with:
           node-version: 12
+      - name: 'update git'
+        run: |
+           git remote update
+           git fetch
       - name: 'Automated Version Bump'
         id: version-bump
         uses: 'phips28/gh-action-bump-version@master'
@@ -29,7 +33,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag-prefix: 'v'
-          target-branch: 'development'
+          target-branch: 'master'
           minor-wording:  'add,Adds,new'
           major-wording:  'MAJOR,cut-major'
           patch-wording:  'patch,fixes' 
