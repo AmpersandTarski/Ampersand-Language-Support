@@ -1,7 +1,7 @@
 {
 	"name": "language-ampersand",
 	"displayName": "Ampersand (ADL) language support",
-	"version": "0.4.5",
+	"version": "0.4.6",
 	"publisher": "AmpersandTarski",
 	"description": "Language support for Ampersand scripts",
 	"categories": [
@@ -55,15 +55,22 @@
 					"ADL",
 					"Ampersand Definition Language"
 				],
-				"extensions": [ ".adl", ".ifc", ".pop", ".docadl" ],
+				"extensions": [
+					".adl",
+					".ifc",
+					".pop",
+					".docadl"
+				],
 				"configuration": "./ampersand-configuration.json"
-		  	},
+			},
 			{
 				"id": "amplog",
 				"aliases": [
 					"amplog"
 				],
-				"extensions": [ ".amplog" ],
+				"extensions": [
+					".amplog"
+				],
 				"configuration": "./amplog-configuration.json"
 			}
 		],
@@ -138,7 +145,6 @@
 		"package": "vsce package",
 		"publish": "vsce publish"
 	},
-	"dependencies": {},
 	"devDependencies": {
 		"@types/chai": "^4.2.11",
 		"@types/mocha": "^7.0.2",
@@ -149,10 +155,5 @@
 		"ts-node": "^8.8.2",
 		"typescript": "^3.8.3",
 		"vscode": "^1.1.36"
-	},
-	"__metadata": {
-		"id": "e189bda7-80e7-483e-92ac-aa5e8946b228",
-		"publisherId": "8bc6e032-563e-47c6-bab1-130ea4d6d8d7",
-		"publisherDisplayName": "AmpersandTarski"
 	}
 }
