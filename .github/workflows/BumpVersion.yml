@@ -33,7 +33,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag-prefix: 'v'
-          target-branch: 'development'
+          target-branch: 'master'
           minor-wording:  'add,Adds,new'
           major-wording:  'MAJOR,cut-major'
           patch-wording:  'patch,fixes' 
