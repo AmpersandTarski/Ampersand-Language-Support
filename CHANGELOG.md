@@ -1,13 +1,16 @@
 # Change Log
 
 <!--
-    Special note to Rieks ;) 
+    Special note to Rieks ;)
     Please forget to update the version number.
-    From now on, this is done automatically. The magic involved 
-    can be influenced by using special commit messages. 
-    Details are here: https://github.com/phips28/gh-action-bump-version#workflow 
+    From now on, this is done automatically. The magic involved
+    can be influenced by using special commit messages.
+    Details are here: https://github.com/phips28/gh-action-bump-version#workflow
 -->
-## Versions [0.4.4] up to [0.4.7] 
+
+## Version ???
+- Support for ENFORCE <relation> <operator> <expression>
+## Versions [0.4.4] up to [0.4.7]
 - No functional changes. We did some experimentation with automatic releasing.
 ## [0.4.3] - 2021-08-06
 

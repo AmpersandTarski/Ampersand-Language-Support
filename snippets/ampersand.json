@@ -19,7 +19,7 @@
 	"INCLUDE statements": {
 		"prefix": "INCLUDE",
 		"description": "INCLUDE with preprocessor variables",
-		"body":[ 
+		"body":[
 			"INCLUDE \"${path/file.ext}\" --# [ \"${1:variable}\", \"${2:variable}\" ]",
 			"$0"
 		]
@@ -30,7 +30,7 @@
 		"comment": "this snippet ensures that you do not forget the corresponding 'ENDCONTEXT' statement",
 		"body":[
 			"CONTEXT \"${1:name}\"",
-			"$0",	
+			"$0",
 			"ENDCONTEXT"
 		]
 	},
@@ -134,7 +134,7 @@
 		"body":[
 			"-- The function `NewStruct` is deprecated. Please use `InsAtom` instead.",
 			"InsAtom;${1:concept}\"",
-			"          ,TXT \"{EX} $0\"" 
+			"          ,TXT \"{EX} $0\""
 		]
 	},
 	"InsAtom": {
@@ -196,6 +196,13 @@
 			"ROLE ExecEngine MAINTAINS \"Compute $1Plus\"",
 			"RULE \"Compute $1Plus\": $1[$2] = $1Copy[$2]",
 			"VIOLATION (TXT \"{EX} TransitiveClosure;$1;$2;$1Copy;$1Plus\")"
+		]
+	},
+	"ENFORCE": {
+		"prefix": "ENFORCE",
+		"description": "ENFORCE: relation operator expression ",
+		"body": [
+			"ENFORCE ${1:Relname} ${2|:= ,:< ,>: }"
 		]
 	},
 	"Equivalence rule": {
@@ -261,7 +268,7 @@
 		"prefix": "BOX <BOXTYPE>",
 		"description": "e.g. FORM/TABLE/TABS/RAW etc.",
 		"body":[
-			"BOX <${1|RAW,FORM,TABLE,TABS,PROPBUTTON,OBJECTDROPDOWN,VALUEDROPDOWN|}>", 
+			"BOX <${1|RAW,FORM,TABLE,TABS,PROPBUTTON,OBJECTDROPDOWN,VALUEDROPDOWN|}>",
 			"   [ $0",
 			"   ]"
 		]
@@ -301,7 +308,7 @@
 		"description": "propbutton arguments",
 		"body":[
 			"<PROPBUTTON>",
-			"   [ label: TXT \"${1:buttontext}\"", 
+			"   [ label: TXT \"${1:buttontext}\"",
 			"   , property: ${2:[prop]-relation} cRUd",
 			"   , setprop1: ${2:[prop]-relation} cRUd",
 			"   , clrprop1: ${2:[prop]-relation} cRUd",
@@ -317,7 +324,7 @@
 		"description": "propbutton arguments",
 		"body":[
 			"BOX <PROPBUTTON>",
-			"   [ label: TXT \"${1:buttontext}\"", 
+			"   [ label: TXT \"${1:buttontext}\"",
 			"$0   , label1: TXT \"+label1\"",
 			"   , label2: TXT \"+label2\"",
 			"   , label3: TXT \"+label3\"",
@@ -342,7 +349,7 @@
 		"description": "propbutton arguments",
 		"body":[
 			"BOX <PROPBUTTON>",
-			"   [ label: TXT \"${1:buttontext}\"", 
+			"   [ label: TXT \"${1:buttontext}\"",
 			"   , label1: TXT \"${2:buttontext}\" -- label text = label+label1",
 			"   , label2: TXT \"${3:buttontext}\" -- label text = label+label1+label2",
 			"   , label3: TXT \"${4:buttontext}\" -- label text = label+label1+label2+label3",

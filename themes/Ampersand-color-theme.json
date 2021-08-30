@@ -62,7 +62,7 @@
 		},
 
 		{	"scope": [
-           		"text.amplog rulefixing.execengine.amplog", 
+           		"text.amplog rulefixing.execengine.amplog",
            		"text.amplog fixing.rulefixing.execengine.amplog",
            		"text.amplog rulename.rulefixing.execengine.amplog",
 			],
@@ -103,7 +103,7 @@
 		},
 
 		{	"scope": [
-			"text.amplog checking.invariants.amplog", 
+			"text.amplog checking.invariants.amplog",
 			"text.amplog violation.invariants.amplog",
 			"text.amplog keyword.invariants.amplog",
 			"text.amplog punctuation.invariants.amplog",
@@ -113,8 +113,8 @@
 			"settings": { "foreground": "#ff6060", "fontStyle": "" }
 		},
 		{	"scope": [
-			"text.amplog keyword.invariants.amplog", 
-			"text.amplog rulename.invariants.amplog", 
+			"text.amplog keyword.invariants.amplog",
+			"text.amplog rulename.invariants.amplog",
 			],
 			"settings": { "foreground": "#ff0000", "fontStyle": "underline" }
 		},
@@ -132,8 +132,8 @@
 		{	"scope": "source.ampersand invalid.deprecated",
 			"settings": { "foreground": "#E05070", "fontStyle": "italic underline" }
 		},
-		
-		
+
+
 		{	"scope": "source.ampersand comment.block",
 			"settings": { "foreground": "#808080" }
 		},
@@ -157,14 +157,14 @@
 		{  "scope": "source.ampersand comment.block.endcontext",
 			"settings": { "foreground": "#546E7A" }
 		},
-		
+
 		{	"scope": "source.ampersand statement",
 			"settings": { "foreground": "#c0a040" }
 		},
 		{	"scope": "source.ampersand meta.boxitem.crud",
 			"settings": { "foreground": "#c0a040", "fontStyle": "bold" }
 		},
-		
+
 		{	"scope": "source.ampersand keyword",
 			"settings": { "foreground": "#FFC080F0", "fontStyle": "bold" }
 		},
@@ -197,12 +197,12 @@
 		},
 		{  "scope": "source.ampersand keyword.operator.violation.txt.arguments.reserved",
 			"settings": { "foreground": "#60A000", "fontStyle": "bold" }
-		},	
-		
+		},
+
 		{	"scope": "source.ampersand punctuation",
 			"settings": { "foreground": "#E0C080" }
 		},
-		
+
 		{	"scope": "source.ampersand definition",
 			"settings": { "foreground": "#80A060", "fontStyle": "bold underline" }
 		},
@@ -213,7 +213,7 @@
 			],
 			"settings": { "foreground": "#40A060"}
 		},
-			
+
 		{	"scope": "source.ampersand use",
 			"settings": { "foreground": "#80A060"}
 		},
@@ -237,14 +237,14 @@
 						],
 			"settings": { "foreground": "#FFC080F0", "fontStyle": "" }
 		},
-		
+
 
 		{  "scope": [
 				"source.ampersand string.quoted",
 				"source.ampersand meta.box.body.label.text"
 			],
 			"settings": { "foreground": "#C0c040" }
-		},            
+		},
 		{  "scope": "source.ampersand markup.other.highlight.ampersand",
 			"settings": { "foreground": "#ffc000" }
 		},
@@ -254,7 +254,7 @@
 		{  "scope": "source.ampersand markup.other.filename.ampersand",
 			"settings": { "foreground": "#4080ff", "fontStyle": "underline" }
 		},
-		
+
 
 		{
 			"name": "Comment",
