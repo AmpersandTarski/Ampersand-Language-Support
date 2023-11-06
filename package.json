@@ -1,7 +1,7 @@
 {
 	"name": "language-ampersand",
 	"displayName": "Ampersand (ADL) language support",
-	"version": "0.4.9",
+	"version": "0.4.10",
 	"publisher": "AmpersandTarski",
 	"description": "Language support for Ampersand scripts",
 	"categories": [
