@@ -8,10 +8,18 @@
     Details are here: https://github.com/phips28/gh-action-bump-version#workflow
 -->
 
-## Version ???
-- Support for ENFORCE <relation> <operator> <expression>
-## Versions [0.4.4] up to [0.4.7]
+## Versions [0.4.9] up to [0.4.?]
+
 - No functional changes. We did some experimentation with automatic releasing.
+
+## Version [0.4.8]
+
+- Support for ENFORCE <relation> <operator> <expression>
+
+## Versions [0.4.4] up to [0.4.7]
+
+- No functional changes. We did some experimentation with automatic releasing.
+
 ## [0.4.3] - 2021-08-06
 
 - Add devcontainer for ease of use for maintainers of this extention.
@@ -45,9 +53,10 @@
 - updated Ampersand color theme to support `--$` comment coloring (subsections)
 - deprecated ROWS, COLS, TABS, PANELS (superseded by new `BOX` syntax with templates `FORM`, `TABLE`, `TABS`)
   For now, some old syntaxes are still recognized and colored (that will change in future)
+
 ## [0.3.12] - 2020-07-20
 
-- fixes [#52](https://github.com/AmpersandTarski/Ampersand-Language-Support/issues/52) - syntax coloring for BOX <TEMPLATE {key[=value]}*>
+- fixes [#52](https://github.com/AmpersandTarski/Ampersand-Language-Support/issues/52) - syntax coloring for BOX <TEMPLATE {key[=value]}\*>
 
 ## [0.3.11] - 2020-04-19
 
