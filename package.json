@@ -44,6 +44,7 @@
 	"bugs": {
 		"url": "https://github.com/AmpersandTarski/Ampersand-Language-Support/issues"
 	},
+	"browser": "./out/src/extension.js",
 	"main": "./out/src/extension.js",
 	"contributes": {
 		"languages": [
