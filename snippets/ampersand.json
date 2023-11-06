@@ -200,9 +200,9 @@
 	},
 	"ENFORCE": {
 		"prefix": "ENFORCE",
-		"description": "ENFORCE: relation operator expression ",
+		"description": "ENFORCE: <relation> <operator> <expression> ",
 		"body": [
-			"ENFORCE ${1:Relname} ${2|:= ,:< ,>: }"
+			"ENFORCE ${1:Relname} ${2|:=,:<,>:|} ${3:expression}"
 		]
 	},
 	"Equivalence rule": {
