@@ -23,13 +23,9 @@
 		}
 	],
 	"engines": {
-		"vscode": "^1.25.1"
+		"vscode": "^1.75"
 	},
-	"activationEvents": [
-		"onLanguage:ampersand",
-		"onCommand:extension.checkVersion",
-		"onCommand:extension.startDaemon"
-	],
+	"activationEvents": [],
 	"icon": "images/ampersandLogo.png",
 	"galleryBanner": {
 		"color": "#f6a615",
