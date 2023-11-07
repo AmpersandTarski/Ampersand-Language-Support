@@ -1,7 +1,7 @@
 {
 	"name": "language-ampersand",
 	"displayName": "Ampersand (ADL) language support",
-	"version": "0.4.15",
+	"version": "0.4.16",
 	"publisher": "AmpersandTarski",
 	"description": "Language support for Ampersand scripts",
 	"categories": [
@@ -151,6 +151,6 @@
 		"mochawesome": "^6.1.0",
 		"ts-node": "^8.8.2",
 		"typescript": "^3.8.3",
-		"vscode": "^1.1.36"
+		"@types/vscode": "^1.75.1"
 	}
 }
