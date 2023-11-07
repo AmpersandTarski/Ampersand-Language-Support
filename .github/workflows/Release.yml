@@ -1,8 +1,5 @@
 on:
-  workflow_run:
-    workflows: ["BumpVersion","CI"]
-    types: 
-      - completed
+  workflow_call:
       
 name: Deploy Extension
 jobs:
