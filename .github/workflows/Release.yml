@@ -7,9 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npm install
-      - uses: lannonbr/vsce-action@master
-        with:
-          args: "publish -p $VSCE_TOKEN"
+      - run: |
+          npm install
+          npm install -g @vscode/vsce
+          vsce publish minor -p $VSCE_TOKEN
         env:
           VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
