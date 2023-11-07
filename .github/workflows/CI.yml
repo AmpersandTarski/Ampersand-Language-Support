@@ -4,7 +4,6 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  pull_request:
   push:
     branches:
       - "**" # Only trigger on branches (i.e. not tags, ..)
