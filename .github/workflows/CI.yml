@@ -1,19 +1,12 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
-# Controls when the workflow will run
 on:
   push:
     branches:
-      - "**" # Only trigger on branches (i.e. not tags, ..)
-
-  # Allows you to run this workflow manually from the Actions tab
+      - "**" 
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
     name: Build on ubuntu-latest 🏗 🧪
     runs-on: ubuntu-latest
@@ -28,3 +21,15 @@ jobs:
           npm install
           npm install -g mocha
           npm run vscode:prepublish
+
+  BumpVersion:
+    name: Bump version
+    if: github.ref == 'refs/heads/master'
+    needs: build
+    uses:  ./.github/workflows/BumpVersion.yml
+
+  deploy:
+    name: Deploy Extension 🥧
+    if: github.ref == 'refs/heads/master'
+    needs: BumpVersion
+    uses: ./.github/workflows/Release.yml
