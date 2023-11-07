@@ -28,3 +28,10 @@ jobs:
     # if: github.ref == 'refs/heads/master'
     uses: ./.github/workflows/Release.yml
     secrets: inherit
+
+  BumpVersion:
+    name: Bump version
+    needs: deploy
+    # if: github.ref == 'refs/heads/master'
+    uses: ./.github/workflows/BumpVersion.yml
+    secrets: inherit
