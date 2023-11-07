@@ -23,7 +23,7 @@
 		}
 	],
 	"engines": {
-		"vscode": "^1.75"
+		"vscode": "^1.75.1"
 	},
 	"activationEvents": [],
 	"icon": "images/ampersandLogo.png",
