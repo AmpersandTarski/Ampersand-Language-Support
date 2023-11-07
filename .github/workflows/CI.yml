@@ -4,7 +4,6 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  pull_request:
   push:
     branches:
       - "**" # Only trigger on branches (i.e. not tags, ..)
@@ -29,22 +28,3 @@ jobs:
           npm install
           npm install -g mocha
           npm run vscode:prepublish
-#      - 
-#        name: test
-#        run: |
-#          echo "There are no tests defined, therefor, 'npm test' is disabled here."
-
-  deploy:
-    name: Deploy Extension 🥧
-    if: github.ref == 'refs/heads/master'
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - run: npm install
-      - uses: lannonbr/vsce-action@master
-        with:
-          args: "publish -p $VSCE_TOKEN"
-        env:
-          VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
-

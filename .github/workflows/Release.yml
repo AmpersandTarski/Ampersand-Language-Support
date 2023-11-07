@@ -1,7 +1,8 @@
 on:
-  push:
-    branches:
-      - master
+  workflow_run:
+    workflows: ["BumpVersion","CI"]
+    types: 
+      - completed
       
 name: Deploy Extension
 jobs:
