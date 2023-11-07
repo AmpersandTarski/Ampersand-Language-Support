@@ -33,3 +33,4 @@ jobs:
     if: github.ref == 'refs/heads/master'
     needs: BumpVersion
     uses: ./.github/workflows/Release.yml
+    secrets: inherit
