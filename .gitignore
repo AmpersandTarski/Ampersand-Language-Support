@@ -16,3 +16,5 @@ copyLangSupFiles.bat
 ~$*
 Link to VSCode extensions.lnk
 *.ffs_*
+
+/.pnpm-store/
