@@ -17,8 +17,8 @@
 				"DavidAnson.vscode-markdownlint",
 				"ms-vscode-remote.remote-containers",
 				"mhutchie.git-graph",
-				"jacano.vscode-pnpm"
-
+				"jacano.vscode-pnpm",
+				"amodio.tsl-problem-matcher"
 			]
 		}
 	},
