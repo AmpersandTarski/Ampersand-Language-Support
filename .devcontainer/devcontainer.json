@@ -16,7 +16,9 @@
 				"esbenp.prettier-vscode",
 				"DavidAnson.vscode-markdownlint",
 				"ms-vscode-remote.remote-containers",
-				"mhutchie.git-graph"
+				"mhutchie.git-graph",
+				"jacano.vscode-pnpm"
+
 			]
 		}
 	},
