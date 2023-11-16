@@ -32,9 +32,6 @@ jobs:
         name: install mocha
         run: npm install -g mocha
       -
-        name: install typescript
-        run: npm install -g typescript@latest
-      -
         name: prepublish
         run: npm run vscode:prepublish
 
