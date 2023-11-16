@@ -25,9 +25,9 @@ jobs:
         run: |
           cd /home/runner/work/Ampersand-Language-Support/Ampersand-Language-Support/node_modules/@types/vscode
           ls
-      # -
-      #   name: install npm
-      #   run: npm install
+      -
+        name: install npm
+        run: npm install
       -
         name: install mocha
         run: npm install -g mocha

@@ -135,7 +135,6 @@
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run watch",
-		"postinstall": "node ./node_modules/@types/vscode",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"test": "mocha --require ts-node/register --watch-extensions ts \"test\\**\\*.ts\"",
