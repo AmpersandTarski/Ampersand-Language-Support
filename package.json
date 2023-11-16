@@ -134,7 +134,7 @@
 		]
 	},
 	"scripts": {
-		"vscode:prepublish": "tsc -p ./",
+		"vscode:prepublish": "npm run compile",
 		"postinstall": "node ./node_modules/@types/vscode",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
