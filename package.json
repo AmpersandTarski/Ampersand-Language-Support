@@ -137,6 +137,7 @@
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
+		"test": "mocha --require ts-node/register --watch-extensions ts \"test\\**\\*.ts\"",
 		"package": "vsce package",
 		"publish": "vsce publish"
 	},
