@@ -19,7 +19,7 @@ jobs:
         run: npm upgrade
       -
         name: locate
-        run: find /home/runner/work/ -type d -name "install" -print 2>/dev/null
+        run: find /home/runner/work/ -type d -name "Ampersand-Language-Support"
       -
         name: install npm
         run: npm install
