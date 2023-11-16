@@ -149,7 +149,7 @@
 		"chai": "^4.2.0",
 		"mocha": "^10.2.0",
 		"mochawesome": "^6.1.0",
-		"ts-node": "^latest",
+		"ts-node": "latest",
 		"typescript": "^3.8.3",
 		"@types/vscode": "^1.75.1"
 	}
