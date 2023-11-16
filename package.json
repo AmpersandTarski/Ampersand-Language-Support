@@ -142,7 +142,7 @@
 		"publish": "vsce publish"
 	},
 	"dependencies": {
-		"@types/vscode": "1.84.1@ts5.1",
+		"@types/vscode": "ts5.1",
 		"@vscode/test-electron": "latest",
 		"undici-types":"latest",
 		"@types/chai": "^4.2.11",
