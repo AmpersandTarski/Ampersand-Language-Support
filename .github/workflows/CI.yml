@@ -17,9 +17,6 @@ jobs:
       - 
         name: upgrade
         run: npm upgrade
-      - 
-        name: update
-        run: npm update
       -
         name: install npm
         run: npm install

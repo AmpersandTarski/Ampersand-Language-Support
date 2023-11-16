@@ -152,6 +152,6 @@
 		"mochawesome": "^6.1.0",
 		"ts-node": "latest",
 		"typescript": "^3.8.3",
-		"@types/vscode": "^1.75.1"
+		"@types/vscode": "latest"
 	}
 }
