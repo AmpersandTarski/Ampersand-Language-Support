@@ -143,7 +143,7 @@
 	},
 	"dependencies": {
 		"@types/vscode": "latest",
-		"vscode-test": "latest",
+		"@vscode/test-electron": "latest",
 		"undici-types":"latest",
 		"@types/chai": "latest",
 		"@types/mocha": "latest",
