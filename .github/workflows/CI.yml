@@ -21,6 +21,11 @@ jobs:
         name: locate
         run: find /home/runner/work/ -type d -name "Ampersand-Language-Support"
       -
+        name: list
+        run: |
+          cd /home/runner/work/Ampersand-Language-Support/Ampersand-Language-Support
+          ls
+      -
         name: install npm
         run: npm install
       -
