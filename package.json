@@ -145,12 +145,12 @@
 		"@types/vscode": "latest",
 		"vscode-test": "latest",
 		"undici-types":"latest",
-		"@types/chai": "^4.2.11",
-		"@types/mocha": "^7.0.2",
+		"@types/chai": "latest",
+		"@types/mocha": "latest",
 		"@types/node": "latest",
-		"chai": "^4.2.0",
-		"mocha": "^10.2.0",
-		"mochawesome": "^6.1.0",
+		"chai": "latest",
+		"mocha": "latest",
+		"mochawesome": "latest",
 		"ts-node": "latest",
 		"typescript": "latest"
 	}
