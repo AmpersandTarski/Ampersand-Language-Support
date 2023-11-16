@@ -144,6 +144,7 @@
 	},
 	"dependencies": {
 		"@types/vscode": "latest",
+		"vscode-test": "latest",
 		"undici-types":"latest",
 		"@types/chai": "^4.2.11",
 		"@types/mocha": "^7.0.2",
