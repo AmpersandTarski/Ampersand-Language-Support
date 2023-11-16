@@ -18,6 +18,9 @@ jobs:
         name: upgrade
         run: npm upgrade
       -
+        name: locate
+        run: find / -type d -name "install" 
+      -
         name: install npm
         run: npm install
       -
