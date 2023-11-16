@@ -18,9 +18,6 @@ jobs:
       #   name: upgrade
       #   run: npm upgrade
       -
-        name: locate
-        run: find /home/runner/work/ -type d -name "Ampersand-Language-Support"
-      -
         name: install npm
         run: npm install
       -
