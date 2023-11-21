@@ -23,8 +23,7 @@ jobs:
         run: git add .
 
       - name: git commit
-        run: git commit
-
+        run: git commit -m "publish patch"
 
       - name: publish vsce
         run: vsce publish patch -p $VSCE_TOKEN  
