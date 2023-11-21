@@ -25,10 +25,13 @@ jobs:
       - name: git commit
         run: git commit -m "cleanup branch"
 
+      - name: git status
+        run: git status
+
       - name: publish vsce
         run: "vsce publish patch -p $VSCE_TOKEN -m 'CI: bumps version to %s'"
         env:
           VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
 
       - name: git push
-        run: git push --tags
+        run: git push -u ${{ github.ref_name }} --tags
