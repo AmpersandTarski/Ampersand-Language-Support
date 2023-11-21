@@ -23,12 +23,9 @@ jobs:
         run: git add .
 
       - name: publish vsce
-        run: "vsce publish patch -p $VSCE_TOKEN -m 'CI: bumps version to %s' -t %s"
+        run: "vsce publish patch -p $VSCE_TOKEN -m 'CI: bumps version to %s'"
         env:
           VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
-          
-      - name: git tag
-        run: git tag 
 
       - name: git push
         run: git push --set-upstream origin --tags
