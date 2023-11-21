@@ -8,18 +8,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v1
+      - name: npm install
+        run: npm install
 
       - name: install vsce
-        run: npm i -g vsce --no-package-lock
+        run: npm i -g @vscode/vsce
 
-      # - name: set git variables
-      #   run: |
-      #     git config user.name "$(git log -n 1 --pretty=format:%an)"
-      #     git config user.email "$(git log -n 1 --pretty=format:%ae)"
+      - name: set git variables
+        run: |
+          git config user.name "$(git log -n 1 --pretty=format:%an)"
+          git config user.email "$(git log -n 1 --pretty=format:%ae)"
 
-      # - name: git add
-      #   run: git add .
+      - name: git add
+        run: git add .
 
       - name: publish vsce
         run: "vsce publish patch -p $VSCE_TOKEN -m 'CI: bumps version to %s'"
