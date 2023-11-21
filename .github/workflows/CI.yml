@@ -17,9 +17,6 @@ jobs:
       -
         name: install npm
         run: npm install
-      # -
-      #   name: install mocha
-      #   run: npm install -g mocha
       -
         name: prepublish
         run: npm run vscode:prepublish
@@ -29,11 +26,4 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/master'
     uses: ./.github/workflows/Release.yml
-    secrets: inherit
-
-  BumpVersion:
-    name: Bump version
-    needs: deploy
-    if: github.ref == 'refs/heads/master'
-    uses: ./.github/workflows/BumpVersion.yml
     secrets: inherit

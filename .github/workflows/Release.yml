@@ -7,9 +7,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: npm install
-      - uses: lannonbr/vsce-action@3.0.0
-        with:
-          args: "publish patch -p $VSCE_TOKEN"
+
+      - name: install npm
+        run: npm install
+
+      - name: install vsce
+        run: npm i -g @vscode/vsce
+
+      - name: set git variables
+        run: |
+          git config user.name "$(git log -n 1 --pretty=format:%an)"
+          git config user.email "$(git log -n 1 --pretty=format:%ae)"
+
+      - name: git add
+        run: git add .
+
+      - name: publish vsce
+        run: "vsce publish patch -p $VSCE_TOKEN -m 'CI: bumps version to %s'"
         env:
           VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
+
+      - name: git push
+        run: git push --set-upstream origin
