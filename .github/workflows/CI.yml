@@ -17,9 +17,6 @@ jobs:
       -
         name: install npm
         run: npm install
-      # -
-      #   name: install mocha
-      #   run: npm install -g mocha
       -
         name: prepublish
         run: npm run vscode:prepublish
@@ -27,7 +24,7 @@ jobs:
   deploy:
     name: Deploy Extension 🥧
     needs: build
-    if: github.ref == 'refs/heads/master'
+    # if: github.ref == 'refs/heads/master'
     uses: ./.github/workflows/Release.yml
     secrets: inherit
 

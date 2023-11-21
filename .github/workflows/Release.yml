@@ -7,9 +7,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: npm install
-      - uses: lannonbr/vsce-action@3.0.0
-        with:
-          args: "publish patch -p $VSCE_TOKEN"
+
+      - name: install npm
+        run: npm install
+
+      - name: install vsce
+        run: npm i -g @vscode/vsce
+
+      - name: publish vsce
+        run: vsce publish patch -p $VSCE_TOKEN  
         env:
           VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
+          
+      # - uses: lannonbr/vsce-action@3.0.0
+      #   with:
+      #     args: "publish patch -p $VSCE_TOKEN"
+      #   env:
+      #     VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
