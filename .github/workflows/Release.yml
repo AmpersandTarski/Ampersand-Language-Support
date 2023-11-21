@@ -12,7 +12,7 @@ jobs:
         run: npm install
 
       - name: install vsce
-        run: npm i -g @vscode/vsce
+        run: npm i @vscode/vsce
 
       - name: set git variables
         run: |
@@ -22,9 +22,6 @@ jobs:
       - name: git add
         run: git add .
 
-      - name: git push
-        run: git push
-        
       - name: publish vsce
         run: "vsce publish patch -p $VSCE_TOKEN -m 'CI: bumps version to %s'"
         env:
