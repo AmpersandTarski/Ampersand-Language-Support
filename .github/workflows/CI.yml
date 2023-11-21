@@ -14,15 +14,12 @@ jobs:
       - 
         name: Checkout project contents 📡
         uses: actions/checkout@v3
-      - 
-        name: upgrade
-        run: npm upgrade
       -
         name: install npm
         run: npm install
-      -
-        name: install mocha
-        run: npm install -g mocha
+      # -
+      #   name: install mocha
+      #   run: npm install -g mocha
       -
         name: prepublish
         run: npm run vscode:prepublish
