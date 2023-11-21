@@ -34,4 +34,4 @@ jobs:
           VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
 
       - name: git push
-        run: git push -u ${{ github.ref_name }} --tags
+        run: git push origin -u ${{ github.ref_name }} --tags
