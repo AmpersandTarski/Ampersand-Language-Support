@@ -23,7 +23,7 @@ jobs:
         run: git add .
 
       - name: publish vsce
-        run: vsce publish patch -p $VSCE_TOKEN  
+        run: "vsce publish patch -p $VSCE_TOKEN -m 'CI: bumps version to %s'"
         env:
           VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
 
