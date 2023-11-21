@@ -137,20 +137,13 @@
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
-		"test": "mocha --require ts-node/register --watch-extensions ts \"test\\**\\*.ts\"",
 		"package": "vsce package",
 		"publish": "vsce publish"
 	},
 	"dependencies": {
 		"@types/vscode": "ts5.1",
 		"@vscode/test-electron": "latest",
-		"undici-types":"latest",
-		"@types/chai": "^4.2.11",
-		"@types/mocha": "^10.0.4",
-		"@types/node": "latest",
-		"chai": "^4.2.0",
-		"mocha": "^10.2.0",
-		"mochawesome": "^6.1.0",
+		"@types/node": "ts5.1",
 		"ts-node": "latest",
 		"typescript": "5.1.6"
 	}
