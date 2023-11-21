@@ -21,11 +21,16 @@ jobs:
 
       - name: git add
         run: git add .
+      - name: git tag
+        run: npm config set sign-git-tag true
 
       - name: publish vsce
         run: "vsce publish patch -p $VSCE_TOKEN -m 'CI: bumps version to %s'"
         env:
           VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
+          
+      - name: git tag
+        run: git tag 
 
       - name: git push
-        run: git push --set-upstream origin
+        run: git push --set-upstream origin --tags
