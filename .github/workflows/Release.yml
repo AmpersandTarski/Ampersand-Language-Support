@@ -8,8 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: install npm
-        run: npm install
+      - uses: actions/setup-node@v4
 
       - name: install vsce
         run: npm i -g @vscode/vsce --no-package-lock
@@ -21,8 +20,7 @@ jobs:
 
       # - name: git add
       #   run: git add .
-      - uses: actions/checkout@v3
-      
+
       - name: publish vsce
         run: "vsce publish patch -p $VSCE_TOKEN -m 'CI: bumps version to %s'"
         env:
