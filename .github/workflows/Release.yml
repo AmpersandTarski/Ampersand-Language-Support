@@ -21,7 +21,8 @@ jobs:
 
       # - name: git add
       #   run: git add .
-
+      - uses: actions/checkout@v3
+      
       - name: publish vsce
         run: "vsce publish patch -p $VSCE_TOKEN -m 'CI: bumps version to %s'"
         env:
