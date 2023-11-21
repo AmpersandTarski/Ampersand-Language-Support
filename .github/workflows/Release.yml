@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: install npm
+      - name: npm install
         run: npm install
 
       - name: install vsce
@@ -28,4 +28,4 @@ jobs:
           VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
 
       - name: git push
-        run: git push --set-upstream origin
+        run: git push origin -u ${{ github.ref_name }} --tags
