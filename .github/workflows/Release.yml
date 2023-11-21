@@ -12,7 +12,7 @@ jobs:
         run: npm install
 
       - name: install vsce
-        run: npm i @vscode/vsce
+        run: npm i -g @vscode/vsce --no-package-lock
 
       - name: set git variables
         run: |
