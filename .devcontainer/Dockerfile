@@ -9,8 +9,6 @@ RUN chmod +x /usr/local/bin/ampersand
 
 RUN npm install --global @vscode/vsce
 RUN npm install --global typescript
-RUN vsce package 0.4.0
-RUN code --install-extension language-ampersand-0.4.0.vsix
 
 # Set `DEVCONTAINER` environment variable to help with orientation
 ENV DEVCONTAINER=true
