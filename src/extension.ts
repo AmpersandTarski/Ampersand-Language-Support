@@ -186,7 +186,7 @@ export function activate(context: vscode.ExtensionContext) {
         return watchOutput(vscode.workspace.rootPath, file);
     });
 
-    add('extension.checkVersion', () => {
+    let dispose = vscode.commands.registerCommand("extension.newCheckVersion",() => {
         if (!vscode.workspace.rootPath) {
             vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.")
             return null;
@@ -195,7 +195,7 @@ export function activate(context: vscode.ExtensionContext) {
         let versionString : string = getVersion();
         vscode.window.setStatusBarMessage("your current ampersand version is: " + versionString,10000);
     });
-
+    context.subscriptions.push(dispose);
 }
 
 function getVersion() : string {
