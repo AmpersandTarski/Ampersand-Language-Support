@@ -8,7 +8,7 @@ COPY --from=ampersandtarski/ampersand:v4.7 /bin/ampersand /usr/local/bin
 RUN chmod +x /usr/local/bin/ampersand
 
 RUN npm install --global @vscode/vsce
-RUN npm install -D typescript
+RUN npm install --global typescript
 RUN vsce package 0.4.0
 RUN code --install-extension language-ampersand-0.4.0.vsix
 
