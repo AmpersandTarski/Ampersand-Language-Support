@@ -195,7 +195,35 @@ export function activate(context: vscode.ExtensionContext) {
         let versionString : string = getVersion();
         vscode.window.setStatusBarMessage("your current ampersand version is: " + versionString,10000);
     });
+
+    let disposeGenerateFunctionalSpec = vscode.commands.registerCommand("extension.generateFunctionalSpec",()=>{
+        if (!vscode.workspace.rootPath) {
+            vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.")
+            return null;
+        }
+
+        let runAmpersandCommand : string = "ampersand";
+        let runAmpersandArgs : string[] = 
+        [
+            "documentation",
+            "script.adl",
+            "--format docx",
+            "--no-graphics",
+            "--language=NL",
+            "--ConceptualAnalysis",
+            "--verbosity debug"
+        ];
+
+        let opts : vscode.TerminalOptions =
+                {shellPath: runAmpersandCommand, shellArgs: runAmpersandArgs};
+        opts.name = "ampersand generate spec";
+     //   opts.shellArgs.push("--outputfile=" + file);
+        oldTerminal = vscode.window.createTerminal(opts);
+        oldTerminal.show();
+    });
+
     context.subscriptions.push(dispose);
+    context.subscriptions.push(disposeGenerateFunctionalSpec);
 }
 
 function getVersion() : string {
