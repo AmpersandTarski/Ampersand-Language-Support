@@ -156,7 +156,7 @@ export function activate(context: vscode.ExtensionContext) {
     let disposeCheckVersion = vscode.commands.registerCommand("extension.checkVersion",()=>checkVersionCommand());
     context.subscriptions.push(disposeCheckVersion);
 
-    let disposeGenerateFunctionalSpec = vscode.commands.registerCommand("extension.generateFunctionalSpec",() => GenerateFunctionalSpecCommand);
+    let disposeGenerateFunctionalSpec = vscode.commands.registerCommand("extension.generateFunctionalSpec",() => GenerateFunctionalSpecCommand());
     context.subscriptions.push(disposeGenerateFunctionalSpec);
 }
 
