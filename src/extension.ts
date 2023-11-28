@@ -151,82 +151,92 @@ export function activate(context: vscode.ExtensionContext) {
         context.subscriptions.push(dispose);
     }
 
-    add('extension.startDaemon', () => {
-        if (!vscode.workspace.rootPath) {
-            vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.")
-            return null;
-        }
-        // hashing the rootPath ensures we create a finite number of temp files
-        var hash = crypto.createHash('sha256').update(vscode.workspace.rootPath).digest('hex').substring(0, 20);
-        let file = path.join(os.tmpdir(), "ampersandDaemon-" + hash + ".txt");
-        context.subscriptions.push({dispose: () => {try {fs.unlinkSync(file);} catch (e) {};}});
-        fs.writeFileSync(file, "");
-        let versionString : string = getVersion();
-        let runAmpersandCommand : string = "ampersand";
-        var runAmpersandArgs : string = "";
-        let version : string = versionString.substr(10,3) 
-        if (version === "v4.") {
-          runAmpersandArgs = "daemon"
-        } else if (version === "v3.") {
-          runAmpersandArgs = "--daemon"
-        } else {
-       		vscode.window.showErrorMessage
-		        ('The version of ampersand you have installed, is not supported: '+versionString)
+    add('extension.startDaemon', () => runDaemonCommand(context, oldTerminal));
 
-        }
-        
-        let opts : vscode.TerminalOptions =
-            os.type().startsWith("Windows") ?
-                {shellPath: "cmd.exe", shellArgs: ["/k", runAmpersandCommand , runAmpersandArgs]} :
-                {shellPath: runAmpersandCommand, shellArgs: [runAmpersandArgs]};
-        opts.name = "ampersand daemon";
-     //   opts.shellArgs.push("--outputfile=" + file);
-        oldTerminal = vscode.window.createTerminal(opts);
-        oldTerminal.show();
-        return watchOutput(vscode.workspace.rootPath, file);
-    });
-
-    let disposeCheckVersion = vscode.commands.registerCommand("extension.checkVersion",() => {
-        if (!vscode.workspace.rootPath) {
-            vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.")
-            return null;
-        }
-
-        let versionString : string = getVersion();
-        vscode.window.setStatusBarMessage("your current ampersand version is: " + versionString,10000);
-    });
+    let disposeCheckVersion = vscode.commands.registerCommand("extension.checkVersion",()=>checkVersionCommand());
     context.subscriptions.push(disposeCheckVersion);
 
-    let disposeGenerateFunctionalSpec = vscode.commands.registerCommand("extension.generateFunctionalSpec",()=>{
-        if (vscode.workspace.workspaceFolders === undefined) {
-            vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.")
-            return null;
-        }
-
-        let activeEditorWindow = vscode.window.activeTextEditor;
-
-        if(!activeEditorWindow){
-            vscode.window.showWarningMessage("Make sure you have an active editor window.")
-            return null;
-        }
-
-        let currentActiveFilePath : string = activeEditorWindow.document.uri.fsPath;
-
-        if(!currentActiveFilePath.endsWith(".adl"))
-        {
-            vscode.window.showWarningMessage(`Make sure you have an .adl file open`) 
-            return null;
-        }
-
-        let runAmpersandCommand : string = `ampersand documentation ${currentActiveFilePath} --format docx --no-graphics --language=NL --ConceptualAnalysis --verbosity debug`;
-        let terminalName : string = "ampersand generate spec";
-
-        oldTerminal = vscode.window.createTerminal(terminalName);
-        oldTerminal.sendText(runAmpersandCommand)
-        oldTerminal.show();
-    });
+    let disposeGenerateFunctionalSpec = vscode.commands.registerCommand("extension.generateFunctionalSpec",() => GenerateFunctionalSpecCommand);
     context.subscriptions.push(disposeGenerateFunctionalSpec);
+}
 
+function GenerateFunctionalSpecCommand()
+{
+    if (vscode.workspace.workspaceFolders === undefined) {
+        vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.")
+        return null;
+    }
+
+    let activeEditorWindow = vscode.window.activeTextEditor;
+
+    if(!activeEditorWindow){
+        vscode.window.showWarningMessage("Make sure you have an active editor window.")
+        return null;
+    }
+
+    let currentActiveFilePath : string = activeEditorWindow.document.uri.fsPath;
+
+    if(!currentActiveFilePath.endsWith(".adl"))
+    {
+        vscode.window.showWarningMessage(`Make sure you have an .adl file open`) 
+        return null;
+    }
+
+    RunCommandInNewTerminal("ampersand generate spec",`ampersand documentation ${currentActiveFilePath} --format docx --no-graphics --language=NL --ConceptualAnalysis --verbosity debug`)
+}
+
+function runDaemonCommand(context : vscode.ExtensionContext, oldTerminal : vscode.Terminal | null = null)
+{
+    if (!vscode.workspace.rootPath) {
+        vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.")
+        return null;
+    }
+    // hashing the rootPath ensures we create a finite number of temp files
+    var hash = crypto.createHash('sha256').update(vscode.workspace.rootPath).digest('hex').substring(0, 20);
+    let file = path.join(os.tmpdir(), "ampersandDaemon-" + hash + ".txt");
+    context.subscriptions.push({dispose: () => {try {fs.unlinkSync(file);} catch (e) {};}});
+    fs.writeFileSync(file, "");
+    let versionString : string = getVersion();
+    let runAmpersandCommand : string = "ampersand";
+    var runAmpersandArgs : string = "";
+    let version : string = versionString.substr(10,3) 
+    if (version === "v4.") {
+      runAmpersandArgs = "daemon"
+    } else if (version === "v3.") {
+      runAmpersandArgs = "--daemon"
+    } else {
+           vscode.window.showErrorMessage
+            ('The version of ampersand you have installed, is not supported: '+versionString)
+
+    }
+    
+    let opts : vscode.TerminalOptions =
+        os.type().startsWith("Windows") ?
+            {shellPath: "cmd.exe", shellArgs: ["/k", runAmpersandCommand , runAmpersandArgs]} :
+            {shellPath: runAmpersandCommand, shellArgs: [runAmpersandArgs]};
+    opts.name = "ampersand daemon";
+ //   opts.shellArgs.push("--outputfile=" + file);
+    oldTerminal = vscode.window.createTerminal(opts);
+    oldTerminal.show();
+    return watchOutput(vscode.workspace.rootPath, file);
+}
+
+function checkVersionCommand()
+{
+    if (!vscode.workspace.rootPath) {
+        vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.")
+        return null;
+    }
+
+    let versionString : string = getVersion();
+    vscode.window.setStatusBarMessage("your current ampersand version is: " + versionString,10000);
+}
+
+function RunCommandInNewTerminal(terminalName : string, runAmpersandCommand : string)
+{
+    let terminal = vscode.window.createTerminal(terminalName);
+    terminal.sendText(runAmpersandCommand)
+    terminal.show();
 }
 
 function getVersion() : string {
