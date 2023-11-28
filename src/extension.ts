@@ -48,7 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
     console.info(
 		`[${constants.extension.name}] v${constants.extension.version} activated!`,
 	  );
-      
+
 	AmpersandVersionChecker.checkVersion();
 
     watch(context);
@@ -132,7 +132,7 @@ function runDaemonCommand(context : vscode.ExtensionContext, oldTerminal : vscod
     let file = path.join(os.tmpdir(), "ampersandDaemon-" + hash + ".txt");
     context.subscriptions.push({dispose: () => {try {fs.unlinkSync(file);} catch (e) {};}});
     fs.writeFileSync(file, "");
-    let versionString : string = getVersion();
+    let versionString : string = AmpersandVersionChecker.getVersion();
     let runAmpersandCommand : string = "ampersand";
     var runAmpersandArgs : string = "";
     let version : string = versionString.substr(10,3) 
