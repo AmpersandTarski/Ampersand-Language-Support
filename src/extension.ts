@@ -4,81 +4,10 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as crypto from 'crypto'
+import * as AmpersandParser from './AmpersandParser';
+import * as AmpersandVersionChecker from './AmpersandVersionChecker';
 import { constants } from './constants';
 
-function pair<a,b>(a : a, b : b) : [a,b] {return [a,b];}
-
-export function parseAmpersandOutput(dir : string, s : string) : [vscode.Uri, vscode.Diagnostic][] {
-    // standard lines, dealing with \r\n as well
-    function lines(s : string) : string[] {
-        return s.replace('\r','').split('\n').filter(x => x != "");
-    }
-
-    // After the file location, message bodies are indented (perhaps prefixed by a line number)
-    function isMessageBody(x : string) {
-        if (x.startsWith(" "))
-            return true;
-        let sep = x.indexOf('|');
-        if (sep == -1)
-            return false;
-        return !isNaN(Number(x.substr(0, sep)));
-    }
-
-    // split into separate error messages, which all start at col 0 (no spaces) and are following by message bodies
-    function split(xs : string[]) : string[][] {
-        let cont: any[] = [];
-        let res = [];
-        for (let x of xs) {
-            if (isMessageBody(x))
-                cont.push(x);
-            else {
-                if (cont.length > 0) res.push(cont);
-                cont = [x];
-            }
-        }
-        if (cont.length > 0) res.push(cont);
-        return res;
-    }
-
-    function parse(xs : string[]) : [vscode.Uri, vscode.Diagnostic][] {
-        let cont: any[] = [];  
-        let r1 = /(..[^:]+):([0-9]+):([0-9]+):/
-        let r2 = /(..[^:]+):([0-9]+):([0-9]+)-([0-9]+):/
-        let r3 = /(..[^:]+):\(([0-9]+),([0-9]+)\)-\(([0-9]+),([0-9]+)\):/
-				var m1 : RegExpMatchArray | null;
-				var m : RegExpMatchArray;
-        let f = (l1: number,c1: number,l2: number,c2: number) => {
-            let range = new vscode.Range(parseInt(m[l1])-1,parseInt(m[c1])-1,parseInt(m[l2])-1,parseInt(m[c2]));
-            let file = vscode.Uri.file(path.isAbsolute(m[1]) ? m[1] : path.join(dir, m[1]));
-            var s : string = xs[0].substring(m[0].length).trim();
-            let i = s.indexOf(':');
-            var sev = vscode.DiagnosticSeverity.Error;
-            if (i !== -1) {
-                if (s.substr(0, i).toLowerCase() == 'warning')
-                    sev = vscode.DiagnosticSeverity.Warning;
-                s = s.substr(i+1).trim();
-            }
-            let msg = cont.concat([s],xs.slice(1)).join('\n');
-            return [pair(file, new vscode.Diagnostic(range, msg, sev))];
-        };
-        if (xs[0].startsWith("All good"))
-            return [];
-        if (m1 = xs[0].match(r1)) {
-						m = m1 ;
-						return f(2,3,2,3);
-				} else if (m1 = xs[0].match(r2)) {
-						m = m1;
-						return f(2,3,2,4);
-				} else if (m1 = xs[0].match(r3)) {
-						m = m1;
-						return f(2,3,4,5);
-				} else {
-						return [[vscode.Uri.file("") , new vscode.Diagnostic(new vscode.Range(0,0,0,0), xs.join('\n'))]];
-				};		
-    }
-    let cont: any[] = [];
-    return cont.concat(... split(lines(s)).map(parse));
-	}
 
 function groupDiagnostic(xs : [vscode.Uri, vscode.Diagnostic[]][]) : [vscode.Uri, vscode.Diagnostic[]][] {
     let seen = new Map<string, [number, vscode.Uri, vscode.Diagnostic[]]>();
@@ -91,17 +20,17 @@ function groupDiagnostic(xs : [vscode.Uri, vscode.Diagnostic[]][]) : [vscode.Uri
         else
             seen.set(key, [i, xs[i][0], xs[i][1]]);
     }
-    return Array.from(seen.values()).sort((a,b) => a[0] - b[0]).map(x => pair(x[1],x[2]));
+    return Array.from(seen.values()).sort((a,b) => a[0] - b[0]).map(x => AmpersandParser.pair(x[1],x[2]));
 }
 
 function watchOutput(root : string, file : string) : fs.FSWatcher {
     let d = vscode.languages.createDiagnosticCollection('ampersand');
     let last : [vscode.Uri, vscode.Diagnostic][] = [];
     let go = () => {
-        let next = parseAmpersandOutput(root, fs.readFileSync(file, "utf8"));
-        let next2 = next.map(x => pair(x[0], [x[1]]));
+        let next = AmpersandParser.parseAmpersandOutput(root, fs.readFileSync(file, "utf8"));
+        let next2 = next.map(x => AmpersandParser.pair(x[0], [x[1]]));
         for (let x of last)
-            next2.push(pair(x[0], []));
+            next2.push(AmpersandParser.pair(x[0], []));
         d.set(groupDiagnostic(next2));
         last = next;
     };
@@ -109,8 +38,6 @@ function watchOutput(root : string, file : string) : fs.FSWatcher {
     go();
     return watcher;
 }
-
-
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -121,8 +48,23 @@ export function activate(context: vscode.ExtensionContext) {
     console.info(
 		`[${constants.extension.name}] v${constants.extension.version} activated!`,
 	  );
-	checkVersion();
+      
+	AmpersandVersionChecker.checkVersion();
 
+    watch(context);
+
+    pushDisposable(context, "extension.checkVersion", () => checkVersionCommand())
+    pushDisposable(context, "extension.generateFunctionalSpec", () => GenerateFunctionalSpecCommand())
+}
+
+function pushDisposable(context: vscode.ExtensionContext,extensionName : string, commandFunction: (...args: any[]) => any)
+{
+    let dispose = vscode.commands.registerCommand(extensionName,commandFunction);
+    context.subscriptions.push(dispose);
+}
+// Setup last running watcher, so we can undo it
+function watch(context: vscode.ExtensionContext)
+{
     // Pointer to the last running watcher, so we can undo it
     var oldWatcher : fs.FSWatcher | null = null;
     var oldTerminal : vscode.Terminal | null = null;
@@ -152,12 +94,6 @@ export function activate(context: vscode.ExtensionContext) {
     }
 
     add('extension.startDaemon', () => runDaemonCommand(context, oldTerminal));
-
-    let disposeCheckVersion = vscode.commands.registerCommand("extension.checkVersion",()=>checkVersionCommand());
-    context.subscriptions.push(disposeCheckVersion);
-
-    let disposeGenerateFunctionalSpec = vscode.commands.registerCommand("extension.generateFunctionalSpec",() => GenerateFunctionalSpecCommand());
-    context.subscriptions.push(disposeGenerateFunctionalSpec);
 }
 
 function GenerateFunctionalSpecCommand()
@@ -228,7 +164,7 @@ function checkVersionCommand()
         return null;
     }
 
-    let versionString : string = getVersion();
+    let versionString : string = AmpersandVersionChecker.getVersion();
     vscode.window.setStatusBarMessage("your current ampersand version is: " + versionString,10000);
 }
 
@@ -237,67 +173,4 @@ function RunCommandInNewTerminal(terminalName : string, runAmpersandCommand : st
     let terminal = vscode.window.createTerminal(terminalName);
     terminal.sendText(runAmpersandCommand)
     terminal.show();
-}
-
-function getVersion() : string {
-	const { execSync } = require('child_process');
-  // stderr is sent to stderr of parent process
-  // you can set options.stdio if you want it to go elsewhere
-	let command = `${constants.extension.generatorName} --version`;
-  let version = execSync(command);
-  var string = new TextDecoder("utf-8").decode(version);  
-  return string
-    
-}
-
-
-function checkVersion ()  {
-	
-	// grab the version number from a string that holds the
-	// output of ampersand --version
-	function grabVersion (xs : string) : string | null {
-		
-		
-		let f = (b : string, isModified : boolean) => {
-			if (b == "master" && !isModified) {
-        return ""
-			} else if (isModified) {
-				return " " + b + " (modified)"
-			} else {
-				return " " + b
-			}
-		}
-		let r1 = /Ampersand-(v[0-9]+\.[0-9]+\.[0-9]+) \[(.*)?\]/ ;
-		var m : RegExpMatchArray | null ;
-		var result : string | null = null ;
-		if (m = xs.match(r1)) {
-				let m1 = m ;
-				let r2 = /(.*)?:(.*)?([\*]*)$/ ;
-				var m2 : RegExpMatchArray | null ;
-				if (m2 = m1[2].match(r2)) {
-					result = m1[1] + f(m2[1],(null == m2[2]))
-					}  
-				} else {
-					result = null
-		}
-		return result
-	};
-	const { exec } = require('child_process');
-	let command = `${constants.extension.generatorName} --version`
-	exec(command, (err:string, stdout:string) => {
-	  if (err) {
-		// node couldn't execute the command
-		console.log(`err: ${err}`);
-		vscode.window.showErrorMessage
-		   ('Make sure `ampersand` is in your path if you want to fully leverage this extention. ')
-	  } else {
-			let v = grabVersion(stdout) ;
-			// the *entire* stdout and stderr (buffered)
-		  let message : string = `Your version of ampersand:
-		       ${v}`;
-		  vscode.window.showInformationMessage(message )
-	  };
-	
-	});
-
 }
