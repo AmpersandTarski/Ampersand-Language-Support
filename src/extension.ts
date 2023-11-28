@@ -202,19 +202,19 @@ export function activate(context: vscode.ExtensionContext) {
             return null;
         }
 
-        let runAmpersandCommand : string = "ampersand documentation";
-        let runAmpersandArgs : string[] = 
-        [
-            "script.adl",
-            "--format docx",
-            "--no-graphics",
-            "--language=NL",
-            "--ConceptualAnalysis",
-            "--verbosity debug"
-        ];
+        let runAmpersandCommand : string = "ampersand";
+        let runAmpersandArgs : string = 
+            " documentation"+
+            " script.adl"+
+            " --format docx"+
+            " --no-graphics"+
+            " --language=NL"+
+            " --ConceptualAnalysis"+
+            " --verbosity debug"
+        ;
 
         let opts : vscode.TerminalOptions =
-                {shellPath: runAmpersandCommand, shellArgs: runAmpersandArgs};
+        {shellPath: "cmd.exe", shellArgs: ["/k", runAmpersandCommand , runAmpersandArgs]};
         opts.name = "ampersand generate spec";
      //   opts.shellArgs.push("--outputfile=" + file);
         oldTerminal = vscode.window.createTerminal(opts);
