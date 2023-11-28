@@ -203,15 +203,16 @@ export function activate(context: vscode.ExtensionContext) {
             return null;
         }
 
-        let currentFilePath : string = vscode.workspace.workspaceFolders[0].uri.fsPath;
+        let currentFsPath : string = vscode.workspace.workspaceFolders[0].uri.fsPath;
+        let currentPath : string = vscode.workspace.workspaceFolders[0].uri.path;
 
-        if(!currentFilePath.endsWith(".adl"))
+        if(!currentFsPath.endsWith(".adl"))
         {
-            vscode.window.showWarningMessage("Make sure you have an .adl file open")
+            vscode.window.showWarningMessage(`Make sure you have an .adl file open, fsPath: ${currentFsPath} current path: ${currentPath}`) 
             return null;
         }
 
-        let runAmpersandCommand : string = "ampersand documentation ${currentFilePath} --format docx --no-graphics --language=NL --ConceptualAnalysis --verbosity debug";
+        let runAmpersandCommand : string = `ampersand documentation ${currentFilePath} --format docx --no-graphics --language=NL --ConceptualAnalysis --verbosity debug`;
         let terminalName : string = "ampersand generate spec";
 
         oldTerminal = vscode.window.createTerminal(terminalName);
