@@ -205,7 +205,7 @@ export function activate(context: vscode.ExtensionContext) {
         let runAmpersandCommand : string = "ampersand";
         let runAmpersandArgs : string[] = [
             "documentation",
-            "script.adl",
+            "src/script.adl",
             "--format docx",
             "--no-graphics",
             "--language=NL",
