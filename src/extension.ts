@@ -186,7 +186,7 @@ export function activate(context: vscode.ExtensionContext) {
         return watchOutput(vscode.workspace.rootPath, file);
     });
 
-    let dispose = vscode.commands.registerCommand("extension.newCheckVersion",() => {
+    let disposeCheckVersion = vscode.commands.registerCommand("extension.checkVersion",() => {
         if (!vscode.workspace.rootPath) {
             vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.")
             return null;
@@ -195,23 +195,31 @@ export function activate(context: vscode.ExtensionContext) {
         let versionString : string = getVersion();
         vscode.window.setStatusBarMessage("your current ampersand version is: " + versionString,10000);
     });
+    context.subscriptions.push(disposeCheckVersion);
 
     let disposeGenerateFunctionalSpec = vscode.commands.registerCommand("extension.generateFunctionalSpec",()=>{
-        if (!vscode.workspace.rootPath) {
+        if (vscode.workspace.workspaceFolders === undefined) {
             vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.")
             return null;
         }
 
-        let runAmpersandCommand : string = "ampersand documentation src/script.adl --format docx --no-graphics --language=NL --ConceptualAnalysis --verbosity debug";
-        let terminalName = "ampersand generate spec";
-        
+        let currentFilePath : string = vscode.workspace.workspaceFolders[0].uri.fsPath;
+
+        if(!currentFilePath.endsWith(".adl"))
+        {
+            vscode.window.showWarningMessage("Make sure you have an .adl file open")
+            return null;
+        }
+
+        let runAmpersandCommand : string = "ampersand documentation ${currentFilePath} --format docx --no-graphics --language=NL --ConceptualAnalysis --verbosity debug";
+        let terminalName : string = "ampersand generate spec";
+
         oldTerminal = vscode.window.createTerminal(terminalName);
         oldTerminal.sendText(runAmpersandCommand)
         oldTerminal.show();
     });
-
-    context.subscriptions.push(dispose);
     context.subscriptions.push(disposeGenerateFunctionalSpec);
+
 }
 
 function getVersion() : string {

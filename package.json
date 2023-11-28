@@ -106,10 +106,6 @@
 				"title": "Ampersand: Start checker"
 			},
 			{
-				"command":"extension.newCheckVersion",
-				"title":"Ampersand: new version checker"
-			},
-			{
 				"command":"extension.generateFunctionalSpec",
 				"title":"Ampersand: generate functional spec"
 			}
