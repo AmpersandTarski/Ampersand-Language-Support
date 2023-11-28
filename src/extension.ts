@@ -217,7 +217,9 @@ export function activate(context: vscode.ExtensionContext) {
         {shellPath: runAmpersandCommand, shellArgs: runAmpersandArgs};
         opts.name = "ampersand generate spec";
      //   opts.shellArgs.push("--outputfile=" + file);
-        oldTerminal = vscode.window.createTerminal(opts);
+        oldTerminal = vscode.window.createTerminal("ampersand generate spec","ampersand",[
+            "documentation src/script.adl --format docx --no-graphics --language=NL --ConceptualAnalysis --verbosity debug"
+        ]);
         oldTerminal.show();
     });
 
