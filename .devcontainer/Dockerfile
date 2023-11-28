@@ -1,7 +1,6 @@
 # See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.191.0/containers/typescript-node/.devcontainer/base.Dockerfile
 
 # [Choice] Node.js version: 16, 14, 12
-ARG VARIANT="16-buster"
 FROM ampersandtarski/ampersand:v4.7
 
 COPY --from=ampersandtarski/ampersand:v4.7 /bin/ampersand /usr/local/bin
