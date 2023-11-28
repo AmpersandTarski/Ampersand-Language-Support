@@ -212,7 +212,7 @@ export function activate(context: vscode.ExtensionContext) {
             return null;
         }
 
-        let runAmpersandCommand : string = `ampersand documentation ${currentFilePath} --format docx --no-graphics --language=NL --ConceptualAnalysis --verbosity debug`;
+        let runAmpersandCommand : string = `ampersand documentation ${currentFsPath} --format docx --no-graphics --language=NL --ConceptualAnalysis --verbosity debug`;
         let terminalName : string = "ampersand generate spec";
 
         oldTerminal = vscode.window.createTerminal(terminalName);
