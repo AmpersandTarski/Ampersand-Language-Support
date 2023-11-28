@@ -203,15 +203,15 @@ export function activate(context: vscode.ExtensionContext) {
         }
 
         let runAmpersandCommand : string = "ampersand";
-        let runAmpersandArgs : string = 
-            "documentation"+
-            " script.adl"+
-            " --format docx"+
-            " --no-graphics"+
-            " --language=NL"+
-            " --ConceptualAnalysis"+
-            " --verbosity debug"
-        ;
+        let runAmpersandArgs : string[] = [
+            "documentation",
+            "script.adl",
+            "--format docx",
+            "--no-graphics",
+            "--language=NL",
+            "--ConceptualAnalysis",
+            "--verbosity debug"
+        ];
 
         let opts : vscode.TerminalOptions =
         {shellPath: runAmpersandCommand, shellArgs: runAmpersandArgs};
