@@ -202,10 +202,9 @@ export function activate(context: vscode.ExtensionContext) {
             return null;
         }
 
-        let runAmpersandCommand : string = "ampersand";
+        let runAmpersandCommand : string = "ampersand documentation";
         let runAmpersandArgs : string[] = 
         [
-            "documentation",
             "script.adl",
             "--format docx",
             "--no-graphics",
