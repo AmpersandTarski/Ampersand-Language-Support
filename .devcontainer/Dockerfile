@@ -1,8 +1,10 @@
 # See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.191.0/containers/typescript-node/.devcontainer/base.Dockerfile
 
 # [Choice] Node.js version: 16, 14, 12
-FROM ampersandtarski/ampersand:v4.7
+ARG VARIANT="16-buster"
+FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-${VARIANT}
 
+FROM ampersandtarski/ampersand:v4.7
 COPY --from=ampersandtarski/ampersand:v4.7 /bin/ampersand /usr/local/bin
 RUN chmod +x /usr/local/bin/ampersand
 
