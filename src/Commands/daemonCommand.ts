@@ -47,7 +47,7 @@ export class daemonCommand {
             let last : [vscode.Uri, vscode.Diagnostic][] = [];
             const go = () => {
                 let next = ampersandParser.parseAmpersandOutput(root, fs.readFileSync(file, "utf8"));
-                let next2 = next.map(x => fileUtils.pair(x[0], [x[1]]));
+                let next2 = next.map((x: any) => fileUtils.pair(x[0], [x[1]]));
                 for (let x of last)
                     next2.push(fileUtils.pair(x[0], []));
                 d.set(diagnosticUtils.groupDiagnostics(next2));
