@@ -108,6 +108,10 @@
 			{
 				"command":"extension.generateFunctionalSpec",
 				"title":"Ampersand: generate functional spec"
+			},
+			{
+				"command":"extension.generateAtlas",
+				"title":"Ampersand: Generate atlas"
 			}
 		],
 		"problemMatchers": [
