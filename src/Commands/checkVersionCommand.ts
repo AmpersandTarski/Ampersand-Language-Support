@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
-import { AmpersandVersionChecker } from '../Ampersand';
+import { ampersandVersionChecker } from '../ampersand';
 
-export class CheckVersionCommand{
+export class checkVersionCommand{
     static checkVersionCommand()
     {
         if (!vscode.workspace.rootPath) {
@@ -9,7 +9,7 @@ export class CheckVersionCommand{
             return null;
         }
     
-        let versionString : string = AmpersandVersionChecker.getVersion();
+        let versionString : string = ampersandVersionChecker.getVersion();
         vscode.window.setStatusBarMessage("your current ampersand version is: " + versionString,10000);
     }
 }

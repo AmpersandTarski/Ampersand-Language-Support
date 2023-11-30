@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { FileUtils } from '../utils';
+import { fileUtils } from '../utils';
 
-export class AmpersandParser {
+export class ampersandParser {
     static parseAmpersandOutput(dir: string, s: string): [vscode.Uri, vscode.Diagnostic][] {
         let cont: any[] = [];
         return cont.concat(... split(lines(s)).map(parse));
@@ -57,7 +57,7 @@ export class AmpersandParser {
                     s = s.substr(i+1).trim();
                 }
                 let msg = cont.concat([s],xs.slice(1)).join('\n');
-                return [FileUtils.pair(file, new vscode.Diagnostic(range, msg, sev))];
+                return [fileUtils.pair(file, new vscode.Diagnostic(range, msg, sev))];
             };
             if (xs[0].startsWith("All good"))
                 return [];

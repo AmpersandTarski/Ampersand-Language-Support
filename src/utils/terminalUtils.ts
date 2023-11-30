@@ -1,6 +1,6 @@
 import vscode from 'vscode';
 
-export class TerminalUtils{
+export class terminalUtils{
     static RunCommandInNewTerminal(terminalName : string, runAmpersandCommand : string)
     {
         let terminal = vscode.window.createTerminal(terminalName);

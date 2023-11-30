@@ -1,4 +1,4 @@
 
-export * from "./DiagnosticUtils";
-export * from "./FileUtils";
-export * from "./TerminalUtils";
+export * from "./diagnosticUtils";
+export * from "./fileUtils";
+export * from "./terminalUtils";

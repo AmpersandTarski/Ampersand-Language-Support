@@ -3,10 +3,10 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as crypto from 'crypto'
-import { AmpersandParser, AmpersandVersionChecker } from '../Ampersand';
-import { DiagnosticUtils, FileUtils} from '../utils';
+import { ampersandParser, ampersandVersionChecker } from '../ampersand';
+import { diagnosticUtils, fileUtils} from '../utils';
 
-export class DaemonCommand {
+export class daemonCommand {
     static runDaemonCommand(context : vscode.ExtensionContext, oldTerminal : vscode.Terminal | null = null)
     {
         if (!vscode.workspace.rootPath) {
@@ -18,7 +18,7 @@ export class DaemonCommand {
         let file = path.join(os.tmpdir(), "ampersandDaemon-" + hash + ".txt");
         context.subscriptions.push({dispose: () => {try {fs.unlinkSync(file);} catch (e) {};}});
         fs.writeFileSync(file, "");
-        let versionString : string = AmpersandVersionChecker.getVersion();
+        let versionString : string = ampersandVersionChecker.getVersion();
         let runAmpersandCommand : string = "ampersand";
         var runAmpersandArgs : string = "";
         let version : string = versionString.substr(10,3) 
@@ -46,11 +46,11 @@ export class DaemonCommand {
             const d = vscode.languages.createDiagnosticCollection('ampersand');
             let last : [vscode.Uri, vscode.Diagnostic][] = [];
             const go = () => {
-                let next = AmpersandParser.parseAmpersandOutput(root, fs.readFileSync(file, "utf8"));
-                let next2 = next.map(x => FileUtils.pair(x[0], [x[1]]));
+                let next = ampersandParser.parseAmpersandOutput(root, fs.readFileSync(file, "utf8"));
+                let next2 = next.map(x => fileUtils.pair(x[0], [x[1]]));
                 for (let x of last)
-                    next2.push(FileUtils.pair(x[0], []));
-                d.set(DiagnosticUtils.groupDiagnostics(next2));
+                    next2.push(fileUtils.pair(x[0], []));
+                d.set(diagnosticUtils.groupDiagnostics(next2));
                 last = next;
             };
             let watcher = fs.watch(file, go);

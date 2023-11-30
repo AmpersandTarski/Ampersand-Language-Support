@@ -1,3 +1,3 @@
-export * from "./DaemonCommand";
-export * from "./GenerateFunctionalSpecCommand";
-export * from "./CheckVersionCommand";
+export * from "./daemonCommand";
+export * from "./generateFunctionalSpecCommand";
+export * from "./checkVersionCommand";

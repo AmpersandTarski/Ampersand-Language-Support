@@ -1,9 +1,9 @@
 'use strict';
 import * as vscode from 'vscode';
 import * as fs from 'fs';
-import { AmpersandVersionChecker } from './Ampersand';
+import { ampersandVersionChecker } from './ampersand';
 import { constants } from './constants';
-import { DaemonCommand, GenerateFunctionalSpecCommand, CheckVersionCommand } from './Commands';
+import { daemonCommand, generateFunctionalSpecCommand, checkVersionCommand } from './commands';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -15,12 +15,12 @@ export function activate(context: vscode.ExtensionContext) {
 		`[${constants.extension.name}] v${constants.extension.version} activated!`,
 	  );
 
-	AmpersandVersionChecker.checkVersion();
+	ampersandVersionChecker.checkVersion();
 
     setupLastRunningWatcher(context);
 
-    pushDisposable(context, "extension.checkVersion", () => CheckVersionCommand.checkVersionCommand())
-    pushDisposable(context, "extension.generateFunctionalSpec", () => GenerateFunctionalSpecCommand.GenerateFunctionalSpecCommand())
+    pushDisposable(context, "extension.checkVersion", () => checkVersionCommand.checkVersionCommand())
+    pushDisposable(context, "extension.generateFunctionalSpec", () => generateFunctionalSpecCommand.GenerateFunctionalSpecCommand())
 }
 
 function pushDisposable(context: vscode.ExtensionContext,extensionName : string, commandFunction: (...args: any[]) => any)
@@ -60,5 +60,5 @@ function setupLastRunningWatcher(context: vscode.ExtensionContext)
         context.subscriptions.push(dispose);
     }
 
-    add('extension.startDaemon', () => DaemonCommand.runDaemonCommand(context, oldTerminal));
+    add('extension.startDaemon', () => daemonCommand.runDaemonCommand(context, oldTerminal));
 }

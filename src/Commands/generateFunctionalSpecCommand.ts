@@ -1,7 +1,7 @@
 import vscode from 'vscode';
-import { TerminalUtils } from '../utils';
+import { terminalUtils } from '../utils';
 
-export class GenerateFunctionalSpecCommand{
+export class generateFunctionalSpecCommand{
     static GenerateFunctionalSpecCommand()
     {
         if (vscode.workspace.workspaceFolders === undefined) {
@@ -24,6 +24,6 @@ export class GenerateFunctionalSpecCommand{
             return null;
         }
     
-        TerminalUtils.RunCommandInNewTerminal("ampersand generate spec",`ampersand documentation ${currentActiveFilePath} --format docx --no-graphics --language=NL --ConceptualAnalysis --verbosity debug`)
+        terminalUtils.RunCommandInNewTerminal("ampersand generate spec",`ampersand documentation ${currentActiveFilePath} --format docx --no-graphics --language=NL --ConceptualAnalysis --verbosity debug`)
     }
 }

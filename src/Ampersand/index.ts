@@ -1,2 +1,2 @@
-export * from "./AmpersandParser";
-export * from "./AmpersandVersionChecker";
+export * from "./ampersandParser";
+export * from "./ampersandVersionChecker";

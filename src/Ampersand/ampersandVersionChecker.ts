@@ -2,7 +2,7 @@
 import * as vscode from 'vscode';
 import { constants } from '../constants';
 
-export class AmpersandVersionChecker {
+export class ampersandVersionChecker {
 	static checkVersion ()  {
 		
 		// grab the version number from a string that holds the
