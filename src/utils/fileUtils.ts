@@ -47,7 +47,7 @@ export class fileUtils {
     return fileName;
   }
 
-  static replaceMarkers(data: Uint8Array, markerValuePairs: Map<string, string>) : vscode.Thenable<Uint8Array>
+  static replaceMarkers(data: Uint8Array, markerValuePairs: Map<string, string>) : Uint8Array
   {
     let text: string = Buffer.Buffer.from(data).toString();
 
