@@ -9,7 +9,7 @@
 			"VARIANT": "16"
 		}
 	},
-	"postAttachCommand":"npm install && npm install --global @vscode/vsce && npm install --global typescript && npm i @types/node && git restore . && vsce package 0.0.0 && code --install-extension language-ampersand-0.0.0.vsix",
+	"postAttachCommand":"sh startup.sh",
 	// Set *default* container specific settings.json values on container create.
 	"customizations": {
 		"vscode": {
