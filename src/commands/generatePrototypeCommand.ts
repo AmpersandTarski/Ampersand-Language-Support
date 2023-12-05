@@ -17,17 +17,19 @@ export class generatePrototypeCommand {
         // const manifestContent : string = fs.readFileSync('/workspaces/Ampersand-Language-Support/src/prototype-template.yaml', 'utf-8');
         // manifestContent.replace('{{scriptContent}}', encodedContent);
 
-        let templateFileUri = vscode.Uri.file('/workspaces/Ampersand-Language-Support/src/prototype-template.yaml');
-        let manifestFileUri = vscode.Uri.file(`/workspaces/Ampersand-Language-Support/src/${fileUtils.getCurrentOpenFileName}`);
+        const manifestFileName : string | undefined = fileUtils.getCurrentOpenFileName();
+
+        const templateFileUri : vscode.Uri = vscode.Uri.file('/workspaces/Ampersand-Language-Support/src/prototype-template.yaml');
+        const manifestFileUri : vscode.Uri = vscode.Uri.file(`/workspaces/Ampersand-Language-Support/src/${manifestFileName}`);
 
         // read the file contents as a Uint8Array
         vscode.workspace.fs.readFile(templateFileUri).then(data => {
 
           // convert the Uint8Array to a string
-          let text = Buffer.Buffer.from(data).toString();
+          const text : string = Buffer.Buffer.from(data).toString();
         
           // replace the text with the new value
-          let newText = text.replace('{{scriptContent}}', encodedContent);
+          const newText : string = text.replace('{{scriptContent}}', encodedContent);
         
           // convert the string to a Uint8Array
           let newData = Buffer.Buffer.from(newText);
