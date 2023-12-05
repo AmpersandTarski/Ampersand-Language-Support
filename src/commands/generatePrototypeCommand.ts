@@ -17,10 +17,11 @@ export class generatePrototypeCommand {
         // const manifestContent : string = fs.readFileSync('/workspaces/Ampersand-Language-Support/src/prototype-template.yaml', 'utf-8');
         // manifestContent.replace('{{scriptContent}}', encodedContent);
 
-        let fileUri = vscode.Uri.file('/workspaces/Ampersand-Language-Support/src/prototype-template.yaml');
+        let templateFileUri = vscode.Uri.file('/workspaces/Ampersand-Language-Support/src/prototype-template.yaml');
+        let manifestFileUri = vscode.Uri.file('/workspaces/Ampersand-Language-Support/src/prototype-manifest.yaml');
 
         // read the file contents as a Uint8Array
-        vscode.workspace.fs.readFile(fileUri).then(data => {
+        vscode.workspace.fs.readFile(templateFileUri).then(data => {
 
           // convert the Uint8Array to a string
           let text = Buffer.Buffer.from(data).toString();
@@ -32,14 +33,14 @@ export class generatePrototypeCommand {
           let newData = Buffer.Buffer.from(newText);
         
           // write the file contents from the Uint8Array
-          vscode.workspace.fs.writeFile(fileUri, newData).then(() => {
+          vscode.workspace.fs.writeFile(manifestFileUri, newData).then(() =>{
 
             // show a message that the file was updated
-            vscode.window.showInformationMessage('File updated');
+            vscode.window.showInformationMessage('Applying prototype');
           });
         });
 
-        // terminalUtils.RunCommandInNewTerminal("ampersand generate atlas",
-        // `ampersand population --output-dir='./' --build-recipe Grind --output-format json --verbosity warn ${currentActiveFilePath}`)
+        terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
+        `kubectl apply -f ${manifestFileUri.fsPath}`)
     }
 }
