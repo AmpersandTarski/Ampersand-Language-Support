@@ -1,7 +1,6 @@
 import { fileUtils, terminalUtils } from "../utils";
 import * as fs from 'fs';
 import * as vscode from 'vscode';
-import * as Buffer from 'buffer';
 
 export class generatePrototypeCommand {
     static GeneratePrototypeCommand()
@@ -23,24 +22,7 @@ export class generatePrototypeCommand {
         const manifestFileUri : vscode.Uri = vscode.Uri.file(`/workspaces/Ampersand-Language-Support/src/${manifestFileName}`);
 
         // read the file contents as a Uint8Array
-        vscode.workspace.fs.readFile(templateFileUri).then(data => {
-
-          // convert the Uint8Array to a string
-          const text : string = Buffer.Buffer.from(data).toString();
-        
-          // replace the text with the new value
-          const newText : string = text.replace('{{scriptContent}}', encodedContent);
-        
-          // convert the string to a Uint8Array
-          let newData = Buffer.Buffer.from(newText);
-        
-          // write the file contents from the Uint8Array
-          vscode.workspace.fs.writeFile(manifestFileUri, newData).then(() =>{
-
-            // show a message that the file was updated
-            vscode.window.showInformationMessage('Applying prototype');
-          });
-        });
+        fileUtils.replaceMarker(templateFileUri, manifestFileUri, '{{scriptContent}}', encodedContent);
 
         terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
         `kubectl apply -f ${manifestFileUri.fsPath}`)

@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import * as Buffer from 'buffer'
 export class fileUtils {
   static pair<A, B>(a: A, b: B): [A, B] {
     return [a, b];
@@ -45,4 +46,20 @@ export class fileUtils {
 
     return fileName;
   }
+
+  static replaceMarker(from: vscode.Uri, to: vscode.Uri, marker: string, newValue: string,) {
+    vscode.workspace.fs.readFile(from).then(data => {
+
+        const text: string = Buffer.Buffer.from(data).toString();
+
+        const newText: string = text.replace(marker, newValue);
+
+        let newData = Buffer.Buffer.from(newText);
+
+        vscode.workspace.fs.writeFile(to, newData).then(() => {
+
+            vscode.window.showInformationMessage('Applying prototype');
+        });
+    });
+}
 }
