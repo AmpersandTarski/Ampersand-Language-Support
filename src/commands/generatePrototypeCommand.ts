@@ -21,8 +21,13 @@ export class generatePrototypeCommand {
         const templateFileUri : vscode.Uri = vscode.Uri.file('/workspaces/Ampersand-Language-Support/src/prototype-template.yaml');
         const manifestFileUri : vscode.Uri = vscode.Uri.file(`/workspaces/Ampersand-Language-Support/src/${manifestFileName}`);
 
-        // read the file contents as a Uint8Array
-        fileUtils.replaceMarker(templateFileUri, manifestFileUri, '{{scriptContent}}', encodedContent);
+        vscode.workspace.fs.readFile(templateFileUri).then(data =>{
+            const newData = fileUtils.replaceMarkers(data, new Map<string, string>([['{{scriptContent}}', encodedContent]]));
+            vscode.workspace.fs.writeFile(manifestFileUri, newData).then(() => {
+
+                vscode.window.showInformationMessage('Applying prototype');
+            });
+        });
 
         terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
         `kubectl apply -f ${manifestFileUri.fsPath}`)

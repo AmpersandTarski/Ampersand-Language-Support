@@ -47,19 +47,14 @@ export class fileUtils {
     return fileName;
   }
 
-  static replaceMarker(from: vscode.Uri, to: vscode.Uri, marker: string, newValue: string,) {
-    vscode.workspace.fs.readFile(from).then(data => {
+  static replaceMarkers(data: Uint8Array, markerValuePairs: Map<string, string>) : vscode.Thenable<Uint8Array>
+  {
+    let text: string = Buffer.Buffer.from(data).toString();
 
-        const text: string = Buffer.Buffer.from(data).toString();
-
-        const newText: string = text.replace(marker, newValue);
-
-        let newData = Buffer.Buffer.from(newText);
-
-        vscode.workspace.fs.writeFile(to, newData).then(() => {
-
-            vscode.window.showInformationMessage('Applying prototype');
-        });
+    markerValuePairs.forEach((key, value) => {
+      text = text.replace(key, value)
     });
-}
+
+    return Buffer.Buffer.from(text);
+  }
 }
