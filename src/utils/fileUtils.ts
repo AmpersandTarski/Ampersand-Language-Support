@@ -51,7 +51,7 @@ export class fileUtils {
   {
     let text: string = Buffer.Buffer.from(data).toString();
 
-    markerValuePairs.forEach((key, value) => {
+    markerValuePairs.forEach((value, key) => {
       text = text.replace(key, value)
     });
 
