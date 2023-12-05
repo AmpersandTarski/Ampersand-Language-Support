@@ -18,7 +18,7 @@ export class generatePrototypeCommand {
         // manifestContent.replace('{{scriptContent}}', encodedContent);
 
         let templateFileUri = vscode.Uri.file('/workspaces/Ampersand-Language-Support/src/prototype-template.yaml');
-        let manifestFileUri = vscode.Uri.file('/workspaces/Ampersand-Language-Support/src/prototype-manifest.yaml');
+        let manifestFileUri = vscode.Uri.file(`/workspaces/Ampersand-Language-Support/src/${fileUtils.getCurrentOpenFileName}`);
 
         // read the file contents as a Uint8Array
         vscode.workspace.fs.readFile(templateFileUri).then(data => {

@@ -4,14 +4,19 @@ export class fileUtils {
     return [a, b];
   }
 
-  static getCurrentOpenFile(): string | undefined
+  static getActiveTextEditor() : TextEditor | undefined
   {
     if (vscode.workspace.workspaceFolders === undefined) {
       vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.")
       return;
     }
 
-    const activeEditorWindow = vscode.window.activeTextEditor;
+    return vscode.window.activeTextEditor;
+  }
+
+  static getCurrentOpenFile(): string | undefined
+  {
+    const activeEditorWindow = this.getActiveTextEditor();
 
     if(!activeEditorWindow){
       vscode.window.showWarningMessage("Make sure you have an active editor window.")
@@ -27,5 +32,20 @@ export class fileUtils {
     }
 
     return currentActiveFilePath;
+  }
+
+  static getCurrentOpenFileName() : string | undefined
+  {
+    const activeEditorWindow = this.getActiveTextEditor();
+
+    if(!activeEditorWindow){
+      vscode.window.showWarningMessage("Make sure you have an active editor window.")
+      return;
+    }
+
+    const document = activeEditorWindow.document;
+
+    return document.fileName;
+
   }
 }
