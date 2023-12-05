@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import { ampersandVersionChecker } from './ampersand';
 import { constants } from './constants';
-import { daemonCommand, generateFunctionalSpecCommand, checkVersionCommand, generateAtlasCommand } from './commands';
+import { daemonCommand, generateFunctionalSpecCommand, checkVersionCommand, generateAtlasCommand, generatePrototypeCommand } from './commands';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -22,6 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
     pushDisposable(context, "extension.checkVersion", () => checkVersionCommand.checkVersionCommand())
     pushDisposable(context, "extension.generateFunctionalSpec", () => generateFunctionalSpecCommand.GenerateFunctionalSpecCommand())
     pushDisposable(context, "extension.generateAtlas", () => generateAtlasCommand.GenerateAtlasCommand())
+    pushDisposable(context, "extension.generatePrototype", () => generatePrototypeCommand.GeneratePrototypeCommand())
 }
 
 function pushDisposable(context: vscode.ExtensionContext,extensionName : string, commandFunction: (...args: any[]) => any)

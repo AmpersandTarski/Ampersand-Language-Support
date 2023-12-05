@@ -112,6 +112,10 @@
 			{
 				"command":"extension.generateAtlas",
 				"title":"Ampersand: Generate atlas"
+			},
+			{
+				"command":"extension.generatePrototype",
+				"title":"Ampersand: Generate prototype"
 			}
 		],
 		"problemMatchers": [

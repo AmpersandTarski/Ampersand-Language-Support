@@ -1,0 +1,58 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student
+  labels:
+    app: student
+    container-image: student-prototype
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: student
+  template:
+    metadata:
+      labels:
+        app: student
+        container-image: student-prototype
+    spec:
+      containers:
+        - name: student
+          image: ampersandtarski/rap4-student-prototype:production-latest
+          env:
+            - name: AMPERSAND_DBHOST
+              value: ampersand-db
+            - name: AMPERSAND_DBNAME
+              value: student
+            - name: AMPERSAND_DEBUG_MODE
+              value: "true"
+            - name: AMPERSAND_LOG_CONFIG
+              value: logging.yaml
+            - name: AMPERSAND_PRODUCTION_MODE
+              value: "false"
+            - name: AMPERSAND_SERVER_URL
+              value: https://localhost
+            - name: RAP_DEPLOYMENT
+              value: Kubernetes
+            - name: RAP_KUBERNETES_NAMESPACE
+              value: ampersand
+          envFrom:
+            - secretRef:
+                name: db-secrets
+          ports:
+            - containerPort: 80
+          command: ["bash", "/run-student-prototype.sh"]
+          args: [{{scriptContent}}]
+---
+# student-prototype user service
+apiVersion: v1
+kind: Service
+metadata:
+  name: student
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+  selector:
+    app: student
