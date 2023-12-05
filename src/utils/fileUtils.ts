@@ -40,7 +40,8 @@ export class fileUtils {
 
     const startOfFileName : number = openFile.lastIndexOf('/');
 
-    const fileName : string = openFile.substring(startOfFileName, openFile.length - 3);
+    let fileName : string = openFile.substring(startOfFileName);
+    fileName = fileName.replace('adl', 'yaml');
 
     return fileName;
   }
