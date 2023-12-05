@@ -9,7 +9,7 @@
 			"VARIANT": "16"
 		}
 	},
-	"postAttachCommand":"sh startup.sh",
+	"postAttachCommand":"sh .devcontainer/startup.sh",
 	// Set *default* container specific settings.json values on container create.
 	"customizations": {
 		"vscode": {
