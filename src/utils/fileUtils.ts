@@ -43,7 +43,7 @@ export class fileUtils {
       return;
     }
 
-    const document : vscode.TextEditor = activeEditorWindow.document;
+    const document : vscode.TextDocument = activeEditorWindow.document;
 
     return document.fileName;
 
