@@ -26,7 +26,7 @@ export class generatePrototypeCommand {
           let text = Buffer.Buffer.from(data).toString();
         
           // replace the text with the new value
-          let newText = text.replace('{{scriptContent}}', 'something else');
+          let newText = text.replace('{{scriptContent}}', encodedContent);
         
           // convert the string to a Uint8Array
           let newData = Buffer.Buffer.from(newText);
