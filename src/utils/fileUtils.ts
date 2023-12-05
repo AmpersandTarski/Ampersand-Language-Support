@@ -4,7 +4,7 @@ export class fileUtils {
     return [a, b];
   }
 
-  static getActiveTextEditor() : TextEditor | undefined
+  static getActiveTextEditor() : vscode.TextEditor | undefined
   {
     if (vscode.workspace.workspaceFolders === undefined) {
       vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.")
@@ -43,7 +43,7 @@ export class fileUtils {
       return;
     }
 
-    const document = activeEditorWindow.document;
+    const document : vscode.TextEditor = activeEditorWindow.document;
 
     return document.fileName;
 
