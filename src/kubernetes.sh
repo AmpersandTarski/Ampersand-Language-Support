@@ -1,10 +1,11 @@
 set -e
 
-# kubectl apply -f {{fileName}}
-kubectl apply -f /workspaces/Ampersand-Language-Support/src/script.yaml
+$FILENAME=$1
+$DEPLOYMENT=$2
+$SERVICE=$3
 
-# $DEPLOYMENT={{deploymentName}}
-# $SERVICE={{serviceName}}
+kubectl apply -f $FILENAME
+
 $DEPLOYMENT=student
 $SERVICE=student
 
