@@ -29,7 +29,7 @@ export class generatePrototypeCommand {
         const extensionPath = extensionUri.fsPath;
     
         // append the relative path of the file to the extension path
-        const templateFilePath = path.join(extensionPath, 'src', 'prototype-template.yaml');//`${extensionPath}/src/prototype-template.yaml`;
+        const templateFilePath = `${extensionPath}/src/prototype-template.yaml`;
         const manifestFilePath = `${extensionPath}/src/${manifestFileName}`;
     
         const templateFileUri : vscode.Uri = vscode.Uri.file(templateFilePath);
@@ -43,9 +43,9 @@ export class generatePrototypeCommand {
             });
         });
 
-        // terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
-        // `kubectl apply -f ${manifestFileUri.fsPath}`)
         terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
-        `sh ${extensionPath}/src/kubernetes.sh ${manifestFileUri.fsPath} student student`)
+        `kubectl apply -f ${manifestFileUri.fsPath}`)
+        // terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
+        // `sh ${extensionPath}/src/kubernetes.sh ${manifestFileUri.fsPath} student student`)
     }
 }
