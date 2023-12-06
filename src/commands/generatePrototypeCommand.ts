@@ -1,6 +1,7 @@
 import { fileUtils, terminalUtils } from "../utils";
 import * as fs from 'fs';
 import * as vscode from 'vscode';
+import * as path from 'path';
 
 export class generatePrototypeCommand {
     static GeneratePrototypeCommand()
@@ -20,7 +21,7 @@ export class generatePrototypeCommand {
         // check if the extension is found
         if(extension === undefined)
             return;
-        
+
         // get the extension URI
         const extensionUri = extension.extensionUri;
     
@@ -28,7 +29,7 @@ export class generatePrototypeCommand {
         const extensionPath = extensionUri.fsPath;
     
         // append the relative path of the file to the extension path
-        const templateFilePath = `${extensionPath}/src/prototype-template.yaml`;
+        const templateFilePath = path.join(extensionPath, 'src', 'prototype-template.yaml');//`${extensionPath}/src/prototype-template.yaml`;
         const manifestFilePath = `${extensionPath}/src/${manifestFileName}`;
     
         const templateFileUri : vscode.Uri = vscode.Uri.file(templateFilePath);
