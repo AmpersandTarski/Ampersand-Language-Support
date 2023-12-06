@@ -18,6 +18,9 @@ export class generatePrototypeCommand {
         const extension = vscode.extensions.getExtension('ampersandtarski.language-ampersand');
 
         // check if the extension is found
+        if(extension === undefined)
+            return;
+        
         // get the extension URI
         const extensionUri = extension.extensionUri;
     
