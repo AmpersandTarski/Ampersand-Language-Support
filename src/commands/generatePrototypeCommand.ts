@@ -15,8 +15,21 @@ export class generatePrototypeCommand {
         
         const manifestFileName : string | undefined = fileUtils.getCurrentOpenFileName();
 
-        const templateFileUri : vscode.Uri = vscode.Uri.file('/workspaces/Ampersand-Language-Support/src/prototype-template.yaml');
-        const manifestFileUri : vscode.Uri = vscode.Uri.file(`/workspaces/Ampersand-Language-Support/src/${manifestFileName}`);
+        const extension = vscode.extensions.getExtension('ampersandtarski.language-ampersand');
+
+        // check if the extension is found
+        // get the extension URI
+        const extensionUri = extension.extensionUri;
+    
+        // get the fs path of the extension folder
+        const extensionPath = extensionUri.fsPath;
+    
+        // append the relative path of the file to the extension path
+        const templateFilePath = `${extensionPath}/src/prototype-template.yaml`;
+        const manifestFilePath = `${extensionPath}/src/${manifestFileName}`;
+    
+        const templateFileUri : vscode.Uri = vscode.Uri.file(templateFilePath);
+        const manifestFileUri : vscode.Uri = vscode.Uri.file(manifestFilePath);
 
         vscode.workspace.fs.readFile(templateFileUri).then(data =>{
             const newData = fileUtils.replaceMarkers(data, new Map<string, string>([['{{scriptContent}}', encodedContent]]));
@@ -29,6 +42,6 @@ export class generatePrototypeCommand {
         // terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
         // `kubectl apply -f ${manifestFileUri.fsPath}`)
         terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
-        `sh /workspaces/Ampersand-Language-Support/src/kubernetes.sh ${manifestFileUri.fsPath} student student`)
+        `sh ${extensionPath}/src/kubernetes.sh ${manifestFileUri.fsPath} student student`)
     }
 }
