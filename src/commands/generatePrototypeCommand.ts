@@ -13,9 +13,6 @@ export class generatePrototypeCommand {
         const fileContent : string = fs.readFileSync(currentActiveFilePath, 'utf-8');
         const encodedContent : string = btoa(fileContent);
         
-        // const manifestContent : string = fs.readFileSync('/workspaces/Ampersand-Language-Support/src/prototype-template.yaml', 'utf-8');
-        // manifestContent.replace('{{scriptContent}}', encodedContent);
-
         const manifestFileName : string | undefined = fileUtils.getCurrentOpenFileName();
 
         const templateFileUri : vscode.Uri = vscode.Uri.file('/workspaces/Ampersand-Language-Support/src/prototype-template.yaml');
@@ -29,7 +26,9 @@ export class generatePrototypeCommand {
             });
         });
 
+        // terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
+        // `kubectl apply -f ${manifestFileUri.fsPath}`)
         terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
-        `kubectl apply -f ${manifestFileUri.fsPath}`)
+        `sh /workspaces/Ampersand-Language-Support/src/kubernetes.sh`)
     }
 }
