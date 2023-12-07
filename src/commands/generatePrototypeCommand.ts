@@ -30,7 +30,9 @@ export class generatePrototypeCommand {
     
         // append the relative path of the file to the extension path
         const templateFilePath = `${extensionPath}/src/prototype-template.yaml`;
-        const manifestFilePath = `${extensionPath}/src/${manifestFileName}`;
+
+        const workspacePath = vscode.workspace.workspaceFolders[0].uri.fsPath;
+        const manifestFilePath = `${workspacePath}/ampersand/deployments/${manifestFileName}`;
     
         const templateFileUri : vscode.Uri = vscode.Uri.file(templateFilePath);
         const manifestFileUri : vscode.Uri = vscode.Uri.file(manifestFilePath);
