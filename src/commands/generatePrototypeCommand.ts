@@ -34,7 +34,7 @@ export class generatePrototypeCommand {
 
         const workspacePath = workspaceFolders[0].uri.fsPath;
     
-        const manifestFileUri = vscode.Uri.file(path.join(workspacePath, 'ampersand', 'deployments', manifestFileName));
+        const manifestFileUri = vscode.Uri.file(path.join(workspacePath, 'ampersand', 'deployments', `${manifestFileName}`));
 
         console.log(manifestFileUri);
 
