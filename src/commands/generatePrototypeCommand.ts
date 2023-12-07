@@ -4,7 +4,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 
 export class generatePrototypeCommand {
-    static GeneratePrototypeCommand()
+    static GeneratePrototypeCommand(context: vscode.ExtensionContext)
     {
         const currentActiveFilePath : string | undefined = fileUtils.getCurrentOpenFile();
 
@@ -16,12 +16,10 @@ export class generatePrototypeCommand {
         
         const manifestFileName : string | undefined = fileUtils.getCurrentOpenFileName();
 
-        const extension = vscode.extensions.getExtension('ampersandtarski.language-ampersand');
-
-        if(extension === undefined)
+        if(context === undefined)
             return;
 
-        const extensionPath = extension.extensionPath;
+        const extensionPath = context.extensionPath;
 
         const templateFileUri = vscode.Uri.file(path.join(extensionPath, 'src', 'prototype-template.yaml'))
 

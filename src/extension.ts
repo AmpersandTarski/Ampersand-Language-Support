@@ -22,7 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
     pushDisposable(context, "extension.checkVersion", () => checkVersionCommand.checkVersionCommand())
     pushDisposable(context, "extension.generateFunctionalSpec", () => generateFunctionalSpecCommand.GenerateFunctionalSpecCommand())
     pushDisposable(context, "extension.generateAtlas", () => generateAtlasCommand.GenerateAtlasCommand())
-    pushDisposable(context, "extension.generatePrototype", () => generatePrototypeCommand.GeneratePrototypeCommand())
+    pushDisposable(context, "extension.generatePrototype", () => generatePrototypeCommand.GeneratePrototypeCommand(context))
 }
 
 function pushDisposable(context: vscode.ExtensionContext,extensionName : string, commandFunction: (...args: any[]) => any)
