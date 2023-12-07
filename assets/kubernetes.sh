@@ -6,9 +6,6 @@ SERVICE=$3
 
 kubectl apply -f $FILENAME
 
-DEPLOYMENT=student
-SERVICE=student
-
 while [[ $(kubectl get deployment $DEPLOYMENT -o 'jsonpath={..status.conditions[?(@.type=="Available")].status}') != "True" ]];
 do echo "waiting for deployment" && sleep 1;
 done
