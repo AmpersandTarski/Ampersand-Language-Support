@@ -18,32 +18,30 @@ export class generatePrototypeCommand {
 
         const extension = vscode.extensions.getExtension('ampersandtarski.language-ampersand');
 
-        // check if the extension is found
         if(extension === undefined)
             return;
 
-        // get the extension URI
-        const extensionUri = extension.extensionUri;
-    
-        // get the fs path of the extension folder
-        const extensionPath = extensionUri.fsPath;
-    
-        // append the relative path of the file to the extension path
-        const templateFilePath = `${extensionPath}/src/prototype-template.yaml`;
+        const extensionPath = extension.extensionPath;
 
+        const templateFileUri = vscode.Uri.file(path.join(extensionPath), 'src', 'prototype-template.yaml')
+
+        console.log(templateFileUri);
+    
         const workspaceFolders = vscode.workspace.workspaceFolders;
 
         if(workspaceFolders === undefined)
             return;
 
         const workspacePath = workspaceFolders[0].uri.fsPath;
-        const manifestFilePath = `${workspacePath}/ampersand/deployments/${manifestFileName}`;
     
-        const templateFileUri : vscode.Uri = vscode.Uri.file(templateFilePath);
-        const manifestFileUri : vscode.Uri = vscode.Uri.file(manifestFilePath);
+        const manifestFileUri = vscode.Uri.file(path.join(workspacePath, 'ampersand', 'deployments', manifestFileName));
+
+        console.log(manifestFileUri);
 
         vscode.workspace.fs.readFile(templateFileUri).then(data =>{
+            console.log(data);
             const newData = fileUtils.replaceMarkers(data, new Map<string, string>([['{{scriptContent}}', encodedContent]]));
+            console.log(newData);
             vscode.workspace.fs.writeFile(manifestFileUri, newData).then(() => {
 
                 vscode.window.showInformationMessage(`Manifest saved at ${manifestFileUri}`);
