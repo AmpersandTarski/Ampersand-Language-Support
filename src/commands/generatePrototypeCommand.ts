@@ -46,12 +46,12 @@ export class generatePrototypeCommand {
             const newData = fileUtils.replaceMarkers(data, new Map<string, string>([['{{scriptContent}}', encodedContent]]));
             vscode.workspace.fs.writeFile(manifestFileUri, newData).then(() => {
 
-                vscode.window.showInformationMessage('Applying prototype');
+                vscode.window.showInformationMessage(`Manifest saved at ${manifestFileUri}`);
             });
         });
 
-        terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
-        `kubectl apply -f ${manifestFileUri.fsPath}`)
+        // terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
+        // `kubectl apply -f ${manifestFileUri.fsPath}`)
         // terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
         // `sh ${extensionPath}/src/kubernetes.sh ${manifestFileUri.fsPath} student student`)
     }
