@@ -21,7 +21,7 @@ export class generatePrototypeCommand {
 
         const extensionPath = context.extensionPath;
 
-        const templateFileUri = vscode.Uri.file(path.join(extensionPath, 'src', 'prototype-template.yaml'))
+        const templateFileUri = vscode.Uri.file(path.join(extensionPath, 'assets', 'prototype-template.yaml'))
 
         console.log(templateFileUri);
     
