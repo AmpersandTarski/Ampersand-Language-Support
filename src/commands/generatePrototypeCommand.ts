@@ -36,7 +36,7 @@ export class generatePrototypeCommand {
         if(workspaceFolders === undefined)
             return;
 
-        const workspacePath = vscode.workspace.workspaceFolders[0].uri.fsPath;
+        const workspacePath = workspaceFolders[0].uri.fsPath;
         const manifestFilePath = `${workspacePath}/ampersand/deployments/${manifestFileName}`;
     
         const templateFileUri : vscode.Uri = vscode.Uri.file(templateFilePath);
