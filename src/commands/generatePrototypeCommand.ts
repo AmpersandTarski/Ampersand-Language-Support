@@ -49,6 +49,6 @@ export class generatePrototypeCommand {
         // terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
         // `kubectl apply -f ${manifestFileUri.fsPath}`)
         terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
-        `sh ${extensionPath}/assets/kubernetes.sh -f ${manifestFileUri.fsPath} -d student -s student`)
+        `sh ${extensionPath}/assets/kubernetes.sh ${manifestFileUri.fsPath} student student`)
     }
 }
