@@ -143,7 +143,17 @@
 					}
 				]
 			}
-		]
+		],
+		"configuration": {
+			"title": "Main Script",
+			"properties": {
+			  "ampersand.mainScriptName": {
+				"type": "string",
+				"default": "script.adl",
+				"description": "The name of the main ADL script file to be fed to the ampersand compiler to generate a prototype."
+			  }
+			}
+		  }
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
