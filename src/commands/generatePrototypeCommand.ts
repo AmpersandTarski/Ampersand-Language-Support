@@ -23,8 +23,6 @@ export class generatePrototypeCommand {
 
         const templateFileUri = vscode.Uri.file(path.join(extensionPath, 'assets', 'prototype-template.yaml'))
 
-        console.log(templateFileUri);
-    
         const workspaceFolders = vscode.workspace.workspaceFolders;
 
         if(workspaceFolders === undefined)
@@ -34,21 +32,19 @@ export class generatePrototypeCommand {
     
         const manifestFileUri = vscode.Uri.file(path.join(workspacePath, 'ampersand', 'deployments', `${manifestFileName}`));
 
-        console.log(manifestFileUri);
-
         vscode.workspace.fs.readFile(templateFileUri).then(data =>{
-            console.log(data);
             const newData = fileUtils.replaceMarkers(data, new Map<string, string>([['{{scriptContent}}', encodedContent]]));
-            console.log(newData);
             vscode.workspace.fs.writeFile(manifestFileUri, newData).then(() => {
 
                 vscode.window.showInformationMessage(`Manifest saved at ${manifestFileUri}`);
             });
         });
 
+        const student : string = 'student';
+
         // terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
         // `kubectl apply -f ${manifestFileUri.fsPath}`)
         terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
-        `sh ${extensionPath}/assets/kubernetes.sh ${manifestFileUri.fsPath} student student`)
+        `sh ${extensionPath}/assets/kubernetes.sh ${manifestFileUri.fsPath} ${student} ${student}`)
     }
 }

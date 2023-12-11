@@ -1,19 +1,19 @@
 set -e
 
 filename=$1
-deployment="student"
-service="student"
+deployment=$2 #"student"
+service=$3 #"student"
 
-# check if the user provided arguments
-if [ $# -gt 1 ]; then
-  # assign the first argument to DEPLOYMENT
-  deployment=$2
-fi
+# # check if the user provided arguments
+# if [ $# -gt 1 ]; then
+#   # assign the first argument to DEPLOYMENT
+#   deployment=$2
+# fi
 
-if [ $# -gt 2 ]; then
-  # assign the second argument to SERVICE
-  service=$3
-fi
+# if [ $# -gt 2 ]; then
+#   # assign the second argument to SERVICE
+#   service=$3
+# fi
 
 kubectl apply -f $filename
 
