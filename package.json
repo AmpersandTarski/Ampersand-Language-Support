@@ -145,7 +145,7 @@
 			}
 		],
 		"configuration": {
-			"title": "Main Script",
+			"title": "Ampersand",
 			"properties": {
 			  "ampersand.mainScriptName": {
 				"type": "string",
