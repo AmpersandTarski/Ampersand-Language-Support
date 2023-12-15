@@ -149,8 +149,14 @@
 			"properties": {
 			  "ampersand.mainScriptName": {
 				"type": "string",
-				"default": "script.adl",
+				"default": "main.adl",
 				"description": "The name of the main ADL script file to be fed to the ampersand compiler to generate a prototype."
+			  },
+			  "ampersand.folderName": {
+				"type": "string",
+				"default": "project",
+				"description": "The name of the folder to use to generate a protoype. Must contain the main script."
+
 			  }
 			}
 		  }
