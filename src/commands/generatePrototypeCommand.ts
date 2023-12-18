@@ -1,4 +1,4 @@
-import { fileUtils, terminalUtils } from "../utils";
+import { config, fileUtils, terminalUtils } from "../utils";
 import * as fs from 'fs';
 import * as vscode from 'vscode';
 import * as path from 'path';
@@ -13,12 +13,7 @@ export class generatePrototypeCommand {
 
         const extensionPath = context.extensionPath;
 
-        //Get config settings
-        const config = vscode.workspace.getConfiguration('ampersand');
-        const mainScriptSetting : string | undefined = config.get('mainScriptName');
-        const folderSetting : string | undefined = config.get('folderName');
-
-        if(mainScriptSetting === undefined || folderSetting === undefined)
+        if(config.mainScriptSetting === undefined || config.folderSetting === undefined)
             return;
         
         //Get workspace folders
@@ -28,7 +23,7 @@ export class generatePrototypeCommand {
             return;
 
         const workspacePath = workspaceFolders[0].uri.fsPath;
-        const folderPath = path.join(workspacePath, folderSetting);
+        const folderPath = path.join(workspacePath, config.folderSetting);
 
         //Zip folder and encode
         const zipOutPath = path.join(extensionPath, "assets", "out.zip");
@@ -40,7 +35,7 @@ export class generatePrototypeCommand {
         const encodedZipContent = fs.readFileSync(zipOutPath).toString('base64');
 
         //Encode main script
-        const encodedMainScript = btoa(mainScriptSetting);
+        const encodedMainScript = btoa(config.mainScriptSetting);
 
         //Get template file and output path
         const templateFileUri = vscode.Uri.file(path.join(extensionPath, 'assets', 'prototype-template.yaml'));
