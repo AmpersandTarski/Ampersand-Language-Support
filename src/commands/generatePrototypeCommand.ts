@@ -2,6 +2,7 @@ import { fileUtils, terminalUtils } from "../utils";
 import * as fs from 'fs';
 import * as vscode from 'vscode';
 import * as path from 'path';
+import * as Buffer from 'buffer';
 
 export class generatePrototypeCommand {
     static GeneratePrototypeCommand(context: vscode.ExtensionContext)
@@ -34,10 +35,10 @@ export class generatePrototypeCommand {
 
         terminalUtils.RunCommandInNewTerminal('Zip', `zip -r - ${folderPath} | base64 > ${zipOutPath}`);
 
-        let encodedZipContent = '';
+        let encodedZipContent: string = '';
         (async () => {
             await fileUtils.waitForFile(zipOutPath, 10000);
-            encodedZipContent = fs.readFileSync(zipOutPath);
+            encodedZipContent = fs.readFileSync(zipOutPath).toString();
           })();
 
         //Encode main script
