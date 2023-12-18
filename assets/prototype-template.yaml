@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: student
-          image: ampersandtarski/rap4-student-prototype:production-latest
+          image: ampersandtarski/rap4-student-prototype:dev-zip
           env:
             - name: AMPERSAND_DBHOST
               value: ampersand-db

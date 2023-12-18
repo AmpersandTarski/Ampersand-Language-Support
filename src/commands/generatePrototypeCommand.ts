@@ -2,7 +2,7 @@ import { fileUtils, terminalUtils } from "../utils";
 import * as fs from 'fs';
 import * as vscode from 'vscode';
 import * as path from 'path';
-import * as Buffer from 'buffer';
+import * as child_process from 'child_process';
 
 export class generatePrototypeCommand {
     static GeneratePrototypeCommand(context: vscode.ExtensionContext)
@@ -33,20 +33,21 @@ export class generatePrototypeCommand {
         //Zip folder and encode
         const zipOutPath = path.join(workspacePath, "ampersand", "out.txt");
 
-        terminalUtils.RunCommandInNewTerminal('Zip', `zip -r - ${folderPath} | base64 > ${zipOutPath}`);
+        child_process.execSync(`zip -r ${zipOutPath} *`, {
+          cwd: folderPath
+        });
 
-        let encodedZipContent: string = '';
-        (async () => {
-            await fileUtils.waitForFile(zipOutPath, 10000);
-            encodedZipContent = fs.readFileSync(zipOutPath).toString();
-          })();
+
+        // terminalUtils.RunCommandInNewTerminal('Zip', `zip -r - ${folderPath} | base64 > ${zipOutPath}`);
+
+        const encodedZipContent = fs.readFileSync(zipOutPath).toString('base64');
 
         //Encode main script
         const encodedMainScript = btoa(mainScriptSetting);
 
         //Get template file and output path
         const templateFileUri = vscode.Uri.file(path.join(extensionPath, 'assets', 'prototype-template.yaml'));
-        const manifestFileName : string | undefined = path.join(workspacePath, "ampersand", "prototype.yaml");
+        const manifestFileName : string | undefined = path.join(workspacePath, 'ampersand', 'prototype.yaml');
         const manifestFileUri = vscode.Uri.file(manifestFileName);
 
         //Replace markers
