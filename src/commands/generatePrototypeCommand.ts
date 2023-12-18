@@ -8,7 +8,7 @@ export class generatePrototypeCommand {
     {
         //Get extension path
         if(context === undefined)
-        return;
+            return;
 
         const extensionPath = context.extensionPath;
 
@@ -16,6 +16,9 @@ export class generatePrototypeCommand {
         const config = vscode.workspace.getConfiguration('ampersandtarski.language-ampersand');
         const mainScriptSetting : string | undefined = config.get('ampersand.mainScriptName');
         const folderSetting : string | undefined = config.get('ampersand.folderName');
+
+        if(mainScriptSetting === undefined || folderSetting === undefined)
+            return;
         
         //Get workspace folders
         const workspaceFolders = vscode.workspace.workspaceFolders;
