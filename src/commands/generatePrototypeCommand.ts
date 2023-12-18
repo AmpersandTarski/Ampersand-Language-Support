@@ -14,8 +14,8 @@ export class generatePrototypeCommand {
 
         //Get config settings
         const config = vscode.workspace.getConfiguration('ampersandtarski.language-ampersand');
-        const mainScriptSetting = config.get('ampersand.mainScriptName');
-        const folderSetting = config.get('ampersand.folderName');
+        const mainScriptSetting : string = config.get('ampersand.mainScriptName');
+        const folderSetting : string = config.get('ampersand.folderName');
         
         //Get workspace folders
         const workspaceFolders = vscode.workspace.workspaceFolders;
