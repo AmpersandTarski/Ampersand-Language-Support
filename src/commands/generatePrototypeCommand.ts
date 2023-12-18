@@ -46,8 +46,8 @@ export class generatePrototypeCommand {
         readStream.pipe(gzip).pipe(writeStream);
 
         let encodedZipContent = '';
-        fs.readFileSync(zipOutPath, (data: any) => {
-            encodedZipContent = Buffer.from(data).toString('base64');
+        fs.readFile(zipOutPath, (data: any) => {
+            encodedZipContent = Buffer.Buffer.from(data).toString('base64');
         });
 
         if(encodedZipContent === '')
