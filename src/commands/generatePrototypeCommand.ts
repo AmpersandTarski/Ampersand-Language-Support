@@ -2,6 +2,7 @@ import { fileUtils, terminalUtils } from "../utils";
 import * as fs from 'fs';
 import * as vscode from 'vscode';
 import * as path from 'path';
+import * as zlib from 'zlib';
 
 export class generatePrototypeCommand {
     static GeneratePrototypeCommand(context: vscode.ExtensionContext)
@@ -32,7 +33,11 @@ export class generatePrototypeCommand {
         //Zip folder and encode
         const zipOutPath = path.join(extensionPath, "assets", "out.zip");
 
-        terminalUtils.RunCommandInNewTerminal("Zip", `zip -r - ${folderPath} ${zipOutPath}`);
+        const readStream = fs.createReadStream(folderPath);
+        const writeStream = fs.createWriteStream(zipOutPath);
+
+        const gzip = zlib.createGzip();
+        readStream.pipe(gzip).pipe(writeStream);
 
         const zipContent = fs.readFileSync(zipOutPath, 'utf-8');
         const encodedFolder = btoa(zipContent);
