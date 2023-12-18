@@ -2,6 +2,8 @@ import { fileUtils, terminalUtils } from "../utils";
 import * as fs from 'fs';
 import * as vscode from 'vscode';
 import * as path from 'path';
+import * as zlib from 'zlib';
+import * as Buffer from 'buffer';
 
 export class generatePrototypeCommand {
     static GeneratePrototypeCommand(context: vscode.ExtensionContext)
@@ -30,11 +32,30 @@ export class generatePrototypeCommand {
         const folderPath = path.join(workspacePath, folderSetting);
 
         //Zip folder and encode
-        const zipOutPath = path.join(workspacePath, "ampersand", "out.txt");
+        const zipOutPath = path.join(workspacePath, "ampersand", "out.zip");
 
-        terminalUtils.RunCommandInNewTerminal('Zip', `zip -r - ${folderPath} | base64 > ${zipOutPath}`);
+        const readStream = fs.createReadStream(folderPath);
 
-        const encodedZipContent = fs.readFileSync(zipOutPath, 'utf-8');
+        // Create a write stream for the zipped file
+        const writeStream = fs.createWriteStream(zipOutPath);
+        
+        // Create a gzip transform stream
+        const gzip = zlib.createGzip();
+        
+        // Pipe the read stream to the gzip stream, then to the write stream
+        readStream.pipe(gzip).pipe(writeStream);
+
+        let encodedZipContent = '';
+        fs.readFileSync(zipOutPath, (data: any) => {
+            encodedZipContent = Buffer.from(data).toString('base64');
+        });
+
+        if(encodedZipContent === '')
+            return;
+
+        //terminalUtils.RunCommandInNewTerminal('Zip', `zip -r - ${folderPath} | base64 > ${zipOutPath}`);
+
+        //const encodedZipContent = fs.readFileSync(zipOutPath, 'utf-8');
 
         //Encode main script
         const encodedMainScript = btoa(mainScriptSetting);
