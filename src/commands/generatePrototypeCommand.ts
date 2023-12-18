@@ -34,6 +34,10 @@ export class generatePrototypeCommand {
 
         terminalUtils.RunCommandInNewTerminal('Zip', `zip -r - ${folderPath} | base64 > ${zipOutPath}`);
 
+        (async () => {
+            await fileUtils.waitForFile(zipOutPath, 10000);
+          })();
+
         const encodedZipContent = fs.readFileSync(zipOutPath, 'utf-8');
 
         //Encode main script
