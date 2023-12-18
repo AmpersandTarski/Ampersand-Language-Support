@@ -13,9 +13,9 @@ export class generatePrototypeCommand {
         const extensionPath = context.extensionPath;
 
         //Get config settings
-        const config = vscode.workspace.getConfiguration('ampersandtarski.language-ampersand');
-        const mainScriptSetting : string | undefined = config.get('ampersand.mainScriptName');
-        const folderSetting : string | undefined = config.get('ampersand.folderName');
+        const config = vscode.workspace.getConfiguration('ampersand');
+        const mainScriptSetting : string | undefined = config.get('mainScriptName');
+        const folderSetting : string | undefined = config.get('folderName');
 
         if(mainScriptSetting === undefined || folderSetting === undefined)
             return;
