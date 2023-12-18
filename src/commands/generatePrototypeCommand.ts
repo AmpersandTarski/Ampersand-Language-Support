@@ -31,7 +31,7 @@ export class generatePrototypeCommand {
         const folderPath = path.join(workspacePath, folderSetting);
 
         //Zip folder and encode
-        const zipOutPath = path.join(workspacePath, "ampersand", "out.zip");
+        const zipOutPath = path.join(extensionPath, "assets", "out.zip");
 
         child_process.execSync(`zip -r ${zipOutPath} *`, {
           cwd: folderPath
