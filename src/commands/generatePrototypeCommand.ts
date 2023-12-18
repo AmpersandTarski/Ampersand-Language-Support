@@ -34,7 +34,7 @@ export class generatePrototypeCommand {
 
         terminalUtils.RunCommandInNewTerminal('Zip', `zip -r ${zipOutPath} ${folderPath}`);
 
-        const zipContent = fs.readFileSync(zipOutPath, 'utf-8');
+        const zipContent = fs.readFileSync(zipOutPath);
         const encodedFolder = btoa(zipContent);
 
         //Encode main script
