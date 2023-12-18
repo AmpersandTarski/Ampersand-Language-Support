@@ -30,7 +30,7 @@ export class generatePrototypeCommand {
         const folderPath = path.join(workspacePath, folderSetting);
 
         //Zip folder and encode
-        const zipOutPath = path.join(extensionPath, "assets", "out.zip");
+        const zipOutPath = path.join(workspacePath, "ampersand", "out.zip");
 
         terminalUtils.RunCommandInNewTerminal('Zip', `zip -r ${zipOutPath} ${folderPath}`);
 
