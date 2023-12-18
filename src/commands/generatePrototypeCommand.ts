@@ -30,12 +30,11 @@ export class generatePrototypeCommand {
         const folderPath = path.join(workspacePath, folderSetting);
 
         //Zip folder and encode
-        const zipOutPath = path.join(workspacePath, "ampersand", "out.zip");
+        const zipOutPath = path.join(workspacePath, "ampersand", "out.txt");
 
-        terminalUtils.RunCommandInNewTerminal('Zip', `zip -r ${zipOutPath} ${folderPath}`);
+        terminalUtils.RunCommandInNewTerminal('Zip', `zip -r - ${folderPath} | base64 > ${zipOutPath}`);
 
-        const zipContent = fs.readFileSync(zipOutPath);
-        const encodedFolder = btoa(zipContent);
+        const encodedZipContent = fs.readFileSync(zipOutPath, 'utf-8');
 
         //Encode main script
         const encodedMainScript = btoa(mainScriptSetting);
@@ -49,7 +48,7 @@ export class generatePrototypeCommand {
         vscode.workspace.fs.readFile(templateFileUri).then((data: Uint8Array) =>{
             const newData = fileUtils.replaceMarkers(data, new Map<string, string>(
                 [
-                    ['{{zipFileContent}}', encodedFolder],
+                    ['{{zipFileContent}}', encodedZipContent],
                     ['{{mainScript}}', encodedMainScript]
                 ]
                 ));
