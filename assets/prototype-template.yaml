@@ -43,7 +43,7 @@ spec:
           ports:
             - containerPort: 80
           command: ["bash", "/run-student-prototype.sh"]
-          args: [{{scriptContent}}]
+          args: [{{zipFileContent}}, {{mainScript}}]
 ---
 # student-prototype user service
 apiVersion: v1

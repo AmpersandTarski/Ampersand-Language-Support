@@ -6,34 +6,50 @@ import * as path from 'path';
 export class generatePrototypeCommand {
     static GeneratePrototypeCommand(context: vscode.ExtensionContext)
     {
-        const currentActiveFilePath : string | undefined = fileUtils.getCurrentOpenFile();
-
-        if(currentActiveFilePath === undefined)
-            return;
-
-        const fileContent : string = fs.readFileSync(currentActiveFilePath, 'utf-8');
-        const encodedContent : string = btoa(fileContent);
-        
-        const manifestFileName : string | undefined = fileUtils.getCurrentOpenFileName();
-
+        //Get extension path
         if(context === undefined)
-            return;
+        return;
 
         const extensionPath = context.extensionPath;
 
-        const templateFileUri = vscode.Uri.file(path.join(extensionPath, 'assets', 'prototype-template.yaml'))
-
+        //Get config settings
+        const config = vscode.workspace.getConfiguration('ampersandtarski.language-ampersand');
+        const mainScriptSetting = config.get('ampersand.mainScriptName');
+        const folderSetting = config.get('ampersand.folderName');
+        
+        //Get workspace folders
         const workspaceFolders = vscode.workspace.workspaceFolders;
 
         if(workspaceFolders === undefined)
             return;
 
         const workspacePath = workspaceFolders[0].uri.fsPath;
-    
-        const manifestFileUri = vscode.Uri.file(path.join(workspacePath, 'ampersand', 'deployments', `${manifestFileName}`));
+        const folderPath = path.join(workspacePath, folderSetting);
 
-        vscode.workspace.fs.readFile(templateFileUri).then(data =>{
-            const newData = fileUtils.replaceMarkers(data, new Map<string, string>([['{{scriptContent}}', encodedContent]]));
+        //Zip folder and encode
+        const zipOutPath = path.join(extensionPath, "assets", "out.zip");
+
+        terminalUtils.RunCommandInNewTerminal("Zip", `zip -r - ${folderPath} ${zipOutPath}`);
+
+        const zipContent = fs.readFileSync(zipOutPath, 'utf-8');
+        const encodedFolder = btoa(zipContent);
+
+        //Encode main script
+        const encodedMainScript = btoa(mainScriptSetting);
+
+        //Get template file and output path
+        const templateFileUri = vscode.Uri.file(path.join(extensionPath, 'assets', 'prototype-template.yaml'));
+        const manifestFileName : string | undefined = path.join(workspacePath, "ampersand", "prototype.yaml");
+        const manifestFileUri = vscode.Uri.file(manifestFileName);
+
+        //Replace markers
+        vscode.workspace.fs.readFile(templateFileUri).then((data: Uint8Array) =>{
+            const newData = fileUtils.replaceMarkers(data, new Map<string, string>(
+                [
+                    ['{{zipFileContent}}', encodedFolder],
+                    ['{{mainScript}}', encodedMainScript]
+                ]
+                ));
             vscode.workspace.fs.writeFile(manifestFileUri, newData).then(() => {
 
                 vscode.window.showInformationMessage(`Manifest saved at ${manifestFileUri}`);
@@ -42,9 +58,8 @@ export class generatePrototypeCommand {
 
         const student : string = 'student';
 
-        // terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
-        // `kubectl apply -f ${manifestFileUri.fsPath}`)
-        terminalUtils.RunCommandInNewTerminal("Prototype in minikube",
+        //Run prototype in minikube
+        terminalUtils.RunCommandInNewTerminal("Run prototype in minikube",
         `sh ${extensionPath}/assets/kubernetes.sh ${manifestFileUri.fsPath} ${student} ${student}`)
     }
 }
