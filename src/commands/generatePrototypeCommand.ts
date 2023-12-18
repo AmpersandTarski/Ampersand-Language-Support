@@ -37,7 +37,7 @@ export class generatePrototypeCommand {
         let encodedZipContent = '';
         (async () => {
             await fileUtils.waitForFile(zipOutPath, 10000);
-            encodedZipContent = fs.readFile(zipOutPath);
+            encodedZipContent = fs.readFileSync(zipOutPath);
           })();
 
         //Encode main script
