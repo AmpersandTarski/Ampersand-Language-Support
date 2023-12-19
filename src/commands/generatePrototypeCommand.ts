@@ -57,9 +57,15 @@ export class generatePrototypeCommand {
                 const deployment : string = 'student';
                 const service : string = 'student';
 
-                child_process.execSync(`kubectl apply -f ${manifestFileUri.fsPath}`);
-                child_process.execSync(`kubectl rollout status deployment/${deployment} --timeout=100s`);
-                child_process.execSync(`kubectl port-forward svc/${service} -n default 8000:80`);
+                child_process.execSync(`kubectl apply -f ${manifestFileUri.fsPath}`, {
+                    stdio: "inherit"
+                  });
+                child_process.execSync(`kubectl rollout status deployment/${deployment} --timeout=100s`, {
+                    stdio: "inherit"
+                  });
+                child_process.execSync(`kubectl port-forward svc/${service} -n default 8000:80`, {
+                    stdio: "inherit"
+                  });
             });
         });
 
