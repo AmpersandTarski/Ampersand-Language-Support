@@ -53,18 +53,25 @@ export class generatePrototypeCommand {
             vscode.workspace.fs.writeFile(manifestFileUri, newData).then(() => {
 
                 vscode.window.showInformationMessage(`Manifest saved at ${manifestFileUri}`);
+
+                const deployment : string = 'student';
+                const service : string = 'student';
+
+                child_process.execSync(`kubectl apply -f ${manifestFileUri.fsPath}`);
+                child_process.execSync(`kubectl rollout status deployment/${deployment} --timeout=100s`);
+                child_process.execSync(`kubectl port-forward svc/${service} -n default 8000:80`);
             });
         });
 
-        const deployment : string = 'student';
-        const service : string = 'student';
+        // const deployment : string = 'student';
+        // const service : string = 'student';
 
-        //Run prototype in minikube
-        // terminalUtils.RunCommandInNewTerminal("Run prototype in minikube",
-        // `sh ${extensionPath}/assets/kubernetes.sh ${manifestFileUri.fsPath} ${deployment} ${service}`)
+        // //Run prototype in minikube
+        // // terminalUtils.RunCommandInNewTerminal("Run prototype in minikube",
+        // // `sh ${extensionPath}/assets/kubernetes.sh ${manifestFileUri.fsPath} ${deployment} ${service}`)
 
-        child_process.execSync(`kubectl apply -f ${manifestFileUri.fsPath}`);
-        child_process.execSync(`kubectl rollout status deployment/${deployment} --timeout=10s`);
-        child_process.execSync(`kubectl port-forward svc/${service} -n default 8000:80`);
+        // child_process.execSync(`kubectl apply -f ${manifestFileUri.fsPath}`);
+        // child_process.execSync(`kubectl rollout status deployment/${deployment} --timeout=100s`);
+        // child_process.execSync(`kubectl port-forward svc/${service} -n default 8000:80`);
     }
 }
