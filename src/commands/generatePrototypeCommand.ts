@@ -64,7 +64,7 @@ export class generatePrototypeCommand {
         // `sh ${extensionPath}/assets/kubernetes.sh ${manifestFileUri.fsPath} ${deployment} ${service}`)
 
         child_process.execSync(`kubectl apply -f ${manifestFileUri.fsPath}`);
-        child_process.execSync(`kubectl wait --for=condition=available --timeout=300s deployment/${deployment}`);
+        child_process.execSync(`kubectl rollout status deployment/${deployment} --timeout=10s`);
         child_process.execSync(`kubectl port-forward svc/${service} -n default 8000:80`);
     }
 }
