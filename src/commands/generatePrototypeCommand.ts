@@ -56,10 +56,15 @@ export class generatePrototypeCommand {
             });
         });
 
-        const student : string = 'student';
+        const deployment : string = 'student';
+        const service : string = 'student';
 
         //Run prototype in minikube
-        terminalUtils.RunCommandInNewTerminal("Run prototype in minikube",
-        `sh ${extensionPath}/assets/kubernetes.sh ${manifestFileUri.fsPath} ${student} ${student}`)
+        // terminalUtils.RunCommandInNewTerminal("Run prototype in minikube",
+        // `sh ${extensionPath}/assets/kubernetes.sh ${manifestFileUri.fsPath} ${deployment} ${service}`)
+
+        child_process.execSync(`kubectl apply -f ${manifestFileUri.fsPath}`);
+        child_process.execSync(`kubectl wait --for=condition=available --timeout=300s deployment/${deployment}`);
+        child_process.execSync(`kubectl port-forward svc/${service} -n default 8000:80`);
     }
 }
