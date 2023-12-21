@@ -32,7 +32,7 @@ export class generatePrototypeCommand {
 
         //Get template file and output path
         const templateFileUri = vscode.Uri.file(path.join(extensionPath, 'assets', 'prototype-template.yaml'));
-        const manifestFileName : string | undefined = fileUtils.generateWorkspacePath(['ampersand', 'prototype']); //path.join(workspacePath, 'ampersand', 'prototype.yaml');
+        const manifestFileName = fileUtils.generateWorkspacePath(['ampersand', 'prototype']); //path.join(workspacePath, 'ampersand', 'prototype.yaml');
         const manifestFileUri = vscode.Uri.file(manifestFileName);
 
         //Replace markers

@@ -40,10 +40,10 @@ export class fileUtils {
     return currentActiveFilePath;
   }
 
-  static generateWorkspacePath(paths: string[]) : string | undefined 
+  static generateWorkspacePath(paths: string[]) : string 
   {
     if(!this.isWorkspaceFolder()){
-      return;
+      return '';
     }
 
     const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -52,8 +52,10 @@ export class fileUtils {
     let filePath = workspacePath;
 
     paths.forEach(p => {
-      path.join(filePath, p);
+      filePath = path.join(filePath, p);
     });
+
+    return filePath;
 
   }
 
