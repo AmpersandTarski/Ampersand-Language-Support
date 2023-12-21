@@ -2,29 +2,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: student
+  name: prototype
   labels:
-    app: student
+    app: prototype
     container-image: student-prototype
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: student
+      app: prototype
   template:
     metadata:
       labels:
-        app: student
+        app: prototype
         container-image: student-prototype
     spec:
       containers:
-        - name: student
+        - name: prototype
           image: ampersandtarski/rap4-student-prototype:dev-zip
           env:
             - name: AMPERSAND_DBHOST
               value: ampersand-db
             - name: AMPERSAND_DBNAME
-              value: student
+              value: prototype
             - name: AMPERSAND_DEBUG_MODE
               value: "true"
             - name: AMPERSAND_LOG_CONFIG
@@ -49,10 +49,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: student
+  name: prototype
 spec:
   type: ClusterIP
   ports:
     - port: 80
   selector:
-    app: student
+    app: prototype
