@@ -6,19 +6,10 @@ export class fileUtils {
     return [a, b];
   }
 
-  static isWorkspaceFolder() : boolean
-  {
-    if(vscode.workspace.workspaceFolders === undefined){
-      vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.");
-      return false;
-    }
-
-    return true;
-  }
-
   static getCurrentOpenFile(): string | undefined
   {
-    if (!this.isWorkspaceFolder()) {
+    if (vscode.workspace.workspaceFolders === undefined) {
+      vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.");
       return;
     }
 
@@ -42,11 +33,13 @@ export class fileUtils {
 
   static generateWorkspacePath(paths: string[]) : string 
   {
-    if(!this.isWorkspaceFolder()){
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+
+    if (workspaceFolders === undefined) {
+      vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.");
       return '';
     }
 
-    const workspaceFolders = vscode.workspace.workspaceFolders;
     const workspacePath = workspaceFolders[0].uri.fsPath;
 
     let filePath = workspacePath;
