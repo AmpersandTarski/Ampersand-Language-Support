@@ -1,3 +1,4 @@
+import * as path from 'path';
 import * as vscode from 'vscode';
 import * as Buffer from 'buffer';
 export class fileUtils {
@@ -5,10 +6,19 @@ export class fileUtils {
     return [a, b];
   }
 
+  static isWorkspaceFolder() : boolean
+  {
+    if(vscode.workspace.workspaceFolders === undefined){
+      vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.");
+      return false;
+    }
+
+    return true;
+  }
+
   static getCurrentOpenFile(): string | undefined
   {
-    if (vscode.workspace.workspaceFolders === undefined) {
-      vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.")
+    if (!this.isWorkspaceFolder()) {
       return;
     }
 
@@ -28,6 +38,23 @@ export class fileUtils {
     }
 
     return currentActiveFilePath;
+  }
+
+  static generateWorkspacePath(paths: string[]) : string | undefined 
+  {
+    if(!this.isWorkspaceFolder()){
+      return;
+    }
+
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    const workspacePath = workspaceFolders[0].uri.fsPath;
+
+    let filePath = workspacePath;
+
+    paths.forEach(p => {
+      path.join(filePath, p);
+    });
+
   }
 
   static replaceMarkers(data: Uint8Array, markerValuePairs: Map<string, string>) : Uint8Array

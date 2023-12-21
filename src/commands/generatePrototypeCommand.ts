@@ -16,14 +16,7 @@ export class generatePrototypeCommand {
         if(config.mainScriptSetting === undefined || config.folderSetting === undefined)
             return;
         
-        //Get workspace folders
-        const workspaceFolders = vscode.workspace.workspaceFolders;
-
-        if(workspaceFolders === undefined)
-            return;
-
-        const workspacePath = workspaceFolders[0].uri.fsPath;
-        const folderPath = path.join(workspacePath, config.folderSetting);
+        const folderPath = fileUtils.generateWorkspacePath([config.folderSetting]); //path.join(workspacePath, config.folderSetting);
 
         //Zip folder and encode
         const zipOutPath = path.join(extensionPath, "assets", "out.zip");
@@ -39,7 +32,7 @@ export class generatePrototypeCommand {
 
         //Get template file and output path
         const templateFileUri = vscode.Uri.file(path.join(extensionPath, 'assets', 'prototype-template.yaml'));
-        const manifestFileName : string | undefined = path.join(workspacePath, 'ampersand', 'prototype.yaml');
+        const manifestFileName : string | undefined = fileUtils.generateWorkspacePath(['ampersand', 'prototype']); //path.join(workspacePath, 'ampersand', 'prototype.yaml');
         const manifestFileUri = vscode.Uri.file(manifestFileName);
 
         //Replace markers
@@ -52,32 +45,16 @@ export class generatePrototypeCommand {
                 ));
             vscode.workspace.fs.writeFile(manifestFileUri, newData).then(() => {
 
-                vscode.window.showInformationMessage(`Manifest saved at ${manifestFileUri}`);
+                vscode.window.showInformationMessage(`Manifest saved, running in minikube.`);
 
-                const deployment : string = 'student';
-                const service : string = 'student';
+                const deployment : string = 'prototype';
+                const service : string = 'prototype';
 
-                child_process.execSync(`kubectl apply -f ${manifestFileUri.fsPath}`, {
-                    stdio: "inherit"
-                  });
-                child_process.execSync(`kubectl rollout status deployment/${deployment} --timeout=100s`, {
-                    stdio: "inherit"
-                  });
-                child_process.execSync(`kubectl port-forward svc/${service} -n default 8000:80`, {
-                    stdio: "inherit"
-                  });
+                // Run prototype in minikube
+                terminalUtils.RunCommandInNewTerminal("Run prototype in minikube",
+                `sh ${extensionPath}/assets/kubernetes.sh ${manifestFileUri.fsPath} ${deployment} ${service}`);
+
             });
         });
-
-        // const deployment : string = 'student';
-        // const service : string = 'student';
-
-        // //Run prototype in minikube
-        // // terminalUtils.RunCommandInNewTerminal("Run prototype in minikube",
-        // // `sh ${extensionPath}/assets/kubernetes.sh ${manifestFileUri.fsPath} ${deployment} ${service}`)
-
-        // child_process.execSync(`kubectl apply -f ${manifestFileUri.fsPath}`);
-        // child_process.execSync(`kubectl rollout status deployment/${deployment} --timeout=100s`);
-        // child_process.execSync(`kubectl port-forward svc/${service} -n default 8000:80`);
     }
 }
