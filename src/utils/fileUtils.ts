@@ -33,7 +33,7 @@ export class fileUtils {
 
   static generateWorkspacePath(paths: string[]) : string 
   {
-    const workspaceFolders: vscode.WorkspaceFolder[] | undefined = vscode.workspace.workspaceFolders;
+    const workspaceFolders: readonly vscode.WorkspaceFolder[] | undefined = vscode.workspace.workspaceFolders;
 
     if (workspaceFolders === undefined) {
       vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.");
