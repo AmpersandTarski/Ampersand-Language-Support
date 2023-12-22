@@ -11,33 +11,33 @@ export class generatePrototypeCommand {
         if(context === undefined)
             return;
 
-        const extensionPath = context.extensionPath;
+        const extensionPath: string = context.extensionPath;
 
         if(config.mainScriptSetting === undefined || config.folderSetting === undefined)
             return;
         
-        const folderPath = fileUtils.generateWorkspacePath([config.folderSetting]); //path.join(workspacePath, config.folderSetting);
+        const folderPath: string = fileUtils.generateWorkspacePath([config.folderSetting]);
 
         //Zip folder and encode
-        const zipOutPath = path.join(extensionPath, "assets", "out.zip");
+        const zipOutPath: string = path.join(extensionPath, "assets", "out.zip");
 
         child_process.execSync(`zip -r ${zipOutPath} *`, {
           cwd: folderPath
         });
 
-        const encodedZipContent = fs.readFileSync(zipOutPath).toString('base64');
+        const encodedZipContent: string = fs.readFileSync(zipOutPath).toString('base64');
 
         //Encode main script
-        const encodedMainScript = btoa(config.mainScriptSetting);
+        const encodedMainScript: string = btoa(config.mainScriptSetting);
 
         //Get template file and output path
-        const templateFileUri = vscode.Uri.file(path.join(extensionPath, 'assets', 'prototype-template.yaml'));
-        const manifestFileName = fileUtils.generateWorkspacePath(['ampersand', 'prototype']); //path.join(workspacePath, 'ampersand', 'prototype.yaml');
-        const manifestFileUri = vscode.Uri.file(manifestFileName);
+        const templateFileUri: vscode.Uri = vscode.Uri.file(path.join(extensionPath, 'assets', 'prototype-template.yaml'));
+        const manifestFileName: string = fileUtils.generateWorkspacePath(['ampersand', 'prototype']);
+        const manifestFileUri: vscode.Uri = vscode.Uri.file(manifestFileName);
 
         //Replace markers
         vscode.workspace.fs.readFile(templateFileUri).then((data: Uint8Array) =>{
-            const newData = fileUtils.replaceMarkers(data, new Map<string, string>(
+            const newData: Uint8Array = fileUtils.replaceMarkers(data, new Map<string, string>(
                 [
                     ['{{zipFileContent}}', encodedZipContent],
                     ['{{mainScript}}', encodedMainScript]
@@ -47,8 +47,8 @@ export class generatePrototypeCommand {
 
                 vscode.window.showInformationMessage(`Manifest saved, running in minikube.`);
 
-                const deployment : string = 'prototype';
-                const service : string = 'prototype';
+                const deployment: string = 'prototype';
+                const service: string = 'prototype';
 
                 // Run prototype in minikube
                 terminalUtils.RunCommandInNewTerminal("Run prototype in minikube",

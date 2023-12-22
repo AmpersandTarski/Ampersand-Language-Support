@@ -1,14 +1,13 @@
-import vscode from 'vscode';
-import { fileUtils, terminalUtils } from '../utils';
+import { config, fileUtils, terminalUtils } from '../utils';
 
 export class generateFunctionalSpecCommand{
     static GenerateFunctionalSpecCommand()
     {
-        const currentActiveFilePath : string | undefined = fileUtils.getCurrentOpenFile();
-
-        if(currentActiveFilePath === undefined)
+        if(config.mainScriptSetting === undefined || config.folderSetting === undefined)
             return;
-    
-        terminalUtils.RunCommandInNewTerminal("ampersand generate spec",`ampersand documentation ${currentActiveFilePath} --format docx --no-graphics --language=NL --ConceptualAnalysis --verbosity debug`)
+        
+        const mainScriptPath: string = fileUtils.generateWorkspacePath([config.folderSetting, config.mainScriptSetting]);
+
+        terminalUtils.RunCommandInNewTerminal("ampersand generate spec",`ampersand documentation ${mainScriptPath} --format docx --no-graphics --language=NL --ConceptualAnalysis --verbosity debug`)
     }
 }

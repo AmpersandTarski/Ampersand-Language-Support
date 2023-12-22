@@ -33,23 +33,22 @@ export class fileUtils {
 
   static generateWorkspacePath(paths: string[]) : string 
   {
-    const workspaceFolders = vscode.workspace.workspaceFolders;
+    const workspaceFolders: vscode.WorkspaceFolder[] | undefined = vscode.workspace.workspaceFolders;
 
     if (workspaceFolders === undefined) {
       vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.");
       return '';
     }
 
-    const workspacePath = workspaceFolders[0].uri.fsPath;
+    const workspacePath: string = workspaceFolders[0].uri.fsPath;
 
-    let filePath = workspacePath;
+    let filePath: string = workspacePath;
 
     paths.forEach(p => {
       filePath = path.join(filePath, p);
     });
 
     return filePath;
-
   }
 
   static replaceMarkers(data: Uint8Array, markerValuePairs: Map<string, string>) : Uint8Array
