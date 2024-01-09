@@ -19,13 +19,14 @@ export function activate(context: vscode.ExtensionContext) {
 	ampersandVersionChecker.checkVersion();
 
     watcherUtils.setupLastRunningWatcher(context);
-
+    
     pushDisposable(context, "extension.checkVersion", () => checkVersionCommand.checkVersionCommand())
     pushDisposable(context, "extension.generateFunctionalSpec", () => generateFunctionalSpecCommand.GenerateFunctionalSpecCommand(context))
     pushDisposable(context, "extension.generateAtlas", () => generateAtlasCommand.GenerateAtlasCommand())
     pushDisposable(context, "extension.generatePrototype", () => generatePrototypeCommand.GeneratePrototypeCommand(context))
 
-    CreateAndFillGitIgnore();
+    generateWorkingFolders();
+    createAndFillGitIgnore();
 }
 
 function pushDisposable(context: vscode.ExtensionContext,extensionName : string, commandFunction: (...args: any[]) => any)
@@ -34,14 +35,14 @@ function pushDisposable(context: vscode.ExtensionContext,extensionName : string,
     context.subscriptions.push(dispose);
 }
 
-function CreateAndFillGitIgnore()
+function generateWorkingFolders()
 {
-    const ampersandPath = fileUtils.generateWorkspacePath(['ampersand']);
-    if (!fs.existsSync(ampersandPath)) 
-    {
-        fs.mkdirSync(ampersandPath, { recursive: true });
-    }
+    fileUtils.generateFolderInCurrentWorkspace(['ampersand']);
+    fileUtils.generateFolderInCurrentWorkspace(['project']);
+}
 
+function createAndFillGitIgnore()
+{
     const gitIgnorePath = fileUtils.generateWorkspacePath(['ampersand', '.gitignore']);
     const gitIgnoreContent = '# Ignore everything in this directory\n*\n# Except this file\n!.gitignore';
     fs.writeFileSync(`${gitIgnorePath}`, gitIgnoreContent);

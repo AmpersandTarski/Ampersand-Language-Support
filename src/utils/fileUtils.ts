@@ -1,6 +1,8 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
 import * as Buffer from 'buffer';
+import * as fs from 'fs';
+
 export class fileUtils {
   static pair<A, B>(a: A, b: B): [A, B] {
     return [a, b];
@@ -49,6 +51,15 @@ export class fileUtils {
     });
 
     return filePath;
+  }
+
+  static generateFolderInCurrentWorkspace(folderName: string[])
+  {
+    const folderPath = fileUtils.generateWorkspacePath(folderName);
+    if (!fs.existsSync(folderPath)) 
+    {
+        fs.mkdirSync(folderPath, { recursive: true });
+    }
   }
 
   static replaceMarkers(data: Uint8Array, markerValuePairs: Map<string, string>) : Uint8Array
