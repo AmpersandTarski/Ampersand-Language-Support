@@ -50,10 +50,10 @@ export class generatePrototypeCommand {
                 const deployment: string = 'prototype';
                 const service: string = 'prototype';
 
-                // Run prototype in minikube
-                terminalUtils.RunCommandInNewTerminal("Run prototype in minikube",
-                `sh ${extensionPath}/assets/kubernetes.sh ${manifestFileUri.fsPath} ${deployment} ${service}`);
-
+            terminalUtils.RunCommandsInNewTerminal("Run prototype in minikube",
+                [`kubectl apply -f ${manifestFileUri.fsPath}`,
+                `kubectl rollout status deployment/${deployment} --timeout=300s`,
+                `kubectl port-forward svc/${service} -n default 8000:80`,]);
             });
         });
     }
