@@ -2,14 +2,14 @@ import vscode from 'vscode';
 import { fileUtils } from './fileUtils';
 
 export class terminalUtils{
-    static RunCommandInNewTerminal(terminalName : string, runAmpersandCommand : string, workingDir? : string)
+    static RunCommandInNewTerminal(terminalName : string, runAmpersandCommand : string, workingDir? : string[])
     {
-        if(workingDir === 'undefined')
+        if(workingDir === undefined)
         {
-            workingDir = '';
+            workingDir = [''];
         }
 
-        let terminal = vscode.window.createTerminal({name:terminalName,cwd:workingDir});
+        let terminal = vscode.window.createTerminal({name:terminalName,cwd:fileUtils.generateWorkspacePath(workingDir)});
         terminal.sendText(runAmpersandCommand)
         terminal.show();
     }
