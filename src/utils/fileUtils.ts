@@ -62,6 +62,19 @@ export class fileUtils {
     }
   }
 
+  static generateFileInCurrentWorkspace(fileName: string[],folderName: string[])
+  {
+    this.generateFolderInCurrentWorkspace(folderName);
+
+    const combinedPath = this.generateCombinedPath(fileName,folderName)
+
+    const filePath = fileUtils.generateWorkspacePath(combinedPath);
+    if (!fs.existsSync(filePath)) 
+    {
+        fs.appendFile(filePath,'',(err) => {console.log(err)});
+    }
+  }
+
   static replaceMarkers(data: Uint8Array, markerValuePairs: Map<string, string>) : Uint8Array
   {
     let text: string = Buffer.Buffer.from(data).toString();
@@ -72,4 +85,21 @@ export class fileUtils {
 
     return Buffer.Buffer.from(text);
   }
+
+  static generateCombinedPath(fileName: string[],folderName: string[]): string[]
+  {
+    let combinedPath: string[] = [];
+      
+    folderName.forEach(p => {
+      combinedPath = combinedPath.concat(p);
+    });
+
+    fileName.forEach(p => {
+      combinedPath = combinedPath.concat(p);
+    });
+
+    return combinedPath;
+  }
+
 }
+
