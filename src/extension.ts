@@ -1,10 +1,10 @@
 'use strict';
 import * as vscode from 'vscode';
 import * as fs from 'fs';
-import { fileUtils } from "./utils";
+import { fileUtils, watcherUtils } from "./utils";
 import { ampersandVersionChecker } from './ampersand';
 import { constants } from './constants';
-import { daemonCommand, generateFunctionalSpecCommand, checkVersionCommand, generateAtlasCommand, generatePrototypeCommand } from './commands';
+import { generateFunctionalSpecCommand, checkVersionCommand, generateAtlasCommand, generatePrototypeCommand } from './commands';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -18,22 +18,14 @@ export function activate(context: vscode.ExtensionContext) {
 
 	ampersandVersionChecker.checkVersion();
 
-    setupLastRunningWatcher(context);
+    watcherUtils.setupLastRunningWatcher(context);
 
     pushDisposable(context, "extension.checkVersion", () => checkVersionCommand.checkVersionCommand())
     pushDisposable(context, "extension.generateFunctionalSpec", () => generateFunctionalSpecCommand.GenerateFunctionalSpecCommand(context))
     pushDisposable(context, "extension.generateAtlas", () => generateAtlasCommand.GenerateAtlasCommand())
     pushDisposable(context, "extension.generatePrototype", () => generatePrototypeCommand.GeneratePrototypeCommand(context))
 
-    const ampersandPath = fileUtils.generateWorkspacePath(['ampersand']);
-    if (!fs.existsSync(ampersandPath)) 
-    {
-        fs.mkdirSync(ampersandPath, { recursive: true });
-    }
-    
-    const gitIgnorePath = fileUtils.generateWorkspacePath(['ampersand', '.gitignore']);
-    const gitIgnoreContent = '# Ignore everything in this directory\n*\n# Except this file\n!.gitignore';
-    fs.writeFileSync(`${gitIgnorePath}`, gitIgnoreContent);
+    CreateAndFillGitIgnore();
 }
 
 function pushDisposable(context: vscode.ExtensionContext,extensionName : string, commandFunction: (...args: any[]) => any)
@@ -42,36 +34,15 @@ function pushDisposable(context: vscode.ExtensionContext,extensionName : string,
     context.subscriptions.push(dispose);
 }
 
-// Setup last running watcher, so we can undo it
-function setupLastRunningWatcher(context: vscode.ExtensionContext)
+function CreateAndFillGitIgnore()
 {
-    // Pointer to the last running watcher, so we can undo it
-    var oldWatcher : fs.FSWatcher | null = null;
-    var oldTerminal : vscode.Terminal | null = null;
-
-    const cleanup = () => {
-        if (oldWatcher != null)
-            oldWatcher.close();
-        oldWatcher = null;
-        if (oldTerminal != null)
-            oldTerminal.dispose();
-        oldTerminal = null;
-    }
-    context.subscriptions.push({dispose: cleanup});
-
-    const add = (name : string, act : () => fs.FSWatcher | null ) => {
-        const dispose = vscode.commands.registerCommand(name, () => {
-            try {
-                cleanup();
-                oldWatcher = act();
-            }
-            catch (e) {
-                console.error("Ampersand extension failed in " + name + ": " + e);
-                throw e;
-            }
-        });
-        context.subscriptions.push(dispose);
+    const ampersandPath = fileUtils.generateWorkspacePath(['ampersand']);
+    if (!fs.existsSync(ampersandPath)) 
+    {
+        fs.mkdirSync(ampersandPath, { recursive: true });
     }
 
-    add('extension.startDaemon', () => daemonCommand.runDaemonCommand(context, oldTerminal));
+    const gitIgnorePath = fileUtils.generateWorkspacePath(['ampersand', '.gitignore']);
+    const gitIgnoreContent = '# Ignore everything in this directory\n*\n# Except this file\n!.gitignore';
+    fs.writeFileSync(`${gitIgnorePath}`, gitIgnoreContent);
 }
