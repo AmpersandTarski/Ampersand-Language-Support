@@ -16,6 +16,6 @@ export class generateFunctionalSpecCommand{
         const mainScriptPath: string = fileUtils.generateWorkspacePath([config.folderSetting, config.mainScriptSetting]);
 
         terminalUtils.RunCommandInNewTerminal("Ampersand generate functional spec",
-            `documentation ${mainScriptPath} --format docx --no-graphics --language=NL --ConceptualAnalysis --verbosity debug`, ['ampersand']);
+            `ampersand documentation ${mainScriptPath} --format docx --no-graphics --language=NL --ConceptualAnalysis --verbosity debug`, ['ampersand']);
     }
 }
