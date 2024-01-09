@@ -4,6 +4,7 @@ npm install
 npm install --global @vscode/vsce
 npm install --global typescript
 npm install @types/node
+npm install graphviz
 
 git restore .
 

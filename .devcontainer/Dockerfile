@@ -6,7 +6,6 @@ FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-${VARIANT}
 
 COPY --from=ampersandtarski/ampersand:v4.7 /bin/ampersand /usr/local/bin
 RUN chmod +x /usr/local/bin/ampersand
-RUN apt-get update && apt-get install -y graphviz
 
 # Set `DEVCONTAINER` environment variable to help with orientation
 ENV DEVCONTAINER=true
