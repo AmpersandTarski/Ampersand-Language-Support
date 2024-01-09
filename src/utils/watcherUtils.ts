@@ -17,9 +17,13 @@ export class watcherUtils {
                 oldTerminal.dispose();
             oldTerminal = null;
         }
+
         context.subscriptions.push({dispose: cleanup});
 
-        const add = (name : string, act : () => fs.FSWatcher | null ) => {
+        add(context, 'extension.startDaemon', () => daemonCommand.runDaemonCommand(context, oldTerminal));
+
+        function add(context: vscode.ExtensionContext,name : string, act : () => fs.FSWatcher | null)
+        {
             const dispose = vscode.commands.registerCommand(name, () => {
                 try {
                     cleanup();
@@ -32,7 +36,5 @@ export class watcherUtils {
             });
             context.subscriptions.push(dispose);
         }
-
-        add('extension.startDaemon', () => daemonCommand.runDaemonCommand(context, oldTerminal));
     }
 }
