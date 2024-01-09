@@ -13,4 +13,18 @@ export class terminalUtils{
         terminal.sendText(runAmpersandCommand)
         terminal.show();
     }
+
+    static RunCommandsInNewTerminal(terminalName : string, runAmpersandCommands : string[], workingDir? : string[])
+    {
+        if(workingDir === undefined)
+        {
+            workingDir = [''];
+        }
+
+        let terminal = vscode.window.createTerminal({name:terminalName,cwd:fileUtils.generateWorkspacePath(workingDir)});
+        terminal.show();
+        runAmpersandCommands.forEach(command => {
+            terminal.sendText(command)
+        });
+    }
 }
