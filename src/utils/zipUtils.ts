@@ -40,8 +40,10 @@ export class zipUtils{
             return newData;
         }
 
-        static writeMarkerFile(manifestFileUri : vscode.Uri, newData: Uint8Array)
+        static writeMarkerFile(manifestFileName : string, newData: Uint8Array)
         {
+            const manifestFileUri: vscode.Uri = vscode.Uri.file(manifestFileName);
+
             vscode.workspace.fs.writeFile(manifestFileUri, newData).then(() => {
     
                 vscode.window.showInformationMessage(`Manifest saved, running in minikube.`);

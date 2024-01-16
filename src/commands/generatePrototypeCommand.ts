@@ -6,30 +6,38 @@ export class generatePrototypeCommand {
     static GeneratePrototypeCommand(context: vscode.ExtensionContext)
     {
         //Get extension path
-        if(context === undefined)
+        if(!context)
             return;
 
         const extensionPath: string = context.extensionPath;
 
         const encodedZipContent = zipUtils.zipFolder(extensionPath);
 
-        if(encodedZipContent === undefined)
+        if(!encodedZipContent)
             return;
 
         //Encode main script
-        const encodedMainScript: string = btoa(config.mainScriptSetting as string);
-
-        //Get template file and output path
-        const templateFileUri: vscode.Uri = vscode.Uri.file(path.join(extensionPath, 'assets', 'prototype-template.yaml'));
-        const manifestFileName: string = fileUtils.generateWorkspacePath(['ampersand', 'prototype.yaml']);
+        const newData = replaceMarkers(encodedZipContent);
         
-        //Replace markers
-        const newData = zipUtils.replaceMarkers(templateFileUri,encodedZipContent,encodedMainScript);
-        
-        if(newData === undefined)
+        if(!newData)
             return;
     
-        const manifestFileUri: vscode.Uri = vscode.Uri.file(manifestFileName);
-        zipUtils.writeMarkerFile(manifestFileUri, newData);
+        writeMarkerFile(newData);
+
+        function replaceMarkers(encodedZipContent : string) {
+            const encodedMainScript: string = btoa(config.mainScriptSetting as string);
+
+            //Get template file and output path
+            const templateFileUri: vscode.Uri = vscode.Uri.file(path.join(extensionPath, 'assets', 'prototype-template.yaml'));
+
+            //Replace markers
+            const newData = zipUtils.replaceMarkers(templateFileUri, encodedZipContent, encodedMainScript);
+            return newData;
+        }
+
+        function writeMarkerFile(newData : Uint8Array) {
+            const manifestFileName: string = fileUtils.generateWorkspacePath(['ampersand', 'prototype.yaml']);
+            zipUtils.writeMarkerFile(manifestFileName, newData);
+        }
     }
 }
