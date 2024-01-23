@@ -6,20 +6,20 @@ export class generatePrototypeCommand {
     static GeneratePrototypeCommand(context: vscode.ExtensionContext)
     {
         //Get extension path
-        if(!context)
+        if(context === undefined)
             return;
 
         const extensionPath: string = context.extensionPath;
 
         const encodedZipContent = zipUtils.zipFolder(extensionPath);
 
-        if(!encodedZipContent)
+        if(encodedZipContent === undefined)
             return;
 
         //Encode main script
         const newData = replaceMarkers(encodedZipContent);
         
-        if(!newData)
+        if(newData === undefined)
             return;
     
         writeMarkerFile(newData);
