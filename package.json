@@ -1,7 +1,7 @@
 {
 	"name": "language-ampersand",
 	"displayName": "Ampersand (ADL) language support",
-	"version": "0.4.32",
+	"version": "0.4.33",
 	"publisher": "AmpersandTarski",
 	"description": "Language support for Ampersand scripts",
 	"categories": [
@@ -106,16 +106,16 @@
 				"title": "Ampersand: Start checker"
 			},
 			{
-				"command":"extension.generateFunctionalSpec",
-				"title":"Ampersand: generate functional spec"
+				"command": "extension.generateFunctionalSpec",
+				"title": "Ampersand: generate functional spec"
 			},
 			{
-				"command":"extension.generateAtlas",
-				"title":"Ampersand: Generate atlas"
+				"command": "extension.generateAtlas",
+				"title": "Ampersand: Generate atlas"
 			},
 			{
-				"command":"extension.generatePrototype",
-				"title":"Ampersand: Generate prototype"
+				"command": "extension.generatePrototype",
+				"title": "Ampersand: Generate prototype"
 			}
 		],
 		"problemMatchers": [
@@ -147,19 +147,18 @@
 		"configuration": {
 			"title": "Ampersand",
 			"properties": {
-			  "ampersand.mainScriptName": {
-				"type": "string",
-				"default": "main.adl",
-				"description": "The name of the main ADL script file to be fed to the ampersand compiler to generate a prototype."
-			  },
-			  "ampersand.folderName": {
-				"type": "string",
-				"default": "project",
-				"description": "The name of the folder to use to generate a protoype. Must contain the main script."
-
-			  }
+				"ampersand.mainScriptName": {
+					"type": "string",
+					"default": "main.adl",
+					"description": "The name of the main ADL script file to be fed to the ampersand compiler to generate a prototype."
+				},
+				"ampersand.folderName": {
+					"type": "string",
+					"default": "project",
+					"description": "The name of the folder to use to generate a protoype. Must contain the main script."
+				}
 			}
-		  }
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
