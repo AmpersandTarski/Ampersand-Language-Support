@@ -15,29 +15,32 @@ export class generatePrototypeCommand {
 
         if(encodedZipContent === undefined)
             return;
-
-        //Encode main script
-        const newData = replaceMarkers(encodedZipContent);
         
-        if(newData === undefined)
-            return;
-    
-        writeMarkerFile(newData);
+        const encodedMainScript: string = btoa(config.mainScriptSetting as string);
+        const templateFileUri: vscode.Uri = vscode.Uri.file(path.join(extensionPath, 'assets', 'prototype-template.yaml'));
+        const manifestFileName: string = fileUtils.generateWorkspacePath(['ampersand', 'prototype.yaml']);
 
-        function replaceMarkers(encodedZipContent : string) {
-            const encodedMainScript: string = btoa(config.mainScriptSetting as string);
+        const manifestFileUri: vscode.Uri = vscode.Uri.file(manifestFileName);
 
-            //Get template file and output path
-            const templateFileUri: vscode.Uri = vscode.Uri.file(path.join(extensionPath, 'assets', 'prototype-template.yaml'));
+        vscode.workspace.fs.readFile(templateFileUri).then((data: Uint8Array) =>{
+            const newData: Uint8Array = fileUtils.replaceMarkers(data, new Map<string, string>(
+                [
+                    ['{{zipFileContent}}', encodedZipContent],
+                    ['{{mainScript}}', encodedMainScript]
+                ]
+                ));
+            vscode.workspace.fs.writeFile(manifestFileUri, newData).then(() => {
 
-            //Replace markers
-            const newData = zipUtils.replaceMarkers(templateFileUri, encodedZipContent, encodedMainScript);
-            return newData;
-        }
+                vscode.window.showInformationMessage(`Manifest saved, running in minikube.`);
 
-        function writeMarkerFile(newData : Uint8Array) {
-            const manifestFileName: string = fileUtils.generateWorkspacePath(['ampersand', 'prototype.yaml']);
-            zipUtils.writeMarkerFile(manifestFileName, newData);
-        }
+                const deployment: string = 'prototype';
+                const service: string = 'prototype';
+
+            terminalUtils.RunCommandsInNewTerminal("Run prototype in minikube",
+                [`kubectl apply -f ${manifestFileUri.fsPath}`,
+                `kubectl rollout status deployment/${deployment} --timeout=300s`,
+                `kubectl port-forward svc/${service} -n default 8000:80`,]);
+            });
+        });
     }
 }
