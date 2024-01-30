@@ -17,6 +17,8 @@ jobs:
       -
         name: install npm
         run: npm install
+      - name: install esbuild
+        run: npm i --global esbuild
       -
         name: prepublish
         run: npm run vscode:prepublish
