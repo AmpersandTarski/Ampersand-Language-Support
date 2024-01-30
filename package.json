@@ -167,7 +167,7 @@
 		"test-compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"package": "npm run esbuild-base -- --minify",
-		"publish": "vsce publish",
+		"publish": "npm run esbuild-base -- --minify",
     	"esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
 		"esbuild": "npm run esbuild-base -- --sourcemap",
     	"esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
