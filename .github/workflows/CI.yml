@@ -24,6 +24,10 @@ jobs:
         name: prepublish
         run: npm run vscode:prepublish
 
+      -
+        name: compile
+        run: npm run compile
+
   deploy:
     name: Deploy Extension 🥧
     needs: build
