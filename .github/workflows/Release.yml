@@ -22,6 +22,10 @@ jobs:
       - name: git add
         run: git add .
 
+      -
+        name: install esbuild
+        run: npm i --global esbuild
+
       - name: bundle
         run: npm run bundle
 
