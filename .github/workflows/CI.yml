@@ -30,6 +30,6 @@ jobs:
   deploy:
     name: Deploy Extension 🥧
     needs: build
-    # if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master'
     uses: ./.github/workflows/Release.yml
     secrets: inherit
