@@ -21,7 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
     watcherUtils.setupLastRunningWatcher(context);
     
     pushDisposable(context, "extension.checkVersion", () => checkVersionCommand.checkVersionCommand())
-    pushDisposable(context, "extension.generateFunctionalSpec", () => generateFunctionalSpecCommand.GenerateFunctionalSpecCommand(context))
+    pushDisposable(context, "extension.generateFunctionalSpec", () => generateFunctionalSpecCommand.GenerateFunctionalSpecCommand())
     pushDisposable(context, "extension.generateAtlas", () => generateAtlasCommand.GenerateAtlasCommand())
     pushDisposable(context, "extension.generatePrototype", () => generatePrototypeCommand.GeneratePrototypeCommand(context))
 
