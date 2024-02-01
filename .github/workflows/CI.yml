@@ -17,8 +17,6 @@ jobs:
       -
         name: install npm
         run: npm install
-      - name: install esbuild
-        run: npm i --global esbuild
       -
         name: install esbuild
         run: npm i --global esbuild
@@ -32,6 +30,6 @@ jobs:
   deploy:
     name: Deploy Extension 🥧
     needs: build
-    if: github.ref == 'refs/heads/master'
+    # if: github.ref == 'refs/heads/master'
     uses: ./.github/workflows/Release.yml
     secrets: inherit
