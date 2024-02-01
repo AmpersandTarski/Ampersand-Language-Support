@@ -20,8 +20,14 @@ jobs:
       - name: install esbuild
         run: npm i --global esbuild
       -
-        name: prepublish
-        run: npm run vscode:prepublish
+        name: install esbuild
+        run: npm i --global esbuild
+      -
+        name: bundle
+        run: npm run bundle
+      -
+        name: compile
+        run: npm run compile
 
   deploy:
     name: Deploy Extension 🥧
