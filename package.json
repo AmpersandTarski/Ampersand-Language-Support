@@ -40,8 +40,8 @@
 	"bugs": {
 		"url": "https://github.com/AmpersandTarski/Ampersand-Language-Support/issues"
 	},
-	"browser": "./out/src/extension.js",
-	"main": "./out/src/extension.js",
+	"browser": "./out/extension.js",
+	"main": "./out/extension.js",
 	"contributes": {
 		"languages": [
 			{
@@ -161,11 +161,13 @@
 		}
 	},
 	"scripts": {
-		"vscode:prepublish": "npm run compile",
+		"bundle": "npm run esbuild-base -- --minify",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
-		"package": "vsce package",
-		"publish": "vsce publish"
+		"package": "npm run esbuild-base -- --minify",
+    	"esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+		"esbuild": "npm run esbuild-base -- --sourcemap",
+    	"esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
 	},
 	"dependencies": {
 		"@types/node": "ts5.1",
