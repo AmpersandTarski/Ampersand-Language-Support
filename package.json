@@ -162,12 +162,10 @@
 		  }
 	},
 	"scripts": {
-		"vscode:prepublish": "npm run esbuild-base -- --minify",
+		"bundle": "npm run esbuild-base -- --minify",
 		"compile": "tsc -p ./",
-		"test-compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"package": "npm run esbuild-base -- --minify",
-		"publish": "",
     	"esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
 		"esbuild": "npm run esbuild-base -- --sourcemap",
     	"esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
