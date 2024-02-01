@@ -1,9 +1,13 @@
-import { fileUtils, terminalUtils } from "../utils";
+import * as vscode from 'vscode';
+import { config, fileUtils, terminalUtils } from "../utils";
 
 export class generateAtlasCommand {
     static GenerateAtlasCommand()
     {
-        const currentActiveFilePath : string | undefined = fileUtils.getCurrentOpenFile();
+        if(config.mainScriptSetting === undefined || config.folderSetting === undefined)
+            return;
+
+        const currentActiveFilePath : string | undefined = fileUtils.generateWorkspacePath([config.folderSetting, config.mainScriptSetting]);
 
         if(currentActiveFilePath === undefined)
             return;
