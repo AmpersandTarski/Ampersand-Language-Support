@@ -55,7 +55,7 @@ export class generatePrototypeCommand {
             let killerTerminalPID = terminalUtils.RunCommandsInNewTerminal("Kill processes",
             [`PID=$(ps -ef | grep 'kubectl port-forward' | grep -v grep | awk '{print $2}')`,
             `kill $PID`,
-            (`kill ` + terminalPID.processId)]);
+            (`kill ${terminalPID.processId.then()}`)]);
         }
     }
 }
