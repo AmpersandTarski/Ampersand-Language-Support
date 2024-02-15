@@ -47,18 +47,25 @@ export class generatePrototypeCommand {
             });
         });
 
-        async function tryKillPortForwardedProcessAndTerminal(terminalPID : vscode.Terminal | undefined)
+        async function tryKillPortForwardedProcessAndTerminal(terminalToKill : vscode.Terminal | undefined)
         {
-            if(terminalPID === undefined)
+            if(terminalToKill === undefined)
                 return;
             
-            let terminalId = await terminalPID.processId.then();
+            //get the processID from the terminal that needs to be killed
+            let terminalPID = await terminalToKill.processId.then();
 
-            let killerTerminalPID = terminalUtils.RunCommandsInNewTerminal("Kill processes",
+            //kill the portforward process and then kill the terminal that was hosting it.
+            let killerTerminal = terminalUtils.RunCommandsInNewTerminal("Kill processes",
             [`PID=$(ps -ef | grep 'kubectl port-forward' | grep -v grep | awk '{print $2}')`,
             `kill $PID`,
-            (`kill ${terminalPID.processId.then()}`),
-            (`kill ${terminalId}`)]);
+            (`kill -9 ${terminalPID}`)]);
+
+            //Get own terminal PID to kill it later
+            let killerTerminalPID = await killerTerminal.processId.then();
+
+            //Kill self to cleanup
+            terminalUtils.RunCommandsInExistingTerminal(killerTerminal,[(`kill -9 ${killerTerminalPID}`)])
         }
     }
 }

@@ -10,8 +10,7 @@ export class terminalUtils{
         }
 
         let terminal = vscode.window.createTerminal({name:terminalName,cwd:fileUtils.generateWorkspacePath(workingDir)});
-        terminal.sendText(runAmpersandCommand)
-        terminal.show();
+        this.RunCommandsInExistingTerminal(terminal,[runAmpersandCommand])
     }
 
     static RunCommandsInNewTerminal(terminalName : string, runAmpersandCommands : string[], workingDir? : string[]) : Terminal
@@ -22,11 +21,22 @@ export class terminalUtils{
         }
 
         let terminal = vscode.window.createTerminal({name:terminalName,cwd:fileUtils.generateWorkspacePath(workingDir)});
+        
+        this.RunCommandsInExistingTerminal(terminal,runAmpersandCommands);
+
+        return terminal;
+    }
+
+    static RunCommandsInExistingTerminal(terminal : Terminal, runAmpersandCommands : string[], workingDir? : string[])
+    {
+        if(workingDir === undefined)
+        {
+            workingDir = [''];
+        }
+
         terminal.show();
         runAmpersandCommands.forEach(command => {
             terminal.sendText(command)
         });
-
-        return terminal;
     }
 }
