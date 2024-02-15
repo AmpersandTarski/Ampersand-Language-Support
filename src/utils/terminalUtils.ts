@@ -14,7 +14,7 @@ export class terminalUtils{
         terminal.show();
     }
 
-    static RunCommandsInNewTerminal(terminalName : string, runAmpersandCommands : string[], workingDir? : string[])
+    static RunCommandsInNewTerminal(terminalName : string, runAmpersandCommands : string[], workingDir? : string[]) : Thenable<number | undefined>
     {
         if(workingDir === undefined)
         {
@@ -26,5 +26,7 @@ export class terminalUtils{
         runAmpersandCommands.forEach(command => {
             terminal.sendText(command)
         });
+
+        return terminal.processId;
     }
 }
