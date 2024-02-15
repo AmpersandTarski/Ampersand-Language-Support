@@ -1,4 +1,4 @@
-import vscode from 'vscode';
+import vscode, { Terminal } from 'vscode';
 import { fileUtils } from './fileUtils';
 
 export class terminalUtils{
@@ -14,7 +14,7 @@ export class terminalUtils{
         terminal.show();
     }
 
-    static RunCommandsInNewTerminal(terminalName : string, runAmpersandCommands : string[], workingDir? : string[]) : Thenable<number | undefined>
+    static RunCommandsInNewTerminal(terminalName : string, runAmpersandCommands : string[], workingDir? : string[]) : Terminal
     {
         if(workingDir === undefined)
         {
@@ -27,6 +27,6 @@ export class terminalUtils{
             terminal.sendText(command)
         });
 
-        return terminal.processId;
+        return terminal;
     }
 }

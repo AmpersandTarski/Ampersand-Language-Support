@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 
 export class generatePrototypeCommand {
-    private static portForwardTerminalPID: Thenable<number | undefined> | undefined;
+    private static portForwardTerminalPID: vscode.Terminal | undefined;
 
     static GeneratePrototypeCommand(context: vscode.ExtensionContext)
     {
@@ -47,7 +47,7 @@ export class generatePrototypeCommand {
             });
         });
 
-        function tryKillPortForwardedProcessAndTerminal(terminalPID : Thenable<number | undefined> | undefined)
+        function tryKillPortForwardedProcessAndTerminal(terminalPID : vscode.Terminal | undefined)
         {
             if(terminalPID === undefined)
                 return;
@@ -55,7 +55,7 @@ export class generatePrototypeCommand {
             let killerTerminalPID = terminalUtils.RunCommandsInNewTerminal("Kill processes",
             [`PID=$(ps -ef | grep 'kubectl port-forward' | grep -v grep | awk '{print $2}')`,
             `kill $PID`,
-            (`kill ` + terminalPID)]);
+            (`kill ` + terminalPID.processId)]);
         }
     }
 }
