@@ -3,9 +3,9 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 
 export class generatePrototypeCommand {
-    private portForwardTerminalPID: Thenable<number | undefined> | undefined;
+    private static portForwardTerminalPID: Thenable<number | undefined> | undefined;
 
-    public GeneratePrototypeCommand(context: vscode.ExtensionContext)
+    static GeneratePrototypeCommand(context: vscode.ExtensionContext)
     {
         //Get extension path
         if(context === undefined)
@@ -23,7 +23,7 @@ export class generatePrototypeCommand {
         const manifestFileName: string = fileUtils.generateWorkspacePath(['ampersand', 'prototype.yaml']);
 
         const manifestFileUri: vscode.Uri = vscode.Uri.file(manifestFileName);
-        
+
         tryKillPortForwardedProcessAndTerminal(this.portForwardTerminalPID);
 
         vscode.workspace.fs.readFile(templateFileUri).then((data: Uint8Array) =>{
