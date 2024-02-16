@@ -13,7 +13,7 @@ export class generatePrototypeCommand {
 
         const extensionPath: string = context.extensionPath;
 
-        const encodedZipContent = zipUtils.zipFolder(extensionPath);
+        const encodedZipContent:string|undefined = zipUtils.zipFolder(extensionPath);
 
         if(encodedZipContent === undefined)
             return;
@@ -26,46 +26,51 @@ export class generatePrototypeCommand {
 
         tryKillPortForwardedProcessAndTerminal(this.portForwardTerminalPID);
 
-        vscode.workspace.fs.readFile(templateFileUri).then((data: Uint8Array) =>{
+        vscode.workspace.fs.readFile(templateFileUri).then((data: Uint8Array) => replaceMarkers(data,encodedZipContent));
+
+        function tryKillPortForwardedProcessAndTerminal(terminalToKill : vscode.Terminal | undefined)
+        {
+            if(terminalToKill === undefined)
+                return;
+            
+            //get the processID from the terminal that needs to be killed
+            terminalToKill.processId.then((terminalToKillPID: number | undefined) => {
+                let killerTerminal = terminalUtils.RunCommandsInNewTerminal("Kill processes",
+                [`PID=$(ps -ef | grep 'kubectl port-forward' | grep -v grep | awk '{print $2}')`,
+                `kill $PID`,
+                (`kill -9 ${terminalToKillPID}`)],
+                false);
+
+                //Get own terminal PID to kill it later
+                killerTerminal.processId.then((killerTerminalPID: number|undefined) => { 
+                    
+                    //Kill self to cleanup
+                    terminalUtils.RunCommandsInExistingTerminal(killerTerminal,[(`kill -9 ${killerTerminalPID}`)]);
+                });
+            });
+        }
+
+        function replaceMarkers(data: Uint8Array, encodedZipContent:string)
+        {
             const newData: Uint8Array = fileUtils.replaceMarkers(data, new Map<string, string>(
                 [
                     ['{{zipFileContent}}', encodedZipContent],
                     ['{{mainScript}}', encodedMainScript]
                 ]
                 ));
-            vscode.workspace.fs.writeFile(manifestFileUri, newData).then(() => {
+                
+                vscode.workspace.fs.writeFile(manifestFileUri, newData).then(runPrototypeCommand)
+        }
 
-                vscode.window.showInformationMessage(`Manifest saved, running in minikube.`);
+        function runPrototypeCommand()
+        {
+            const deployment: string = 'prototype';
+            const service: string = 'prototype';
 
-                const deployment: string = 'prototype';
-                const service: string = 'prototype';
-
-            this.portForwardTerminalPID = terminalUtils.RunCommandsInNewTerminal("Run prototype in minikube",
+            generatePrototypeCommand.portForwardTerminalPID = terminalUtils.RunCommandsInNewTerminal("Run prototype in minikube",
                 [`kubectl apply -f ${manifestFileUri.fsPath}`,
                 `kubectl rollout status deployment/${deployment} --timeout=300s`,
                 `kubectl port-forward svc/${service} -n default 8000:80`,]);
-            });
-        });
-
-        async function tryKillPortForwardedProcessAndTerminal(terminalToKill : vscode.Terminal | undefined)
-        {
-            if(terminalToKill === undefined)
-                return;
-            
-            //get the processID from the terminal that needs to be killed
-            let terminalPID = await terminalToKill.processId.then();
-
-            //kill the portforward process and then kill the terminal that was hosting it.
-            let killerTerminal = terminalUtils.RunCommandsInNewTerminal("Kill processes",
-            [`PID=$(ps -ef | grep 'kubectl port-forward' | grep -v grep | awk '{print $2}')`,
-            `kill $PID`,
-            (`kill -9 ${terminalPID}`)]);
-
-            //Get own terminal PID to kill it later
-            let killerTerminalPID = await killerTerminal.processId.then();
-
-            //Kill self to cleanup
-            terminalUtils.RunCommandsInExistingTerminal(killerTerminal,[(`kill -9 ${killerTerminalPID}`)])
         }
     }
 }
