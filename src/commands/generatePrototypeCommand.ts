@@ -8,15 +8,12 @@ export class generatePrototypeCommand {
     private portForwardTerminal: vscode.Terminal | undefined;
     private builder : terminalBuilder = new terminalBuilder();
 
-    private manifestFile : manifest;
+    private manifestFile : manifest | undefined = undefined;
 
-    constructor(context: vscode.ExtensionContext)
+    public GeneratePrototypeCommand(context: vscode.ExtensionContext)
     {
         this.manifestFile = new manifest(context.extensionPath);
-    }
 
-    public GeneratePrototypeCommand()
-    {
         this.tryKillPortForwardedProcessAndTerminal();     
 
         vscode.workspace.fs.readFile(this.manifestFile.templateFileUri).then((data: Uint8Array) => this.replaceMarkers(data));

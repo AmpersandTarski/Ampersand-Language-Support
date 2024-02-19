@@ -6,6 +6,10 @@ import { ampersandVersionChecker } from './ampersand';
 import { constants } from './constants';
 import { generateFunctionalSpecCommand, checkVersionCommand, generateAtlasCommand, generatePrototypeCommand } from './commands';
 
+const generatePrototypeCommandInstance = new generatePrototypeCommand();
+const generateFunctionalSpecCommandInstance = new generateFunctionalSpecCommand();
+const generateAtlasCommandInstance = new generateAtlasCommand();
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -20,14 +24,10 @@ export function activate(context: vscode.ExtensionContext) {
 
     watcherUtils.setupLastRunningWatcher(context);
 
-    const generatePrototypeCommandInstance = new generatePrototypeCommand(context);
-    const generateFunctionalSpecCommandInstance = new generateFunctionalSpecCommand();
-    const generateAtlasCommandInstance = new generateAtlasCommand();
-
     pushDisposable(context, "extension.checkVersion", () => checkVersionCommand.checkVersionCommand())
     pushDisposable(context, "extension.generateFunctionalSpec", () => generateFunctionalSpecCommandInstance.GenerateFunctionalSpecCommand())
     pushDisposable(context, "extension.generateAtlas", () => generateAtlasCommandInstance.GenerateAtlasCommand())
-    pushDisposable(context, "extension.generatePrototype", () => generatePrototypeCommandInstance.GeneratePrototypeCommand())
+    pushDisposable(context, "extension.generatePrototype", () => generatePrototypeCommandInstance.GeneratePrototypeCommand(context))
 
     generateWorkingFolders();
     createAndFillGitIgnore();
