@@ -12,6 +12,10 @@ export class terminalBuilder
 
     public getTerminal(): vscode.Terminal {
         const toReturn = vscode.window.createTerminal({name:this.terminalInfoBuild.terminalName,cwd:fileUtils.generateWorkspacePath(this.terminalInfoBuild.workingDir)});
+        
+        if(this.terminalInfoBuild.terminalVisible)
+            toReturn.show();
+
         this.reset();
         return toReturn;
     }
@@ -23,6 +27,7 @@ export class terminalBuilder
 
     public setVisibility(terminalVisible:boolean) : terminalBuilder {
         this.terminalInfoBuild.terminalVisible = terminalVisible;
+
         return this;
     }
 
