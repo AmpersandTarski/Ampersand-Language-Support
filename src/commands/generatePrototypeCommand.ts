@@ -4,7 +4,7 @@ import { terminalBuilder } from "../builders/terminalBuilder";
 import { manifest } from '../models/manifest';
 
 export class generatePrototypeCommand {
-    private portForwardTerminal: vscode.Terminal | undefined;
+    static portForwardTerminal: vscode.Terminal | undefined;
     private builder : terminalBuilder = new terminalBuilder();
 
     private manifestFile : manifest;
@@ -23,7 +23,7 @@ export class generatePrototypeCommand {
 
     private tryKillPortForwardedProcessAndTerminal()
     {
-        if(this.portForwardTerminal === undefined)
+        if(generatePrototypeCommand.portForwardTerminal === undefined)
             return;
         
         const buildTerminal = this.builder.setName("default name")
@@ -31,7 +31,7 @@ export class generatePrototypeCommand {
                                             .getTerminal();
 
         //get the processID from the terminal that needs to be killed
-        this.portForwardTerminal.processId.then((terminalToKillPID: number | undefined) => {
+        generatePrototypeCommand.portForwardTerminal.processId.then((terminalToKillPID: number | undefined) => {
             terminalUtils.RunCommandsInExistingTerminal(buildTerminal,
             [`PID=$(ps -ef | grep 'kubectl port-forward' | grep -v grep | awk '{print $2}')`,
             `kill $PID`,
@@ -63,10 +63,10 @@ export class generatePrototypeCommand {
         const deployment: string = 'prototype';
         const service: string = 'prototype';
         
-        this.portForwardTerminal = this.builder.setName("Run prototype in minikube")
+        generatePrototypeCommand.portForwardTerminal = this.builder.setName("Run prototype in minikube")
                                         .getTerminal();
 
-        terminalUtils.RunCommandsInExistingTerminal(this.portForwardTerminal,
+        terminalUtils.RunCommandsInExistingTerminal(generatePrototypeCommand.portForwardTerminal,
             [`kubectl apply -f ${this.manifestFile.fileUri.fsPath}`,
             `kubectl rollout status deployment/${deployment} --timeout=300s`,
             `kubectl port-forward svc/${service} -n default 8000:80`,]);
