@@ -1,6 +1,5 @@
-import { config, fileUtils, terminalUtils, zipUtils } from "../utils";
+import { fileUtils, terminalUtils } from "../utils";
 import * as vscode from 'vscode';
-import * as path from 'path';
 import { terminalBuilder } from "../builders/terminalBuilder";
 import { manifest } from '../models/manifest';
 
@@ -8,12 +7,15 @@ export class generatePrototypeCommand {
     private portForwardTerminal: vscode.Terminal | undefined;
     private builder : terminalBuilder = new terminalBuilder();
 
-    private manifestFile : manifest | undefined = undefined;
+    private manifestFile : manifest;
 
-    public GeneratePrototypeCommand(context: vscode.ExtensionContext)
+    constructor(context: vscode.ExtensionContext)
     {
         this.manifestFile = new manifest(context.extensionPath);
+    }
 
+    public GeneratePrototypeCommand()
+    {
         this.tryKillPortForwardedProcessAndTerminal();     
 
         vscode.workspace.fs.readFile(this.manifestFile.templateFileUri).then((data: Uint8Array) => this.replaceMarkers(data));
