@@ -1,8 +1,11 @@
 import * as vscode from 'vscode';
 import { config, fileUtils, terminalUtils } from "../utils";
+import { terminalBuilder } from '../builders';
 
 export class generateAtlasCommand {
-    static GenerateAtlasCommand()
+    private builder : terminalBuilder = new terminalBuilder();
+    
+    public GenerateAtlasCommand()
     {
         if(config.mainScriptSetting === undefined || config.folderSetting === undefined)
             return;
@@ -12,7 +15,10 @@ export class generateAtlasCommand {
         if(currentActiveFilePath === undefined)
             return;
 
-        terminalUtils.RunCommandInNewTerminal("ampersand generate atlas",
-        `ampersand population --output-dir='./' --build-recipe Grind --output-format json --verbosity warn ${currentActiveFilePath}`)
+        const terminal = this.builder.setName("Ampersand generate functional spec")
+                                        .getTerminal();
+
+        terminalUtils.RunCommandsInExistingTerminal(terminal,
+        [`ampersand population --output-dir='./' --build-recipe Grind --output-format json --verbosity warn ${currentActiveFilePath}`])
     }
 }

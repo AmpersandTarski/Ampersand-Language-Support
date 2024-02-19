@@ -19,11 +19,15 @@ export function activate(context: vscode.ExtensionContext) {
 	ampersandVersionChecker.checkVersion();
 
     watcherUtils.setupLastRunningWatcher(context);
-    
+
+    const generatePrototypeCommandInstance = new generatePrototypeCommand(context);
+    const generateFunctionalSpecCommandInstance = new generateFunctionalSpecCommand();
+    const generateAtlasCommandInstance = new generateAtlasCommand();
+
     pushDisposable(context, "extension.checkVersion", () => checkVersionCommand.checkVersionCommand())
-    pushDisposable(context, "extension.generateFunctionalSpec", () => generateFunctionalSpecCommand.GenerateFunctionalSpecCommand())
-    pushDisposable(context, "extension.generateAtlas", () => generateAtlasCommand.GenerateAtlasCommand())
-    pushDisposable(context, "extension.generatePrototype", () => generatePrototypeCommand.GeneratePrototypeCommand(context))
+    pushDisposable(context, "extension.generateFunctionalSpec", () => generateFunctionalSpecCommandInstance.GenerateFunctionalSpecCommand())
+    pushDisposable(context, "extension.generateAtlas", () => generateAtlasCommandInstance.GenerateAtlasCommand())
+    pushDisposable(context, "extension.generatePrototype", () => generatePrototypeCommandInstance.GeneratePrototypeCommand())
 
     generateWorkingFolders();
     createAndFillGitIgnore();

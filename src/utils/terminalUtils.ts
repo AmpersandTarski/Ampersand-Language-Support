@@ -1,17 +1,18 @@
 import vscode, { Terminal } from 'vscode';
 import { fileUtils } from './fileUtils';
+import { terminalInfo } from '../models/terminal';
 
 export class terminalUtils{
-    static RunCommandsInNewTerminal(terminalName : string, runAmpersandCommands : string[], showTerminal: boolean = true, workingDir? : string[]) : Terminal
+    static RunCommandsInNewTerminal(terminalInfo : terminalInfo, runAmpersandCommands : string[]) : Terminal
     {
-        if(workingDir === undefined)
-            workingDir = [''];
+        if(terminalInfo.workingDir === undefined)
+        terminalInfo.workingDir = [''];
         
-        let terminal = vscode.window.createTerminal({name:terminalName,cwd:fileUtils.generateWorkspacePath(workingDir)});
+        let terminal = vscode.window.createTerminal({name:terminalInfo.terminalName,cwd:fileUtils.generateWorkspacePath(terminalInfo.workingDir)});
         
         this.RunCommandsInExistingTerminal(terminal,runAmpersandCommands);
 
-        if(showTerminal)
+        if(terminalInfo.terminalVisible)
             terminal.show();
 
         return terminal;

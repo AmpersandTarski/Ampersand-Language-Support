@@ -1,76 +1,75 @@
 import { config, fileUtils, terminalUtils, zipUtils } from "../utils";
 import * as vscode from 'vscode';
 import * as path from 'path';
+import { terminalBuilder } from "../builders/terminalBuilder";
+import { manifest } from '../models/manifest';
 
 export class generatePrototypeCommand {
-    private static portForwardTerminalPID: vscode.Terminal | undefined;
+    private portForwardTerminal: vscode.Terminal | undefined;
+    private builder : terminalBuilder = new terminalBuilder();
 
-    static GeneratePrototypeCommand(context: vscode.ExtensionContext)
+    private manifestFile : manifest;
+
+    constructor(context: vscode.ExtensionContext)
     {
-        //Get extension path
-        if(context === undefined)
-            return;
+        this.manifestFile = new manifest(context.extensionPath);
+    }
 
-        const extensionPath: string = context.extensionPath;
+    public GeneratePrototypeCommand()
+    {
+        this.tryKillPortForwardedProcessAndTerminal();     
 
-        const encodedZipContent:string|undefined = zipUtils.zipFolder(extensionPath);
+        vscode.workspace.fs.readFile(this.manifestFile.templateFileUri).then((data: Uint8Array) => this.replaceMarkers(data));
+    }
 
-        if(encodedZipContent === undefined)
+    private tryKillPortForwardedProcessAndTerminal()
+    {
+        if(this.portForwardTerminal === undefined)
             return;
         
-        const encodedMainScript: string = btoa(config.mainScriptSetting as string);
-        const templateFileUri: vscode.Uri = vscode.Uri.file(path.join(extensionPath, 'assets', 'prototype-template.yaml'));
-        const manifestFileName: string = fileUtils.generateWorkspacePath(['ampersand', 'prototype.yaml']);
+        const buildTerminal = this.builder.setName("default name")
+                                            .setVisibility(false)
+                                            .getTerminal();
 
-        const manifestFileUri: vscode.Uri = vscode.Uri.file(manifestFileName);
+        //get the processID from the terminal that needs to be killed
+        this.portForwardTerminal.processId.then((terminalToKillPID: number | undefined) => {
+            terminalUtils.RunCommandsInExistingTerminal(buildTerminal,
+            [`PID=$(ps -ef | grep 'kubectl port-forward' | grep -v grep | awk '{print $2}')`,
+            `kill $PID`,
+            (`kill -9 ${terminalToKillPID}`)])
 
-        tryKillPortForwardedProcessAndTerminal(this.portForwardTerminalPID);
-
-        vscode.workspace.fs.readFile(templateFileUri).then((data: Uint8Array) => replaceMarkers(data,encodedZipContent));
-
-        function tryKillPortForwardedProcessAndTerminal(terminalToKill : vscode.Terminal | undefined)
-        {
-            if(terminalToKill === undefined)
-                return;
-            
-            //get the processID from the terminal that needs to be killed
-            terminalToKill.processId.then((terminalToKillPID: number | undefined) => {
-                let killerTerminal = terminalUtils.RunCommandsInNewTerminal("Kill processes",
-                [`PID=$(ps -ef | grep 'kubectl port-forward' | grep -v grep | awk '{print $2}')`,
-                `kill $PID`,
-                (`kill -9 ${terminalToKillPID}`)],
-                false);
-
-                //Get own terminal PID to kill it later
-                killerTerminal.processId.then((killerTerminalPID: number|undefined) => { 
-                    
-                    //Kill self to cleanup
-                    terminalUtils.RunCommandsInExistingTerminal(killerTerminal,[(`kill -9 ${killerTerminalPID}`)]);
-                });
-            });
-        }
-
-        function replaceMarkers(data: Uint8Array, encodedZipContent:string)
-        {
-            const newData: Uint8Array = fileUtils.replaceMarkers(data, new Map<string, string>(
-                [
-                    ['{{zipFileContent}}', encodedZipContent],
-                    ['{{mainScript}}', encodedMainScript]
-                ]
-                ));
+            //Get own terminal PID to kill it later
+            buildTerminal.processId.then((killerTerminalPID: number|undefined) => { 
                 
-                vscode.workspace.fs.writeFile(manifestFileUri, newData).then(runPrototypeCommand)
-        }
+                //Kill self to cleanup
+                terminalUtils.RunCommandsInExistingTerminal(buildTerminal,[(`kill -9 ${killerTerminalPID}`)]);
+            });
+        });
+    }
 
-        function runPrototypeCommand()
-        {
-            const deployment: string = 'prototype';
-            const service: string = 'prototype';
+    private replaceMarkers(data: Uint8Array)
+    {
+        const newData: Uint8Array = fileUtils.replaceMarkers(data, new Map<string, string>(
+            [
+                ['{{zipFileContent}}', this.manifestFile.encodedZipContent],
+                ['{{mainScript}}', this.manifestFile.encodedMainScript]
+            ]
+            ));
+            
+            vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData).then(this.runPrototypeCommand)
+    }
 
-            generatePrototypeCommand.portForwardTerminalPID = terminalUtils.RunCommandsInNewTerminal("Run prototype in minikube",
-                [`kubectl apply -f ${manifestFileUri.fsPath}`,
-                `kubectl rollout status deployment/${deployment} --timeout=300s`,
-                `kubectl port-forward svc/${service} -n default 8000:80`,]);
-        }
+    private runPrototypeCommand()
+    {
+        const deployment: string = 'prototype';
+        const service: string = 'prototype';
+        
+        this.portForwardTerminal = this.builder.setName("Run prototype in minikube")
+                                        .getTerminal();
+
+        terminalUtils.RunCommandsInExistingTerminal(this.portForwardTerminal,
+            [`kubectl apply -f ${this.manifestFile.fileUri.fsPath}`,
+            `kubectl rollout status deployment/${deployment} --timeout=300s`,
+            `kubectl port-forward svc/${service} -n default 8000:80`,]);
     }
 }
