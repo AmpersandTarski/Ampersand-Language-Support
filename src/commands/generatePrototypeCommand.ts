@@ -48,6 +48,11 @@ export class generatePrototypeCommand {
 
     private replaceMarkers(data: Uint8Array)
     {
+        const term = this.builder.setName("test terminal replace markers")
+        .getTerminal();
+
+terminalUtils.RunCommandsInExistingTerminal(term,[this.manifestFile.encodedZipContent])
+
         const newData: Uint8Array = fileUtils.replaceMarkers(data, new Map<string, string>(
             [
                 ['{{zipFileContent}}', this.manifestFile.encodedZipContent],
