@@ -4,7 +4,7 @@ import { terminalBuilder } from "../builders/terminalBuilder";
 import { manifest } from '../models/manifest';
 
 export class generatePrototypeCommand {
-    static portForwardTerminal: vscode.Terminal | undefined;
+    static portForwardTerminal: vscode.Terminal | undefined = undefined;
     private builder : terminalBuilder = new terminalBuilder();
 
     private manifestFile : manifest;
@@ -29,7 +29,7 @@ export class generatePrototypeCommand {
         const buildTerminal = this.builder.setName("default name")
                                             .setVisibility(false)
                                             .getTerminal();
-
+        
         //get the processID from the terminal that needs to be killed
         generatePrototypeCommand.portForwardTerminal.processId.then((terminalToKillPID: number | undefined) => {
             terminalUtils.RunCommandsInExistingTerminal(buildTerminal,
