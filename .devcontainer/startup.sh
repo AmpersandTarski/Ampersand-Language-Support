@@ -8,5 +8,6 @@ npm i --global esbuild
 
 git restore .
 
+npm run esbuild
 vsce package 0.0.0
 code --install-extension language-ampersand-0.0.0.vsix
