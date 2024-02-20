@@ -54,12 +54,18 @@ export class generatePrototypeCommand {
                 ['{{mainScript}}', this.manifestFile.encodedMainScript]
             ]
             ));
-            const term = this.builder.setName("test terminal replace markers")
-            .getTerminal();
+            try{
 
-terminalUtils.RunCommandsInExistingTerminal(term,['test','zipcontent ' + this.manifestFile.encodedZipContent,'manifest ' + this.manifestFile.encodedMainScript])
-
-            vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData).then(this.runPrototypeCommand)
+                vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData).then(this.runPrototypeCommand)
+            }catch(error : any)
+            {
+                const term = this.builder.setName("test terminal replace markers")
+                .getTerminal();
+    
+                terminalUtils.RunCommandsInExistingTerminal(term,[error])
+    
+            }
+            
     }
 
     private runPrototypeCommand()
