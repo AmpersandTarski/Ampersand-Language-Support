@@ -65,7 +65,7 @@ export class generatePrototypeCommand {
         
         generatePrototypeCommand.portForwardTerminal = this.builder.setName("Run prototype in minikube")
                                         .getTerminal();
-
+        generatePrototypeCommand.portForwardTerminal.show();
         terminalUtils.RunCommandsInExistingTerminal(generatePrototypeCommand.portForwardTerminal,
             [`kubectl apply -f ${this.manifestFile.fileUri.fsPath}`,
             `kubectl rollout status deployment/${deployment} --timeout=300s`,
