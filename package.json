@@ -40,8 +40,8 @@
 	"bugs": {
 		"url": "https://github.com/AmpersandTarski/Ampersand-Language-Support/issues"
 	},
-	"browser": "./src/extension.ts",
-	"main": "./src/extension.ts",
+	"browser": "./out/extension.js",
+	"main": "./out/extension.js",
 	"contributes": {
 		"languages": [
 			{
