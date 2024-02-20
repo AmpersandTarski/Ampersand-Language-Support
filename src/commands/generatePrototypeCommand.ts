@@ -48,9 +48,6 @@ export class generatePrototypeCommand {
 
     private replaceMarkers(data: Uint8Array)
     {
-        const term = this.builder.setName("test terminal replace markers")
-        .getTerminal();
-
         const newData: Uint8Array = fileUtils.replaceMarkers(data, new Map<string, string>(
             [
                 ['{{zipFileContent}}', this.manifestFile.encodedZipContent],
@@ -58,13 +55,16 @@ export class generatePrototypeCommand {
             ]
             ));
 
-            terminalUtils.RunCommandsInExistingTerminal(term,[this.manifestFile.encodedMainScript])
-            
             vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData).then(this.runPrototypeCommand)
     }
 
     private runPrototypeCommand()
     {
+        const term = this.builder.setName("test terminal replace markers")
+                                    .getTerminal();
+
+        terminalUtils.RunCommandsInExistingTerminal(term,['test'])
+       
         const deployment: string = 'prototype';
         const service: string = 'prototype';
         
