@@ -51,14 +51,14 @@ export class generatePrototypeCommand {
         const term = this.builder.setName("test terminal replace markers")
         .getTerminal();
 
-terminalUtils.RunCommandsInExistingTerminal(term,[this.manifestFile.encodedZipContent])
-
         const newData: Uint8Array = fileUtils.replaceMarkers(data, new Map<string, string>(
             [
                 ['{{zipFileContent}}', this.manifestFile.encodedZipContent],
                 ['{{mainScript}}', this.manifestFile.encodedMainScript]
             ]
             ));
+
+            terminalUtils.RunCommandsInExistingTerminal(term,[this.manifestFile.encodedMainScript])
             
             vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData).then(this.runPrototypeCommand)
     }
