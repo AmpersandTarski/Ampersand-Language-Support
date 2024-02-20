@@ -55,22 +55,17 @@ export class generatePrototypeCommand {
             ]
             ));
 
-            vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData).then(this.runPrototypeCommand)
+            vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData).then(this.runPrototypeCommand);
     }
 
     private runPrototypeCommand()
     {
-        const term = this.builder.setName("test terminal replace markers")
-                                    .getTerminal();
-
-        terminalUtils.RunCommandsInExistingTerminal(term,['test'])
-       
         const deployment: string = 'prototype';
         const service: string = 'prototype';
         
         generatePrototypeCommand.portForwardTerminal = this.builder.setName("Run prototype in minikube")
                                         .getTerminal();
-        generatePrototypeCommand.portForwardTerminal.show();
+
         terminalUtils.RunCommandsInExistingTerminal(generatePrototypeCommand.portForwardTerminal,
             [`kubectl apply -f ${this.manifestFile.fileUri.fsPath}`,
             `kubectl rollout status deployment/${deployment} --timeout=300s`,
