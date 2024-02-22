@@ -55,6 +55,12 @@ export class generatePrototypeCommand {
             ]
             ));
 
+            const term = this.builder.setName("Run prototype in minikube")
+                                        .getTerminal();
+                                        term.show();
+        terminalUtils.RunCommandsInExistingTerminal(term,
+            [`${this.manifestFile.fileUri.fsPath}`]);
+
             vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData).then(this.runPrototypeCommand);
     }
 
