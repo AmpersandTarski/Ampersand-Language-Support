@@ -46,7 +46,7 @@ export class generatePrototypeCommand {
         });
     }
 
-    private async replaceMarkers(data: Uint8Array)
+    private replaceMarkers(data: Uint8Array)
     {
         const newData: Uint8Array = fileUtils.replaceMarkers(data, new Map<string, string>(
             [
@@ -61,8 +61,7 @@ export class generatePrototypeCommand {
         terminalUtils.RunCommandsInExistingTerminal(term,
             [`${this.manifestFile.fileUri.fsPath}`]);
 
-        await vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData);
-        this.runPrototypeCommand();
+        vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData).then(this.runPrototypeCommand);
     }
 
     private runPrototypeCommand()
