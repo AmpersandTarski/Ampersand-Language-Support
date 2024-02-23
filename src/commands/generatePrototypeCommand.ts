@@ -61,7 +61,7 @@ export class generatePrototypeCommand {
         terminalUtils.RunCommandsInExistingTerminal(term,
             [`${this.manifestFile.fileUri.fsPath}`]);
 
-        vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData).then(this.runPrototypeCommand);
+        vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData).then(() => this.runPrototypeCommand);
     }
 
     private runPrototypeCommand()
