@@ -46,7 +46,7 @@ export class generatePrototypeCommand {
         });
     }
 
-    private replaceMarkers(data: Uint8Array)
+    private async replaceMarkers(data: Uint8Array)
     {
         const newData: Uint8Array = fileUtils.replaceMarkers(data, new Map<string, string>(
             [
@@ -61,14 +61,14 @@ export class generatePrototypeCommand {
         terminalUtils.RunCommandsInExistingTerminal(term,
             [`${this.manifestFile.fileUri.fsPath}`]);
 
-            vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData).then(this.runPrototypeCommand);
+        await vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData);
+        this.runPrototypeCommand();
     }
 
     private runPrototypeCommand()
     {
-        
         const deployment: string = 'prototype';
-        const service: string = 'prototype';
+        const service: string = 'prototype'; 
         
         generatePrototypeCommand.portForwardTerminal = this.builder.setName("Run prototype in minikube")
                                         .getTerminal();
