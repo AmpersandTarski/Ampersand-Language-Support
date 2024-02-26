@@ -14,14 +14,15 @@ export class generatePrototypeCommand {
         this.manifestFile = new manifest(context.extensionPath);
     }
 
-    public GeneratePrototypeCommand()
+    public async GeneratePrototypeCommand()
     {
         this.tryKillPortForwardedProcessAndTerminal();     
 
-        vscode.workspace.fs.readFile(this.manifestFile.templateFileUri).then((data: Uint8Array) => this.replaceMarkers(data));
+        const data = await vscode.workspace.fs.readFile(this.manifestFile.templateFileUri);
+        this.replaceMarkers(data);
     }
 
-    private tryKillPortForwardedProcessAndTerminal()
+    private async tryKillPortForwardedProcessAndTerminal()
     {
         if(generatePrototypeCommand.portForwardTerminal === undefined)
             return;
@@ -31,19 +32,18 @@ export class generatePrototypeCommand {
                                             .getTerminal();
         
         //get the processID from the terminal that needs to be killed
-        generatePrototypeCommand.portForwardTerminal.processId.then((terminalToKillPID: number | undefined) => {
-            terminalUtils.RunCommandsInExistingTerminal(buildTerminal,
+        const terminalToKillPID = await generatePrototypeCommand.portForwardTerminal.processId;
+            
+        terminalUtils.RunCommandsInExistingTerminal(buildTerminal,
             [`PID=$(ps -ef | grep 'kubectl port-forward' | grep -v grep | awk '{print $2}')`,
             `kill $PID`,
-            (`kill -9 ${terminalToKillPID}`)])
-
-            //Get own terminal PID to kill it later
-            buildTerminal.processId.then((killerTerminalPID: number|undefined) => { 
-                
-                //Kill self to cleanup
-                terminalUtils.RunCommandsInExistingTerminal(buildTerminal,[(`kill -9 ${killerTerminalPID}`)]);
-            });
-        });
+            (`kill -9 ${terminalToKillPID}`)]);
+ 
+        //Get own terminal PID to kill it later
+        const killerTerminalPID = await buildTerminal.processId;
+            
+            //Kill self to cleanup
+        terminalUtils.RunCommandsInExistingTerminal(buildTerminal,[(`kill -9 ${killerTerminalPID}`)]);
     }
 
     private async replaceMarkers(data: Uint8Array)
@@ -54,14 +54,14 @@ export class generatePrototypeCommand {
                 ['{{mainScript}}', this.manifestFile.encodedMainScript]
             ]
             ));
-
+     
             const term = this.builder.setName("Run prototype in minikube")
                                         .getTerminal();
                                         term.show();
         terminalUtils.RunCommandsInExistingTerminal(term,
             [`${this.manifestFile.fileUri.fsPath}`]);
 
-        await vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData)
+        await vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData);
         this.runPrototypeCommand();
     }
 

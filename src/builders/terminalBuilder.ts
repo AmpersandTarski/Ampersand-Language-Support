@@ -28,7 +28,6 @@ export class terminalBuilder
 
     public setVisibility(terminalVisible:boolean) : terminalBuilder {
         this.terminalInfoBuild.terminalVisible = terminalVisible;
-
         return this;
     }
 
