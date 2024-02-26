@@ -27,7 +27,7 @@ export class generatePrototypeCommand {
         if(generatePrototypeCommand.portForwardTerminal === undefined)
             return;
         
-        const buildTerminal = this.builder.setName("default name")
+        const buildTerminal = this.builder.setName("Cleanup")
                                             .setVisibility(false)
                                             .getTerminal();
         
@@ -54,12 +54,6 @@ export class generatePrototypeCommand {
                 ['{{mainScript}}', this.manifestFile.encodedMainScript]
             ]
             ));
-     
-            const term = this.builder.setName("Run prototype in minikube")
-                                        .getTerminal();
-                                        term.show();
-        terminalUtils.RunCommandsInExistingTerminal(term,
-            [`${this.manifestFile.fileUri.fsPath}`]);
 
         await vscode.workspace.fs.writeFile(this.manifestFile.fileUri, newData);
         this.runPrototypeCommand();
@@ -71,8 +65,9 @@ export class generatePrototypeCommand {
         const service: string = 'prototype'; 
         
         generatePrototypeCommand.portForwardTerminal = this.builder.setName("Run prototype in minikube")
-                                        .getTerminal();
+                                                                .getTerminal();
         generatePrototypeCommand.portForwardTerminal.show();
+
         terminalUtils.RunCommandsInExistingTerminal(generatePrototypeCommand.portForwardTerminal,
             [`kubectl apply -f ${this.manifestFile.fileUri.fsPath}`,
             `kubectl rollout status deployment/${deployment} --timeout=300s`,
