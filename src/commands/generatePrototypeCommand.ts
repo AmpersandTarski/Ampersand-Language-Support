@@ -16,7 +16,7 @@ export class generatePrototypeCommand implements ICommand {
         this.manifestFile = new manifest(context.extensionPath);
     }
 
-    public async RunCommand()
+    async RunCommand()
     {
         this.tryKillPortForwardedProcessAndTerminal();     
 

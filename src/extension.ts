@@ -11,7 +11,8 @@ import { checkVersionCommand, generateAtlasCommand, generateFunctionalSpecComman
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
     
-    let commands: Array<ICommand> = new Array<ICommand>();
+    let commands: Array<any> = new Array();
+    ;
     // Use the console to output diagnostic information (console.log) and errors (console.error).
     // This line of code will only be executed once when your extension is activated.
     console.info(
@@ -23,16 +24,17 @@ export function activate(context: vscode.ExtensionContext) {
     watcherUtils.setupLastRunningWatcher(context);
 
     commands.push(
-            new generatePrototypeCommand(context),
-            new generateAtlasCommand(),
-            new generateFunctionalSpecCommand(),
-            new checkVersionCommand()
+            () => new generatePrototypeCommand(context).RunCommand(),
+            () => new generateAtlasCommand().RunCommand(),
+            () => new generateFunctionalSpecCommand().RunCommand(),
+            () => new checkVersionCommand().RunCommand()
         );
 
     for (let index = 0; index < commands.length; index++) {
         const command = commands[index];
-        pushDisposable(context, command.commandName, command.RunCommand());
+        pushDisposable(context, command.commandName, command);
     }
+
     generateWorkingFolders();
     createAndFillGitIgnore();
 }
