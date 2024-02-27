@@ -29,10 +29,10 @@ export function activate(context: vscode.ExtensionContext) {
             new checkVersionCommand()
         );
 
-        commands.forEach(command => {
-            pushDisposable(context, command.commandName, () => command.RunCommand());
-        });
-
+    for (let index = 0; index < commands.length; index++) {
+        const command = commands[index];
+        pushDisposable(context, command.commandName, () => command.RunCommand());
+    }
     generateWorkingFolders();
     createAndFillGitIgnore();
 }
