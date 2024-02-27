@@ -10,9 +10,6 @@ import { checkVersionCommand, generateAtlasCommand, generateFunctionalSpecComman
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-    
-    const commands: Array<ICommand> = new Array<ICommand>();
-    
     // Use the console to output diagnostic information (console.log) and errors (console.error).
     // This line of code will only be executed once when your extension is activated.
     console.info(
@@ -34,8 +31,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 function pushDisposable(context: vscode.ExtensionContext,extensionName : string, commandFunction: (...args: any[]) => any)
 {
-    let dispose = vscode.commands.registerCommand(extensionName,commandFunction);
-    context.subscriptions.push(dispose);
+    context.subscriptions.push(vscode.commands.registerCommand(extensionName,commandFunction));
 }
 
 function generateWorkingFolders()
