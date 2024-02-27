@@ -6,7 +6,7 @@ import { ampersandVersionChecker } from './ampersand';
 import { constants } from './constants';
 import { checkVersionCommand, generateAtlasCommand, generateFunctionalSpecCommand, generatePrototypeCommand } from './commands';
 
-let commands: ICommand[];
+let commands: Array<ICommand>;
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
