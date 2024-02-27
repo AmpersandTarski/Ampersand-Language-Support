@@ -2,7 +2,7 @@ import { config, fileUtils, terminalUtils } from "../utils";
 import { terminalBuilder } from '../builders';
 
 export class generateAtlasCommand implements ICommand  {
-    commandName: string = "extension.generateAtlas";
+    static commandName: string = "extension.generateAtlas";
     
     private builder : terminalBuilder = new terminalBuilder();
     

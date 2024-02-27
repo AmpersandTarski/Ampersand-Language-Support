@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import { ampersandVersionChecker } from '../ampersand';
 
 export class checkVersionCommand implements ICommand{
-    commandName: string = "extension.checkVersion";
+    static commandName: string = "extension.checkVersion";
    
     RunCommand() {
         if (!vscode.workspace.rootPath) {

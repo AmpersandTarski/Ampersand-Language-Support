@@ -2,7 +2,7 @@ import { config, fileUtils, terminalUtils } from '../utils';
 import { terminalBuilder } from '../builders';
 
 export class generateFunctionalSpecCommand  implements ICommand {
-    commandName: string = "extension.generateFunctionalSpec";
+    static commandName: string = "extension.generateFunctionalSpec";
 
     private builder : terminalBuilder = new terminalBuilder();
     

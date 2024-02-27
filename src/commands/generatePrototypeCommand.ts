@@ -4,7 +4,7 @@ import { terminalBuilder } from "../builders/terminalBuilder";
 import { manifest } from '../models/manifest';
 
 export class generatePrototypeCommand implements ICommand {
-    commandName: string = "extension.generatePrototype";
+    static commandName: string = "extension.generatePrototype";
 
     static portForwardTerminal: vscode.Terminal | undefined = undefined;
     private builder : terminalBuilder = new terminalBuilder();
