@@ -1,12 +1,12 @@
-import * as vscode from 'vscode';
 import { config, fileUtils, terminalUtils } from "../utils";
 import { terminalBuilder } from '../builders';
 
-export class generateAtlasCommand {
+export class generateAtlasCommand implements ICommand  {
+    commandName: string = "extension.generateAtlas";
+    
     private builder : terminalBuilder = new terminalBuilder();
     
-    public GenerateAtlasCommand()
-    {
+    RunCommand(): void {
         if(config.mainScriptSetting === undefined || config.folderSetting === undefined)
             return;
 

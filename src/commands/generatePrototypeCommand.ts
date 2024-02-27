@@ -3,7 +3,9 @@ import * as vscode from 'vscode';
 import { terminalBuilder } from "../builders/terminalBuilder";
 import { manifest } from '../models/manifest';
 
-export class generatePrototypeCommand {
+export class generatePrototypeCommand implements ICommand {
+    commandName: string = "extension.generatePrototype";
+
     static portForwardTerminal: vscode.Terminal | undefined = undefined;
     private builder : terminalBuilder = new terminalBuilder();
 
@@ -14,7 +16,7 @@ export class generatePrototypeCommand {
         this.manifestFile = new manifest(context.extensionPath);
     }
 
-    public async GeneratePrototypeCommand()
+    public async RunCommand()
     {
         this.tryKillPortForwardedProcessAndTerminal();     
 

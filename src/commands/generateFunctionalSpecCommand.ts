@@ -1,12 +1,12 @@
-import * as vscode from 'vscode';
 import { config, fileUtils, terminalUtils } from '../utils';
 import { terminalBuilder } from '../builders';
 
-export class generateFunctionalSpecCommand{
-    private builder : terminalBuilder = new terminalBuilder();
+export class generateFunctionalSpecCommand  implements ICommand {
+    commandName: string = "extension.generateFunctionalSpec";
 
-    public GenerateFunctionalSpecCommand()
-    {
+    private builder : terminalBuilder = new terminalBuilder();
+    
+    RunCommand(): void {
         if(config.mainScriptSetting === undefined || config.folderSetting === undefined)
             return;
         

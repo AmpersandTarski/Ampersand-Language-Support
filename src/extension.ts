@@ -4,11 +4,9 @@ import * as fs from 'fs';
 import { fileUtils, watcherUtils } from "./utils";
 import { ampersandVersionChecker } from './ampersand';
 import { constants } from './constants';
-import { generateFunctionalSpecCommand, checkVersionCommand, generateAtlasCommand, generatePrototypeCommand } from './commands';
+import { checkVersionCommand, generateAtlasCommand, generateFunctionalSpecCommand, generatePrototypeCommand } from './commands';
 
-let generatePrototypeCommandInstance: generatePrototypeCommand;
-let generateFunctionalSpecCommandInstance : generateFunctionalSpecCommand;
-let generateAtlasCommandInstance : generateAtlasCommand;
+let commands: ICommand[];
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -24,10 +22,16 @@ export function activate(context: vscode.ExtensionContext) {
 
     watcherUtils.setupLastRunningWatcher(context);
 
-    pushDisposable(context, "extension.checkVersion", () => checkVersionCommand.checkVersionCommand())
-    pushDisposable(context, "extension.generateFunctionalSpec", () => new generateFunctionalSpecCommand().GenerateFunctionalSpecCommand())
-    pushDisposable(context, "extension.generateAtlas", () => new generateAtlasCommand().GenerateAtlasCommand())
-    pushDisposable(context, "extension.generatePrototype", () => new generatePrototypeCommand(context).GeneratePrototypeCommand())
+    commands.push(
+            new generatePrototypeCommand(context),
+            new generateAtlasCommand(),
+            new generateFunctionalSpecCommand(),
+            new checkVersionCommand()
+        );
+
+        commands.forEach(command => {
+            pushDisposable(context, command.commandName, () => command.RunCommand());
+        });
 
     generateWorkingFolders();
     createAndFillGitIgnore();
