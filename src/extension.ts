@@ -24,15 +24,17 @@ export function activate(context: vscode.ExtensionContext) {
     watcherUtils.setupLastRunningWatcher(context);
 
     commands.push(
-            () => new generatePrototypeCommand(context).RunCommand(),
-            () => new generateAtlasCommand().RunCommand(),
-            () => new generateFunctionalSpecCommand().RunCommand(),
-            () => new checkVersionCommand().RunCommand()
+            new generatePrototypeCommand(context),
+            new generateAtlasCommand(),
+            new generateFunctionalSpecCommand(),
+            new checkVersionCommand()
         );
 
     for (let index = 0; index < commands.length; index++) {
         const command = commands[index];
-        pushDisposable(context, command.commandName, command);
+        context.subscriptions.push(vscode.commands.registerCommand(command.commandName, () => command.RunCommand()));
+
+        //pushDisposable(context, command.commandName, command);
     }
 
     generateWorkingFolders();
