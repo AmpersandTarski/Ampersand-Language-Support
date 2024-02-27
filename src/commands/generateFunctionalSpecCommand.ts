@@ -6,7 +6,7 @@ export class generateFunctionalSpecCommand  implements ICommand {
 
     private builder : terminalBuilder = new terminalBuilder();
     
-    RunCommand(): void {
+    RunCommand() {
         if(config.mainScriptSetting === undefined || config.folderSetting === undefined)
             return;
         

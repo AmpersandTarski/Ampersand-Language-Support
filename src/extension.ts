@@ -31,7 +31,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     for (let index = 0; index < commands.length; index++) {
         const command = commands[index];
-        pushDisposable(context, command.commandName, () => command.RunCommand());
+        pushDisposable(context, command.commandName, command.RunCommand());
     }
     generateWorkingFolders();
     createAndFillGitIgnore();

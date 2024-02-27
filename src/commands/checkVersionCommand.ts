@@ -4,7 +4,7 @@ import { ampersandVersionChecker } from '../ampersand';
 export class checkVersionCommand implements ICommand{
     commandName: string = "extension.checkVersion";
    
-    RunCommand(): void {
+    RunCommand() {
         if (!vscode.workspace.rootPath) {
             vscode.window.showWarningMessage("Checking ampersand only works if you work in a workspace.")
             return;
