@@ -1,40 +1,25 @@
 import vscode, { Terminal } from 'vscode';
 import { fileUtils } from './fileUtils';
+import { terminalInfo } from '../models/terminal';
 
 export class terminalUtils{
-    static RunCommandInNewTerminal(terminalName : string, runAmpersandCommand : string, workingDir? : string[])
+    static RunCommandsInNewTerminal(terminalInfo : terminalInfo, runAmpersandCommands : string[]) : Terminal
     {
-        if(workingDir === undefined)
-        {
-            workingDir = [''];
-        }
-
-        let terminal = vscode.window.createTerminal({name:terminalName,cwd:fileUtils.generateWorkspacePath(workingDir)});
-        this.RunCommandsInExistingTerminal(terminal,[runAmpersandCommand])
-    }
-
-    static RunCommandsInNewTerminal(terminalName : string, runAmpersandCommands : string[], workingDir? : string[]) : Terminal
-    {
-        if(workingDir === undefined)
-        {
-            workingDir = [''];
-        }
-
-        let terminal = vscode.window.createTerminal({name:terminalName,cwd:fileUtils.generateWorkspacePath(workingDir)});
+        if(terminalInfo.workingDir === undefined)
+        terminalInfo.workingDir = [''];
+        
+        let terminal = vscode.window.createTerminal({name:terminalInfo.terminalName,cwd:fileUtils.generateWorkspacePath(terminalInfo.workingDir)});
         
         this.RunCommandsInExistingTerminal(terminal,runAmpersandCommands);
+
+        if(terminalInfo.terminalVisible)
+            terminal.show();
 
         return terminal;
     }
 
-    static RunCommandsInExistingTerminal(terminal : Terminal, runAmpersandCommands : string[], workingDir? : string[])
+    static RunCommandsInExistingTerminal(terminal : Terminal, runAmpersandCommands : string[])
     {
-        if(workingDir === undefined)
-        {
-            workingDir = [''];
-        }
-
-        terminal.show();
         runAmpersandCommands.forEach(command => {
             terminal.sendText(command)
         });

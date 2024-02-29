@@ -4,12 +4,12 @@ import * as fs from 'fs';
 import { fileUtils, watcherUtils } from "./utils";
 import { ampersandVersionChecker } from './ampersand';
 import { constants } from './constants';
-import { generateFunctionalSpecCommand, checkVersionCommand, generateAtlasCommand, generatePrototypeCommand } from './commands';
+import { checkVersionCommand, generateAtlasCommand, generateFunctionalSpecCommand, generatePrototypeCommand } from './commands';
+
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-
     // Use the console to output diagnostic information (console.log) and errors (console.error).
     // This line of code will only be executed once when your extension is activated.
     console.info(
@@ -19,11 +19,11 @@ export function activate(context: vscode.ExtensionContext) {
 	ampersandVersionChecker.checkVersion();
 
     watcherUtils.setupLastRunningWatcher(context);
-    
-    pushDisposable(context, "extension.checkVersion", () => checkVersionCommand.checkVersionCommand())
-    pushDisposable(context, "extension.generateFunctionalSpec", () => generateFunctionalSpecCommand.GenerateFunctionalSpecCommand())
-    pushDisposable(context, "extension.generateAtlas", () => generateAtlasCommand.GenerateAtlasCommand())
-    pushDisposable(context, "extension.generatePrototype", () => generatePrototypeCommand.GeneratePrototypeCommand(context))
+
+    pushDisposable(context, generatePrototypeCommand.commandName, () => new generatePrototypeCommand(context).RunCommand());
+    pushDisposable(context, generateAtlasCommand.commandName, () => new generateAtlasCommand().RunCommand());
+    pushDisposable(context, generateFunctionalSpecCommand.commandName, () => new generateFunctionalSpecCommand().RunCommand());
+    pushDisposable(context, checkVersionCommand.commandName, () => new checkVersionCommand().RunCommand());
 
     generateWorkingFolders();
     createAndFillGitIgnore();
@@ -31,8 +31,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 function pushDisposable(context: vscode.ExtensionContext,extensionName : string, commandFunction: (...args: any[]) => any)
 {
-    let dispose = vscode.commands.registerCommand(extensionName,commandFunction);
-    context.subscriptions.push(dispose);
+    context.subscriptions.push(vscode.commands.registerCommand(extensionName,commandFunction));
 }
 
 function generateWorkingFolders()
