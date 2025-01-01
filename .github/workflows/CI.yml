@@ -8,12 +8,12 @@ on:
 
 jobs:
   build:
-    name: Build on ubuntu-latest 🏗 🧪
-    runs-on: ubuntu-latest
+    name: Build on ubuntu-24.04 🏗 🧪
+    runs-on: ubuntu-24.04
     steps:
       - 
         name: Checkout project contents 📡
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       -
         name: install npm
         run: npm install
