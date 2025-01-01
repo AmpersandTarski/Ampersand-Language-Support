@@ -1,180 +1,181 @@
 {
-	"name": "language-ampersand",
-	"displayName": "Ampersand (ADL) language support",
-	"version": "0.0.0",
-	"publisher": "AmpersandTarski",
-	"description": "Language support for Ampersand scripts",
-	"categories": [
-		"Programming Languages",
-		"Themes",
-		"Snippets"
-	],
-	"author": "Ampersand Tarski",
-	"preview": false,
-	"contributors": [
-		{
-			"name": "Rieks",
-			"url": "https://github.com/RieksJ"
-		},
-		{
-			"name": "Han Joosten",
-			"url": "https://github.com/hanjoosten",
-			"email": "han.joosten.han@gmail.com"
-		}
-	],
-	"engines": {
-		"vscode": "^1.75.1"
-	},
-	"activationEvents": [],
-	"icon": "images/ampersandLogo.png",
-	"galleryBanner": {
-		"color": "#f6a615",
-		"theme": "light"
-	},
-	"license": "GPL-3.0",
-	"homepage": "https://github.com/AmpersandTarski/Ampersand-Language-Support",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/AmpersandTarski/Ampersand-Language-Support.git"
-	},
-	"bugs": {
-		"url": "https://github.com/AmpersandTarski/Ampersand-Language-Support/issues"
-	},
-	"browser": "./out/extension.js",
-	"main": "./out/extension.js",
-	"contributes": {
-		"languages": [
-			{
-				"id": "ampersand",
-				"aliases": [
-					"Ampersand",
-					"ampersand",
-					"ADL",
-					"Ampersand Definition Language"
-				],
-				"extensions": [
-					".adl",
-					".ifc",
-					".pop",
-					".docadl"
-				],
-				"configuration": "./ampersand-configuration.json"
-			},
-			{
-				"id": "amplog",
-				"aliases": [
-					"amplog"
-				],
-				"extensions": [
-					".amplog"
-				],
-				"configuration": "./amplog-configuration.json"
-			}
-		],
-		"grammars": [
-			{
-				"language": "ampersand",
-				"scopeName": "source.ampersand",
-				"path": "./syntaxes/ampersand.tmLanguage.json"
-			},
-			{
-				"language": "amplog",
-				"scopeName": "text.amplog",
-				"path": "./syntaxes/amplog.tmLanguage.json"
-			}
-		],
-		"themes": [
-			{
-				"label": "Ampersand",
-				"uiTheme": "vs-dark",
-				"path": "./themes/Ampersand-color-theme.json"
-			}
-		],
-		"snippets": [
-			{
-				"language": "ampersand",
-				"path": "./snippets/ampersand.json"
-			}
-		],
-		"commands": [
-			{
-				"command": "extension.checkVersion",
-				"title": "Ampersand: version"
-			},
-			{
-				"command": "extension.startDaemon",
-				"title": "Ampersand: Start checker"
-			},
-			{
-				"command": "extension.generateFunctionalSpec",
-				"title": "Ampersand: generate functional spec"
-			},
-			{
-				"command": "extension.generateAtlas",
-				"title": "Ampersand: Generate atlas"
-			},
-			{
-				"command": "extension.generatePrototype",
-				"title": "Ampersand: Generate prototype"
-			}
-		],
-		"problemMatchers": [
-			{
-				"name": "amp-err",
-				"owner": "ampersand",
-				"fileLocation": [
-					"absolute"
-				],
-				"pattern": [
-					{
-						"regexp": "^In file +(.*) \\(line (\\d+), column (\\d+)\\):(\n.*)+$",
-						"file": 1,
-						"line": 2,
-						"column": 3,
-						"message": 0
-					},
-					{
-						"regexp": "^(Error).* in file +(.*) at line (\\d+) : (\\d+)\n  (.*)$",
-						"severity": 1,
-						"file": 2,
-						"line": 3,
-						"column": 4,
-						"message": 5
-					}
-				]
-			}
-		],
-		"configuration": {
-			"title": "Ampersand",
-			"properties": {
-				"ampersand.mainScriptName": {
-					"type": "string",
-					"default": "main.adl",
-					"description": "The name of the main ADL script file to be fed to the ampersand compiler to generate a prototype."
-				},
-				"ampersand.folderName": {
-					"type": "string",
-					"default": "project",
-					"description": "The name of the folder to use to generate a protoype. Must contain the main script."
-				}
-			}
-		}
-	},
-	"scripts": {
-		"bundle": "npm run esbuild-base -- --minify",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"package": "npm run esbuild-base -- --minify",
-		"esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
-		"esbuild": "npm run esbuild-base -- --sourcemap",
-		"esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
-	},
-	"dependencies": {
-		"@types/node": "ts5.1",
-		"@types/vscode": "ts5.1",
-		"@vscode/test-electron": "latest",
-		"@vscode/vsce": "^2.22.0",
-		"ts-node": "latest",
-		"typescript": "5.1.6"
-	}
+    "name": "language-ampersand",
+    "displayName": "Ampersand (ADL) language support",
+    "version": "0.0.0",
+    "publisher": "AmpersandTarski",
+    "description": "Language support for Ampersand scripts",
+    "categories": [
+        "Programming Languages",
+        "Themes",
+        "Snippets"
+    ],
+    "author": "Ampersand Tarski",
+    "preview": false,
+    "contributors": [
+        {
+            "name": "Rieks",
+            "url": "https://github.com/RieksJ"
+        },
+        {
+            "name": "Han Joosten",
+            "url": "https://github.com/hanjoosten",
+            "email": "han.joosten.han@gmail.com"
+        }
+    ],
+    "engines": {
+        "vscode": "^1.75.1"
+    },
+    "activationEvents": [],
+    "icon": "images/ampersandLogo.png",
+    "galleryBanner": {
+        "color": "#f6a615",
+        "theme": "light"
+    },
+    "license": "GPL-3.0",
+    "homepage": "https://github.com/AmpersandTarski/Ampersand-Language-Support",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/AmpersandTarski/Ampersand-Language-Support.git"
+    },
+    "bugs": {
+        "url": "https://github.com/AmpersandTarski/Ampersand-Language-Support/issues"
+    },
+    "browser": "./out/extension.js",
+    "main": "./out/extension.js",
+    "contributes": {
+        "languages": [
+            {
+                "id": "ampersand",
+                "aliases": [
+                    "Ampersand",
+                    "ampersand",
+                    "ADL",
+                    "Ampersand Definition Language"
+                ],
+                "extensions": [
+                    ".adl",
+                    ".ifc",
+                    ".pop",
+                    ".docadl"
+                ],
+                "configuration": "./ampersand-configuration.json"
+            },
+            {
+                "id": "amplog",
+                "aliases": [
+                    "amplog"
+                ],
+                "extensions": [
+                    ".amplog"
+                ],
+                "configuration": "./amplog-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "ampersand",
+                "scopeName": "source.ampersand",
+                "path": "./syntaxes/ampersand.tmLanguage.json"
+            },
+            {
+                "language": "amplog",
+                "scopeName": "text.amplog",
+                "path": "./syntaxes/amplog.tmLanguage.json"
+            }
+        ],
+        "themes": [
+            {
+                "label": "Ampersand",
+                "uiTheme": "vs-dark",
+                "path": "./themes/Ampersand-color-theme.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "ampersand",
+                "path": "./snippets/ampersand.json"
+            }
+        ],
+        "commands": [
+            {
+                "command": "extension.checkVersion",
+                "title": "Ampersand: version"
+            },
+            {
+                "command": "extension.startDaemon",
+                "title": "Ampersand: Start checker"
+            },
+            {
+                "command": "extension.generateFunctionalSpec",
+                "title": "Ampersand: generate functional spec"
+            },
+            {
+                "command": "extension.generateAtlas",
+                "title": "Ampersand: Generate atlas"
+            },
+            {
+                "command": "extension.generatePrototype",
+                "title": "Ampersand: Generate prototype"
+            }
+        ],
+        "problemMatchers": [
+            {
+                "name": "amp-err",
+                "owner": "ampersand",
+                "fileLocation": [
+                    "absolute"
+                ],
+                "pattern": [
+                    {
+                        "regexp": "^In file +(.*) \\(line (\\d+), column (\\d+)\\):(\n.*)+$",
+                        "file": 1,
+                        "line": 2,
+                        "column": 3,
+                        "message": 0
+                    },
+                    {
+                        "regexp": "^(Error).* in file +(.*) at line (\\d+) : (\\d+)\n  (.*)$",
+                        "severity": 1,
+                        "file": 2,
+                        "line": 3,
+                        "column": 4,
+                        "message": 5
+                    }
+                ]
+            }
+        ],
+        "configuration": {
+            "title": "Ampersand",
+            "properties": {
+                "ampersand.mainScriptName": {
+                    "type": "string",
+                    "default": "main.adl",
+                    "description": "The name of the main ADL script file to be fed to the ampersand compiler to generate a prototype."
+                },
+                "ampersand.folderName": {
+                    "type": "string",
+                    "default": "project",
+                    "description": "The name of the folder to use to generate a protoype. Must contain the main script."
+                }
+            }
+        }
+    },
+    "scripts": {
+        "bundle": "npm run esbuild-base -- --minify",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "package": "npm run esbuild-base -- --minify",
+        "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+        "esbuild": "npm run esbuild-base -- --sourcemap",
+        "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
+    },
+    "dependencies": {
+        "@types/node": "^22.10.3",
+        "@types/vscode": "^1.96.0",
+        "@vscode/test-electron": "^2.4.1",
+        "@vscode/vsce": "^3.2.1",
+        "npm": "^11.0.0",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.7.2"
+    }
 }

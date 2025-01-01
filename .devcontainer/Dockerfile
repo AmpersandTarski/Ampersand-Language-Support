@@ -1,10 +1,10 @@
 # See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.191.0/containers/typescript-node/.devcontainer/base.Dockerfile
 
-# [Choice] Node.js version: 16, 14, 12
-ARG VARIANT="16-buster"
-FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-${VARIANT}
+ARG TYPESCRIPT_NODE_VARIANT
+ARG PROTOTYPE_FRAMEWORK_VERSION
+FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:${TYPESCRIPT_NODE_VARIANT}
 
-COPY --from=ampersandtarski/ampersand:v4.7 /bin/ampersand /usr/local/bin
+COPY --from=ampersandtarski/prototype-framework:2.0.0-alpha.4 /usr/local/bin/ampersand /usr/local/bin
 RUN chmod +x /usr/local/bin/ampersand
 RUN apt-get update && apt-get install -y graphviz
 
