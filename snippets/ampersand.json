@@ -1,424 +1,428 @@
 {
-	"This section is for comments only": {
-		"prefix": "SNIPPET COMMENTS",
-		"description": "Design considerations - this snippet is not intended to be executed",
-		"body":[
-			"These Snippets are intended to make life easier for Ampersand developers.",
-			"We use the convention to start names of placeholders with an illegal character,",
-			"so that it will be colored red while it has not been replaced with user text.",
-			" ",
-			"Also, we have snippets that also insert comments",
-			"that document how the content is to be used (example: OBJECTDROPDOWN)"
-		]
-	},
-	"Preprocessor statements": {
-		"prefix": "--#",
-		"description": "Preprocessor statements",
-		"body":[ "--#${1:|IF ${2:variable},IFNOT ${2:variable},ELSE,ENDIF|}" ]
-	},
-	"INCLUDE statements": {
-		"prefix": "INCLUDE",
-		"description": "INCLUDE with preprocessor variables",
-		"body":[
-			"INCLUDE \"${path/file.ext}\" --# [ \"${1:variable}\", \"${2:variable}\" ]",
-			"$0"
-		]
-	},
-	"Define a context": {
-		"prefix": "CONTEXT",
-		"description": "Define a CONTEXT. You may need to add the PURPOSE statement yourself",
-		"comment": "this snippet ensures that you do not forget the corresponding 'ENDCONTEXT' statement",
-		"body":[
-			"CONTEXT \"${1:name}\"",
-			"$0",
-			"ENDCONTEXT"
-		]
-	},
-	"Define a concept": {
-		"prefix": "CONCEPT",
-		"description": "Define a CONCEPT and optionally, a reference",
-		"comment": "this snippet ensures that you do not forget about the optional reference text",
-		"body":[ "CONCEPT ${1:cname} \"${2:description}\" \"$0\"" ]
-	},
-	"Define a CLASSIFY ISA statement": {
-		"prefix": "CLASSIFY",
-		"description": "CLASSIFY <Conceptlist> ISA <GenericConcept>",
-		"body":[ "CLASSIFY ${1:ConceptList} ISA ${2:genericConcept}" ]
-	},
-	"Define a CLASSIFY IS statement": {
-		"prefix": "CLASSIFY",
-		"description": "CLASSIFY <Conceptlist> IS <GenericConcept1> /\\ <GenericConcept2> /\\... <GenericConcept<n>>",
-		"body":[ "CLASSIFY ${1:ConceptList} IS ${2:genericConcept} /\\ ${3:genericConcept}" ]
-	},
-	"Define a Concepts population": {
-		"prefix": "POPULATION",
-		"description": "Define a POPULATION of Concept Atoms",
-		"body":[ "POPULATION \"${1:concept}\" CONTAINS [ \"$0\" ]" ]
-	},
-	"TYPE statement": {
-		"prefix": "TYPE",
-		"description": "Choose one of the allowed TYPEs",
-		"body":[ "TYPE ${1|ALPHANUMERIC,BIGALPHANUMERIC,DATE,DATETIME,BOOLEAN,INTEGER,FLOAT,PASSWORD,OBJECT,BINARY,BIGBINARY,HUGEALPHANUMERIC,HUGEBINARY|}" ]
-	},
-	"REPRESENT statement": {
-		"prefix": "REPRESENT",
-		"description": "REPRESENT <Conceptlist> TYPE <type>",
-		"body":[ "REPRESENT ${1:ConceptList} TYPE ${1|ALPHANUMERIC,BIGALPHANUMERIC,DATE,DATETIME,BOOLEAN,INTEGER,FLOAT,PASSWORD,OBJECT,BINARY,BIGBINARY,HUGEALPHANUMERIC,HUGEBINARY|}" ]
-	},
-	"Define a RELATION statement": {
-		"prefix": "RELATION",
-		"description": "RELATION <relname>[<SrcConcept>*<TgtConcept>]",
-		"body":[ "RELATION ${1:Relname}[${2:srcConcept} * ${3:tgtConcept}] " ]
-	},
-	"Define a relation (::-notation)": {
-		"prefix": "RELATION",
-		"description": "<relname> :: <SrcConcept> * <TgtConcept>",
-		"body":[ "${1:Relname} :: ${2:srcConcept} * ${3:tgtConcept} " ]
-	},
-	"Define a Relation population": {
-		"prefix": "POPULATION",
-		"description": "Define a POPULATION of Relation pairs/links",
-		"body":[ "POPULATION ${1:Relname} CONTAINS [ (\"$2\", \"$3\") ]"	]
-	},
-	"SERVICE MAINTAINS RULE": {
-		"prefix": "SERVICE",
-		"description": "Define a RULE that the specified SERVICE will maintain",
-		"body":[
-			"SERVICE \"$1\" MAINTAINS \"$2\"",
-			"RULE \"${2:rulename}\": "
-		]
-	},
-	"ExecEngine MAINTAINS RULE": {
-		"prefix": "ROLE ExecEngine MAINTAINS",
-		"description": "Define a RULE that the ExecEngine will maintain",
-		"body":[
-			"ROLE ExecEngine MAINTAINS \"$1\"",
-			"RULE \"${1:rulename}\": "
-		]
-	},
-	"RULE": {
-		"prefix": "RULE",
-		"description": "Template for invariant rule",
-		"body":[
-			"RULE \"${1:rulename}\": ${0:rule-expression}"
-		]
-	},
-	"TXT": {
-		"prefix": "TXT ",
-		"description": "Define a TXT fragment within a VIOLATION or VIEW",
-		"body":[ "TXT \"$0\"" ]
-	},
-	"VIOLATION": {
-		"prefix": "VIOLATION (TXT ",
-		"description": "Define a VIOLATION",
-		"body":[ "VIOLATION (TXT \"{EX} $0\"" ]
-	},
-	"{EX}": {
-		"prefix": "{EX}",
-		"description": "Marks the start of an ExecEngine function",
-		"body":[ "{EX} ${1|InsPair,DelPair,InsAtom,DelAtom,MrgAtom,SetConcept,ClearConcept,SetNavToOnCommit,SetNavToOnRollBack,TerminateThisExecEngine,TriggerService|}" ]
-	},
-	"InsPair": {
-		"prefix": "InsPair",
-		"description": "most common way in which InsPairs are done",
-		"body":[ "InsPair;${1:Relname};${2:srcConcept};\", SRC I, TXT \";${3:tgtConcept};\", TGT I" ]
-	},
-	"DelPair": {
-		"prefix": "DelPair",
-		"description": "most common way in which DelPairs are done",
-		"body":[ "DelPair;${1:Relname};${2:srcConcept};\", SRC I, TXT \";${3:tgtConcept};\", TGT I" ]
-	},
-	"NewStruct": {
-		"prefix": "NewStruct",
-		"description": "NewStruct is deprecated - change to InsAtom",
-		"body":[
-			"-- The function `NewStruct` is deprecated. Please use `InsAtom` instead.",
-			"InsAtom;${1:concept}\"",
-			"          ,TXT \"{EX} $0\""
-		]
-	},
-	"InsAtom": {
-		"prefix": "InsAtom",
-		"description": "most common way in which InsAtoms are done",
-		"body":[
-			"InsAtom;${1:concept}\"",
-			"          ,TXT \"{EX} $0\""
-		]
-	},
-	"DelAtom": {
-		"prefix": "DelAtom",
-		"description": "most common way in which DelAtoms are done",
-		"body":[ "DelAtom;${1:concept};\", ${2:atomid}"	]
-	},
-	"MrgAtom": {
-		"prefix": "MrgAtom",
-		"description": "Merge atomB into atomA and then delete atomB. Can only be done if conceptA and conceptB are in the same concept-tree.",
-		"body":[ "MrgAtom;${1:conceptA};\", ${2:atomAid}, TXT \";${3:conceptB};\", ${4:atomBid}" ]
-	},
-	"SetConcept": {
-		"prefix": "SetConcept",
-		"description": "Add atomId[CurrentConcept] to [NewConcept]-set. Can only be done if both concepts are in the same concept-tree.",
-		"body":[ "SetConcept;${1:CurrentConcept};${2:NewConcept};\", ${3:atomId}"	]
-	},
-	"ClearConcept": {
-		"prefix": ["ClearConcept", "ClrConcept"],
-		"description": "Remove atomId as member from [Concept] set. Can only be done if [Concept] is a specialization of another concept.",
-		"body":[ "ClearConcept;${1:concept};\", ${2:atomId}"	]
-	},
-	"SetNavToOnCommit": {
-		"prefix": "SetNavToOnCommit",
-		"description": "Specify INTERFACE to which to navigate in case the current transaction is committed to",
-		"body":[ "SetNavToOnCommit;\", ${1:/InterfaceID}"	]
-	},
-	"SetNavToOnRollBack": {
-		"prefix": "SetNavToOnRollBack",
-		"description": "Specify INTERFACE to which to navigate in case the current transaction rolled back",
-		"body":[ "SetNavToOnRollBack;\", ${1:/InterfaceID}"	]
-	},
-	"TerminateThisExecEngine": {
-		"prefix": "TerminateThisExecEngine",
-		"description": "Terminate the ExecEngine that maintains the rule in which this function is executed",
-		"body":[ "TerminateThisExecEngine;${1:Optional message for userlog}\""	]
-	},
-	"TriggerService": {
-		"prefix": "TriggerService",
-		"description": "Trigger the specified ROLEname (i.e. name of ROLE that maintains a set of rules)",
-		"body":[ "TriggerService;${1:ROLEname that maintains a set of rules}\""	]
-	},
-	"Warshall": {
-		"prefix": [ "Warshall", "TransitiveClosure", "star" ],
-		"description": "Compute transitive closure of a relation r",
-		"body":[ "--[Transitive Closure of ${1:Relation}[${2:concept}]]",
-			"$1 :: $2 * $2 -- relation `r` of which r+ will be computed",
-			"$1Copy :: $2 * $2 -- copied value of `r` allows for detecting modification events",
-			"$1Plus :: $2 * $2 -- transitive closure of `r`, i.e. `r+`",
-		   " ",
-			"ROLE ExecEngine MAINTAINS \"Compute $1Plus\"",
-			"RULE \"Compute $1Plus\": $1[$2] = $1Copy[$2]",
-			"VIOLATION (TXT \"{EX} TransitiveClosure;$1;$2;$1Copy;$1Plus\")"
-		]
-	},
-	"ENFORCE": {
-		"prefix": "ENFORCE",
-		"description": "ENFORCE: <relation> <operator> <expression> ",
-		"body": [
-			"ENFORCE ${1:Relname} ${2|:=,:<,>:|} ${3:expression}"
-		]
-	},
-	"Equivalence rule": {
-		"prefix": "eqv-relation",
-		"description": "Equivalence: relation == expression",
-		"body": [
-			"-- EQUIVALENCE ${1:Relname}[${2:srcConcept}*${3:tgtConcept}] == ${4:Expression}",
-			"$1 :: $2 * $3 -- define relation $1 as shorthand for $4",
-			"ROLE ExecEngine MAINTAINS \"Eqv-InsPair $1\"",
-			"RULE \"Eqv-InsPair $1\": $4 |- $1",
-			"VIOLATION (TXT \"{EX} InsPair;$1;$2;\", SRC I, TXT \";$3;\", TGT I)",
-			"ROLE ExecEngine MAINTAINS \"Eqv-DelPair $1\"",
-			"RULE \"Eqv-DelPair $1\": $1 |- $4",
-			"VIOLATION (TXT \"{EX} DelPair;$1;$2;\", SRC I, TXT \";$3;\", TGT I)",
-			"$0"
-		]
-	},
-	"PROP Equivalence rule": {
-		"prefix": "eqv-property",
-		"description": "Equivalence with [PROP]-attribute",
-		"body": [
-			"-- EQUIVALENCE ${1:Relname}[${2:concept}] [PROP] == ${3:Expression}",
-			"$1 :: $2 * $2 [PROP] -- define relation $1 as shorthand for $3",
-			"ROLE ExecEngine MAINTAINS \"Eqv-InsPair $1\"",
-			"RULE \"Eqv-InsPair $1\": $3 |- $1",
-			"VIOLATION (TXT \"{EX} InsPair;$1;$2;\", SRC I, TXT \";$2;\", TGT I)",
-			"ROLE ExecEngine MAINTAINS \"Eqv-DelPair $1\"",
-			"RULE \"Eqv-DelPair $1\": $1 |- $3",
-			"VIOLATION (TXT \"{EX} DelPair;$1;$2;\", SRC I, TXT \";$2;\", TGT I)",
-			"$0"
-		]
-	},
-	"INTERFACE -- FOR <roles>": {
-		"prefix": "INTERFACE FOR",
-		"description": "INTERFACE for <role>s",
-		"body":[
-			"INTERFACE \"${1:ifcname}\" FOR ${2|User,Anonymous,${3:role}|}: ${4:Expression}",
-			"   [ $0",
-			"   ]"
-		]
-	},
-	"VIEW": {
-		"prefix": "VIEW <viewname>:",
-		"description": "simple VIEW for a concept",
-		"body":[
-			"VIEW \"${1:viewname}\": ${2:concept}",
-			"   { \"${3:label}\": $4:Expression}",
-			"   , $0",
-			"   } ENDVIEW"
-		]
-	},
-	"VIEW (using a HTML template)": {
-		"prefix": "VIEW <viewname>:",
-		"description": "VIEW using a HTML-template",
-		"body":[
-			"VIEW \"${1:viewname}\": ${2:concept}",
-			"   { \"${3:label}\": $4:Expression}",
-			"   , $0",
-			"   } HTML TEMPLATE \"${3:templatefilename.html}\" ENDVIEW"
-		]
-	},
-	"BOX <BOXTYPE>": {
-		"prefix": "BOX <BOXTYPE>",
-		"description": "e.g. FORM/TABLE/TABS/RAW etc.",
-		"body":[
-			"BOX <${1|RAW,FORM,TABLE,TABS,PROPBUTTON,OBJECTDROPDOWN,VALUEDROPDOWN|}>",
-			"   [ $0",
-			"   ]"
-		]
-	},
-	"<FORM>": {
-		"prefix": "<FORM",
-		"description": "shows all possible attributes of FORMs",
-		"body":[ "<FORM hideLabels hideOnNoRecords hideSubOnNoRecords title=\"Form Title\" noRootTitle showNavMenu>" ]
-	},
-	"<TABLE>": {
-		"prefix": "<TABLE",
-		"description": "shows all possible attributes of TABLEs",
-		"body":[ "<TABLE noHeader hideOnNoRecords title=\"Table Title\" noRootTitle sortable sortBy=\"ifc-label\" order=\"${1:asc|desc}\" showNavMenu>" ]
-	},
-	"<TABS>": {
-		"prefix": "<TABS",
-		"description": "shows all possible attributes of TABS",
-		"body":[ "<TABS hideOnNoRecords hideSubOnNoRecords title=\"Form Title\" noRootTitle>" ]
-	},
-	"<RAW>": {
-		"prefix": "<RAW",
-		"description": "shows all possible attributes of RAW",
-		"body":[ "<RAW ${1:form|table}>" ]
-	},
-	"COLOR (for use in PROPBUTTONs)": {
-		"prefix": "color:",
-		"description": "specify color for (solid) PROPBUTTONs",
-		"body": "TXT \"${1|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- primary=blue secondary=grey, success=green, warning=yellow, danger=red, info=lightblue, light=grey, dark=black"
-	},
-	"OUTLINECOLOR (for use in PROPBUTTONs)": {
-		"prefix": "outlinecolor",
-		"description": "specify color for (outlined) PROPBUTTONs",
-		"body": "TXT \"outline-${1|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- primary=blue secondary=grey, success=green, warning=yellow, danger=red, info=lightblue, light=grey, dark=black"
-	},
-	"PROPBUTTON (simple, no comments)": {
-		"prefix": "<PROPBUTTON>",
-		"description": "propbutton arguments",
-		"body":[
-			"<PROPBUTTON>",
-			"   [ label: TXT \"${1:buttontext}\"",
-			"   , property: ${2:[prop]-relation} cRUd",
-			"   , setprop1: ${2:[prop]-relation} cRUd",
-			"   , clrprop1: ${2:[prop]-relation} cRUd",
-			"   , hide: ${3:[prop]-expression} cRud",
-			"   , disabled: ${4:[prop]-expression} cRud",
-			"   , disabledpopovertext: TXT \"disabled-popovertext\"",
-			"   , popovertext: TXT \"popovertext\"",
-			"   ]"
-		]
-	},
-	"PROPBUTTON (extended, no comments)": {
-		"prefix": "<PROPBUTTON>",
-		"description": "propbutton arguments",
-		"body":[
-			"BOX <PROPBUTTON>",
-			"   [ label: TXT \"${1:buttontext}\"",
-			"$0   , label1: TXT \"+label1\"",
-			"   , label2: TXT \"+label2\"",
-			"   , label3: TXT \"+label3\"",
-			"   , property: proprel cRUd",
-			"   , setprop1: proprel cRUd",
-			"   , setprop2: proprel cRUd",
-			"   , setprop3: proprel cRUd",
-			"   , clrprop1: proprel cRUd",
-			"   , clrprop2: proprel cRUd",
-			"   , clrprop3: proprel cRUd",
-			"   , color: TXT \"primary,secondary,success,warning,danger,info,light,dark,link\"",
-			"   , disabledcolor: TXT \"primary,secondary,success,warning,danger,info,light,dark,link\"",
-			"   , disabled: proprel cRud",
-			"   , hide: proprel cRud",
-			"   , disabledpopovertext: TXT \"disabled-popovertext\"",
-			"   , popovertext: TXT \"popovertext\"",
-			"   ]"
-		]
-	},
-	"PROPBUTTON (extended)": {
-		"prefix": "<PROPBUTTON>",
-		"description": "propbutton arguments",
-		"body":[
-			"BOX <PROPBUTTON>",
-			"   [ label: TXT \"${1:buttontext}\"",
-			"   , label1: TXT \"${2:buttontext}\" -- label text = label+label1",
-			"   , label2: TXT \"${3:buttontext}\" -- label text = label+label1+label2",
-			"   , label3: TXT \"${4:buttontext}\" -- label text = label+label1+label2+label3",
-			"   , property: ${5:propertyrelation} cRUd -- change/flip the value of the [PROP] relation",
-			"   , setprop1: ${6:propertyrelation} cRUd -- set propertyrelation (InsPair)",
-			"   , setprop2: ${7:propertyrelation} cRUd -- as 'setprop1",
-			"   , setprop3: ${8:propertyrelation} cRUd -- as 'setprop1'",
-			"   , clrprop1: ${9:propertyrelation} cRUd -- clear propertyrelation (DelPair)",
-			"   , clrprop2: ${10:propertyrelation} cRUd -- as 'clrprop1'",
-			"   , clrprop3: ${11:propertyrelation} cRUd -- as 'clrprop1'",
-			"   , color: TXT \"${11|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- primary=blue secondary=grey, success=green, warning=yellow, danger=red, info=lightblue, light=grey, dark=black",
-			"   , disabledcolor: TXT \"${12|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- precede color with `outline-` (e.g. `outline-primary`) to make an outline-button",
-			"   , disabled: ${13:propertyExpression} cRud -- when [PROP]-type expression is not empty, button is disabled (user cannot click it)",
-			"   , hide: ${14:propertyExpression} cRud -- when [PROP]-type expression is not empty, button does not show on screen",
-			"   , disabledpopovertext: TXT \"${15:disabledhovertext}\" -- text that shows when user hovers cursor over the button when it is disabled",
-			"   , popovertext: TXT \"${16:hovertext}\" -- text that shows when user hovers cursor over the button",
-			"   ]"
-		]
-	},
-	"OBJECTDROPDOWN (no comments)": {
-		"prefix": "<OBJECTDROPDOWN>",
-		"description": "BOX template for selecting an OBJECT (and adding it to the population of a relation)",
-		"body":[
-			"<OBJECTDROPDOWN>",
-			"   [ selectfrom: ${1:expr} cRud <${2:View}>",
-			"   , setrelation: ${3:rel} cRUd",
-			"   , instruction: TXT \"${4:text}\"",
-		   "   , selectflag: ${5:property-rel} cRUd",
-	   	"   , deselectflag: ${6:property-rel} cRUd",
-			"   ]"
-		]
-	},
-	"OBJECTDROPDOWN (incl. doc comments)": {
-		"prefix": "<OBJECTDROPDOWN>",
-		"description": "BOX template for selecting an OBJECT (and adding it to the population of a relation)",
-		"body":[
-			"<OBJECTDROPDOWN> -- **use <VALUEDROPDOWN> if the concept is an ALPHANUMERIC, INTEGER, DATE, ...**",
-			"   [ selectfrom: ${1:expr} cRud <${2:View}> -- 'expr' specifies OBJECTS to select from, 'View' how they show up in the dropdown box",
-			"   , setrelation: ${3:rel} cRUd -- if UNI(rel): selected object replaces TGT; else, TGT is added to populatio of 'rel'",
-			"   , instruction: TXT \"${4:text}\" -- Text that shows when nothing is selected yet",
-		   "   , selectflag: ${5:property-rel} cRUd -- [PROP]-type relation that toggles when OBJECT is selected",
-		   "   , deselectflag: ${6:property-rel} cRUd -- [PROP]-type relation that toggles when NO OBJECT is selected",
-			"   ]"
-		]
-	},
-	"VALUEDROPDOWN (no comments)": {
-		"prefix": "<VALUEDROPDOWN>",
-		"description": "BOX template for selecting a VALUE (and adding it to the population of a relation)",
-		"body":[
-			"<VALUEDROPDOWN>",
-			"   [ selectfrom: ${1:expr} cRud <${2:View}>",
-			"   , setrelation: ${3:rel} cRUd",
-			"   , instruction: TXT \"${4:text}\"",
-		   "   , selectflag: ${5:prop-rel} cRUd",
-		   "   , deselectflag: ${6:prop-rel} cRUd",
-			"   ]"
-		]
-	},
-	"VALUEDROPDOWN (incl. doc comments)": {
-		"prefix": "<VALUEDROPDOWN>",
-		"description": "BOX template for selecting a VALUE (and adding it to the population of a relation)",
-		"body":[
-			"<VALUEDROPDOWN> -- **use <OBJECTDROPDOWN> if the concept is **NOT** an ALPHANUMERIC, INTEGER, DATE, ...**",
-			"   [ selectfrom: ${1:exprThatSpecifiesVALUEsToSelectFrom} cRud <${2:ViewToDisplaySelectableVALUEs}>",
-			"   , setrelation: ${3:relToWhichSelectedVALUEisAdded} cRUd -- If the relation is [UNI], a newly selected object will replace the existing population.",
-			"   , instruction: TXT \"${4:selectText}\" -- Text that shows when nothing is selected yet",
-		   "   , selectflag: ${5:selectEventFlag} cRUd -- [PROP]-type relation that toggles when Value is selected",
-		   "   , deselectflag: ${6:deselectEventFlag} cRUd -- [PROP]-type relation that toggles when NO Value is selected",
-			"   ]"
-		]
-	}
+  "This section is for comments only": {
+    "prefix": "SNIPPET COMMENTS",
+    "description": "Design considerations - this snippet is not intended to be executed",
+    "body": [
+      "These Snippets are intended to make life easier for Ampersand developers.",
+      "We use the convention to start names of placeholders with an illegal character,",
+      "so that it will be colored red while it has not been replaced with user text.",
+      " ",
+      "Also, we have snippets that also insert comments",
+      "that document how the content is to be used (example: OBJECTDROPDOWN)"
+    ]
+  },
+  "Preprocessor statements": {
+    "prefix": "--#",
+    "description": "Preprocessor statements",
+    "body": ["--#${1:|IF ${2:variable},IFNOT ${2:variable},ELSE,ENDIF|}"]
+  },
+  "INCLUDE statements": {
+    "prefix": "INCLUDE",
+    "description": "INCLUDE with preprocessor variables",
+    "body": [
+      "INCLUDE \"${path/file.ext}\" --# [ \"${1:variable}\", \"${2:variable}\" ]",
+      "$0"
+    ]
+  },
+  "Define a context": {
+    "prefix": "CONTEXT",
+    "description": "Define a CONTEXT. You may need to add the PURPOSE statement yourself",
+    "comment": "this snippet ensures that you do not forget the corresponding 'ENDCONTEXT' statement",
+    "body": ["CONTEXT \"${1:name}\"", "$0", "ENDCONTEXT"]
+  },
+  "Define a concept": {
+    "prefix": "CONCEPT",
+    "description": "Define a CONCEPT and optionally, a reference",
+    "comment": "this snippet ensures that you do not forget about the optional reference text",
+    "body": ["CONCEPT ${1:cname} \"${2:description}\" \"$0\""]
+  },
+  "Define a CLASSIFY ISA statement": {
+    "prefix": "CLASSIFY",
+    "description": "CLASSIFY <Conceptlist> ISA <GenericConcept>",
+    "body": ["CLASSIFY ${1:ConceptList} ISA ${2:genericConcept}"]
+  },
+  "Define a CLASSIFY IS statement": {
+    "prefix": "CLASSIFY",
+    "description": "CLASSIFY <Conceptlist> IS <GenericConcept1> /\\ <GenericConcept2> /\\... <GenericConcept<n>>",
+    "body": [
+      "CLASSIFY ${1:ConceptList} IS ${2:genericConcept} /\\ ${3:genericConcept}"
+    ]
+  },
+  "Define a Concepts population": {
+    "prefix": "POPULATION",
+    "description": "Define a POPULATION of Concept Atoms",
+    "body": ["POPULATION \"${1:concept}\" CONTAINS [ \"$0\" ]"]
+  },
+  "TYPE statement": {
+    "prefix": "TYPE",
+    "description": "Choose one of the allowed TYPEs",
+    "body": [
+      "TYPE ${1|ALPHANUMERIC,BIGALPHANUMERIC,DATE,DATETIME,BOOLEAN,INTEGER,FLOAT,PASSWORD,OBJECT,BINARY,BIGBINARY,HUGEALPHANUMERIC,HUGEBINARY|}"
+    ]
+  },
+  "REPRESENT statement": {
+    "prefix": "REPRESENT",
+    "description": "REPRESENT <Conceptlist> TYPE <type>",
+    "body": [
+      "REPRESENT ${1:ConceptList} TYPE ${1|ALPHANUMERIC,BIGALPHANUMERIC,DATE,DATETIME,BOOLEAN,INTEGER,FLOAT,PASSWORD,OBJECT,BINARY,BIGBINARY,HUGEALPHANUMERIC,HUGEBINARY|}"
+    ]
+  },
+  "Define a RELATION statement": {
+    "prefix": "RELATION",
+    "description": "RELATION <relname>[<SrcConcept>*<TgtConcept>]",
+    "body": ["RELATION ${1:Relname}[${2:srcConcept} * ${3:tgtConcept}] "]
+  },
+  "Define a relation (::-notation)": {
+    "prefix": "RELATION",
+    "description": "<relname> :: <SrcConcept> * <TgtConcept>",
+    "body": ["${1:Relname} :: ${2:srcConcept} * ${3:tgtConcept} "]
+  },
+  "Define a Relation population": {
+    "prefix": "POPULATION",
+    "description": "Define a POPULATION of Relation pairs/links",
+    "body": ["POPULATION ${1:Relname} CONTAINS [ (\"$2\", \"$3\") ]"]
+  },
+  "SERVICE MAINTAINS RULE": {
+    "prefix": "SERVICE",
+    "description": "Define a RULE that the specified SERVICE will maintain",
+    "body": ["SERVICE \"$1\" MAINTAINS \"$2\"", "RULE \"${2:rulename}\": "]
+  },
+  "ExecEngine MAINTAINS RULE": {
+    "prefix": "ROLE ExecEngine MAINTAINS",
+    "description": "Define a RULE that the ExecEngine will maintain",
+    "body": ["ROLE ExecEngine MAINTAINS \"$1\"", "RULE \"${1:rulename}\": "]
+  },
+  "RULE": {
+    "prefix": "RULE",
+    "description": "Template for invariant rule",
+    "body": ["RULE \"${1:rulename}\": ${0:rule-expression}"]
+  },
+  "TXT": {
+    "prefix": "TXT ",
+    "description": "Define a TXT fragment within a VIOLATION or VIEW",
+    "body": ["TXT \"$0\""]
+  },
+  "VIOLATION": {
+    "prefix": "VIOLATION (TXT ",
+    "description": "Define a VIOLATION",
+    "body": ["VIOLATION (TXT \"{EX} $0\""]
+  },
+  "{EX}": {
+    "prefix": "{EX}",
+    "description": "Marks the start of an ExecEngine function",
+    "body": [
+      "{EX} ${1|InsPair,DelPair,InsAtom,DelAtom,MrgAtom,SetConcept,ClearConcept,SetNavToOnCommit,SetNavToOnRollBack,TerminateThisExecEngine,TriggerService|}"
+    ]
+  },
+  "InsPair": {
+    "prefix": "InsPair",
+    "description": "most common way in which InsPairs are done",
+    "body": [
+      "InsPair;${1:Relname};${2:srcConcept};\", SRC I, TXT \";${3:tgtConcept};\", TGT I"
+    ]
+  },
+  "DelPair": {
+    "prefix": "DelPair",
+    "description": "most common way in which DelPairs are done",
+    "body": [
+      "DelPair;${1:Relname};${2:srcConcept};\", SRC I, TXT \";${3:tgtConcept};\", TGT I"
+    ]
+  },
+  "NewStruct": {
+    "prefix": "NewStruct",
+    "description": "NewStruct is deprecated - change to InsAtom",
+    "body": [
+      "-- The function `NewStruct` is deprecated. Please use `InsAtom` instead.",
+      "InsAtom;${1:concept}\"",
+      "          ,TXT \"{EX} $0\""
+    ]
+  },
+  "InsAtom": {
+    "prefix": "InsAtom",
+    "description": "most common way in which InsAtoms are done",
+    "body": ["InsAtom;${1:concept}\"", "          ,TXT \"{EX} $0\""]
+  },
+  "DelAtom": {
+    "prefix": "DelAtom",
+    "description": "most common way in which DelAtoms are done",
+    "body": ["DelAtom;${1:concept};\", ${2:atomid}"]
+  },
+  "MrgAtom": {
+    "prefix": "MrgAtom",
+    "description": "Merge atomB into atomA and then delete atomB. Can only be done if conceptA and conceptB are in the same concept-tree.",
+    "body": [
+      "MrgAtom;${1:conceptA};\", ${2:atomAid}, TXT \";${3:conceptB};\", ${4:atomBid}"
+    ]
+  },
+  "SetConcept": {
+    "prefix": "SetConcept",
+    "description": "Add atomId[CurrentConcept] to [NewConcept]-set. Can only be done if both concepts are in the same concept-tree.",
+    "body": ["SetConcept;${1:CurrentConcept};${2:NewConcept};\", ${3:atomId}"]
+  },
+  "ClearConcept": {
+    "prefix": ["ClearConcept", "ClrConcept"],
+    "description": "Remove atomId as member from [Concept] set. Can only be done if [Concept] is a specialization of another concept.",
+    "body": ["ClearConcept;${1:concept};\", ${2:atomId}"]
+  },
+  "SetNavToOnCommit": {
+    "prefix": "SetNavToOnCommit",
+    "description": "Specify INTERFACE to which to navigate in case the current transaction is committed to",
+    "body": ["SetNavToOnCommit;\", ${1:/InterfaceID}"]
+  },
+  "SetNavToOnRollBack": {
+    "prefix": "SetNavToOnRollBack",
+    "description": "Specify INTERFACE to which to navigate in case the current transaction rolled back",
+    "body": ["SetNavToOnRollBack;\", ${1:/InterfaceID}"]
+  },
+  "TerminateThisExecEngine": {
+    "prefix": "TerminateThisExecEngine",
+    "description": "Terminate the ExecEngine that maintains the rule in which this function is executed",
+    "body": ["TerminateThisExecEngine;${1:Optional message for userlog}\""]
+  },
+  "TriggerService": {
+    "prefix": "TriggerService",
+    "description": "Trigger the specified ROLEname (i.e. name of ROLE that maintains a set of rules)",
+    "body": ["TriggerService;${1:ROLEname that maintains a set of rules}\""]
+  },
+  "Warshall": {
+    "prefix": ["Warshall", "TransitiveClosure", "star"],
+    "description": "Compute transitive closure of a relation r",
+    "body": [
+      "--[Transitive Closure of ${1:Relation}[${2:concept}]]",
+      "$1 :: $2 * $2 -- relation `r` of which r+ will be computed",
+      "$1Copy :: $2 * $2 -- copied value of `r` allows for detecting modification events",
+      "$1Plus :: $2 * $2 -- transitive closure of `r`, i.e. `r+`",
+      " ",
+      "ROLE ExecEngine MAINTAINS \"Compute $1Plus\"",
+      "RULE \"Compute $1Plus\": $1[$2] = $1Copy[$2]",
+      "VIOLATION (TXT \"{EX} TransitiveClosure;$1;$2;$1Copy;$1Plus\")"
+    ]
+  },
+  "ENFORCE": {
+    "prefix": "ENFORCE",
+    "description": "ENFORCE: <relation> <operator> <expression> ",
+    "body": ["ENFORCE ${1:Relname} ${2|:=,:<,>:|} ${3:expression}"]
+  },
+  "Equivalence rule": {
+    "prefix": "eqv-relation",
+    "description": "Equivalence: relation == expression",
+    "body": [
+      "-- EQUIVALENCE ${1:Relname}[${2:srcConcept}*${3:tgtConcept}] == ${4:Expression}",
+      "$1 :: $2 * $3 -- define relation $1 as shorthand for $4",
+      "ROLE ExecEngine MAINTAINS \"Eqv-InsPair $1\"",
+      "RULE \"Eqv-InsPair $1\": $4 |- $1",
+      "VIOLATION (TXT \"{EX} InsPair;$1;$2;\", SRC I, TXT \";$3;\", TGT I)",
+      "ROLE ExecEngine MAINTAINS \"Eqv-DelPair $1\"",
+      "RULE \"Eqv-DelPair $1\": $1 |- $4",
+      "VIOLATION (TXT \"{EX} DelPair;$1;$2;\", SRC I, TXT \";$3;\", TGT I)",
+      "$0"
+    ]
+  },
+  "PROP Equivalence rule": {
+    "prefix": "eqv-property",
+    "description": "Equivalence with [PROP]-attribute",
+    "body": [
+      "-- EQUIVALENCE ${1:Relname}[${2:concept}] [PROP] == ${3:Expression}",
+      "$1 :: $2 * $2 [PROP] -- define relation $1 as shorthand for $3",
+      "ROLE ExecEngine MAINTAINS \"Eqv-InsPair $1\"",
+      "RULE \"Eqv-InsPair $1\": $3 |- $1",
+      "VIOLATION (TXT \"{EX} InsPair;$1;$2;\", SRC I, TXT \";$2;\", TGT I)",
+      "ROLE ExecEngine MAINTAINS \"Eqv-DelPair $1\"",
+      "RULE \"Eqv-DelPair $1\": $1 |- $3",
+      "VIOLATION (TXT \"{EX} DelPair;$1;$2;\", SRC I, TXT \";$2;\", TGT I)",
+      "$0"
+    ]
+  },
+  "INTERFACE -- FOR <roles>": {
+    "prefix": "INTERFACE FOR",
+    "description": "INTERFACE for <role>s",
+    "body": [
+      "INTERFACE \"${1:ifcname}\" FOR ${2|User,Anonymous,${3:role}|}: ${4:Expression}",
+      "   [ $0",
+      "   ]"
+    ]
+  },
+  "VIEW": {
+    "prefix": "VIEW <viewname>:",
+    "description": "simple VIEW for a concept",
+    "body": [
+      "VIEW \"${1:viewname}\": ${2:concept}",
+      "   { \"${3:label}\": $4:Expression}",
+      "   , $0",
+      "   } ENDVIEW"
+    ]
+  },
+  "VIEW (using a HTML template)": {
+    "prefix": "VIEW <viewname>:",
+    "description": "VIEW using a HTML-template",
+    "body": [
+      "VIEW \"${1:viewname}\": ${2:concept}",
+      "   { \"${3:label}\": $4:Expression}",
+      "   , $0",
+      "   } HTML TEMPLATE \"${3:templatefilename.html}\" ENDVIEW"
+    ]
+  },
+  "BOX <BOXTYPE>": {
+    "prefix": "BOX <BOXTYPE>",
+    "description": "e.g. FORM/TABLE/TABS/RAW etc.",
+    "body": [
+      "BOX <${1|RAW,FORM,TABLE,TABS,PROPBUTTON,OBJECTDROPDOWN,VALUEDROPDOWN|}>",
+      "   [ $0",
+      "   ]"
+    ]
+  },
+  "<FORM>": {
+    "prefix": "<FORM",
+    "description": "shows all possible attributes of FORMs",
+    "body": [
+      "<FORM hideLabels hideOnNoRecords hideSubOnNoRecords title=\"Form Title\" noRootTitle showNavMenu>"
+    ]
+  },
+  "<TABLE>": {
+    "prefix": "<TABLE",
+    "description": "shows all possible attributes of TABLEs",
+    "body": [
+      "<TABLE noHeader hideOnNoRecords title=\"Table Title\" noRootTitle sortable sortBy=\"ifc-label\" order=\"${1:asc|desc}\" showNavMenu>"
+    ]
+  },
+  "<TABS>": {
+    "prefix": "<TABS",
+    "description": "shows all possible attributes of TABS",
+    "body": [
+      "<TABS hideOnNoRecords hideSubOnNoRecords title=\"Form Title\" noRootTitle>"
+    ]
+  },
+  "<RAW>": {
+    "prefix": "<RAW",
+    "description": "shows all possible attributes of RAW",
+    "body": ["<RAW ${1:form|table}>"]
+  },
+  "COLOR (for use in PROPBUTTONs)": {
+    "prefix": "color:",
+    "description": "specify color for (solid) PROPBUTTONs",
+    "body": "TXT \"${1|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- primary=blue secondary=grey, success=green, warning=yellow, danger=red, info=lightblue, light=grey, dark=black"
+  },
+  "OUTLINECOLOR (for use in PROPBUTTONs)": {
+    "prefix": "outlinecolor",
+    "description": "specify color for (outlined) PROPBUTTONs",
+    "body": "TXT \"outline-${1|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- primary=blue secondary=grey, success=green, warning=yellow, danger=red, info=lightblue, light=grey, dark=black"
+  },
+  "PROPBUTTON (simple, no comments)": {
+    "prefix": "<PROPBUTTON>",
+    "description": "propbutton arguments",
+    "body": [
+      "<PROPBUTTON>",
+      "   [ label: TXT \"${1:buttontext}\"",
+      "   , property: ${2:[prop]-relation} cRUd",
+      "   , setprop1: ${2:[prop]-relation} cRUd",
+      "   , clrprop1: ${2:[prop]-relation} cRUd",
+      "   , hide: ${3:[prop]-expression} cRud",
+      "   , disabled: ${4:[prop]-expression} cRud",
+      "   , disabledpopovertext: TXT \"disabled-popovertext\"",
+      "   , popovertext: TXT \"popovertext\"",
+      "   ]"
+    ]
+  },
+  "PROPBUTTON (extended, no comments)": {
+    "prefix": "<PROPBUTTON>",
+    "description": "propbutton arguments",
+    "body": [
+      "BOX <PROPBUTTON>",
+      "   [ label: TXT \"${1:buttontext}\"",
+      "$0   , label1: TXT \"+label1\"",
+      "   , label2: TXT \"+label2\"",
+      "   , label3: TXT \"+label3\"",
+      "   , property: proprel cRUd",
+      "   , setprop1: proprel cRUd",
+      "   , setprop2: proprel cRUd",
+      "   , setprop3: proprel cRUd",
+      "   , clrprop1: proprel cRUd",
+      "   , clrprop2: proprel cRUd",
+      "   , clrprop3: proprel cRUd",
+      "   , color: TXT \"primary,secondary,success,warning,danger,info,light,dark,link\"",
+      "   , disabledcolor: TXT \"primary,secondary,success,warning,danger,info,light,dark,link\"",
+      "   , disabled: proprel cRud",
+      "   , hide: proprel cRud",
+      "   , disabledpopovertext: TXT \"disabled-popovertext\"",
+      "   , popovertext: TXT \"popovertext\"",
+      "   ]"
+    ]
+  },
+  "PROPBUTTON (extended)": {
+    "prefix": "<PROPBUTTON>",
+    "description": "propbutton arguments",
+    "body": [
+      "BOX <PROPBUTTON>",
+      "   [ label: TXT \"${1:buttontext}\"",
+      "   , label1: TXT \"${2:buttontext}\" -- label text = label+label1",
+      "   , label2: TXT \"${3:buttontext}\" -- label text = label+label1+label2",
+      "   , label3: TXT \"${4:buttontext}\" -- label text = label+label1+label2+label3",
+      "   , property: ${5:propertyrelation} cRUd -- change/flip the value of the [PROP] relation",
+      "   , setprop1: ${6:propertyrelation} cRUd -- set propertyrelation (InsPair)",
+      "   , setprop2: ${7:propertyrelation} cRUd -- as 'setprop1",
+      "   , setprop3: ${8:propertyrelation} cRUd -- as 'setprop1'",
+      "   , clrprop1: ${9:propertyrelation} cRUd -- clear propertyrelation (DelPair)",
+      "   , clrprop2: ${10:propertyrelation} cRUd -- as 'clrprop1'",
+      "   , clrprop3: ${11:propertyrelation} cRUd -- as 'clrprop1'",
+      "   , color: TXT \"${11|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- primary=blue secondary=grey, success=green, warning=yellow, danger=red, info=lightblue, light=grey, dark=black",
+      "   , disabledcolor: TXT \"${12|primary,secondary,success,warning,danger,info,light,dark,link|}\" -- precede color with `outline-` (e.g. `outline-primary`) to make an outline-button",
+      "   , disabled: ${13:propertyExpression} cRud -- when [PROP]-type expression is not empty, button is disabled (user cannot click it)",
+      "   , hide: ${14:propertyExpression} cRud -- when [PROP]-type expression is not empty, button does not show on screen",
+      "   , disabledpopovertext: TXT \"${15:disabledhovertext}\" -- text that shows when user hovers cursor over the button when it is disabled",
+      "   , popovertext: TXT \"${16:hovertext}\" -- text that shows when user hovers cursor over the button",
+      "   ]"
+    ]
+  },
+  "OBJECTDROPDOWN (no comments)": {
+    "prefix": "<OBJECTDROPDOWN>",
+    "description": "BOX template for selecting an OBJECT (and adding it to the population of a relation)",
+    "body": [
+      "<OBJECTDROPDOWN>",
+      "   [ selectfrom: ${1:expr} cRud <${2:View}>",
+      "   , setrelation: ${3:rel} cRUd",
+      "   , instruction: TXT \"${4:text}\"",
+      "   , selectflag: ${5:property-rel} cRUd",
+      "   , deselectflag: ${6:property-rel} cRUd",
+      "   ]"
+    ]
+  },
+  "OBJECTDROPDOWN (incl. doc comments)": {
+    "prefix": "<OBJECTDROPDOWN>",
+    "description": "BOX template for selecting an OBJECT (and adding it to the population of a relation)",
+    "body": [
+      "<OBJECTDROPDOWN> -- **use <VALUEDROPDOWN> if the concept is an ALPHANUMERIC, INTEGER, DATE, ...**",
+      "   [ selectfrom: ${1:expr} cRud <${2:View}> -- 'expr' specifies OBJECTS to select from, 'View' how they show up in the dropdown box",
+      "   , setrelation: ${3:rel} cRUd -- if UNI(rel): selected object replaces TGT; else, TGT is added to populatio of 'rel'",
+      "   , instruction: TXT \"${4:text}\" -- Text that shows when nothing is selected yet",
+      "   , selectflag: ${5:property-rel} cRUd -- [PROP]-type relation that toggles when OBJECT is selected",
+      "   , deselectflag: ${6:property-rel} cRUd -- [PROP]-type relation that toggles when NO OBJECT is selected",
+      "   ]"
+    ]
+  },
+  "VALUEDROPDOWN (no comments)": {
+    "prefix": "<VALUEDROPDOWN>",
+    "description": "BOX template for selecting a VALUE (and adding it to the population of a relation)",
+    "body": [
+      "<VALUEDROPDOWN>",
+      "   [ selectfrom: ${1:expr} cRud <${2:View}>",
+      "   , setrelation: ${3:rel} cRUd",
+      "   , instruction: TXT \"${4:text}\"",
+      "   , selectflag: ${5:prop-rel} cRUd",
+      "   , deselectflag: ${6:prop-rel} cRUd",
+      "   ]"
+    ]
+  },
+  "VALUEDROPDOWN (incl. doc comments)": {
+    "prefix": "<VALUEDROPDOWN>",
+    "description": "BOX template for selecting a VALUE (and adding it to the population of a relation)",
+    "body": [
+      "<VALUEDROPDOWN> -- **use <OBJECTDROPDOWN> if the concept is **NOT** an ALPHANUMERIC, INTEGER, DATE, ...**",
+      "   [ selectfrom: ${1:exprThatSpecifiesVALUEsToSelectFrom} cRud <${2:ViewToDisplaySelectableVALUEs}>",
+      "   , setrelation: ${3:relToWhichSelectedVALUEisAdded} cRUd -- If the relation is [UNI], a newly selected object will replace the existing population.",
+      "   , instruction: TXT \"${4:selectText}\" -- Text that shows when nothing is selected yet",
+      "   , selectflag: ${5:selectEventFlag} cRUd -- [PROP]-type relation that toggles when Value is selected",
+      "   , deselectflag: ${6:deselectEventFlag} cRUd -- [PROP]-type relation that toggles when NO Value is selected",
+      "   ]"
+    ]
+  }
 }
