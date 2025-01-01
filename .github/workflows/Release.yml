@@ -11,7 +11,7 @@ jobs:
       - name: npm install
         run: npm install
 
-      - uses: lannonbr/vsce-action@4.0.0
+      - uses: lannonbr/vsce-action@3
         with:
           args: "publish -p $VSCE_TOKEN"
         env:
