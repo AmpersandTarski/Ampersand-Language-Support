@@ -11,28 +11,8 @@ jobs:
       - name: npm install
         run: npm install
 
-      - name: install vsce
-        run: npm i -g @vscode/vsce
-
-      - name: set git variables
-        run: |
-          git config user.name "$(git log -n 1 --pretty=format:%an)"
-          git config user.email "$(git log -n 1 --pretty=format:%ae)"
-
-      - name: git add
-        run: git add .
-
-      -
-        name: install esbuild
-        run: npm i --global esbuild
-
-      - name: bundle
-        run: npm run bundle
-
-      - name: publish vsce
-        run: "vsce publish patch -p $VSCE_TOKEN -m 'CI: bumps version to %s'"
+      - uses: lannonbr/vsce-action@4.0.0
+        with:
+          args: "publish -p $VSCE_TOKEN"
         env:
           VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
-
-      - name: git push
-        run: git push origin -u ${{ github.ref_name }} --tags
