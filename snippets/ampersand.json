@@ -14,7 +14,9 @@
   "Preprocessor statements": {
     "prefix": "--#",
     "description": "Preprocessor statements",
-    "body": ["--#${1:|IF ${2:variable},IFNOT ${2:variable},ELSE,ENDIF|}"]
+    "body": [
+      "--#${1:|IF ${2:variable},IFNOT ${2:variable},ELSE,ENDIF|}"
+    ]
   },
   "INCLUDE statements": {
     "prefix": "INCLUDE",
@@ -28,18 +30,26 @@
     "prefix": "CONTEXT",
     "description": "Define a CONTEXT. You may need to add the PURPOSE statement yourself",
     "comment": "this snippet ensures that you do not forget the corresponding 'ENDCONTEXT' statement",
-    "body": ["CONTEXT \"${1:name}\"", "$0", "ENDCONTEXT"]
+    "body": [
+      "CONTEXT \"${1:name}\"",
+      "$0",
+      "ENDCONTEXT"
+    ]
   },
   "Define a concept": {
     "prefix": "CONCEPT",
     "description": "Define a CONCEPT and optionally, a reference",
     "comment": "this snippet ensures that you do not forget about the optional reference text",
-    "body": ["CONCEPT ${1:cname} \"${2:description}\" \"$0\""]
+    "body": [
+      "CONCEPT ${1:cname} \"${2:description}\" \"$0\""
+    ]
   },
   "Define a CLASSIFY ISA statement": {
     "prefix": "CLASSIFY",
     "description": "CLASSIFY <Conceptlist> ISA <GenericConcept>",
-    "body": ["CLASSIFY ${1:ConceptList} ISA ${2:genericConcept}"]
+    "body": [
+      "CLASSIFY ${1:ConceptList} ISA ${2:genericConcept}"
+    ]
   },
   "Define a CLASSIFY IS statement": {
     "prefix": "CLASSIFY",
@@ -51,7 +61,9 @@
   "Define a Concepts population": {
     "prefix": "POPULATION",
     "description": "Define a POPULATION of Concept Atoms",
-    "body": ["POPULATION \"${1:concept}\" CONTAINS [ \"$0\" ]"]
+    "body": [
+      "POPULATION \"${1:concept}\" CONTAINS [ \"$0\" ]"
+    ]
   },
   "TYPE statement": {
     "prefix": "TYPE",
@@ -70,42 +82,60 @@
   "Define a RELATION statement": {
     "prefix": "RELATION",
     "description": "RELATION <relname>[<SrcConcept>*<TgtConcept>]",
-    "body": ["RELATION ${1:Relname}[${2:srcConcept} * ${3:tgtConcept}] "]
+    "body": [
+      "RELATION ${1:Relname}[${2:srcConcept} * ${3:tgtConcept}] "
+    ]
   },
   "Define a relation (::-notation)": {
     "prefix": "RELATION",
     "description": "<relname> :: <SrcConcept> * <TgtConcept>",
-    "body": ["${1:Relname} :: ${2:srcConcept} * ${3:tgtConcept} "]
+    "body": [
+      "${1:Relname} :: ${2:srcConcept} * ${3:tgtConcept} "
+    ]
   },
   "Define a Relation population": {
     "prefix": "POPULATION",
     "description": "Define a POPULATION of Relation pairs/links",
-    "body": ["POPULATION ${1:Relname} CONTAINS [ (\"$2\", \"$3\") ]"]
+    "body": [
+      "POPULATION ${1:Relname} CONTAINS [ (\"$2\", \"$3\") ]"
+    ]
   },
   "SERVICE MAINTAINS RULE": {
     "prefix": "SERVICE",
     "description": "Define a RULE that the specified SERVICE will maintain",
-    "body": ["SERVICE \"$1\" MAINTAINS \"$2\"", "RULE \"${2:rulename}\": "]
+    "body": [
+      "SERVICE \"$1\" MAINTAINS \"$2\"",
+      "RULE \"${2:rulename}\": "
+    ]
   },
   "ExecEngine MAINTAINS RULE": {
     "prefix": "ROLE ExecEngine MAINTAINS",
     "description": "Define a RULE that the ExecEngine will maintain",
-    "body": ["ROLE ExecEngine MAINTAINS \"$1\"", "RULE \"${1:rulename}\": "]
+    "body": [
+      "ROLE ExecEngine MAINTAINS \"$1\"",
+      "RULE \"${1:rulename}\": "
+    ]
   },
   "RULE": {
     "prefix": "RULE",
     "description": "Template for invariant rule",
-    "body": ["RULE \"${1:rulename}\": ${0:rule-expression}"]
+    "body": [
+      "RULE \"${1:rulename}\": ${0:rule-expression}"
+    ]
   },
   "TXT": {
     "prefix": "TXT ",
     "description": "Define a TXT fragment within a VIOLATION or VIEW",
-    "body": ["TXT \"$0\""]
+    "body": [
+      "TXT \"$0\""
+    ]
   },
   "VIOLATION": {
     "prefix": "VIOLATION (TXT ",
     "description": "Define a VIOLATION",
-    "body": ["VIOLATION (TXT \"{EX} $0\""]
+    "body": [
+      "VIOLATION (TXT \"{EX} $0\""
+    ]
   },
   "{EX}": {
     "prefix": "{EX}",
@@ -140,12 +170,17 @@
   "InsAtom": {
     "prefix": "InsAtom",
     "description": "most common way in which InsAtoms are done",
-    "body": ["InsAtom;${1:concept}\"", "          ,TXT \"{EX} $0\""]
+    "body": [
+      "InsAtom;${1:concept}\"",
+      "          ,TXT \"{EX} $0\""
+    ]
   },
   "DelAtom": {
     "prefix": "DelAtom",
     "description": "most common way in which DelAtoms are done",
-    "body": ["DelAtom;${1:concept};\", ${2:atomid}"]
+    "body": [
+      "DelAtom;${1:concept};\", ${2:atomid}"
+    ]
   },
   "MrgAtom": {
     "prefix": "MrgAtom",
@@ -157,35 +192,54 @@
   "SetConcept": {
     "prefix": "SetConcept",
     "description": "Add atomId[CurrentConcept] to [NewConcept]-set. Can only be done if both concepts are in the same concept-tree.",
-    "body": ["SetConcept;${1:CurrentConcept};${2:NewConcept};\", ${3:atomId}"]
+    "body": [
+      "SetConcept;${1:CurrentConcept};${2:NewConcept};\", ${3:atomId}"
+    ]
   },
   "ClearConcept": {
-    "prefix": ["ClearConcept", "ClrConcept"],
+    "prefix": [
+      "ClearConcept",
+      "ClrConcept"
+    ],
     "description": "Remove atomId as member from [Concept] set. Can only be done if [Concept] is a specialization of another concept.",
-    "body": ["ClearConcept;${1:concept};\", ${2:atomId}"]
+    "body": [
+      "ClearConcept;${1:concept};\", ${2:atomId}"
+    ]
   },
   "SetNavToOnCommit": {
     "prefix": "SetNavToOnCommit",
     "description": "Specify INTERFACE to which to navigate in case the current transaction is committed to",
-    "body": ["SetNavToOnCommit;\", ${1:/InterfaceID}"]
+    "body": [
+      "SetNavToOnCommit;\", ${1:/InterfaceID}"
+    ]
   },
   "SetNavToOnRollBack": {
     "prefix": "SetNavToOnRollBack",
     "description": "Specify INTERFACE to which to navigate in case the current transaction rolled back",
-    "body": ["SetNavToOnRollBack;\", ${1:/InterfaceID}"]
+    "body": [
+      "SetNavToOnRollBack;\", ${1:/InterfaceID}"
+    ]
   },
   "TerminateThisExecEngine": {
     "prefix": "TerminateThisExecEngine",
     "description": "Terminate the ExecEngine that maintains the rule in which this function is executed",
-    "body": ["TerminateThisExecEngine;${1:Optional message for userlog}\""]
+    "body": [
+      "TerminateThisExecEngine;${1:Optional message for userlog}\""
+    ]
   },
   "TriggerService": {
     "prefix": "TriggerService",
     "description": "Trigger the specified ROLEname (i.e. name of ROLE that maintains a set of rules)",
-    "body": ["TriggerService;${1:ROLEname that maintains a set of rules}\""]
+    "body": [
+      "TriggerService;${1:ROLEname that maintains a set of rules}\""
+    ]
   },
   "Warshall": {
-    "prefix": ["Warshall", "TransitiveClosure", "star"],
+    "prefix": [
+      "Warshall",
+      "TransitiveClosure",
+      "star"
+    ],
     "description": "Compute transitive closure of a relation r",
     "body": [
       "--[Transitive Closure of ${1:Relation}[${2:concept}]]",
@@ -201,7 +255,9 @@
   "ENFORCE": {
     "prefix": "ENFORCE",
     "description": "ENFORCE: <relation> <operator> <expression> ",
-    "body": ["ENFORCE ${1:Relname} ${2|:=,:<,>:|} ${3:expression}"]
+    "body": [
+      "ENFORCE ${1:Relname} ${2|:=,:<,>:|} ${3:expression}"
+    ]
   },
   "Equivalence rule": {
     "prefix": "eqv-relation",
@@ -295,7 +351,9 @@
   "<RAW>": {
     "prefix": "<RAW",
     "description": "shows all possible attributes of RAW",
-    "body": ["<RAW ${1:form|table}>"]
+    "body": [
+      "<RAW ${1:form|table}>"
+    ]
   },
   "COLOR (for use in PROPBUTTONs)": {
     "prefix": "color:",
