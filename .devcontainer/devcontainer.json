@@ -12,7 +12,7 @@
     "mounts": [
       "type=bind,source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh/,target=/home/vscode/.ssh,readonly"
     ],
-    "postAttachCommand": "sh .devcontainer/startup.sh",
+    "postStartCommand": "sh .devcontainer/startup.sh",
     "features": {
         "ghcr.io/devcontainers-extra/features/typescript:2": {}
     },
@@ -30,8 +30,8 @@
                 "amodio.tsl-problem-matcher"
             ]
         }
-    },
-    "postCreateCommand": "sh .devcontainer/startup.sh",
+    }
+//    "postCreateCommand": "sh .devcontainer/startup.sh"
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],
     // Use 'postCreateCommand' to run commands after the container is created.

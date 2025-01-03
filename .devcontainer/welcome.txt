@@ -1,0 +1,10 @@
+👋 Welcome to the developer environment for the Ampersand-Language-Support 
+   extention! This environment should help you with the development of the 
+   is repo. 
+
+🛠️  Your environment is fully setup with all the required software.
+    If you think something is missing, please ask @Hanjoosten.
+
+👉 IMPORTANT: Before pushing to master, make sure the project has been compiled, so 
+    there are no extra changes in `package.json` and/or `package-lock.json`
+
