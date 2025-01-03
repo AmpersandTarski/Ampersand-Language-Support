@@ -10,7 +10,7 @@
         }
     },
     "mounts": [
-      "type=bind,source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh/,target=/home/vscode/.ssh,readonly"
+        "type=bind,source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh/,target=/home/vscode/.ssh,readonly"
     ],
     "postStartCommand": "sh .devcontainer/startup.sh",
     "features": {
@@ -20,18 +20,29 @@
     "customizations": {
         "vscode": {
             // Set *default* container specific settings.json values on container create.
-            "settings": {},
+            "settings": {
+                "editor.formatOnSave": true,
+                "files.autoSave": "afterDelay",
+                "[jsonc]": {
+                    "editor.defaultFormatter": "vscode.json-language-features"
+                },
+                "[json]": {
+                    "editor.defaultFormatter": "vscode.json-language-features"
+                }
+            },
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
                 "dbaeumer.vscode-eslint", // ESLint extension
-                "esbenp.prettier-vscode", // Prettier extension
+                // Because of bug (see https://github.com/Microsoft/vscode/issues/45997):
+                "bdsoftware.format-on-auto-save",
                 "mhutchie.git-graph",
                 "huizhou.githd",
-                "amodio.tsl-problem-matcher"
+                "amodio.tsl-problem-matcher",
+                "christian-kohler.npm-intellisense"
             ]
         }
     }
-//    "postCreateCommand": "sh .devcontainer/startup.sh"
+    //    "postCreateCommand": "sh .devcontainer/startup.sh"
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],
     // Use 'postCreateCommand' to run commands after the container is created.
