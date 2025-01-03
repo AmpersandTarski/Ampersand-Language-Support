@@ -9,6 +9,9 @@
             "PROTOTYPE_FRAMEWORK_VERSION": "2.0.0-alpha.4"
         }
     },
+    "mounts": [
+      "type=bind,source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh/,target=/home/vscode/.ssh,readonly"
+    ],
     "postAttachCommand": "sh .devcontainer/startup.sh",
     "features": {
         "ghcr.io/devcontainers-extra/features/typescript:2": {}
