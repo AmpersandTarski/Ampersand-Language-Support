@@ -41,7 +41,15 @@
     "description": "Define a CONCEPT and optionally, a reference",
     "comment": "this snippet ensures that you do not forget about the optional reference text",
     "body": [
-      "CONCEPT ${1:ConceptName} LABEL \"Concept Name\" \"${2:description}\" \"$0\""
+      "CONCEPT ${1:ConceptName} LABEL ${2:\"Concept Name\"} \"${3:description}\" \"$0\""
+    ]
+  },
+  "Add a LABEL to a name": {
+    "prefix": "LABEL",
+    "description": "Add a LABEL to a name",
+    "comment": "this snippet helps with a doublequoted label",
+    "body": [
+      "LABEL \"${1:the label}\""
     ]
   },
   "Define a CLASSIFY ISA statement": {
@@ -90,7 +98,7 @@
     "prefix": "RELATION",
     "description": "<relname> :: <SrcConcept> * <TgtConcept>",
     "body": [
-      "${1:Relname} LABEL ${4:\"Relation Name\"} :: ${2:srcConcept} * ${3:tgtConcept} "
+      "${1:relname} LABEL ${2:\"Relation Name\"} :: ${3:srcConcept} * ${4:tgtConcept} "
     ]
   },
   "Define a Relation population": {
