@@ -25,7 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
   watcherUtils.setupLastRunningWatcher(context);
 
   pushDisposable(context, generatePrototypeCommand.commandName, () =>
-    new generatePrototypeCommand(context).RunCommand()
+    new generatePrototypeCommand().RunCommand()
   );
   pushDisposable(context, generateAtlasCommand.commandName, () =>
     new generateAtlasCommand().RunCommand()
