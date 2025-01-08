@@ -22,13 +22,11 @@ export class daemonCommand {
         let runAmpersandCommand : string = "ampersand";
         var runAmpersandArgs : string = "";
         let version : string = versionString.substr(10,3) 
-        if (version === "v4.") {
+        if (version === "v5.") {
         runAmpersandArgs = "daemon"
-        } else if (version === "v3.") {
-        runAmpersandArgs = "--daemon"
         } else {
             vscode.window.showErrorMessage
-                ('The version of ampersand you have installed, is not supported: '+versionString)
+                ('The version of ampersand you have installed, is no longer supported: '+versionString)
     
         }
         
