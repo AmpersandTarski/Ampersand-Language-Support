@@ -37,8 +37,8 @@ export function activate(context: vscode.ExtensionContext) {
     new checkVersionCommand().RunCommand()
   );
 
-  generateWorkingFolders();
-  createAndFillGitIgnore();
+  // generateWorkingFolders();
+  // createAndFillGitIgnore();
 }
 
 function pushDisposable(
@@ -51,17 +51,17 @@ function pushDisposable(
   );
 }
 
-function generateWorkingFolders() {
-  fileUtils.generateFolderInCurrentWorkspace(["ampersand"]);
-  fileUtils.generateFolderInCurrentWorkspace(["project"]);
-}
+// function generateWorkingFolders() {
+//   fileUtils.generateFolderInCurrentWorkspace(["ampersand"]);
+//   fileUtils.generateFolderInCurrentWorkspace(["project"]);
+// }
 
-function createAndFillGitIgnore() {
-  const gitIgnorePath = fileUtils.generateWorkspacePath([
-    "ampersand",
-    ".gitignore",
-  ]);
-  const gitIgnoreContent =
-    "# Ignore everything in this directory\n*\n# Except this file\n!.gitignore";
-  fs.writeFileSync(`${gitIgnorePath}`, gitIgnoreContent);
-}
+// function createAndFillGitIgnore() {
+//   const gitIgnorePath = fileUtils.generateWorkspacePath([
+//     "ampersand",
+//     ".gitignore",
+//   ]);
+//   const gitIgnoreContent =
+//     "# Ignore everything in this directory\n*\n# Except this file\n!.gitignore";
+//   fs.writeFileSync(`${gitIgnorePath}`, gitIgnoreContent);
+// }
