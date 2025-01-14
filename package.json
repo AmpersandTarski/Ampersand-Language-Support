@@ -25,7 +25,9 @@
     "engines": {
         "vscode": "^1.75.1"
     },
-    "activationEvents": [],
+    "activationEvents": [
+        "*"
+    ],
     "icon": "images/ampersandLogo.png",
     "galleryBanner": {
         "color": "#f6a615",
