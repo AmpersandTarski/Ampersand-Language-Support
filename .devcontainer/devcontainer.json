@@ -6,7 +6,7 @@
         "dockerfile": "Dockerfile",
         "args": {
             "TYPESCRIPT_NODE_VARIANT": "22",
-            "PROTOTYPE_FRAMEWORK_VERSION": "2.0.0-alpha.4"
+            "PROTOTYPE_FRAMEWORK_VERSION": "2.0.0-alpha.5"
         }
     },
     "mounts": [
