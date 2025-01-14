@@ -10,7 +10,7 @@
         }
     },
     "mounts": [
-        "type=bind,source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh/,target=/home/vscode/.ssh,readonly"
+        "type=bind,source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh/,target=/home/node/.ssh,readonly"
     ],
     "postStartCommand": "sh .devcontainer/startup.sh",
     "features": {
