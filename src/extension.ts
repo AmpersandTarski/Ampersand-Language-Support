@@ -40,6 +40,11 @@ export function activate(context: vscode.ExtensionContext) {
   // generateWorkingFolders();
   // createAndFillGitIgnore();
 }
+export function deactivate() {
+  console.info(
+    `[${constants.extension.name}] v${constants.extension.version} deactivated!`
+  );
+}
 
 function pushDisposable(
   context: vscode.ExtensionContext,
