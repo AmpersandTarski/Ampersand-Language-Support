@@ -152,32 +152,65 @@
                 "ampersand.mainScriptName": {
                     "type": "string",
                     "default": "main.adl",
-                    "description": "The name of the main ADL script file to be fed to the ampersand compiler to generate a prototype."
+                    "description": "The name of the main ADL script file to be fed to the ampersand compiler as root of the script."
                 },
                 "ampersand.folderName": {
                     "type": "string",
-                    "default": "project",
-                    "description": "The name of the folder to use to generate a protoype. Must contain the main script."
+                    "default": "./project",
+                    "description": "The absolute path of the folder that contains the main script."
+                },
+                "ampersand.graphics": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Generate graphics when appropriate?"
+                },
+                "ampersand.formatOfDocumentation": {
+                    "type": "string",
+                    "enum": [
+                        "Asciidoc",
+                        "Context",
+                        "Docbook",
+                        "Docx",
+                        "Html",
+                        "Latex",
+                        "Man",
+                        "Markdown",
+                        "Mediawiki",
+                        "Opendocument",
+                        "Org",
+                        "Pandoc",
+                        "Pdf",
+                        "Plain",
+                        "Rst",
+                        "Rtf",
+                        "Texinfo",
+                        "Textile"
+                    ],
+                    "default": "docx",
+                    "description": "The path to the ampersand compiler."
                 }
             }
+        },
+        "scripts": {
+            "bundle": "npm run esbuild-base -- --minify",
+            "compile": "tsc -p ./",
+            "watch": "tsc -watch -p ./",
+            "package": "npm run esbuild-base -- --minify",
+            "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+            "esbuild": "npm run esbuild-base -- --sourcemap",
+            "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
+        },
+        "dependencies": {
+            "@types/node": "^22.10.6",
+            "@types/vscode": "^1.96.0",
+            "@vscode/test-electron": "^2.4.1",
+            "@vscode/vsce": "^3.2.1",
+            "npm": "^11.0.0",
+            "ts-node": "^10.9.2",
+            "typescript": "^5.7.2"
         }
     },
-    "scripts": {
-        "bundle": "npm run esbuild-base -- --minify",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "package": "npm run esbuild-base -- --minify",
-        "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
-        "esbuild": "npm run esbuild-base -- --sourcemap",
-        "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
-    },
     "dependencies": {
-        "@types/node": "^22.10.6",
-        "@types/vscode": "^1.96.0",
-        "@vscode/test-electron": "^2.4.1",
-        "@vscode/vsce": "^3.2.1",
-        "npm": "^11.0.0",
-        "ts-node": "^10.9.2",
-        "typescript": "^5.7.2"
+        "@types/node": "^22.10.6"
     }
 }

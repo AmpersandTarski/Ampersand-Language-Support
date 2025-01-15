@@ -13,7 +13,7 @@ export class generateFunctionalSpecCommand implements ICommand {
         };
         console.info("Script setting: " + config.mainScriptSetting);
 
-        if (config.mainScriptSetting === undefined || config.folderSetting === undefined) {
+        if (config.folderSetting === undefined) {
             console.error("Folder not set in settings");
             return;
         };
@@ -22,12 +22,20 @@ export class generateFunctionalSpecCommand implements ICommand {
         const mainScriptPath: string = fileUtils.generateWorkspacePath([config.folderSetting, config.mainScriptSetting]);
 
         const terminal = this.builder.setName("Ampersand generate functional spec")
-            .setWorkingDir(['ampersand'])
+            .setWorkingDir(['.'])
             .getTerminal();
 
-        terminalUtils.RunCommandsInExistingTerminal(terminal,
-            [`ampersand documentation --no-text --format docx ${mainScriptPath}`,
-            `ampersand documentation ${mainScriptPath} --format docx --no-graphics --language=NL --ConceptualAnalysis --verbosity debug`],
-        );
+        const documentationCommand: string = [
+            "ampersand documentation",
+            "${mainScriptPath}",
+            "--format ${config.formatSetting}",
+            config.graphicsSetting ? "--graphics" : "--no-graphics",
+            "--language = NL",
+            "--ConceptualAnalysis",
+            "--verbosity debug"
+        ].join(" ")
+
+
+        terminalUtils.RunCommandsInExistingTerminal(terminal, [documentationCommand]);
     }
 }
