@@ -30,7 +30,7 @@ export class generateFunctionalSpecCommand implements ICommand {
             mainScriptPath,
             "--format " + config.formatSetting,
             config.graphicsSetting ? "--graphics" : "--no-graphics",
-            "--language = NL",
+            "--language=NL",
             "--ConceptualAnalysis",
             "--verbosity debug"
         ].join(" ")
