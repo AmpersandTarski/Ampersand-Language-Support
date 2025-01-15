@@ -27,8 +27,8 @@ export class generateFunctionalSpecCommand implements ICommand {
 
         const documentationCommand: string = [
             "ampersand documentation",
-            "${mainScriptPath}",
-            "--format ${config.formatSetting}",
+            mainScriptPath,
+            "--format " + config.formatSetting,
             config.graphicsSetting ? "--graphics" : "--no-graphics",
             "--language = NL",
             "--ConceptualAnalysis",
