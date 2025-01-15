@@ -190,30 +190,24 @@
                     "description": "The path to the ampersand compiler."
                 }
             }
-        },
-        "scripts": {
-            "bundle": "npm run esbuild-base -- --minify",
-            "compile": "tsc -p ./",
-            "watch": "tsc -watch -p ./",
-            "package": "npm run esbuild-base -- --minify",
-            "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
-            "esbuild": "npm run esbuild-base -- --sourcemap",
-            "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
-        },
-        "dependencies": {
-            "@types/node": "^22.10.6",
-            "@types/vscode": "^1.96.0",
-            "@vscode/test-electron": "^2.4.1",
-            "@vscode/vsce": "^3.2.1",
-            "npm": "^11.0.0",
-            "ts-node": "^10.9.2",
-            "typescript": "^5.7.2"
         }
     },
-    "dependencies": {
-        "@types/node": "^22.10.6"
+    "scripts": {
+        "bundle": "npm run esbuild-base -- --minify",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "package": "npm run esbuild-base -- --minify",
+        "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+        "esbuild": "npm run esbuild-base -- --sourcemap",
+        "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
     },
-    "devDependencies": {
-        "@types/vscode": "^1.96.0"
+    "dependencies": {
+        "@types/node": "^22.10.6",
+        "@types/vscode": "^1.96.0",
+        "@vscode/test-electron": "^2.4.1",
+        "@vscode/vsce": "^3.2.1",
+        "npm": "^11.0.0",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.7.2"
     }
 }
