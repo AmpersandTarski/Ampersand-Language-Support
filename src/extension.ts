@@ -1,7 +1,12 @@
 "use strict";
 import * as vscode from "vscode";
 import * as fs from "fs";
-import { fileUtils, watcherUtils } from "./utils";
+import {
+  fileUtils,
+  watcherUtils,
+  loadSettings,
+  registerSettingsListener
+} from "./utils";
 import { ampersandVersionChecker } from "./ampersand";
 import { constants } from "./constants";
 import {
@@ -19,6 +24,8 @@ export function activate(context: vscode.ExtensionContext) {
   console.info(
     `[${constants.extension.name}] v${constants.extension.version} activated!`
   );
+  loadSettings(); // Load settings on startup
+  registerSettingsListener(context); // Keep settings updated
 
   ampersandVersionChecker.checkVersion();
 

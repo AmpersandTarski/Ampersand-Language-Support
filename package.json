@@ -164,50 +164,103 @@
                     "default": true,
                     "description": "Generate graphics when appropriate?"
                 },
-                "ampersand.formatOfDocumentation": {
-                    "type": "string",
-                    "enum": [
-                        "Asciidoc",
-                        "Context",
-                        "Docbook",
-                        "Docx",
-                        "Html",
-                        "Latex",
-                        "Man",
-                        "Markdown",
-                        "Mediawiki",
-                        "Opendocument",
-                        "Org",
-                        "Pandoc",
-                        "Pdf",
-                        "Plain",
-                        "Rst",
-                        "Rtf",
-                        "Texinfo",
-                        "Textile"
-                    ],
-                    "default": "docx",
-                    "description": "The path to the ampersand compiler."
+                "ampersand.chapters": {
+                    "type": "object",
+                    "default": {
+                        "intro": true,
+                        "sharedLang": true,
+                        "diagnosis": true,
+                        "conceptualAnalysis": true,
+                        "dataAnalysis": true
+                    },
+                    "description": "Enable or disable specific chapters in generated functional specification.",
+                    "properties": {
+                        "intro": {
+                            "type": "boolean",
+                            "default": true,
+                            "description": "Generate the introduction."
+                        },
+                        "sharedLang": {
+                            "type": "boolean",
+                            "default": true,
+                            "description": "Generate the shared language chapter."
+                        },
+                        "diagnosis": {
+                            "type": "boolean",
+                            "default": true,
+                            "description": "Generate the diagnosis."
+                        },
+                        "conceptualAnalysis": {
+                            "type": "boolean",
+                            "default": true,
+                            "description": "Generate the conceptual analysis chapter."
+                        },
+                        "dataAnalysis": {
+                            "type": "boolean",
+                            "default": true,
+                            "description": "Generate the data analysis"
+                        }
+                    },
+                    "ampersand.verbosity": {
+                        "type": "string",
+                        "enum": [
+                            "silent",
+                            "error",
+                            "warn",
+                            "info",
+                            "debug"
+                        ],
+                        "default": "warn",
+                        "description": "How verose should the output be?"
+                    },
+                    "ampersand.formatOfDocumentation": {
+                        "type": "string",
+                        "enum": [
+                            "Asciidoc",
+                            "Context",
+                            "Docbook",
+                            "Docx",
+                            "Html",
+                            "Latex",
+                            "Man",
+                            "Markdown",
+                            "Mediawiki",
+                            "Opendocument",
+                            "Org",
+                            "Pandoc",
+                            "Pdf",
+                            "Plain",
+                            "Rst",
+                            "Rtf",
+                            "Texinfo",
+                            "Textile"
+                        ],
+                        "default": "docx",
+                        "description": "The format that the functional specification will be generated to."
+                    }
                 }
             }
+        },
+        "scripts": {
+            "bundle": "npm run esbuild-base -- --minify",
+            "compile": "tsc -p ./",
+            "watch": "tsc -watch -p ./",
+            "package": "npm run esbuild-base -- --minify",
+            "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+            "esbuild": "npm run esbuild-base -- --sourcemap",
+            "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
+        },
+        "dependencies": {
+            "@types/node": "^22.13.0",
+            "@types/vscode": "^1.96.0",
+            "@vscode/test-electron": "^2.4.1",
+            "@vscode/vsce": "^3.2.1",
+            "npm": "^11.0.0",
+            "ts-node": "^10.9.2",
+            "typescript": "^5.7.3"
         }
     },
-    "scripts": {
-        "bundle": "npm run esbuild-base -- --minify",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "package": "npm run esbuild-base -- --minify",
-        "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
-        "esbuild": "npm run esbuild-base -- --sourcemap",
-        "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
-    },
     "dependencies": {
-        "@types/node": "^22.10.10",
-        "@types/vscode": "^1.96.0",
-        "@vscode/test-electron": "^2.4.1",
-        "@vscode/vsce": "^3.2.1",
-        "npm": "^11.0.0",
-        "ts-node": "^10.9.2",
-        "typescript": "^5.7.3"
+        "@types/node": "^22.13.0"
     }
 }

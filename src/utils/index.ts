@@ -1,5 +1,5 @@
 
-export * from "./config";
+export * from "./settings";
 export * from "./diagnosticUtils";
 export * from "./fileUtils";
 export * from "./terminalUtils";
