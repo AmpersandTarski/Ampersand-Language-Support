@@ -164,43 +164,30 @@
                     "default": true,
                     "description": "Generate graphics when appropriate?"
                 },
-                "ampersand.chapters": {
-                    "type": "object",
-                    "default": {
-                        "intro": true,
-                        "sharedLang": true,
-                        "diagnosis": true,
-                        "conceptualAnalysis": true,
-                        "dataAnalysis": true
-                    },
-                    "description": "Enable or disable specific chapters in generated functional specification.",
-                    "properties": {
-                        "intro": {
-                            "type": "boolean",
-                            "default": true,
-                            "description": "Generate the introduction."
-                        },
-                        "sharedLang": {
-                            "type": "boolean",
-                            "default": true,
-                            "description": "Generate the shared language chapter."
-                        },
-                        "diagnosis": {
-                            "type": "boolean",
-                            "default": true,
-                            "description": "Generate the diagnosis."
-                        },
-                        "conceptualAnalysis": {
-                            "type": "boolean",
-                            "default": true,
-                            "description": "Generate the conceptual analysis chapter."
-                        },
-                        "dataAnalysis": {
-                            "type": "boolean",
-                            "default": true,
-                            "description": "Generate the data analysis"
-                        }
-                    }
+                "ampersand.chapters.intro": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable or disable the generation of the introduction in the functional documentation."
+                },
+                "ampersand.chapters.sharedLang": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable or disable the generation of the shared language chapter in the functional documentation."
+                },
+                "ampersand.chapters.diagnosis": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable or disable the generation of the diagnosis in the functional documentation."
+                },
+                "ampersand.chapters.conceptualAnalysis": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable or disable the generation of the conceptual analysis chapter in the functional documentation."
+                },
+                "ampersand.chapters.dataAnalysis": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable or disable the generation of the data analysis in the functional documentation."
                 },
                 "ampersand.verbosity": {
                     "type": "string",
