@@ -1,4 +1,4 @@
-import { config, fileUtils, terminalUtils } from '../utils';
+import { extensionSettings, fileUtils, terminalUtils } from '../utils';
 import { terminalBuilder } from '../builders';
 
 export class generateFunctionalSpecCommand implements ICommand {
@@ -7,19 +7,19 @@ export class generateFunctionalSpecCommand implements ICommand {
     private builder: terminalBuilder = new terminalBuilder();
 
     RunCommand() {
-        if (config.mainScriptSetting === undefined) {
+        if (extensionSettings.mainScriptSetting === undefined) {
             console.error("Main script not set in settings");
             return
         };
-        console.info("Script setting: " + config.mainScriptSetting);
+        console.info("Script setting: " + extensionSettings.mainScriptSetting);
 
-        if (config.folderSetting === undefined) {
+        if (extensionSettings.folderSetting === undefined) {
             console.error("Folder not set in settings");
             return;
         };
-        console.info("Folder setting: " + config.folderSetting);
+        console.info("Folder setting: " + extensionSettings.folderSetting);
 
-        const mainScriptPath: string = fileUtils.generateWorkspacePath([config.folderSetting, config.mainScriptSetting]);
+        const mainScriptPath: string = fileUtils.generateWorkspacePath([extensionSettings.folderSetting, extensionSettings.mainScriptSetting]);
 
         const terminal = this.builder.setName("Ampersand generate functional spec")
             .setWorkingDir(['.'])
@@ -28,8 +28,8 @@ export class generateFunctionalSpecCommand implements ICommand {
         const documentationCommand: string = [
             "ampersand documentation",
             mainScriptPath,
-            "--format " + config.formatSetting,
-            config.graphicsSetting ? "--graphics" : "--no-graphics",
+            "--format " + extensionSettings.formatSetting,
+            extensionSettings.graphicsSetting ? "--graphics" : "--no-graphics",
             "--language=NL",
             "--ConceptualAnalysis",
             "--verbosity debug"

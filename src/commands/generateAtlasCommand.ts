@@ -1,24 +1,24 @@
-import { config, fileUtils, terminalUtils } from "../utils";
+import { extensionSettings, fileUtils, terminalUtils } from "../utils";
 import { terminalBuilder } from '../builders';
 
-export class generateAtlasCommand implements ICommand  {
+export class generateAtlasCommand implements ICommand {
     static commandName: string = "extension.generateAtlas";
-    
-    private builder : terminalBuilder = new terminalBuilder();
-    
+
+    private builder: terminalBuilder = new terminalBuilder();
+
     RunCommand() {
-        if(config.mainScriptSetting === undefined || config.folderSetting === undefined)
+        if (extensionSettings.mainScriptSetting === undefined || extensionSettings.folderSetting === undefined)
             return;
 
-        const currentActiveFilePath : string | undefined = fileUtils.generateWorkspacePath([config.folderSetting, config.mainScriptSetting]);
+        const currentActiveFilePath: string | undefined = fileUtils.generateWorkspacePath([extensionSettings.folderSetting, extensionSettings.mainScriptSetting]);
 
-        if(currentActiveFilePath === undefined)
+        if (currentActiveFilePath === undefined)
             return;
 
         const terminal = this.builder.setName("Ampersand generate functional spec")
-                                        .getTerminal();
+            .getTerminal();
 
         terminalUtils.RunCommandsInExistingTerminal(terminal,
-        [`ampersand population --output-dir='./' --build-recipe Grind --output-format json --verbosity warn ${currentActiveFilePath}`]);
+            [`ampersand population --output-dir='./' --build-recipe Grind --output-format json --verbosity warn ${currentActiveFilePath}`]);
     }
 }
