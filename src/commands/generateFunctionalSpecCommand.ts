@@ -32,7 +32,7 @@ export class generateFunctionalSpecCommand implements ICommand {
             extensionSettings.graphicsSetting ? "--graphics" : "--no-graphics",
             "--language=NL",
             "--ConceptualAnalysis",
-            "--verbosity debug"
+            "--verbosity " + extensionSettings.verbosity
         ].join(" ")
 
 

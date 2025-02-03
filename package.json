@@ -162,32 +162,37 @@
                 "ampersand.graphics": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Generate graphics when appropriate?"
+                    "description": "Generate graphics for documentation when appropriate. Obviously, this takes longer and can become annoying when you are only interested in the text."
                 },
-                "ampersand.chapters.intro": {
+                "ampersand.documentation.intro": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Enable or disable the generation of the introduction in the functional documentation."
+                    "description": "Include the introduction chapter in the functional documentation."
                 },
-                "ampersand.chapters.sharedLang": {
+                "ampersand.documentation.sharedLang": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Enable or disable the generation of the shared language chapter in the functional documentation."
+                    "description": "Include the shared language chapter in the functional documentation."
                 },
-                "ampersand.chapters.diagnosis": {
+                "ampersand.documentation.diagnosis": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Enable or disable the generation of the diagnosis in the functional documentation."
+                    "description": "Include the diagnosis chapter in the functional documentation."
                 },
-                "ampersand.chapters.conceptualAnalysis": {
+                "ampersand.documentation.conceptualAnalysis": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Enable or disable the generation of the conceptual analysis chapter in the functional documentation."
+                    "description": "Include the conceptual analysis chapter in the functional documentation."
                 },
-                "ampersand.chapters.dataAnalysis": {
+                "ampersand.documentation.dataAnalysis": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Enable or disable the generation of the data analysis in the functional documentation."
+                    "description": "Include the data analysis chapter in the functional documentation."
+                },
+                "ampersand.outputFolder": {
+                    "type": "string",
+                    "default": "./output",
+                    "description": "The path of the folder where the output of the ampersand compiler will be stored."
                 },
                 "ampersand.verbosity": {
                     "type": "string",

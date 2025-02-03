@@ -19,6 +19,6 @@ export class generateAtlasCommand implements ICommand {
             .getTerminal();
 
         terminalUtils.RunCommandsInExistingTerminal(terminal,
-            [`ampersand population --output-dir='./' --build-recipe Grind --output-format json --verbosity warn ${currentActiveFilePath}`]);
+            [`ampersand population --output-dir=${extensionSettings.outputFolder} --build-recipe Grind --output-format json --verbosity ${extensionSettings.verbosity} ${currentActiveFilePath}`]);
     }
 }

@@ -2,18 +2,19 @@ import * as vscode from 'vscode';
 
 
 export interface ExtensionSettings {
-  verbosity: string;
-  mainScriptSetting: string;
-  folderSetting: string;
-  formatSetting: string;
-  graphicsSetting: boolean;
-  chapters: {
+  documentation: {
     intro: boolean;
     sharedLang: boolean;
     diagnosis: boolean;
     conceptualAnalysis: boolean;
     dataAnalysis: boolean;
-  }
+  };
+  folderSetting: string;
+  formatSetting: string;
+  graphicsSetting: boolean;
+  mainScriptSetting: string;
+  outputFolder: string;
+  verbosity: string;
 }
 
 export let extensionSettings: ExtensionSettings;
@@ -23,18 +24,19 @@ export function loadSettings() {
   const config = vscode.workspace.getConfiguration('ampersand');
 
   extensionSettings = {
-    verbosity: config.get<string>('verbosity', "warn"),
-    mainScriptSetting: config.get('mainScriptName', "main.adl"),
-    folderSetting: config.get('folderName', "./project"),
-    formatSetting: config.get('formatOfDocumentation', "docx"),
-    graphicsSetting: config.get('graphics', true),
-    chapters: config.get<ExtensionSettings['chapters']>('chapters', {
+    documentation: config.get<ExtensionSettings['documentation']>('documentation', {
       intro: true,
       sharedLang: true,
       diagnosis: true,
       conceptualAnalysis: true,
       dataAnalysis: true
-    })
+    }),
+    folderSetting: config.get('folderName', "./project"),
+    formatSetting: config.get('formatOfDocumentation', "docx"),
+    graphicsSetting: config.get('graphics', true),
+    mainScriptSetting: config.get('mainScriptName', "main.adl"),
+    outputFolder: config.get('outputFolder', "./output"),
+    verbosity: config.get<string>('verbosity', "warn"),
 
   };
   console.log('Updated settings:', extensionSettings);
