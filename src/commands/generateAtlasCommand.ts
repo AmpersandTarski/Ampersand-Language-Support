@@ -6,7 +6,7 @@ export class generateAtlasCommand implements ICommand {
 
     private builder: terminalBuilder = new terminalBuilder();
 
-    RunCommand() {
+    runCommand() {
         if (extensionSettings.mainScriptSetting === undefined || extensionSettings.folderSetting === undefined)
             return;
 
@@ -18,7 +18,7 @@ export class generateAtlasCommand implements ICommand {
         const terminal = this.builder.setName("Ampersand generate functional spec")
             .getTerminal();
 
-        terminalUtils.RunCommandsInExistingTerminal(terminal,
+        terminalUtils.runCommandsInExistingTerminal(terminal,
             [`ampersand population --output-dir=${extensionSettings.outputFolder} --build-recipe Grind --output-format json --verbosity ${extensionSettings.verbosity} ${currentActiveFilePath}`]);
     }
 }

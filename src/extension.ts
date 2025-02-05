@@ -32,16 +32,16 @@ export function activate(context: vscode.ExtensionContext) {
   watcherUtils.setupLastRunningWatcher(context);
 
   pushDisposable(context, generatePrototypeCommand.commandName, () =>
-    new generatePrototypeCommand().RunCommand()
+    new generatePrototypeCommand().runCommand()
   );
   pushDisposable(context, generateAtlasCommand.commandName, () =>
-    new generateAtlasCommand().RunCommand()
+    new generateAtlasCommand().runCommand()
   );
   pushDisposable(context, generateFunctionalSpecCommand.commandName, () =>
-    new generateFunctionalSpecCommand().RunCommand()
+    new generateFunctionalSpecCommand().runCommand()
   );
   pushDisposable(context, checkVersionCommand.commandName, () =>
-    new checkVersionCommand().RunCommand()
+    new checkVersionCommand().runCommand()
   );
 
   // generateWorkingFolders();

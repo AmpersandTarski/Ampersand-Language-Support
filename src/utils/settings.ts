@@ -8,13 +8,15 @@ export interface ExtensionSettings {
     diagnosis: boolean;
     conceptualAnalysis: boolean;
     dataAnalysis: boolean;
+    format: string;
   };
   folderSetting: string;
-  formatSetting: string;
   graphicsSetting: boolean;
   mainScriptSetting: string;
   outputFolder: string;
+  sqlBinaryTables: boolean;
   verbosity: string;
+  outputLanguage: string;
 }
 
 export let extensionSettings: ExtensionSettings;
@@ -29,13 +31,15 @@ export function loadSettings() {
       sharedLang: true,
       diagnosis: true,
       conceptualAnalysis: true,
-      dataAnalysis: true
+      dataAnalysis: true,
+      format: "docx"
     }),
     folderSetting: config.get('folderName', "./project"),
-    formatSetting: config.get('formatOfDocumentation', "docx"),
     graphicsSetting: config.get('graphics', true),
     mainScriptSetting: config.get('mainScriptName', "main.adl"),
     outputFolder: config.get('outputFolder', "./output"),
+    outputLanguage: config.get('outputLanguage', "NL"),
+    sqlBinaryTables: config.get('sqlBinaryTables', false),
     verbosity: config.get<string>('verbosity', "warn"),
 
   };

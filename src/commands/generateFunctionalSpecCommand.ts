@@ -6,7 +6,22 @@ export class generateFunctionalSpecCommand implements ICommand {
 
     private builder: terminalBuilder = new terminalBuilder();
 
-    RunCommand() {
+    /**
+     * Executes the command to generate the functional specification documentation
+     * using the Ampersand tool. This method performs the following steps:
+     * 
+     * 1. Checks if the main script setting is defined in the extension settings.
+     *    If not, logs an error and returns.
+     * 2. Logs the main script setting.
+     * 3. Checks if the folder setting is defined in the extension settings.
+     *    If not, logs an error and returns.
+     * 4. Logs the folder setting.
+     * 5. Generates the path to the main script using the folder and main script settings.
+     * 6. Configures a terminal for running the Ampersand documentation command.
+     * 7. Constructs the documentation command with various options based on the extension settings.
+     * 8. Runs the constructed command in the configured terminal.
+     */
+    runCommand(): void {
         if (extensionSettings.mainScriptSetting === undefined) {
             console.error("Main script not set in settings");
             return
@@ -28,14 +43,22 @@ export class generateFunctionalSpecCommand implements ICommand {
         const documentationCommand: string = [
             "ampersand documentation",
             mainScriptPath,
-            "--format " + extensionSettings.formatSetting,
+            "--format " + extensionSettings.documentation.format,
             extensionSettings.graphicsSetting ? "--graphics" : "--no-graphics",
-            "--language=NL",
-            "--ConceptualAnalysis",
+            extensionSettings.documentation.intro ? "" : "--no-intro",
+            extensionSettings.documentation.sharedLang ? "" : "--no-SharedLang",
+            extensionSettings.documentation.diagnosis ? "" : "--no-Diagnosis",
+            extensionSettings.documentation.conceptualAnalysis ? "" : "--no-ConceptualAnalysis",
+            extensionSettings.documentation.dataAnalysis ? "" : "--no-DataAnalysis",
+            "--language=" + extensionSettings.outputLanguage,
+            "--output-folder " + extensionSettings.outputFolder,
+            extensionSettings.sqlBinaryTables ? "--sql-binary-tables" : "",
             "--verbosity " + extensionSettings.verbosity
-        ].join(" ")
+        ]
+            .filter((x) => x.trim() !== "")
+            .join(" ");
 
 
-        terminalUtils.RunCommandsInExistingTerminal(terminal, [documentationCommand]);
+        terminalUtils.runCommandsInExistingTerminal(terminal, [documentationCommand]);
     }
 }

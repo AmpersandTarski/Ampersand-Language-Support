@@ -1,3 +1,3 @@
 interface ICommand {
-    RunCommand(): any;
+    runCommand(): void;
 }
