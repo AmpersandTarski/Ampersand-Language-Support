@@ -104,14 +104,10 @@
                 "command": "extension.startDaemon",
                 "title": "Ampersand: Start checker"
             },
-            {
-                "command": "extension.generateFunctionalSpec",
-                "title": "Ampersand: generate functional spec"
-            },
-            {
-                "command": "extension.generateAtlas",
-                "title": "Ampersand: Generate atlas"
-            },
+            // {
+            //     "command": "extension.generateFunctionalSpec",
+            //     "title": "Ampersand: Generate functional spec"
+            // },
             {
                 "command": "extension.generatePrototype",
                 "title": "Ampersand: Generate prototype"
@@ -191,7 +187,7 @@
                     "default": false,
                     "description": "Generate binary tables instead of broad tables in SQL database, for testing purposes."
                 },
-                "ampersand.outputFolder": {
+                "ampersand.outputDir": {
                     "type": "string",
                     "default": "./output",
                     "description": "The path of the folder where the output of the ampersand compiler will be stored."

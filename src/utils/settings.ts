@@ -13,7 +13,7 @@ export interface ExtensionSettings {
   folderSetting: string;
   graphicsSetting: boolean;
   mainScriptSetting: string;
-  outputFolder: string;
+  outputDir: string;
   sqlBinaryTables: boolean;
   verbosity: string;
   outputLanguage: string;
@@ -37,7 +37,7 @@ export function loadSettings() {
     folderSetting: config.get('folderName', "./project"),
     graphicsSetting: config.get('graphics', true),
     mainScriptSetting: config.get('mainScriptName', "main.adl"),
-    outputFolder: config.get('outputFolder', "./output"),
+    outputDir: config.get('outputDir', "./output"),
     outputLanguage: config.get('outputLanguage', "NL"),
     sqlBinaryTables: config.get('sqlBinaryTables', false),
     verbosity: config.get<string>('verbosity', "warn"),

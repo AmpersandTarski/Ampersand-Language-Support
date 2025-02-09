@@ -44,14 +44,14 @@ export class generateFunctionalSpecCommand implements ICommand {
             "ampersand documentation",
             mainScriptPath,
             "--format " + extensionSettings.documentation.format,
-            extensionSettings.graphicsSetting ? "--graphics" : "--no-graphics",
+            extensionSettings.graphicsSetting ? "" : "--no-graphics",
             extensionSettings.documentation.intro ? "" : "--no-intro",
             extensionSettings.documentation.sharedLang ? "" : "--no-SharedLang",
             extensionSettings.documentation.diagnosis ? "" : "--no-Diagnosis",
             extensionSettings.documentation.conceptualAnalysis ? "" : "--no-ConceptualAnalysis",
             extensionSettings.documentation.dataAnalysis ? "" : "--no-DataAnalysis",
             "--language=" + extensionSettings.outputLanguage,
-            "--output-folder " + extensionSettings.outputFolder,
+            "--output-dir " + extensionSettings.outputDir,
             extensionSettings.sqlBinaryTables ? "--sql-binary-tables" : "",
             "--verbosity " + extensionSettings.verbosity
         ]
