@@ -109,8 +109,8 @@
                 "title": "Ampersand: Generate prototype"
             },
             {
-                "command": "extension.generatePrototype",
-                "title": "Ampersand: Generate prototype"
+                "command": "extension.generateFunctionalSpec",
+                "title": "Ampersand: Generate functional spec"
             }
         ],
         "problemMatchers": [
