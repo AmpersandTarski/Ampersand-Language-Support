@@ -35,9 +35,7 @@ export function loadSettings() {
       diagnosis: true,
       conceptualAnalysis: true,
       dataAnalysis: true,
-      format: "docx",
-      datamodelOnly: false,
-      text: true
+      format: "docx"
     }),
     outputDir: config.get('outputDir', "./output"),
     outputLanguage: config.get('outputLanguage', "NL"),
