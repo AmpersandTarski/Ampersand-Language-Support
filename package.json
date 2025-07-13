@@ -236,7 +236,7 @@
                         "debug"
                     ],
                     "default": "warn",
-                    "description": "How verose should the output be?"
+                    "description": "How verbose should the output be?"
                 }
             }
         }
