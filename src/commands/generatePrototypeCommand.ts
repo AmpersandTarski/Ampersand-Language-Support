@@ -7,19 +7,19 @@ export class generatePrototypeCommand implements ICommand {
     private builder: terminalBuilder = new terminalBuilder();
 
     runCommand(): void {
-        if (extensionSettings.mainScriptSetting === undefined) {
+        if (extensionSettings.rootScriptName === undefined) {
             console.error("Main script not set in settings");
             return
         };
-        console.info("Script setting: " + extensionSettings.mainScriptSetting);
+        console.info("Script setting: " + extensionSettings.rootScriptName);
 
-        if (extensionSettings.folderSetting === undefined) {
+        if (extensionSettings.rootScriptFolder === undefined) {
             console.error("Folder not set in settings");
             return;
         };
-        console.info("Folder setting: " + extensionSettings.folderSetting);
+        console.info("Folder setting: " + extensionSettings.rootScriptFolder);
 
-        const mainScriptPath: string = fileUtils.generateWorkspacePath([extensionSettings.folderSetting, extensionSettings.mainScriptSetting]);
+        const mainScriptPath: string = fileUtils.generateWorkspacePath([extensionSettings.rootScriptFolder, extensionSettings.rootScriptName]);
 
         const terminal = this.builder.setName("Ampersand generate functional spec")
             .setWorkingDir(['.'])

@@ -6,10 +6,10 @@ import { fileUtils, extensionSettings } from '../utils';
 
 export class zipUtils {
   static zipFolder(extensionPath: string): string | undefined {
-    if (extensionSettings.mainScriptSetting === undefined || extensionSettings.folderSetting === undefined)
+    if (extensionSettings.rootScriptName === undefined || extensionSettings.rootScriptFolder === undefined)
       return;
 
-    const folderPath: string = fileUtils.generateWorkspacePath([extensionSettings.folderSetting]);
+    const folderPath: string = fileUtils.generateWorkspacePath([extensionSettings.rootScriptFolder]);
 
     //Zip folder and encode
     const zipOutPath: string = path.join(extensionPath, "assets", "out.zip");

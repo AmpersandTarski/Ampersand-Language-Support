@@ -7,10 +7,10 @@ export class generateAtlasCommand implements ICommand {
     private builder: terminalBuilder = new terminalBuilder();
 
     runCommand() {
-        if (extensionSettings.mainScriptSetting === undefined || extensionSettings.folderSetting === undefined)
+        if (extensionSettings.rootScriptName === undefined || extensionSettings.rootScriptFolder === undefined)
             return;
 
-        const currentActiveFilePath: string | undefined = fileUtils.generateWorkspacePath([extensionSettings.folderSetting, extensionSettings.mainScriptSetting]);
+        const currentActiveFilePath: string | undefined = fileUtils.generateWorkspacePath([extensionSettings.rootScriptFolder, extensionSettings.rootScriptName]);
 
         if (currentActiveFilePath === undefined)
             return;

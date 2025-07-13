@@ -10,9 +10,9 @@ export interface ExtensionSettings {
     dataAnalysis: boolean;
     format: string;
   };
-  folderSetting: string;
+  rootScriptFolder: string;
   graphicsSetting: boolean;
-  mainScriptSetting: string;
+  rootScriptName: string;
   outputDir: string;
   sqlBinaryTables: boolean;
   verbosity: string;
@@ -26,17 +26,19 @@ export function loadSettings() {
   const config = vscode.workspace.getConfiguration('ampersand');
 
   extensionSettings = {
+    rootScriptName: config.get('mainScriptName', "main.adl"),
+    rootScriptFolder: config.get('folderName', "./project"),
+    graphicsSetting: config.get('graphics', true),
     documentation: config.get<ExtensionSettings['documentation']>('documentation', {
       intro: true,
       sharedLang: true,
       diagnosis: true,
       conceptualAnalysis: true,
       dataAnalysis: true,
-      format: "docx"
+      format: "docx",
+      datamodelOnly: false,
+      text: true
     }),
-    folderSetting: config.get('folderName', "./project"),
-    graphicsSetting: config.get('graphics', true),
-    mainScriptSetting: config.get('mainScriptName', "main.adl"),
     outputDir: config.get('outputDir', "./output"),
     outputLanguage: config.get('outputLanguage', "NL"),
     sqlBinaryTables: config.get('sqlBinaryTables', false),

@@ -182,37 +182,6 @@
                     "default": true,
                     "description": "Include the data analysis chapter in the functional documentation."
                 },
-                "ampersand.sqlBinaryTables": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Generate binary tables instead of broad tables in SQL database, for testing purposes."
-                },
-                "ampersand.outputDir": {
-                    "type": "string",
-                    "default": "./output",
-                    "description": "The path of the folder where the output of the ampersand compiler will be stored."
-                },
-                "ampersand.outputLanguage": {
-                    "type": "string",
-                    "default": "NL",
-                    "enum": [
-                        "NL",
-                        "EN"
-                    ],
-                    "description": "Pick 'NL' for Dutch or 'EN' for English, as the language to be used in your output. Without this option, output is written in the language of your context."
-                },
-                "ampersand.verbosity": {
-                    "type": "string",
-                    "enum": [
-                        "silent",
-                        "error",
-                        "warn",
-                        "info",
-                        "debug"
-                    ],
-                    "default": "warn",
-                    "description": "How verose should the output be?"
-                },
                 "ampersand.documentation.format": {
                     "type": "string",
                     "enum": [
@@ -237,6 +206,37 @@
                     ],
                     "default": "docx",
                     "description": "The format that the functional specification will be generated to."
+                },
+                "ampersand.outputDir": {
+                    "type": "string",
+                    "default": "./output",
+                    "description": "The path of the folder where the output of the ampersand compiler will be stored."
+                },
+                "ampersand.outputLanguage": {
+                    "type": "string",
+                    "default": "NL",
+                    "enum": [
+                        "NL",
+                        "EN"
+                    ],
+                    "description": "Pick 'NL' for Dutch or 'EN' for English, as the language to be used in your output. Without this option, output is written in the language of your context."
+                },
+                "ampersand.sqlBinaryTables": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Generate binary tables instead of broad tables in SQL database, for testing purposes."
+                },
+                "ampersand.verbosity": {
+                    "type": "string",
+                    "enum": [
+                        "silent",
+                        "error",
+                        "warn",
+                        "info",
+                        "debug"
+                    ],
+                    "default": "warn",
+                    "description": "How verose should the output be?"
                 }
             }
         }
@@ -251,7 +251,7 @@
         "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch"
     },
     "dependencies": {
-        "@types/node": "^22.13.1",
+        "@types/node": "^22.16.3",
         "@types/vscode": "^1.96.0",
         "@vscode/test-electron": "^2.4.1",
         "@vscode/vsce": "^3.2.1",

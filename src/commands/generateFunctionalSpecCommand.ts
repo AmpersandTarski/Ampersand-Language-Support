@@ -22,19 +22,19 @@ export class generateFunctionalSpecCommand implements ICommand {
      * 8. Runs the constructed command in the configured terminal.
      */
     runCommand(): void {
-        if (extensionSettings.mainScriptSetting === undefined) {
+        if (extensionSettings.rootScriptName === undefined) {
             console.error("Main script not set in settings");
             return
         };
-        console.info("Script setting: " + extensionSettings.mainScriptSetting);
+        console.info("Script setting: " + extensionSettings.rootScriptName);
 
-        if (extensionSettings.folderSetting === undefined) {
+        if (extensionSettings.rootScriptFolder === undefined) {
             console.error("Folder not set in settings");
             return;
         };
-        console.info("Folder setting: " + extensionSettings.folderSetting);
+        console.info("Folder setting: " + extensionSettings.rootScriptFolder);
 
-        const mainScriptPath: string = fileUtils.generateWorkspacePath([extensionSettings.folderSetting, extensionSettings.mainScriptSetting]);
+        const mainScriptPath: string = fileUtils.generateWorkspacePath([extensionSettings.rootScriptFolder, extensionSettings.rootScriptName]);
 
         const terminal = this.builder.setName("Ampersand generate functional spec")
             .setWorkingDir(['.'])
@@ -45,7 +45,7 @@ export class generateFunctionalSpecCommand implements ICommand {
             mainScriptPath,
             "--format " + extensionSettings.documentation.format,
             extensionSettings.graphicsSetting ? "" : "--no-graphics",
-            extensionSettings.documentation.intro ? "" : "--no-intro",
+            extensionSettings.documentation.intro ? "" : "--no-Intro",
             extensionSettings.documentation.sharedLang ? "" : "--no-SharedLang",
             extensionSettings.documentation.diagnosis ? "" : "--no-Diagnosis",
             extensionSettings.documentation.conceptualAnalysis ? "" : "--no-ConceptualAnalysis",
