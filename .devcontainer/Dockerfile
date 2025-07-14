@@ -4,7 +4,7 @@ ARG TYPESCRIPT_NODE_VARIANT
 ARG PROTOTYPE_FRAMEWORK_VERSION
 FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:${TYPESCRIPT_NODE_VARIANT}
 
-COPY --from=ampersandtarski/prototype-framework:2.0.0-alpha.4 /usr/local/bin/ampersand /usr/local/bin
+COPY --from=ampersandtarski/prototype-framework:main /usr/local/bin/ampersand /usr/local/bin
 RUN chmod +x /usr/local/bin/ampersand
 RUN apt-get update && apt-get install -y graphviz
 
